@@ -81,7 +81,7 @@
 - **Baseline Frequency:** 30.0% (6 / 20 traces in random sample).
 - **Proposed Technical Change:** Implement effective-date metadata filtering in retriever pre-processing to exclude legacy 2021 policy chunks prior to RRF reranking.
 - **Expected Quantitative Delta:** Drops Mode #1 frequency from **30.0% (6/20)** to under **5.0% (<=1/20)** on seeded random 20-trace samples.
-- **Git Commit Hash:** `PENDING_GIT_COMMIT`
+- **Git Commit Hash:** `0cc9cd06bfb3181e505761e41746bd02a3375464`
 
 ---
 

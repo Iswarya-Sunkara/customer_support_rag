@@ -1,9 +1,13 @@
 from pathlib import Path
+import sys
 import chromadb
 from sentence_transformers import SentenceTransformer
 
 PROJECT_DIR = Path(__file__).resolve().parent.parent
 CHROMA_DIR = PROJECT_DIR / "chroma_db"
+sys.path.append(str(PROJECT_DIR))
+
+from src.hybrid_retriever import HybridRRFRetriever
 
 DISTANCE_THRESHOLD = 1.0
 TOP_K = 3
@@ -11,11 +15,48 @@ TOP_K = 3
 model = SentenceTransformer("all-MiniLM-L6-v2")
 client = chromadb.PersistentClient(path=str(CHROMA_DIR))
 collection = client.get_collection("strategy_b")
+hybrid_retriever = None
 
-def run_rag(question):
+def run_rag(question, use_hybrid=False):
+    global hybrid_retriever
     print("=" * 80)
-    print(f"QUESTION: {question}")
+    print(f"QUESTION: {question} (Mode: {'Hybrid BM25+RRF' if use_hybrid else 'Dense Baseline'})")
     print("=" * 80)
+
+    if use_hybrid:
+        if hybrid_retriever is None:
+            hybrid_retriever = HybridRRFRetriever()
+        search_res = hybrid_retriever.search(question, top_k=TOP_K)
+        res_list = search_res["results"]
+        if not res_list:
+            print("\nSTATUS: REFUSED (No candidate results)")
+            return {"status": "refused", "response": "No relevant context found."}
+        
+        best_item = res_list[0]
+        best_doc = best_item["document"]
+        best_meta = best_item["metadata"]
+        chunk_id = best_item["chunk_id"]
+        art_id = best_meta.get("article_id", "unknown_article")
+        source_file = best_meta.get("source_file", "")
+        prod_area = best_meta.get("product_area", "")
+        best_distance = best_item.get("dense_distance", 0.0) or 0.0
+
+        print(f"\nSTATUS: ANSWERED (Grounded in Corpus via Hybrid RRF Score: {best_item['rrf_score']:.6f})")
+        print(f"- Main Finding/Fix: {best_doc[:300].strip()}... [Citation -> chunk_id: {chunk_id}, article: {art_id} ({source_file})]")
+        print("\nCITATIONS DETAILED BREAKDOWN:")
+        print(f"  • Cited Chunk ID:   {chunk_id}")
+        print(f"  • Article ID:       {art_id}")
+        print(f"  • Source File:      {source_file}")
+        print(f"  • Product Area:     {prod_area}")
+        print(f"  • RRF Score:        {best_item['rrf_score']:.6f}")
+        print("-" * 80 + "\n")
+        return {
+            "status": "answered",
+            "chunk_id": chunk_id,
+            "article_id": art_id,
+            "source_file": source_file,
+            "rrf_score": best_item["rrf_score"],
+        }
 
     question_embedding = model.encode(question).tolist()
 

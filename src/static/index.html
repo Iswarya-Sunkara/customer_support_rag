@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DocuMind AI — Universal Document Q&A Chatbot</title>
+    <meta name="description" content="Upload any document without file type restrictions and ask questions with instant grounded answers and source citations.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation & File Upload -->
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="brand-icon">
+                    <i class="fa-solid fa-brain"></i>
+                </div>
+                <div class="brand-text">
+                    <h2>DocuMind <span>AI</span></h2>
+                    <p>Universal Doc RAG</p>
+                </div>
+            </div>
+
+            <!-- Upload Area -->
+            <div class="upload-section">
+                <h3><i class="fa-solid fa-cloud-arrow-up"></i> Upload Document</h3>
+                <p class="upload-sub">Supports <strong>ALL</strong> file formats without restriction</p>
+
+                <div class="drop-zone" id="dropZone">
+                    <i class="fa-solid fa-file-circle-plus drop-icon"></i>
+                    <p class="drop-text">Drag & drop file here or <span class="browse-btn">browse</span></p>
+                    <span class="file-limits">PDF, DOCX, CSV, Excel, TXT, MD, Code, Images, Binary</span>
+                    <input type="file" id="fileInput" multiple style="display: none;">
+                </div>
+                <div class="upload-progress" id="uploadProgress" style="display: none;">
+                    <div class="spinner"></div>
+                    <span id="uploadStatusText">Ingesting document...</span>
+                </div>
+            </div>
+
+            <!-- 12 Golden Set Questions Benchmark Panel -->
+            <div class="golden-section">
+                <div class="kb-header">
+                    <h3><i class="fa-solid fa-clipboard-question"></i> 12 Golden Questions</h3>
+                    <span class="badge" style="background: rgba(139, 92, 246, 0.2); color:#A78BFA;">Benchmark</span>
+                </div>
+                <p class="upload-sub">Click any benchmark question to test Week 3 vs Week 4 filter</p>
+                <div class="golden-list" id="goldenList">
+                    <div class="spinner"></div>
+                </div>
+            </div>
+
+            <!-- Active Document Knowledge Base -->
+            <div class="knowledge-base">
+                <div class="kb-header">
+                    <h3><i class="fa-solid fa-layer-group"></i> Uploaded Files</h3>
+                    <span class="badge" id="docCountBadge">0 Files</span>
+                </div>
+
+                <div class="doc-list" id="docList">
+                    <div class="empty-docs">
+                        <i class="fa-regular fa-folder-open"></i>
+                        <p>No extra files uploaded</p>
+                    </div>
+                </div>
+
+                <div class="kb-stats" id="kbStats" style="display: none;">
+                    <div class="stat-item">
+                        <span class="stat-val" id="statTotalChunks">0</span>
+                        <span class="stat-lbl">Chunks</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-val" id="statVectorStatus">Active</span>
+                        <span class="stat-lbl">Index</span>
+                    </div>
+                </div>
+
+                <button class="btn-clear" id="btnClearKb">
+                    <i class="fa-solid fa-trash-can"></i> Clear Knowledge Base
+                </button>
+            </div>
+
+            <div class="sidebar-footer">
+                <p><i class="fa-solid fa-shield-halved"></i> All file extensions parsed</p>
+            </div>
+        </aside>
+
+        <!-- Main Chat Area -->
+        <main class="chat-main">
+            <!-- Top Navigation Bar -->
+            <header class="chat-header">
+                <div class="header-info">
+                    <h1>Universal Document Chatbot</h1>
+                    <span class="status-indicator">
+                        <span class="pulse-dot"></span> System Ready
+                    </span>
+                </div>
+
+                <!-- Evaluation Filter Switch (Week 3 vs Week 4) -->
+                <div class="filter-switch-container">
+                    <span class="filter-label">System Filter:</span>
+                    <div class="segmented-control">
+                        <button class="seg-btn" id="btnModeWeek3" data-mode="week3">
+                            <i class="fa-solid fa-filter"></i> Week 3 (Dense Baseline)
+                        </button>
+                        <button class="seg-btn active" id="btnModeWeek4" data-mode="week4">
+                            <i class="fa-solid fa-bolt"></i> Week 4 (Hybrid RAG)
+                        </button>
+                    </div>
+                </div>
+
+                <div class="header-actions">
+                    <button class="icon-btn" id="btnClearChat" title="Clear Chat History">
+                        <i class="fa-solid fa-arrows-rotate"></i> Reset Chat
+                    </button>
+                </div>
+            </header>
+
+            <!-- Chat Message Feed -->
+            <div class="chat-messages" id="chatMessages">
+                <!-- Welcome Assistant Message -->
+                <div class="message assistant-message">
+                    <div class="avatar">
+                        <i class="fa-solid fa-robot"></i>
+                    </div>
+                    <div class="message-body">
+                        <div class="sender-name">DocuMind AI <span class="time-stamp">Just now</span></div>
+                        <div class="message-content">
+                            <p>👋 Hello! I am your <strong>Universal Document Q&A Assistant</strong>.</p>
+                            <p>You can upload <strong>any document format without restriction</strong> (PDF, Word, Excel, CSV, Text, Markdown, Python/Code files, Images, or Binary files). Once uploaded, ask me any question about the contents!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Typing Indicator -->
+            <div class="typing-indicator" id="typingIndicator" style="display: none;">
+                <div class="avatar"><i class="fa-solid fa-robot"></i></div>
+                <div class="dots">
+                    <span></span><span></span><span></span>
+                </div>
+                <span class="typing-text">Searching document context...</span>
+            </div>
+
+            <!-- Chat Input Footer -->
+            <footer class="chat-footer">
+                <form id="chatForm" class="chat-form">
+                    <div class="input-wrapper">
+                        <input type="text" id="userInput" placeholder="Ask any question about your uploaded document(s)..." autocomplete="off">
+                        <button type="submit" id="btnSend" class="btn-send">
+                            <i class="fa-solid fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </form>
+                <div class="input-footnote">
+                    <span><i class="fa-solid fa-lock"></i> Context Grounded RAG with Claim-Level Citations</span>
+                </div>
+            </footer>
+        </main>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>

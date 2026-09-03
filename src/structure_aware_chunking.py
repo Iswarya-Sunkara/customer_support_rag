@@ -1,4 +1,6 @@
 from pathlib import Path
+import sys
+sys.path.append(str(Path(__file__).resolve().parent))
 from prepare_documents import load_documents
 from langchain_core.documents import Document
 from langchain_text_splitters import RecursiveCharacterTextSplitter

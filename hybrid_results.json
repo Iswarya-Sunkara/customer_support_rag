@@ -1,0 +1,237 @@
+{
+  "hits": 6,
+  "total_evaluable": 11,
+  "hit_rate_at_3": 54.55,
+  "p50_latency_ms": 20.38,
+  "mean_latency_ms": 23.13,
+  "detailed_results": [
+    {
+      "id": "Q01",
+      "question": "What should I do if I get credit card error code 51 - Decline when paying my invoice?",
+      "expected_chunk_id": "strategy_b_36",
+      "has_exact_token": true,
+      "retrieved_ids": [
+        "strategy_b_12",
+        "strategy_b_15",
+        "strategy_b_31"
+      ],
+      "rrf_scores": [
+        0.032787,
+        0.032002,
+        0.031281
+      ],
+      "is_hit": false,
+      "hit_rank": null,
+      "latency_ms": 54.25
+    },
+    {
+      "id": "Q02",
+      "question": "How do I fix Cloudflare billing error 'Payment error: authorization failed'?",
+      "expected_chunk_id": "strategy_b_3",
+      "has_exact_token": true,
+      "retrieved_ids": [
+        "strategy_b_9",
+        "strategy_b_0",
+        "strategy_b_8"
+      ],
+      "rrf_scores": [
+        0.032266,
+        0.032018,
+        0.030622
+      ],
+      "is_hit": false,
+      "hit_rank": null,
+      "latency_ms": 18.82
+    },
+    {
+      "id": "Q03",
+      "question": "What does Zendesk payment error code 430357 - Lost or Stolen Card mean and how do I fix it?",
+      "expected_chunk_id": "strategy_b_39",
+      "has_exact_token": true,
+      "retrieved_ids": [
+        "strategy_b_30",
+        "strategy_b_40",
+        "strategy_b_10"
+      ],
+      "rrf_scores": [
+        0.030679,
+        0.030622,
+        0.03031
+      ],
+      "is_hit": false,
+      "hit_rank": null,
+      "latency_ms": 23.48
+    },
+    {
+      "id": "Q04",
+      "question": "How should I resolve credit card error code 14 - Card No. Error when saving my payment details?",
+      "expected_chunk_id": "strategy_b_35",
+      "has_exact_token": true,
+      "retrieved_ids": [
+        "strategy_b_15",
+        "strategy_b_12",
+        "strategy_b_31"
+      ],
+      "rrf_scores": [
+        0.032002,
+        0.031778,
+        0.031319
+      ],
+      "is_hit": false,
+      "hit_rank": null,
+      "latency_ms": 18.49
+    },
+    {
+      "id": "Q05",
+      "question": "What URL parameter ?noapps should I add to test Zendesk tickets with all apps disabled?",
+      "expected_chunk_id": "strategy_b_42",
+      "has_exact_token": true,
+      "retrieved_ids": [
+        "strategy_b_43",
+        "strategy_b_42",
+        "strategy_b_41"
+      ],
+      "rrf_scores": [
+        0.032522,
+        0.032522,
+        0.031746
+      ],
+      "is_hit": true,
+      "hit_rank": 2,
+      "latency_ms": 20.96
+    },
+    {
+      "id": "Q06",
+      "question": "Why does Google block sign-in attempts when accessing an account from a third-party service?",
+      "expected_chunk_id": "strategy_b_49",
+      "has_exact_token": false,
+      "retrieved_ids": [
+        "strategy_b_48",
+        "strategy_b_49",
+        "strategy_b_53"
+      ],
+      "rrf_scores": [
+        0.032787,
+        0.032258,
+        0.031746
+      ],
+      "is_hit": true,
+      "hit_rank": 2,
+      "latency_ms": 20.27
+    },
+    {
+      "id": "Q07",
+      "question": "How long does Google account recovery take if I lost my security key and have no backup second step?",
+      "expected_chunk_id": "strategy_b_60",
+      "has_exact_token": false,
+      "retrieved_ids": [
+        "strategy_b_59",
+        "strategy_b_61",
+        "strategy_b_60"
+      ],
+      "rrf_scores": [
+        0.032266,
+        0.032002,
+        0.031778
+      ],
+      "is_hit": true,
+      "hit_rank": 3,
+      "latency_ms": 20.98
+    },
+    {
+      "id": "Q08",
+      "question": "What is the key difference between Strong Customer Authentication (SCA) and 3D Secure (3DS)?",
+      "expected_chunk_id": "strategy_b_21",
+      "has_exact_token": false,
+      "retrieved_ids": [
+        "strategy_b_21",
+        "strategy_b_22",
+        "strategy_b_20"
+      ],
+      "rrf_scores": [
+        0.032787,
+        0.032258,
+        0.031746
+      ],
+      "is_hit": true,
+      "hit_rank": 1,
+      "latency_ms": 18.45
+    },
+    {
+      "id": "Q09",
+      "question": "How many times and over how many days will Cloudflare retry a failed recurring subscription renewal payment before ending grace period?",
+      "expected_chunk_id": "strategy_b_7",
+      "has_exact_token": false,
+      "retrieved_ids": [
+        "strategy_b_9",
+        "strategy_b_0",
+        "strategy_b_32"
+      ],
+      "rrf_scores": [
+        0.032002,
+        0.031099,
+        0.029644
+      ],
+      "is_hit": false,
+      "hit_rank": null,
+      "latency_ms": 20.28
+    },
+    {
+      "id": "Q10",
+      "question": "What format requirements apply to the Cardholder name and Postal Code fields when resubmitting a failed card?",
+      "expected_chunk_id": "strategy_b_31",
+      "has_exact_token": false,
+      "retrieved_ids": [
+        "strategy_b_31",
+        "strategy_b_15",
+        "strategy_b_30"
+      ],
+      "rrf_scores": [
+        0.032787,
+        0.029877,
+        0.029762
+      ],
+      "is_hit": true,
+      "hit_rank": 1,
+      "latency_ms": 20.21
+    },
+    {
+      "id": "Q11",
+      "question": "Why shouldn't I use Google Voice to receive 2-Step Verification codes?",
+      "expected_chunk_id": "strategy_b_68",
+      "has_exact_token": false,
+      "retrieved_ids": [
+        "strategy_b_68",
+        "strategy_b_65",
+        "strategy_b_67"
+      ],
+      "rrf_scores": [
+        0.032787,
+        0.031754,
+        0.031746
+      ],
+      "is_hit": true,
+      "hit_rank": 1,
+      "latency_ms": 20.95
+    },
+    {
+      "id": "Q12",
+      "question": "What is the exact SLA guaranteed refund window in business days for annual plan chargebacks?",
+      "expected_chunk_id": "NONE",
+      "has_exact_token": false,
+      "retrieved_ids": [
+        "strategy_b_23",
+        "strategy_b_60",
+        "strategy_b_0"
+      ],
+      "rrf_scores": [
+        0.030478,
+        0.030366,
+        0.03031
+      ],
+      "is_hit": false,
+      "hit_rank": null,
+      "latency_ms": 20.47
+    }
+  ]
+}

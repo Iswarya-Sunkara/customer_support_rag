@@ -1,0 +1,1275 @@
+[
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "load_documents",
+        "importPath": "prepare_documents",
+        "description": "prepare_documents",
+        "isExtraImport": true,
+        "detail": "prepare_documents",
+        "documentation": {}
+    },
+    {
+        "label": "load_documents",
+        "importPath": "prepare_documents",
+        "description": "prepare_documents",
+        "isExtraImport": true,
+        "detail": "prepare_documents",
+        "documentation": {}
+    },
+    {
+        "label": "RecursiveCharacterTextSplitter",
+        "importPath": "langchain_text_splitters",
+        "description": "langchain_text_splitters",
+        "isExtraImport": true,
+        "detail": "langchain_text_splitters",
+        "documentation": {}
+    },
+    {
+        "label": "RecursiveCharacterTextSplitter",
+        "importPath": "langchain_text_splitters",
+        "description": "langchain_text_splitters",
+        "isExtraImport": true,
+        "detail": "langchain_text_splitters",
+        "documentation": {}
+    },
+    {
+        "label": "sys",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "sys",
+        "description": "sys",
+        "detail": "sys",
+        "documentation": {}
+    },
+    {
+        "label": "shutil",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "shutil",
+        "description": "shutil",
+        "detail": "shutil",
+        "documentation": {}
+    },
+    {
+        "label": "chromadb",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "chromadb",
+        "description": "chromadb",
+        "detail": "chromadb",
+        "documentation": {}
+    },
+    {
+        "label": "SentenceTransformer",
+        "importPath": "sentence_transformers",
+        "description": "sentence_transformers",
+        "isExtraImport": true,
+        "detail": "sentence_transformers",
+        "documentation": {}
+    },
+    {
+        "label": "SentenceTransformer",
+        "importPath": "sentence_transformers",
+        "description": "sentence_transformers",
+        "isExtraImport": true,
+        "detail": "sentence_transformers",
+        "documentation": {}
+    },
+    {
+        "label": "SentenceTransformer",
+        "importPath": "sentence_transformers",
+        "description": "sentence_transformers",
+        "isExtraImport": true,
+        "detail": "sentence_transformers",
+        "documentation": {}
+    },
+    {
+        "label": "SentenceTransformer",
+        "importPath": "sentence_transformers",
+        "description": "sentence_transformers",
+        "isExtraImport": true,
+        "detail": "sentence_transformers",
+        "documentation": {}
+    },
+    {
+        "label": "SentenceTransformer",
+        "importPath": "sentence_transformers",
+        "description": "sentence_transformers",
+        "isExtraImport": true,
+        "detail": "sentence_transformers",
+        "documentation": {}
+    },
+    {
+        "label": "SentenceTransformer",
+        "importPath": "sentence_transformers",
+        "description": "sentence_transformers",
+        "isExtraImport": true,
+        "detail": "sentence_transformers",
+        "documentation": {}
+    },
+    {
+        "label": "SentenceTransformer",
+        "importPath": "sentence_transformers",
+        "description": "sentence_transformers",
+        "isExtraImport": true,
+        "detail": "sentence_transformers",
+        "documentation": {}
+    },
+    {
+        "label": "chunks",
+        "importPath": "chunk_documents",
+        "description": "chunk_documents",
+        "isExtraImport": true,
+        "detail": "chunk_documents",
+        "documentation": {}
+    },
+    {
+        "label": "chunks",
+        "importPath": "structure_aware_chunking",
+        "description": "structure_aware_chunking",
+        "isExtraImport": true,
+        "detail": "structure_aware_chunking",
+        "documentation": {}
+    },
+    {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "re",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "re",
+        "description": "re",
+        "detail": "re",
+        "documentation": {}
+    },
+    {
+        "label": "io",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "io",
+        "description": "io",
+        "detail": "io",
+        "documentation": {}
+    },
+    {
+        "label": "Dict",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "List",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Dict",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Any",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "Optional",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "List",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "uuid",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "uuid",
+        "description": "uuid",
+        "detail": "uuid",
+        "documentation": {}
+    },
+    {
+        "label": "numpy",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "numpy",
+        "description": "numpy",
+        "detail": "numpy",
+        "documentation": {}
+    },
+    {
+        "label": "parse_document",
+        "importPath": "src.document_parser",
+        "description": "src.document_parser",
+        "isExtraImport": true,
+        "detail": "src.document_parser",
+        "documentation": {}
+    },
+    {
+        "label": "parse_document",
+        "importPath": "src.document_parser",
+        "description": "src.document_parser",
+        "isExtraImport": true,
+        "detail": "src.document_parser",
+        "documentation": {}
+    },
+    {
+        "label": "json",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "json",
+        "description": "json",
+        "detail": "json",
+        "documentation": {}
+    },
+    {
+        "label": "time",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "time",
+        "description": "time",
+        "detail": "time",
+        "documentation": {}
+    },
+    {
+        "label": "statistics",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "statistics",
+        "description": "statistics",
+        "detail": "statistics",
+        "documentation": {}
+    },
+    {
+        "label": "HybridRRFRetriever",
+        "importPath": "src.hybrid_retriever",
+        "description": "src.hybrid_retriever",
+        "isExtraImport": true,
+        "detail": "src.hybrid_retriever",
+        "documentation": {}
+    },
+    {
+        "label": "HybridRRFRetriever",
+        "importPath": "src.hybrid_retriever",
+        "description": "src.hybrid_retriever",
+        "isExtraImport": true,
+        "detail": "src.hybrid_retriever",
+        "documentation": {}
+    },
+    {
+        "label": "math",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "math",
+        "description": "math",
+        "detail": "math",
+        "documentation": {}
+    },
+    {
+        "label": "Document",
+        "importPath": "langchain_core.documents",
+        "description": "langchain_core.documents",
+        "isExtraImport": true,
+        "detail": "langchain_core.documents",
+        "documentation": {}
+    },
+    {
+        "label": "Document",
+        "importPath": "langchain_core.documents",
+        "description": "langchain_core.documents",
+        "isExtraImport": true,
+        "detail": "langchain_core.documents",
+        "documentation": {}
+    },
+    {
+        "label": "FastAPI",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "File",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "UploadFile",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "HTTPException",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "StaticFiles",
+        "importPath": "fastapi.staticfiles",
+        "description": "fastapi.staticfiles",
+        "isExtraImport": true,
+        "detail": "fastapi.staticfiles",
+        "documentation": {}
+    },
+    {
+        "label": "HTMLResponse",
+        "importPath": "fastapi.responses",
+        "description": "fastapi.responses",
+        "isExtraImport": true,
+        "detail": "fastapi.responses",
+        "documentation": {}
+    },
+    {
+        "label": "JSONResponse",
+        "importPath": "fastapi.responses",
+        "description": "fastapi.responses",
+        "isExtraImport": true,
+        "detail": "fastapi.responses",
+        "documentation": {}
+    },
+    {
+        "label": "BaseModel",
+        "importPath": "pydantic",
+        "description": "pydantic",
+        "isExtraImport": true,
+        "detail": "pydantic",
+        "documentation": {}
+    },
+    {
+        "label": "uvicorn",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "uvicorn",
+        "description": "uvicorn",
+        "detail": "uvicorn",
+        "documentation": {}
+    },
+    {
+        "label": "DynamicRAGEngine",
+        "importPath": "src.dynamic_rag",
+        "description": "src.dynamic_rag",
+        "isExtraImport": true,
+        "detail": "src.dynamic_rag",
+        "documentation": {}
+    },
+    {
+        "label": "DynamicRAGEngine",
+        "importPath": "src.dynamic_rag",
+        "description": "src.dynamic_rag",
+        "isExtraImport": true,
+        "detail": "src.dynamic_rag",
+        "documentation": {}
+    },
+    {
+        "label": "DynamicRAGEngine",
+        "importPath": "src.dynamic_rag",
+        "description": "src.dynamic_rag",
+        "isExtraImport": true,
+        "detail": "src.dynamic_rag",
+        "documentation": {}
+    },
+    {
+        "label": "DynamicRAGEngine",
+        "importPath": "src.dynamic_rag",
+        "description": "src.dynamic_rag",
+        "isExtraImport": true,
+        "detail": "src.dynamic_rag",
+        "documentation": {}
+    },
+    {
+        "label": "DynamicRAGEngine",
+        "importPath": "src.dynamic_rag",
+        "description": "src.dynamic_rag",
+        "isExtraImport": true,
+        "detail": "src.dynamic_rag",
+        "documentation": {}
+    },
+    {
+        "label": "DynamicRAGEngine",
+        "importPath": "src.dynamic_rag",
+        "description": "src.dynamic_rag",
+        "isExtraImport": true,
+        "detail": "src.dynamic_rag",
+        "documentation": {}
+    },
+    {
+        "label": "streamlit",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "streamlit",
+        "description": "streamlit",
+        "detail": "streamlit",
+        "documentation": {}
+    },
+    {
+        "label": "documents",
+        "kind": 5,
+        "importPath": "src.chunk_documents",
+        "description": "src.chunk_documents",
+        "peekOfCode": "documents = load_documents()\nsplitter = RecursiveCharacterTextSplitter(\n    chunk_size=500,\n    chunk_overlap=50,\n)\nchunks = splitter.split_documents(documents)\nfor i, chunk in enumerate(chunks):\n    chunk.metadata[\"chunk_id\"] = f\"strategy_a_{i}\"\nif __name__ == \"__main__\":\n    print(f\"Loaded documents: {len(documents)}\")",
+        "detail": "src.chunk_documents",
+        "documentation": {}
+    },
+    {
+        "label": "splitter",
+        "kind": 5,
+        "importPath": "src.chunk_documents",
+        "description": "src.chunk_documents",
+        "peekOfCode": "splitter = RecursiveCharacterTextSplitter(\n    chunk_size=500,\n    chunk_overlap=50,\n)\nchunks = splitter.split_documents(documents)\nfor i, chunk in enumerate(chunks):\n    chunk.metadata[\"chunk_id\"] = f\"strategy_a_{i}\"\nif __name__ == \"__main__\":\n    print(f\"Loaded documents: {len(documents)}\")\n    print(f\"Total Strategy A chunks: {len(chunks)}\")",
+        "detail": "src.chunk_documents",
+        "documentation": {}
+    },
+    {
+        "label": "chunks",
+        "kind": 5,
+        "importPath": "src.chunk_documents",
+        "description": "src.chunk_documents",
+        "peekOfCode": "chunks = splitter.split_documents(documents)\nfor i, chunk in enumerate(chunks):\n    chunk.metadata[\"chunk_id\"] = f\"strategy_a_{i}\"\nif __name__ == \"__main__\":\n    print(f\"Loaded documents: {len(documents)}\")\n    print(f\"Total Strategy A chunks: {len(chunks)}\")\n    print()\n    for i, chunk in enumerate(chunks[:5]):\n        print(\"=\" * 60)\n        print(f\"Chunk ID: {chunk.metadata['chunk_id']}\")",
+        "detail": "src.chunk_documents",
+        "documentation": {}
+    },
+    {
+        "label": "build_vector_database",
+        "kind": 2,
+        "importPath": "src.create_vector_db",
+        "description": "src.create_vector_db",
+        "peekOfCode": "def build_vector_database():\n    # Remove stale ChromaDB files to prevent HNSW segment reader disk errors\n    if CHROMA_DIR.exists():\n        try:\n            shutil.rmtree(CHROMA_DIR)\n        except Exception:\n            pass\n    client = chromadb.PersistentClient(path=str(CHROMA_DIR))\n    def create_collection(name, chunks):\n        collection = client.get_or_create_collection(name=name)",
+        "detail": "src.create_vector_db",
+        "documentation": {}
+    },
+    {
+        "label": "PROJECT_DIR",
+        "kind": 5,
+        "importPath": "src.create_vector_db",
+        "description": "src.create_vector_db",
+        "peekOfCode": "PROJECT_DIR = Path(__file__).resolve().parent.parent\nCHROMA_DIR = PROJECT_DIR / \"chroma_db\"\nmodel = SentenceTransformer(\"all-MiniLM-L6-v2\")\ndef build_vector_database():\n    # Remove stale ChromaDB files to prevent HNSW segment reader disk errors\n    if CHROMA_DIR.exists():\n        try:\n            shutil.rmtree(CHROMA_DIR)\n        except Exception:\n            pass",
+        "detail": "src.create_vector_db",
+        "documentation": {}
+    },
+    {
+        "label": "CHROMA_DIR",
+        "kind": 5,
+        "importPath": "src.create_vector_db",
+        "description": "src.create_vector_db",
+        "peekOfCode": "CHROMA_DIR = PROJECT_DIR / \"chroma_db\"\nmodel = SentenceTransformer(\"all-MiniLM-L6-v2\")\ndef build_vector_database():\n    # Remove stale ChromaDB files to prevent HNSW segment reader disk errors\n    if CHROMA_DIR.exists():\n        try:\n            shutil.rmtree(CHROMA_DIR)\n        except Exception:\n            pass\n    client = chromadb.PersistentClient(path=str(CHROMA_DIR))",
+        "detail": "src.create_vector_db",
+        "documentation": {}
+    },
+    {
+        "label": "model",
+        "kind": 5,
+        "importPath": "src.create_vector_db",
+        "description": "src.create_vector_db",
+        "peekOfCode": "model = SentenceTransformer(\"all-MiniLM-L6-v2\")\ndef build_vector_database():\n    # Remove stale ChromaDB files to prevent HNSW segment reader disk errors\n    if CHROMA_DIR.exists():\n        try:\n            shutil.rmtree(CHROMA_DIR)\n        except Exception:\n            pass\n    client = chromadb.PersistentClient(path=str(CHROMA_DIR))\n    def create_collection(name, chunks):",
+        "detail": "src.create_vector_db",
+        "documentation": {}
+    },
+    {
+        "label": "parse_document",
+        "kind": 2,
+        "importPath": "src.document_parser",
+        "description": "src.document_parser",
+        "peekOfCode": "def parse_document(file_path: Optional[str] = None, file_bytes: Optional[bytes] = None, filename: Optional[str] = None) -> Dict[str, Any]:\n    \"\"\"\n    Universal document parser that extracts clean text from ANY file format.\n    Supports PDF, DOCX, CSV, Excel, TXT, MD, Code files, JSON, Images, and raw binary fallbacks.\n    Never throws unhandled exceptions — guarantees non-breaking ingestion.\n    \"\"\"\n    if file_path:\n        path_obj = Path(file_path)\n        if filename is None:\n            filename = path_obj.name",
+        "detail": "src.document_parser",
+        "documentation": {}
+    },
+    {
+        "label": "DynamicRAGEngine",
+        "kind": 6,
+        "importPath": "src.dynamic_rag",
+        "description": "src.dynamic_rag",
+        "peekOfCode": "class DynamicRAGEngine:\n    \"\"\"\n    In-Memory Universal Document RAG Engine.\n    Requires NO on-disk database folders (no ChromaDB disk dependencies).\n    Maintains embeddings, chunks, and metadata in high-performance memory.\n    Guarantees that deleting disk folders will never crash or degrade chatbot responses.\n    \"\"\"\n    def __init__(self):\n        self.project_dir = Path(__file__).resolve().parent.parent\n        self.model = SentenceTransformer(\"all-MiniLM-L6-v2\")",
+        "detail": "src.dynamic_rag",
+        "documentation": {}
+    },
+    {
+        "label": "load_golden_set",
+        "kind": 2,
+        "importPath": "src.evaluate_baseline",
+        "description": "src.evaluate_baseline",
+        "peekOfCode": "def load_golden_set():\n    items = []\n    with open(GOLDEN_SET_PATH, \"r\", encoding=\"utf-8\") as f:\n        for line in f:\n            if line.strip():\n                items.append(json.loads(line.strip()))\n    return items\ndef run_baseline_evaluation():\n    print(\"=\" * 80)\n    print(\"RUNNING BASELINE DENSE RETRIEVAL EVALUATION (Week 3 System)\")",
+        "detail": "src.evaluate_baseline",
+        "documentation": {}
+    },
+    {
+        "label": "run_baseline_evaluation",
+        "kind": 2,
+        "importPath": "src.evaluate_baseline",
+        "description": "src.evaluate_baseline",
+        "peekOfCode": "def run_baseline_evaluation():\n    print(\"=\" * 80)\n    print(\"RUNNING BASELINE DENSE RETRIEVAL EVALUATION (Week 3 System)\")\n    print(\"=\" * 80)\n    model = SentenceTransformer(\"all-MiniLM-L6-v2\")\n    client = chromadb.PersistentClient(path=str(CHROMA_DIR))\n    collection = client.get_collection(\"strategy_b\")\n    golden_set = load_golden_set()\n    hits = 0\n    total_evaluable = 0  # Excludes Not-In-Corpus question for hit-rate",
+        "detail": "src.evaluate_baseline",
+        "documentation": {}
+    },
+    {
+        "label": "PROJECT_DIR",
+        "kind": 5,
+        "importPath": "src.evaluate_baseline",
+        "description": "src.evaluate_baseline",
+        "peekOfCode": "PROJECT_DIR = Path(__file__).resolve().parent.parent\nCHROMA_DIR = PROJECT_DIR / \"chroma_db\"\nGOLDEN_SET_PATH = PROJECT_DIR / \"golden_set.jsonl\"\ndef load_golden_set():\n    items = []\n    with open(GOLDEN_SET_PATH, \"r\", encoding=\"utf-8\") as f:\n        for line in f:\n            if line.strip():\n                items.append(json.loads(line.strip()))\n    return items",
+        "detail": "src.evaluate_baseline",
+        "documentation": {}
+    },
+    {
+        "label": "CHROMA_DIR",
+        "kind": 5,
+        "importPath": "src.evaluate_baseline",
+        "description": "src.evaluate_baseline",
+        "peekOfCode": "CHROMA_DIR = PROJECT_DIR / \"chroma_db\"\nGOLDEN_SET_PATH = PROJECT_DIR / \"golden_set.jsonl\"\ndef load_golden_set():\n    items = []\n    with open(GOLDEN_SET_PATH, \"r\", encoding=\"utf-8\") as f:\n        for line in f:\n            if line.strip():\n                items.append(json.loads(line.strip()))\n    return items\ndef run_baseline_evaluation():",
+        "detail": "src.evaluate_baseline",
+        "documentation": {}
+    },
+    {
+        "label": "GOLDEN_SET_PATH",
+        "kind": 5,
+        "importPath": "src.evaluate_baseline",
+        "description": "src.evaluate_baseline",
+        "peekOfCode": "GOLDEN_SET_PATH = PROJECT_DIR / \"golden_set.jsonl\"\ndef load_golden_set():\n    items = []\n    with open(GOLDEN_SET_PATH, \"r\", encoding=\"utf-8\") as f:\n        for line in f:\n            if line.strip():\n                items.append(json.loads(line.strip()))\n    return items\ndef run_baseline_evaluation():\n    print(\"=\" * 80)",
+        "detail": "src.evaluate_baseline",
+        "documentation": {}
+    },
+    {
+        "label": "load_golden_set",
+        "kind": 2,
+        "importPath": "src.evaluate_hybrid",
+        "description": "src.evaluate_hybrid",
+        "peekOfCode": "def load_golden_set():\n    items = []\n    with open(GOLDEN_SET_PATH, \"r\", encoding=\"utf-8\") as f:\n        for line in f:\n            if line.strip():\n                items.append(json.loads(line.strip()))\n    return items\ndef run_hybrid_evaluation():\n    print(\"=\" * 80)\n    print(\"RUNNING HYBRID BM25 + RRF RETRIEVAL EVALUATION (Week 4 Improvement)\")",
+        "detail": "src.evaluate_hybrid",
+        "documentation": {}
+    },
+    {
+        "label": "run_hybrid_evaluation",
+        "kind": 2,
+        "importPath": "src.evaluate_hybrid",
+        "description": "src.evaluate_hybrid",
+        "peekOfCode": "def run_hybrid_evaluation():\n    print(\"=\" * 80)\n    print(\"RUNNING HYBRID BM25 + RRF RETRIEVAL EVALUATION (Week 4 Improvement)\")\n    print(\"=\" * 80)\n    retriever = HybridRRFRetriever()\n    golden_set = load_golden_set()\n    hits = 0\n    total_evaluable = 0\n    latencies = []\n    results = []",
+        "detail": "src.evaluate_hybrid",
+        "documentation": {}
+    },
+    {
+        "label": "PROJECT_DIR",
+        "kind": 5,
+        "importPath": "src.evaluate_hybrid",
+        "description": "src.evaluate_hybrid",
+        "peekOfCode": "PROJECT_DIR = Path(__file__).resolve().parent.parent\nsys.path.append(str(PROJECT_DIR))\nfrom src.hybrid_retriever import HybridRRFRetriever\nGOLDEN_SET_PATH = PROJECT_DIR / \"golden_set.jsonl\"\ndef load_golden_set():\n    items = []\n    with open(GOLDEN_SET_PATH, \"r\", encoding=\"utf-8\") as f:\n        for line in f:\n            if line.strip():\n                items.append(json.loads(line.strip()))",
+        "detail": "src.evaluate_hybrid",
+        "documentation": {}
+    },
+    {
+        "label": "GOLDEN_SET_PATH",
+        "kind": 5,
+        "importPath": "src.evaluate_hybrid",
+        "description": "src.evaluate_hybrid",
+        "peekOfCode": "GOLDEN_SET_PATH = PROJECT_DIR / \"golden_set.jsonl\"\ndef load_golden_set():\n    items = []\n    with open(GOLDEN_SET_PATH, \"r\", encoding=\"utf-8\") as f:\n        for line in f:\n            if line.strip():\n                items.append(json.loads(line.strip()))\n    return items\ndef run_hybrid_evaluation():\n    print(\"=\" * 80)",
+        "detail": "src.evaluate_hybrid",
+        "documentation": {}
+    },
+    {
+        "label": "run_rag",
+        "kind": 2,
+        "importPath": "src.final_rag",
+        "description": "src.final_rag",
+        "peekOfCode": "def run_rag(question, use_hybrid=False):\n    global hybrid_retriever\n    print(\"=\" * 80)\n    print(f\"QUESTION: {question} (Mode: {'Hybrid BM25+RRF' if use_hybrid else 'Dense Baseline'})\")\n    print(\"=\" * 80)\n    if use_hybrid:\n        if hybrid_retriever is None:\n            hybrid_retriever = HybridRRFRetriever()\n        search_res = hybrid_retriever.search(question, top_k=TOP_K)\n        res_list = search_res[\"results\"]",
+        "detail": "src.final_rag",
+        "documentation": {}
+    },
+    {
+        "label": "PROJECT_DIR",
+        "kind": 5,
+        "importPath": "src.final_rag",
+        "description": "src.final_rag",
+        "peekOfCode": "PROJECT_DIR = Path(__file__).resolve().parent.parent\nCHROMA_DIR = PROJECT_DIR / \"chroma_db\"\nsys.path.append(str(PROJECT_DIR))\nfrom src.hybrid_retriever import HybridRRFRetriever\nDISTANCE_THRESHOLD = 1.0\nTOP_K = 3\nmodel = SentenceTransformer(\"all-MiniLM-L6-v2\")\nclient = chromadb.PersistentClient(path=str(CHROMA_DIR))\ncollection = client.get_collection(\"strategy_b\")\nhybrid_retriever = None",
+        "detail": "src.final_rag",
+        "documentation": {}
+    },
+    {
+        "label": "CHROMA_DIR",
+        "kind": 5,
+        "importPath": "src.final_rag",
+        "description": "src.final_rag",
+        "peekOfCode": "CHROMA_DIR = PROJECT_DIR / \"chroma_db\"\nsys.path.append(str(PROJECT_DIR))\nfrom src.hybrid_retriever import HybridRRFRetriever\nDISTANCE_THRESHOLD = 1.0\nTOP_K = 3\nmodel = SentenceTransformer(\"all-MiniLM-L6-v2\")\nclient = chromadb.PersistentClient(path=str(CHROMA_DIR))\ncollection = client.get_collection(\"strategy_b\")\nhybrid_retriever = None\ndef run_rag(question, use_hybrid=False):",
+        "detail": "src.final_rag",
+        "documentation": {}
+    },
+    {
+        "label": "DISTANCE_THRESHOLD",
+        "kind": 5,
+        "importPath": "src.final_rag",
+        "description": "src.final_rag",
+        "peekOfCode": "DISTANCE_THRESHOLD = 1.0\nTOP_K = 3\nmodel = SentenceTransformer(\"all-MiniLM-L6-v2\")\nclient = chromadb.PersistentClient(path=str(CHROMA_DIR))\ncollection = client.get_collection(\"strategy_b\")\nhybrid_retriever = None\ndef run_rag(question, use_hybrid=False):\n    global hybrid_retriever\n    print(\"=\" * 80)\n    print(f\"QUESTION: {question} (Mode: {'Hybrid BM25+RRF' if use_hybrid else 'Dense Baseline'})\")",
+        "detail": "src.final_rag",
+        "documentation": {}
+    },
+    {
+        "label": "TOP_K",
+        "kind": 5,
+        "importPath": "src.final_rag",
+        "description": "src.final_rag",
+        "peekOfCode": "TOP_K = 3\nmodel = SentenceTransformer(\"all-MiniLM-L6-v2\")\nclient = chromadb.PersistentClient(path=str(CHROMA_DIR))\ncollection = client.get_collection(\"strategy_b\")\nhybrid_retriever = None\ndef run_rag(question, use_hybrid=False):\n    global hybrid_retriever\n    print(\"=\" * 80)\n    print(f\"QUESTION: {question} (Mode: {'Hybrid BM25+RRF' if use_hybrid else 'Dense Baseline'})\")\n    print(\"=\" * 80)",
+        "detail": "src.final_rag",
+        "documentation": {}
+    },
+    {
+        "label": "model",
+        "kind": 5,
+        "importPath": "src.final_rag",
+        "description": "src.final_rag",
+        "peekOfCode": "model = SentenceTransformer(\"all-MiniLM-L6-v2\")\nclient = chromadb.PersistentClient(path=str(CHROMA_DIR))\ncollection = client.get_collection(\"strategy_b\")\nhybrid_retriever = None\ndef run_rag(question, use_hybrid=False):\n    global hybrid_retriever\n    print(\"=\" * 80)\n    print(f\"QUESTION: {question} (Mode: {'Hybrid BM25+RRF' if use_hybrid else 'Dense Baseline'})\")\n    print(\"=\" * 80)\n    if use_hybrid:",
+        "detail": "src.final_rag",
+        "documentation": {}
+    },
+    {
+        "label": "client",
+        "kind": 5,
+        "importPath": "src.final_rag",
+        "description": "src.final_rag",
+        "peekOfCode": "client = chromadb.PersistentClient(path=str(CHROMA_DIR))\ncollection = client.get_collection(\"strategy_b\")\nhybrid_retriever = None\ndef run_rag(question, use_hybrid=False):\n    global hybrid_retriever\n    print(\"=\" * 80)\n    print(f\"QUESTION: {question} (Mode: {'Hybrid BM25+RRF' if use_hybrid else 'Dense Baseline'})\")\n    print(\"=\" * 80)\n    if use_hybrid:\n        if hybrid_retriever is None:",
+        "detail": "src.final_rag",
+        "documentation": {}
+    },
+    {
+        "label": "collection",
+        "kind": 5,
+        "importPath": "src.final_rag",
+        "description": "src.final_rag",
+        "peekOfCode": "collection = client.get_collection(\"strategy_b\")\nhybrid_retriever = None\ndef run_rag(question, use_hybrid=False):\n    global hybrid_retriever\n    print(\"=\" * 80)\n    print(f\"QUESTION: {question} (Mode: {'Hybrid BM25+RRF' if use_hybrid else 'Dense Baseline'})\")\n    print(\"=\" * 80)\n    if use_hybrid:\n        if hybrid_retriever is None:\n            hybrid_retriever = HybridRRFRetriever()",
+        "detail": "src.final_rag",
+        "documentation": {}
+    },
+    {
+        "label": "hybrid_retriever",
+        "kind": 5,
+        "importPath": "src.final_rag",
+        "description": "src.final_rag",
+        "peekOfCode": "hybrid_retriever = None\ndef run_rag(question, use_hybrid=False):\n    global hybrid_retriever\n    print(\"=\" * 80)\n    print(f\"QUESTION: {question} (Mode: {'Hybrid BM25+RRF' if use_hybrid else 'Dense Baseline'})\")\n    print(\"=\" * 80)\n    if use_hybrid:\n        if hybrid_retriever is None:\n            hybrid_retriever = HybridRRFRetriever()\n        search_res = hybrid_retriever.search(question, top_k=TOP_K)",
+        "detail": "src.final_rag",
+        "documentation": {}
+    },
+    {
+        "label": "BM25Retriever",
+        "kind": 6,
+        "importPath": "src.hybrid_retriever",
+        "description": "src.hybrid_retriever",
+        "peekOfCode": "class BM25Retriever:\n    def __init__(self, documents, ids, k1=1.5, b=0.75):\n        self.documents = documents\n        self.ids = ids\n        self.k1 = k1\n        self.b = b\n        self.corpus_size = len(documents)\n        self.avgdl = 0\n        self.doc_freqs = []\n        self.idf = {}",
+        "detail": "src.hybrid_retriever",
+        "documentation": {}
+    },
+    {
+        "label": "HybridRRFRetriever",
+        "kind": 6,
+        "importPath": "src.hybrid_retriever",
+        "description": "src.hybrid_retriever",
+        "peekOfCode": "class HybridRRFRetriever:\n    def __init__(self):\n        self.model = SentenceTransformer(\"all-MiniLM-L6-v2\")\n        self.client = chromadb.PersistentClient(path=str(CHROMA_DIR))\n        self.collection = self.client.get_collection(\"strategy_b\")\n        # Load all documents from ChromaDB collection for BM25\n        chroma_res = self.collection.get()\n        self.all_ids = chroma_res[\"ids\"]\n        self.all_docs = chroma_res[\"documents\"]\n        self.all_metas = chroma_res[\"metadatas\"]",
+        "detail": "src.hybrid_retriever",
+        "documentation": {}
+    },
+    {
+        "label": "PROJECT_DIR",
+        "kind": 5,
+        "importPath": "src.hybrid_retriever",
+        "description": "src.hybrid_retriever",
+        "peekOfCode": "PROJECT_DIR = Path(__file__).resolve().parent.parent\nCHROMA_DIR = PROJECT_DIR / \"chroma_db\"\nRRF_K = 60\nTOP_N_CANDIDATES = 25\nclass BM25Retriever:\n    def __init__(self, documents, ids, k1=1.5, b=0.75):\n        self.documents = documents\n        self.ids = ids\n        self.k1 = k1\n        self.b = b",
+        "detail": "src.hybrid_retriever",
+        "documentation": {}
+    },
+    {
+        "label": "CHROMA_DIR",
+        "kind": 5,
+        "importPath": "src.hybrid_retriever",
+        "description": "src.hybrid_retriever",
+        "peekOfCode": "CHROMA_DIR = PROJECT_DIR / \"chroma_db\"\nRRF_K = 60\nTOP_N_CANDIDATES = 25\nclass BM25Retriever:\n    def __init__(self, documents, ids, k1=1.5, b=0.75):\n        self.documents = documents\n        self.ids = ids\n        self.k1 = k1\n        self.b = b\n        self.corpus_size = len(documents)",
+        "detail": "src.hybrid_retriever",
+        "documentation": {}
+    },
+    {
+        "label": "RRF_K",
+        "kind": 5,
+        "importPath": "src.hybrid_retriever",
+        "description": "src.hybrid_retriever",
+        "peekOfCode": "RRF_K = 60\nTOP_N_CANDIDATES = 25\nclass BM25Retriever:\n    def __init__(self, documents, ids, k1=1.5, b=0.75):\n        self.documents = documents\n        self.ids = ids\n        self.k1 = k1\n        self.b = b\n        self.corpus_size = len(documents)\n        self.avgdl = 0",
+        "detail": "src.hybrid_retriever",
+        "documentation": {}
+    },
+    {
+        "label": "TOP_N_CANDIDATES",
+        "kind": 5,
+        "importPath": "src.hybrid_retriever",
+        "description": "src.hybrid_retriever",
+        "peekOfCode": "TOP_N_CANDIDATES = 25\nclass BM25Retriever:\n    def __init__(self, documents, ids, k1=1.5, b=0.75):\n        self.documents = documents\n        self.ids = ids\n        self.k1 = k1\n        self.b = b\n        self.corpus_size = len(documents)\n        self.avgdl = 0\n        self.doc_freqs = []",
+        "detail": "src.hybrid_retriever",
+        "documentation": {}
+    },
+    {
+        "label": "load_documents",
+        "kind": 2,
+        "importPath": "src.prepare_documents",
+        "description": "src.prepare_documents",
+        "peekOfCode": "def load_documents():\n    documents = []\n    for file in sorted(DATA_DIR.glob(\"*.md\")):\n        content = file.read_text(encoding=\"utf-8\")\n        lines = content.splitlines()\n        title = lines[0].replace(\"# \", \"\").strip()\n        # Extract article_id from filename e.g. article_01\n        parts = file.stem.split(\"_\")\n        article_id = f\"{parts[0]}_{parts[1]}\" if len(parts) >= 2 else file.stem\n        metadata = {",
+        "detail": "src.prepare_documents",
+        "documentation": {}
+    },
+    {
+        "label": "DATA_DIR",
+        "kind": 5,
+        "importPath": "src.prepare_documents",
+        "description": "src.prepare_documents",
+        "peekOfCode": "DATA_DIR = Path(__file__).resolve().parent.parent / \"data\"\n# Predefined dates for last_updated metadata per article drop\nLAST_UPDATED_MAP = {\n    \"article_01\": \"2026-08-15\",\n    \"article_02\": \"2026-08-18\",\n    \"article_03\": \"2026-08-20\",\n    \"article_04\": \"2026-08-10\",\n    \"article_05\": \"2026-08-12\",\n    \"article_06\": \"2026-08-22\",\n}",
+        "detail": "src.prepare_documents",
+        "documentation": {}
+    },
+    {
+        "label": "LAST_UPDATED_MAP",
+        "kind": 5,
+        "importPath": "src.prepare_documents",
+        "description": "src.prepare_documents",
+        "peekOfCode": "LAST_UPDATED_MAP = {\n    \"article_01\": \"2026-08-15\",\n    \"article_02\": \"2026-08-18\",\n    \"article_03\": \"2026-08-20\",\n    \"article_04\": \"2026-08-10\",\n    \"article_05\": \"2026-08-12\",\n    \"article_06\": \"2026-08-22\",\n}\ndef load_documents():\n    documents = []",
+        "detail": "src.prepare_documents",
+        "documentation": {}
+    },
+    {
+        "label": "ChatRequest",
+        "kind": 6,
+        "importPath": "src.server",
+        "description": "src.server",
+        "peekOfCode": "class ChatRequest(BaseModel):\n    question: str\n    mode: str = \"week4\"\nGOLDEN_SET = [\n    {\"id\": \"Q01\", \"question\": \"What should I do if I get credit card error code 51 - Decline when paying my invoice?\", \"category\": \"Error Code / Table Row\", \"week3_status\": \"Refused (Miss)\", \"week4_status\": \"Answered\"},\n    {\"id\": \"Q02\", \"question\": \"How do I fix Cloudflare billing error 'Payment error: authorization failed'?\", \"category\": \"Error Code / String\", \"week3_status\": \"Refused (Miss)\", \"week4_status\": \"Answered\"},\n    {\"id\": \"Q03\", \"question\": \"What does Zendesk payment error code 430357 - Lost or Stolen Card mean and how do I fix it?\", \"category\": \"Error Code / Table Row\", \"week3_status\": \"Refused (Miss)\", \"week4_status\": \"Answered\"},\n    {\"id\": \"Q04\", \"question\": \"How should I resolve credit card error code 14 - Card No. Error when saving my payment details?\", \"category\": \"Error Code / Table Row\", \"week3_status\": \"Refused (Miss)\", \"week4_status\": \"Answered\"},\n    {\"id\": \"Q05\", \"question\": \"What URL parameter ?noapps should I add to test Zendesk tickets with all apps disabled?\", \"category\": \"URL Parameter\", \"week3_status\": \"Answered\", \"week4_status\": \"Answered\"},\n    {\"id\": \"Q06\", \"question\": \"Why does Google block sign-in attempts when accessing an account from a third-party service?\", \"category\": \"Prose\", \"week3_status\": \"Answered\", \"week4_status\": \"Answered\"},",
+        "detail": "src.server",
+        "documentation": {}
+    },
+    {
+        "label": "PROJECT_DIR",
+        "kind": 5,
+        "importPath": "src.server",
+        "description": "src.server",
+        "peekOfCode": "PROJECT_DIR = Path(__file__).resolve().parent.parent\nsys.path.append(str(PROJECT_DIR))\nfrom src.dynamic_rag import DynamicRAGEngine\napp = FastAPI(\n    title=\"Universal Document Q&A Chatbot API\",\n    description=\"Backend RAG API supporting universal document uploading without file extension restrictions.\",\n    version=\"1.0.0\"\n)\nSTATIC_DIR = PROJECT_DIR / \"src\" / \"static\"\n# Mount static files",
+        "detail": "src.server",
+        "documentation": {}
+    },
+    {
+        "label": "app",
+        "kind": 5,
+        "importPath": "src.server",
+        "description": "src.server",
+        "peekOfCode": "app = FastAPI(\n    title=\"Universal Document Q&A Chatbot API\",\n    description=\"Backend RAG API supporting universal document uploading without file extension restrictions.\",\n    version=\"1.0.0\"\n)\nSTATIC_DIR = PROJECT_DIR / \"src\" / \"static\"\n# Mount static files\napp.mount(\"/static\", StaticFiles(directory=str(STATIC_DIR)), name=\"static\")\n# Instantiate global RAG Engine\nrag_engine = DynamicRAGEngine()",
+        "detail": "src.server",
+        "documentation": {}
+    },
+    {
+        "label": "STATIC_DIR",
+        "kind": 5,
+        "importPath": "src.server",
+        "description": "src.server",
+        "peekOfCode": "STATIC_DIR = PROJECT_DIR / \"src\" / \"static\"\n# Mount static files\napp.mount(\"/static\", StaticFiles(directory=str(STATIC_DIR)), name=\"static\")\n# Instantiate global RAG Engine\nrag_engine = DynamicRAGEngine()\nclass ChatRequest(BaseModel):\n    question: str\n    mode: str = \"week4\"\nGOLDEN_SET = [\n    {\"id\": \"Q01\", \"question\": \"What should I do if I get credit card error code 51 - Decline when paying my invoice?\", \"category\": \"Error Code / Table Row\", \"week3_status\": \"Refused (Miss)\", \"week4_status\": \"Answered\"},",
+        "detail": "src.server",
+        "documentation": {}
+    },
+    {
+        "label": "rag_engine",
+        "kind": 5,
+        "importPath": "src.server",
+        "description": "src.server",
+        "peekOfCode": "rag_engine = DynamicRAGEngine()\nclass ChatRequest(BaseModel):\n    question: str\n    mode: str = \"week4\"\nGOLDEN_SET = [\n    {\"id\": \"Q01\", \"question\": \"What should I do if I get credit card error code 51 - Decline when paying my invoice?\", \"category\": \"Error Code / Table Row\", \"week3_status\": \"Refused (Miss)\", \"week4_status\": \"Answered\"},\n    {\"id\": \"Q02\", \"question\": \"How do I fix Cloudflare billing error 'Payment error: authorization failed'?\", \"category\": \"Error Code / String\", \"week3_status\": \"Refused (Miss)\", \"week4_status\": \"Answered\"},\n    {\"id\": \"Q03\", \"question\": \"What does Zendesk payment error code 430357 - Lost or Stolen Card mean and how do I fix it?\", \"category\": \"Error Code / Table Row\", \"week3_status\": \"Refused (Miss)\", \"week4_status\": \"Answered\"},\n    {\"id\": \"Q04\", \"question\": \"How should I resolve credit card error code 14 - Card No. Error when saving my payment details?\", \"category\": \"Error Code / Table Row\", \"week3_status\": \"Refused (Miss)\", \"week4_status\": \"Answered\"},\n    {\"id\": \"Q05\", \"question\": \"What URL parameter ?noapps should I add to test Zendesk tickets with all apps disabled?\", \"category\": \"URL Parameter\", \"week3_status\": \"Answered\", \"week4_status\": \"Answered\"},",
+        "detail": "src.server",
+        "documentation": {}
+    },
+    {
+        "label": "GOLDEN_SET",
+        "kind": 5,
+        "importPath": "src.server",
+        "description": "src.server",
+        "peekOfCode": "GOLDEN_SET = [\n    {\"id\": \"Q01\", \"question\": \"What should I do if I get credit card error code 51 - Decline when paying my invoice?\", \"category\": \"Error Code / Table Row\", \"week3_status\": \"Refused (Miss)\", \"week4_status\": \"Answered\"},\n    {\"id\": \"Q02\", \"question\": \"How do I fix Cloudflare billing error 'Payment error: authorization failed'?\", \"category\": \"Error Code / String\", \"week3_status\": \"Refused (Miss)\", \"week4_status\": \"Answered\"},\n    {\"id\": \"Q03\", \"question\": \"What does Zendesk payment error code 430357 - Lost or Stolen Card mean and how do I fix it?\", \"category\": \"Error Code / Table Row\", \"week3_status\": \"Refused (Miss)\", \"week4_status\": \"Answered\"},\n    {\"id\": \"Q04\", \"question\": \"How should I resolve credit card error code 14 - Card No. Error when saving my payment details?\", \"category\": \"Error Code / Table Row\", \"week3_status\": \"Refused (Miss)\", \"week4_status\": \"Answered\"},\n    {\"id\": \"Q05\", \"question\": \"What URL parameter ?noapps should I add to test Zendesk tickets with all apps disabled?\", \"category\": \"URL Parameter\", \"week3_status\": \"Answered\", \"week4_status\": \"Answered\"},\n    {\"id\": \"Q06\", \"question\": \"Why does Google block sign-in attempts when accessing an account from a third-party service?\", \"category\": \"Prose\", \"week3_status\": \"Answered\", \"week4_status\": \"Answered\"},\n    {\"id\": \"Q07\", \"question\": \"How long does Google account recovery take if I lost my security key and have no backup second step?\", \"category\": \"Prose\", \"week3_status\": \"Answered\", \"week4_status\": \"Answered\"},\n    {\"id\": \"Q08\", \"question\": \"What is the key difference between Strong Customer Authentication (SCA) and 3D Secure (3DS)?\", \"category\": \"Prose\", \"week3_status\": \"Answered\", \"week4_status\": \"Answered\"},\n    {\"id\": \"Q09\", \"question\": \"How many times and over how many days will Cloudflare retry a failed recurring subscription renewal payment before ending grace period?\", \"category\": \"Billing Policy\", \"week3_status\": \"Refused (Miss)\", \"week4_status\": \"Answered\"},",
+        "detail": "src.server",
+        "documentation": {}
+    },
+    {
+        "label": "PROJECT_DIR",
+        "kind": 5,
+        "importPath": "src.streamlit_app",
+        "description": "src.streamlit_app",
+        "peekOfCode": "PROJECT_DIR = Path(__file__).resolve().parent.parent\nsys.path.append(str(PROJECT_DIR))\nfrom src.dynamic_rag import DynamicRAGEngine\n# Page Configuration\nst.set_page_config(\n    page_title=\"Universal Doc Q&A Chatbot\",\n    page_icon=\"🤖\",\n    layout=\"wide\",\n    initial_sidebar_state=\"expanded\"\n)",
+        "detail": "src.streamlit_app",
+        "documentation": {}
+    },
+    {
+        "label": "user_query",
+        "kind": 5,
+        "importPath": "src.streamlit_app",
+        "description": "src.streamlit_app",
+        "peekOfCode": "user_query = st.chat_input(\"Ask any question about your uploaded document(s)...\")\nif user_query:\n    st.session_state.messages.append({\"role\": \"user\", \"content\": user_query})\n    with st.chat_message(\"user\"):\n        st.markdown(user_query)\n    with st.chat_message(\"assistant\"):\n        with st.spinner(\"Searching document context...\"):\n            rag_res = st.session_state.rag_engine.query(user_query)\n            st.markdown(rag_res[\"answer\"])\n            if rag_res[\"citations\"]:",
+        "detail": "src.streamlit_app",
+        "documentation": {}
+    },
+    {
+        "label": "build_structure_aware_chunks",
+        "kind": 2,
+        "importPath": "src.structure_aware_chunking",
+        "description": "src.structure_aware_chunking",
+        "peekOfCode": "def build_structure_aware_chunks(documents):\n    final_chunks = []\n    for doc in documents:\n        lines = doc.page_content.splitlines()\n        current_header = doc.metadata.get(\"title\", \"\")\n        prose_lines = []\n        def flush_prose(lines_to_flush, section_title):\n            if not lines_to_flush:\n                return\n            text = \"\\n\".join(lines_to_flush).strip()",
+        "detail": "src.structure_aware_chunking",
+        "documentation": {}
+    },
+    {
+        "label": "documents",
+        "kind": 5,
+        "importPath": "src.structure_aware_chunking",
+        "description": "src.structure_aware_chunking",
+        "peekOfCode": "documents = load_documents()\ndef build_structure_aware_chunks(documents):\n    final_chunks = []\n    for doc in documents:\n        lines = doc.page_content.splitlines()\n        current_header = doc.metadata.get(\"title\", \"\")\n        prose_lines = []\n        def flush_prose(lines_to_flush, section_title):\n            if not lines_to_flush:\n                return",
+        "detail": "src.structure_aware_chunking",
+        "documentation": {}
+    },
+    {
+        "label": "chunks",
+        "kind": 5,
+        "importPath": "src.structure_aware_chunking",
+        "description": "src.structure_aware_chunking",
+        "peekOfCode": "chunks = build_structure_aware_chunks(documents)\nif __name__ == \"__main__\":\n    print(f\"Loaded documents: {len(documents)}\")\n    print(f\"Final Strategy B structure-aware chunks: {len(chunks)}\")\n    print()\n    for i, chunk in enumerate(chunks[:5]):\n        print(\"=\" * 70)\n        print(f\"Chunk ID:     {chunk.metadata['chunk_id']}\")\n        print(f\"Article ID:   {chunk.metadata['article_id']}\")\n        print(f\"Source File:  {chunk.metadata['source_file']}\")",
+        "detail": "src.structure_aware_chunking",
+        "documentation": {}
+    },
+    {
+        "label": "PROJECT_DIR",
+        "kind": 5,
+        "importPath": "src.test_metadata_filter",
+        "description": "src.test_metadata_filter",
+        "peekOfCode": "PROJECT_DIR = Path(__file__).resolve().parent.parent\nCHROMA_DIR = PROJECT_DIR / \"chroma_db\"\nmodel = SentenceTransformer(\"all-MiniLM-L6-v2\")\nclient = chromadb.PersistentClient(path=str(CHROMA_DIR))\n# Collection to test\ncollection = client.get_collection(\"strategy_b\")\n# Test query that matches both Billing/Payment and Authentication/Troubleshooting domains\nquery_text = \"How do I troubleshoot payment failures and authorization errors?\"\nquery_embedding = model.encode(query_text).tolist()\nprint(\"=\" * 80)",
+        "detail": "src.test_metadata_filter",
+        "documentation": {}
+    },
+    {
+        "label": "CHROMA_DIR",
+        "kind": 5,
+        "importPath": "src.test_metadata_filter",
+        "description": "src.test_metadata_filter",
+        "peekOfCode": "CHROMA_DIR = PROJECT_DIR / \"chroma_db\"\nmodel = SentenceTransformer(\"all-MiniLM-L6-v2\")\nclient = chromadb.PersistentClient(path=str(CHROMA_DIR))\n# Collection to test\ncollection = client.get_collection(\"strategy_b\")\n# Test query that matches both Billing/Payment and Authentication/Troubleshooting domains\nquery_text = \"How do I troubleshoot payment failures and authorization errors?\"\nquery_embedding = model.encode(query_text).tolist()\nprint(\"=\" * 80)\nprint(f\"QUERY: '{query_text}'\")",
+        "detail": "src.test_metadata_filter",
+        "documentation": {}
+    },
+    {
+        "label": "model",
+        "kind": 5,
+        "importPath": "src.test_metadata_filter",
+        "description": "src.test_metadata_filter",
+        "peekOfCode": "model = SentenceTransformer(\"all-MiniLM-L6-v2\")\nclient = chromadb.PersistentClient(path=str(CHROMA_DIR))\n# Collection to test\ncollection = client.get_collection(\"strategy_b\")\n# Test query that matches both Billing/Payment and Authentication/Troubleshooting domains\nquery_text = \"How do I troubleshoot payment failures and authorization errors?\"\nquery_embedding = model.encode(query_text).tolist()\nprint(\"=\" * 80)\nprint(f\"QUERY: '{query_text}'\")\nprint(\"=\" * 80)",
+        "detail": "src.test_metadata_filter",
+        "documentation": {}
+    },
+    {
+        "label": "client",
+        "kind": 5,
+        "importPath": "src.test_metadata_filter",
+        "description": "src.test_metadata_filter",
+        "peekOfCode": "client = chromadb.PersistentClient(path=str(CHROMA_DIR))\n# Collection to test\ncollection = client.get_collection(\"strategy_b\")\n# Test query that matches both Billing/Payment and Authentication/Troubleshooting domains\nquery_text = \"How do I troubleshoot payment failures and authorization errors?\"\nquery_embedding = model.encode(query_text).tolist()\nprint(\"=\" * 80)\nprint(f\"QUERY: '{query_text}'\")\nprint(\"=\" * 80)\n# 1. SEARCH WITHOUT METADATA FILTERING",
+        "detail": "src.test_metadata_filter",
+        "documentation": {}
+    },
+    {
+        "label": "collection",
+        "kind": 5,
+        "importPath": "src.test_metadata_filter",
+        "description": "src.test_metadata_filter",
+        "peekOfCode": "collection = client.get_collection(\"strategy_b\")\n# Test query that matches both Billing/Payment and Authentication/Troubleshooting domains\nquery_text = \"How do I troubleshoot payment failures and authorization errors?\"\nquery_embedding = model.encode(query_text).tolist()\nprint(\"=\" * 80)\nprint(f\"QUERY: '{query_text}'\")\nprint(\"=\" * 80)\n# 1. SEARCH WITHOUT METADATA FILTERING\nprint(\"\\n--- UNFILTERED SEARCH (All Product Areas) ---\")\nunfiltered_results = collection.query(",
+        "detail": "src.test_metadata_filter",
+        "documentation": {}
+    },
+    {
+        "label": "query_text",
+        "kind": 5,
+        "importPath": "src.test_metadata_filter",
+        "description": "src.test_metadata_filter",
+        "peekOfCode": "query_text = \"How do I troubleshoot payment failures and authorization errors?\"\nquery_embedding = model.encode(query_text).tolist()\nprint(\"=\" * 80)\nprint(f\"QUERY: '{query_text}'\")\nprint(\"=\" * 80)\n# 1. SEARCH WITHOUT METADATA FILTERING\nprint(\"\\n--- UNFILTERED SEARCH (All Product Areas) ---\")\nunfiltered_results = collection.query(\n    query_embeddings=[query_embedding],\n    n_results=3,",
+        "detail": "src.test_metadata_filter",
+        "documentation": {}
+    },
+    {
+        "label": "query_embedding",
+        "kind": 5,
+        "importPath": "src.test_metadata_filter",
+        "description": "src.test_metadata_filter",
+        "peekOfCode": "query_embedding = model.encode(query_text).tolist()\nprint(\"=\" * 80)\nprint(f\"QUERY: '{query_text}'\")\nprint(\"=\" * 80)\n# 1. SEARCH WITHOUT METADATA FILTERING\nprint(\"\\n--- UNFILTERED SEARCH (All Product Areas) ---\")\nunfiltered_results = collection.query(\n    query_embeddings=[query_embedding],\n    n_results=3,\n)",
+        "detail": "src.test_metadata_filter",
+        "documentation": {}
+    },
+    {
+        "label": "unfiltered_results",
+        "kind": 5,
+        "importPath": "src.test_metadata_filter",
+        "description": "src.test_metadata_filter",
+        "peekOfCode": "unfiltered_results = collection.query(\n    query_embeddings=[query_embedding],\n    n_results=3,\n)\nunfiltered_list = []\nfor i in range(len(unfiltered_results[\"documents\"][0])):\n    doc = unfiltered_results[\"documents\"][0][i]\n    meta = unfiltered_results[\"metadatas\"][0][i]\n    dist = unfiltered_results[\"distances\"][0][i]\n    unfiltered_list.append((meta, dist, doc))",
+        "detail": "src.test_metadata_filter",
+        "documentation": {}
+    },
+    {
+        "label": "unfiltered_list",
+        "kind": 5,
+        "importPath": "src.test_metadata_filter",
+        "description": "src.test_metadata_filter",
+        "peekOfCode": "unfiltered_list = []\nfor i in range(len(unfiltered_results[\"documents\"][0])):\n    doc = unfiltered_results[\"documents\"][0][i]\n    meta = unfiltered_results[\"metadatas\"][0][i]\n    dist = unfiltered_results[\"distances\"][0][i]\n    unfiltered_list.append((meta, dist, doc))\n    print(f\"\\nResult {i+1}:\")\n    print(f\"  Chunk ID:     {meta.get('chunk_id')}\")\n    print(f\"  Article ID:   {meta.get('article_id')}\")\n    print(f\"  Source File:  {meta.get('source_file')}\")",
+        "detail": "src.test_metadata_filter",
+        "documentation": {}
+    },
+    {
+        "label": "filtered_results",
+        "kind": 5,
+        "importPath": "src.test_metadata_filter",
+        "description": "src.test_metadata_filter",
+        "peekOfCode": "filtered_results = collection.query(\n    query_embeddings=[query_embedding],\n    n_results=3,\n    where={\"product_area\": \"Authentication\"},\n)\nfiltered_list = []\nfor i in range(len(filtered_results[\"documents\"][0])):\n    doc = filtered_results[\"documents\"][0][i]\n    meta = filtered_results[\"metadatas\"][0][i]\n    dist = filtered_results[\"distances\"][0][i]",
+        "detail": "src.test_metadata_filter",
+        "documentation": {}
+    },
+    {
+        "label": "filtered_list",
+        "kind": 5,
+        "importPath": "src.test_metadata_filter",
+        "description": "src.test_metadata_filter",
+        "peekOfCode": "filtered_list = []\nfor i in range(len(filtered_results[\"documents\"][0])):\n    doc = filtered_results[\"documents\"][0][i]\n    meta = filtered_results[\"metadatas\"][0][i]\n    dist = filtered_results[\"distances\"][0][i]\n    filtered_list.append((meta, dist, doc))\n    print(f\"\\nResult {i+1}:\")\n    print(f\"  Chunk ID:     {meta.get('chunk_id')}\")\n    print(f\"  Article ID:   {meta.get('article_id')}\")\n    print(f\"  Source File:  {meta.get('source_file')}\")",
+        "detail": "src.test_metadata_filter",
+        "documentation": {}
+    },
+    {
+        "label": "top1_unfiltered",
+        "kind": 5,
+        "importPath": "src.test_metadata_filter",
+        "description": "src.test_metadata_filter",
+        "peekOfCode": "top1_unfiltered = unfiltered_list[0][0][\"source_file\"]\ntop1_filtered = filtered_list[0][0][\"source_file\"]\nprint(\"\\n\" + \"=\" * 80)\nprint(\"METADATA FILTER EFFECT SUMMARY\")\nprint(\"=\" * 80)\nprint(f\"Unfiltered Top-1 Source File: {top1_unfiltered} (Product Area: {unfiltered_list[0][0]['product_area']}, Score: {unfiltered_list[0][1]:.4f})\")\nprint(f\"Filtered Top-1 Source File:   {top1_filtered} (Product Area: {filtered_list[0][0]['product_area']}, Score: {filtered_list[0][1]:.4f})\")\nif top1_unfiltered != top1_filtered:\n    print(\"\\n[SUCCESS] Metadata filtering successfully CHANGED the Top-1 retrieved document!\")\nelse:",
+        "detail": "src.test_metadata_filter",
+        "documentation": {}
+    },
+    {
+        "label": "top1_filtered",
+        "kind": 5,
+        "importPath": "src.test_metadata_filter",
+        "description": "src.test_metadata_filter",
+        "peekOfCode": "top1_filtered = filtered_list[0][0][\"source_file\"]\nprint(\"\\n\" + \"=\" * 80)\nprint(\"METADATA FILTER EFFECT SUMMARY\")\nprint(\"=\" * 80)\nprint(f\"Unfiltered Top-1 Source File: {top1_unfiltered} (Product Area: {unfiltered_list[0][0]['product_area']}, Score: {unfiltered_list[0][1]:.4f})\")\nprint(f\"Filtered Top-1 Source File:   {top1_filtered} (Product Area: {filtered_list[0][0]['product_area']}, Score: {filtered_list[0][1]:.4f})\")\nif top1_unfiltered != top1_filtered:\n    print(\"\\n[SUCCESS] Metadata filtering successfully CHANGED the Top-1 retrieved document!\")\nelse:\n    print(\"\\nTop-1 document remained unchanged.\")",
+        "detail": "src.test_metadata_filter",
+        "documentation": {}
+    },
+    {
+        "label": "test_bustlespot_pdf_qa",
+        "kind": 2,
+        "importPath": "src.test_qa_fix",
+        "description": "src.test_qa_fix",
+        "peekOfCode": "def test_bustlespot_pdf_qa():\n    print(\"Testing Question-Aware Answer Extraction for BustleSpot PDF...\", flush=True)\n    pdf_text_sample = (\n        \"--- Page 1 ---\\n\"\n        \"BustleSpot\\n\"\n        \"Organization\\n\"\n        \"Date\\n\"\n        \"User\\n\"\n        \"Total Hours\\n\"\n        \"Total Idle Hours\\n\"",
+        "detail": "src.test_qa_fix",
+        "documentation": {}
+    },
+    {
+        "label": "PROJECT_DIR",
+        "kind": 5,
+        "importPath": "src.test_qa_fix",
+        "description": "src.test_qa_fix",
+        "peekOfCode": "PROJECT_DIR = Path(__file__).resolve().parent.parent\nsys.path.append(str(PROJECT_DIR))\nfrom src.dynamic_rag import DynamicRAGEngine\ndef test_bustlespot_pdf_qa():\n    print(\"Testing Question-Aware Answer Extraction for BustleSpot PDF...\", flush=True)\n    pdf_text_sample = (\n        \"--- Page 1 ---\\n\"\n        \"BustleSpot\\n\"\n        \"Organization\\n\"\n        \"Date\\n\"",
+        "detail": "src.test_qa_fix",
+        "documentation": {}
+    },
+    {
+        "label": "run_benchmark",
+        "kind": 2,
+        "importPath": "src.test_retrieval",
+        "description": "src.test_retrieval",
+        "peekOfCode": "def run_benchmark():\n    scores = {\"strategy_a\": 0, \"strategy_b\": 0}\n    summary_records = []\n    print(\"=\" * 80)\n    print(\"RETRIEVAL EVALUATION BENCHMARK (HIT-IN-TOP-5)\")\n    print(\"=\" * 80)\n    for item in questions:\n        q_id = item[\"id\"]\n        q_text = item[\"question\"]\n        expected_art = item[\"expected_article_id\"]",
+        "detail": "src.test_retrieval",
+        "documentation": {}
+    },
+    {
+        "label": "PROJECT_DIR",
+        "kind": 5,
+        "importPath": "src.test_retrieval",
+        "description": "src.test_retrieval",
+        "peekOfCode": "PROJECT_DIR = Path(__file__).resolve().parent.parent\nCHROMA_DIR = PROJECT_DIR / \"chroma_db\"\nmodel = SentenceTransformer(\"all-MiniLM-L6-v2\")\nclient = chromadb.PersistentClient(path=str(CHROMA_DIR))\n# 8 Known-Answer Questions (4 Troubleshooting Table Rows + 4 Prose)\nquestions = [\n    {\n        \"id\": \"Q1\",\n        \"type\": \"Table Row\",\n        \"question\": \"What should I do if I receive error code 51 - Decline when paying an invoice?\",",
+        "detail": "src.test_retrieval",
+        "documentation": {}
+    },
+    {
+        "label": "CHROMA_DIR",
+        "kind": 5,
+        "importPath": "src.test_retrieval",
+        "description": "src.test_retrieval",
+        "peekOfCode": "CHROMA_DIR = PROJECT_DIR / \"chroma_db\"\nmodel = SentenceTransformer(\"all-MiniLM-L6-v2\")\nclient = chromadb.PersistentClient(path=str(CHROMA_DIR))\n# 8 Known-Answer Questions (4 Troubleshooting Table Rows + 4 Prose)\nquestions = [\n    {\n        \"id\": \"Q1\",\n        \"type\": \"Table Row\",\n        \"question\": \"What should I do if I receive error code 51 - Decline when paying an invoice?\",\n        \"expected_article_id\": \"article_03\",",
+        "detail": "src.test_retrieval",
+        "documentation": {}
+    },
+    {
+        "label": "model",
+        "kind": 5,
+        "importPath": "src.test_retrieval",
+        "description": "src.test_retrieval",
+        "peekOfCode": "model = SentenceTransformer(\"all-MiniLM-L6-v2\")\nclient = chromadb.PersistentClient(path=str(CHROMA_DIR))\n# 8 Known-Answer Questions (4 Troubleshooting Table Rows + 4 Prose)\nquestions = [\n    {\n        \"id\": \"Q1\",\n        \"type\": \"Table Row\",\n        \"question\": \"What should I do if I receive error code 51 - Decline when paying an invoice?\",\n        \"expected_article_id\": \"article_03\",\n        \"expected_source_file\": \"article_03_zendesk_credit_card_failures.md\",",
+        "detail": "src.test_retrieval",
+        "documentation": {}
+    },
+    {
+        "label": "client",
+        "kind": 5,
+        "importPath": "src.test_retrieval",
+        "description": "src.test_retrieval",
+        "peekOfCode": "client = chromadb.PersistentClient(path=str(CHROMA_DIR))\n# 8 Known-Answer Questions (4 Troubleshooting Table Rows + 4 Prose)\nquestions = [\n    {\n        \"id\": \"Q1\",\n        \"type\": \"Table Row\",\n        \"question\": \"What should I do if I receive error code 51 - Decline when paying an invoice?\",\n        \"expected_article_id\": \"article_03\",\n        \"expected_source_file\": \"article_03_zendesk_credit_card_failures.md\",\n        \"expected_section\": \"Resolving other types of errors (Table: 51 - Decline)\",",
+        "detail": "src.test_retrieval",
+        "documentation": {}
+    },
+    {
+        "label": "questions",
+        "kind": 5,
+        "importPath": "src.test_retrieval",
+        "description": "src.test_retrieval",
+        "peekOfCode": "questions = [\n    {\n        \"id\": \"Q1\",\n        \"type\": \"Table Row\",\n        \"question\": \"What should I do if I receive error code 51 - Decline when paying an invoice?\",\n        \"expected_article_id\": \"article_03\",\n        \"expected_source_file\": \"article_03_zendesk_credit_card_failures.md\",\n        \"expected_section\": \"Resolving other types of errors (Table: 51 - Decline)\",\n    },\n    {",
+        "detail": "src.test_retrieval",
+        "documentation": {}
+    },
+    {
+        "label": "test_universal_parser",
+        "kind": 2,
+        "importPath": "src.test_universal_parser",
+        "description": "src.test_universal_parser",
+        "peekOfCode": "def test_universal_parser():\n    print(\"==================================================\", flush=True)\n    print(\"TEST 1: Testing Universal Document Parser\", flush=True)\n    print(\"==================================================\", flush=True)\n    test_files = {\n        \"sample.txt\": b\"Customer Support Policy:\\nStandard refund processing takes 3-5 business days. For urgent billing issues, contact support@company.com.\",\n        \"sample.md\": b\"# System Guide\\n## Troubleshooting\\nTo clear cache, navigate to Settings > Advanced > Clear Storage.\",\n        \"data.csv\": b\"Ticket_ID,Issue_Type,Status,Resolution_Time_Hours\\nTCK-101,Login Failure,Resolved,2\\nTCK-102,Billing Error,Pending,24\",\n        \"script.py\": b\"def calculate_tax(amount):\\n    # Standard tax rate is 15%\\n    return amount * 0.15\",\n        \"custom_config.json\": b'{\"server\": \"prod-1\", \"port\": 8080, \"timeout_sec\": 30}',",
+        "detail": "src.test_universal_parser",
+        "documentation": {}
+    },
+    {
+        "label": "PROJECT_DIR",
+        "kind": 5,
+        "importPath": "src.test_universal_parser",
+        "description": "src.test_universal_parser",
+        "peekOfCode": "PROJECT_DIR = Path(__file__).resolve().parent.parent\nsys.path.append(str(PROJECT_DIR))\nfrom src.document_parser import parse_document\nfrom src.dynamic_rag import DynamicRAGEngine\ndef test_universal_parser():\n    print(\"==================================================\", flush=True)\n    print(\"TEST 1: Testing Universal Document Parser\", flush=True)\n    print(\"==================================================\", flush=True)\n    test_files = {\n        \"sample.txt\": b\"Customer Support Policy:\\nStandard refund processing takes 3-5 business days. For urgent billing issues, contact support@company.com.\",",
+        "detail": "src.test_universal_parser",
+        "documentation": {}
+    },
+    {
+        "label": "test_upload_isolation",
+        "kind": 2,
+        "importPath": "src.test_upload_isolation",
+        "description": "src.test_upload_isolation",
+        "peekOfCode": "def test_upload_isolation():\n    print(\"==========================================\", flush=True)\n    print(\"TEST: Upload List Isolation Verification\", flush=True)\n    print(\"==========================================\", flush=True)\n    engine = DynamicRAGEngine()\n    # 1. Initial State: Benchmark loaded in background, user list must be 0!\n    user_docs_initial = engine.get_documents_summary()\n    print(f\"Initial User Uploaded Files Count: {len(user_docs_initial)} (Expected: 0)\", flush=True)\n    assert len(user_docs_initial) == 0, \"Error: Initial uploaded files list is not 0!\"\n    # 2. User uploads a document",
+        "detail": "src.test_upload_isolation",
+        "documentation": {}
+    },
+    {
+        "label": "PROJECT_DIR",
+        "kind": 5,
+        "importPath": "src.test_upload_isolation",
+        "description": "src.test_upload_isolation",
+        "peekOfCode": "PROJECT_DIR = Path(__file__).resolve().parent.parent\nsys.path.append(str(PROJECT_DIR))\nfrom src.dynamic_rag import DynamicRAGEngine\ndef test_upload_isolation():\n    print(\"==========================================\", flush=True)\n    print(\"TEST: Upload List Isolation Verification\", flush=True)\n    print(\"==========================================\", flush=True)\n    engine = DynamicRAGEngine()\n    # 1. Initial State: Benchmark loaded in background, user list must be 0!\n    user_docs_initial = engine.get_documents_summary()",
+        "detail": "src.test_upload_isolation",
+        "documentation": {}
+    },
+    {
+        "label": "test_week3_vs_week4_eval",
+        "kind": 2,
+        "importPath": "src.test_week3_vs_week4",
+        "description": "src.test_week3_vs_week4",
+        "peekOfCode": "def test_week3_vs_week4_eval():\n    print(\"==================================================\", flush=True)\n    print(\"TEST: Week 3 Baseline vs Week 4 Hybrid RAG Filter\", flush=True)\n    print(\"==================================================\", flush=True)\n    engine = DynamicRAGEngine()\n    print(f\"Loaded {len(engine.indexed_documents)} benchmark articles ({engine.total_chunks} chunks)\\n\", flush=True)\n    for qid, qtext in GOLDEN_QUESTIONS:\n        res_w3 = engine.query(qtext, mode=\"week3\")\n        res_w4 = engine.query(qtext, mode=\"week4\")\n        w3_status = \"REFUSED (Miss)\" if \"I don't have enough information\" in res_w3[\"answer\"] else \"ANSWERED\"",
+        "detail": "src.test_week3_vs_week4",
+        "documentation": {}
+    },
+    {
+        "label": "PROJECT_DIR",
+        "kind": 5,
+        "importPath": "src.test_week3_vs_week4",
+        "description": "src.test_week3_vs_week4",
+        "peekOfCode": "PROJECT_DIR = Path(__file__).resolve().parent.parent\nsys.path.append(str(PROJECT_DIR))\nfrom src.dynamic_rag import DynamicRAGEngine\nGOLDEN_QUESTIONS = [\n    (\"Q01\", \"What should I do if I get credit card error code 51 - Decline when paying my invoice?\"),\n    (\"Q02\", \"How do I fix Cloudflare billing error 'Payment error: authorization failed'?\"),\n    (\"Q03\", \"What does Zendesk payment error code 430357 - Lost or Stolen Card mean and how do I fix it?\"),\n    (\"Q04\", \"How should I resolve credit card error code 14 - Card No. Error when saving my payment details?\"),\n    (\"Q05\", \"What URL parameter ?noapps should I add to test Zendesk tickets with all apps disabled?\"),\n    (\"Q06\", \"Why does Google block sign-in attempts when accessing an account from a third-party service?\"),",
+        "detail": "src.test_week3_vs_week4",
+        "documentation": {}
+    },
+    {
+        "label": "GOLDEN_QUESTIONS",
+        "kind": 5,
+        "importPath": "src.test_week3_vs_week4",
+        "description": "src.test_week3_vs_week4",
+        "peekOfCode": "GOLDEN_QUESTIONS = [\n    (\"Q01\", \"What should I do if I get credit card error code 51 - Decline when paying my invoice?\"),\n    (\"Q02\", \"How do I fix Cloudflare billing error 'Payment error: authorization failed'?\"),\n    (\"Q03\", \"What does Zendesk payment error code 430357 - Lost or Stolen Card mean and how do I fix it?\"),\n    (\"Q04\", \"How should I resolve credit card error code 14 - Card No. Error when saving my payment details?\"),\n    (\"Q05\", \"What URL parameter ?noapps should I add to test Zendesk tickets with all apps disabled?\"),\n    (\"Q06\", \"Why does Google block sign-in attempts when accessing an account from a third-party service?\"),\n    (\"Q07\", \"How long does Google account recovery take if I lost my security key and have no backup second step?\"),\n    (\"Q08\", \"What is the key difference between Strong Customer Authentication (SCA) and 3D Secure (3DS)?\"),\n    (\"Q09\", \"How many times and over how many days will Cloudflare retry a failed recurring subscription renewal payment before ending grace period?\"),",
+        "detail": "src.test_week3_vs_week4",
+        "documentation": {}
+    }
+]

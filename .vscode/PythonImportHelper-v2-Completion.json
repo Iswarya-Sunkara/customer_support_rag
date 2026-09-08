@@ -144,6 +144,14 @@
         "documentation": {}
     },
     {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
         "label": "load_documents",
         "importPath": "prepare_documents",
         "description": "prepare_documents",
@@ -443,6 +451,71 @@
         "documentation": {}
     },
     {
+        "label": "random",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "random",
+        "description": "random",
+        "detail": "random",
+        "documentation": {}
+    },
+    {
+        "label": "DynamicRAGEngine",
+        "importPath": "src.dynamic_rag",
+        "description": "src.dynamic_rag",
+        "isExtraImport": true,
+        "detail": "src.dynamic_rag",
+        "documentation": {}
+    },
+    {
+        "label": "DynamicRAGEngine",
+        "importPath": "src.dynamic_rag",
+        "description": "src.dynamic_rag",
+        "isExtraImport": true,
+        "detail": "src.dynamic_rag",
+        "documentation": {}
+    },
+    {
+        "label": "DynamicRAGEngine",
+        "importPath": "src.dynamic_rag",
+        "description": "src.dynamic_rag",
+        "isExtraImport": true,
+        "detail": "src.dynamic_rag",
+        "documentation": {}
+    },
+    {
+        "label": "DynamicRAGEngine",
+        "importPath": "src.dynamic_rag",
+        "description": "src.dynamic_rag",
+        "isExtraImport": true,
+        "detail": "src.dynamic_rag",
+        "documentation": {}
+    },
+    {
+        "label": "DynamicRAGEngine",
+        "importPath": "src.dynamic_rag",
+        "description": "src.dynamic_rag",
+        "isExtraImport": true,
+        "detail": "src.dynamic_rag",
+        "documentation": {}
+    },
+    {
+        "label": "DynamicRAGEngine",
+        "importPath": "src.dynamic_rag",
+        "description": "src.dynamic_rag",
+        "isExtraImport": true,
+        "detail": "src.dynamic_rag",
+        "documentation": {}
+    },
+    {
+        "label": "DynamicRAGEngine",
+        "importPath": "src.dynamic_rag",
+        "description": "src.dynamic_rag",
+        "isExtraImport": true,
+        "detail": "src.dynamic_rag",
+        "documentation": {}
+    },
+    {
         "label": "math",
         "kind": 6,
         "isExtraImport": true,
@@ -538,54 +611,6 @@
         "importPath": "uvicorn",
         "description": "uvicorn",
         "detail": "uvicorn",
-        "documentation": {}
-    },
-    {
-        "label": "DynamicRAGEngine",
-        "importPath": "src.dynamic_rag",
-        "description": "src.dynamic_rag",
-        "isExtraImport": true,
-        "detail": "src.dynamic_rag",
-        "documentation": {}
-    },
-    {
-        "label": "DynamicRAGEngine",
-        "importPath": "src.dynamic_rag",
-        "description": "src.dynamic_rag",
-        "isExtraImport": true,
-        "detail": "src.dynamic_rag",
-        "documentation": {}
-    },
-    {
-        "label": "DynamicRAGEngine",
-        "importPath": "src.dynamic_rag",
-        "description": "src.dynamic_rag",
-        "isExtraImport": true,
-        "detail": "src.dynamic_rag",
-        "documentation": {}
-    },
-    {
-        "label": "DynamicRAGEngine",
-        "importPath": "src.dynamic_rag",
-        "description": "src.dynamic_rag",
-        "isExtraImport": true,
-        "detail": "src.dynamic_rag",
-        "documentation": {}
-    },
-    {
-        "label": "DynamicRAGEngine",
-        "importPath": "src.dynamic_rag",
-        "description": "src.dynamic_rag",
-        "isExtraImport": true,
-        "detail": "src.dynamic_rag",
-        "documentation": {}
-    },
-    {
-        "label": "DynamicRAGEngine",
-        "importPath": "src.dynamic_rag",
-        "description": "src.dynamic_rag",
-        "isExtraImport": true,
-        "detail": "src.dynamic_rag",
         "documentation": {}
     },
     {
@@ -838,6 +863,69 @@
         "description": "src.final_rag",
         "peekOfCode": "hybrid_retriever = None\ndef run_rag(question, use_hybrid=False):\n    global hybrid_retriever\n    print(\"=\" * 80)\n    print(f\"QUESTION: {question} (Mode: {'Hybrid BM25+RRF' if use_hybrid else 'Dense Baseline'})\")\n    print(\"=\" * 80)\n    if use_hybrid:\n        if hybrid_retriever is None:\n            hybrid_retriever = HybridRRFRetriever()\n        search_res = hybrid_retriever.search(question, top_k=TOP_K)",
         "detail": "src.final_rag",
+        "documentation": {}
+    },
+    {
+        "label": "generate_traces",
+        "kind": 2,
+        "importPath": "src.generate_traces",
+        "description": "src.generate_traces",
+        "peekOfCode": "def generate_traces():\n    print(\"Initializing Dynamic RAG Engine for trace generation...\", flush=True)\n    engine = DynamicRAGEngine()\n    traces = []\n    total_traces = 1000\n    random.seed(SEED)\n    template_answers = {}\n    preambles = [\n        \"\", \"Hi team, \", \"Urgent: \", \"Question regarding invoice: \",\n        \"Customer Ticket #10492: \", \"Help needed - \", \"Billing query: \"",
+        "detail": "src.generate_traces",
+        "documentation": {}
+    },
+    {
+        "label": "run_seeded_sampling_and_replay",
+        "kind": 2,
+        "importPath": "src.generate_traces",
+        "description": "src.generate_traces",
+        "peekOfCode": "def run_seeded_sampling_and_replay():\n    random.seed(SEED)\n    traces = []\n    with open(TRACES_FILE, \"r\", encoding=\"utf-8\") as f:\n        for line in f:\n            if line.strip():\n                traces.append(json.loads(line.strip()))\n    all_trace_ids = [t[\"trace_id\"] for t in traces]\n    sampled_ids = sorted(random.sample(all_trace_ids, 20))\n    print(\"\\n\" + \"=\" * 80, flush=True)",
+        "detail": "src.generate_traces",
+        "documentation": {}
+    },
+    {
+        "label": "PROJECT_DIR",
+        "kind": 5,
+        "importPath": "src.generate_traces",
+        "description": "src.generate_traces",
+        "peekOfCode": "PROJECT_DIR = Path(__file__).resolve().parent.parent\nsys.path.append(str(PROJECT_DIR))\nfrom src.dynamic_rag import DynamicRAGEngine\nTRACES_FILE = PROJECT_DIR / \"traces.jsonl\"\nSEED = 42\nTICKET_TEMPLATES = [\n    # 1. Billing Grace Period & Renewal Retries\n    (\"How many times and over how many days will Cloudflare retry a failed recurring subscription renewal payment?\", \"billing_grace\"),\n    (\"What is the exact grace period for failed billing payments on my account before suspension?\", \"billing_grace\"),\n    (\"If my automatic subscription payment fails on day 1, when is the next retry attempt made?\", \"billing_grace\"),",
+        "detail": "src.generate_traces",
+        "documentation": {}
+    },
+    {
+        "label": "TRACES_FILE",
+        "kind": 5,
+        "importPath": "src.generate_traces",
+        "description": "src.generate_traces",
+        "peekOfCode": "TRACES_FILE = PROJECT_DIR / \"traces.jsonl\"\nSEED = 42\nTICKET_TEMPLATES = [\n    # 1. Billing Grace Period & Renewal Retries\n    (\"How many times and over how many days will Cloudflare retry a failed recurring subscription renewal payment?\", \"billing_grace\"),\n    (\"What is the exact grace period for failed billing payments on my account before suspension?\", \"billing_grace\"),\n    (\"If my automatic subscription payment fails on day 1, when is the next retry attempt made?\", \"billing_grace\"),\n    (\"Does Cloudflare cancel my subscription immediately after a single payment decline or is there a retry schedule?\", \"billing_grace\"),\n    (\"How long do I have to update my credit card after a payment failure before my account is downgraded?\", \"billing_grace\"),\n    # 2. Error Code 51 & Card Declines",
+        "detail": "src.generate_traces",
+        "documentation": {}
+    },
+    {
+        "label": "SEED",
+        "kind": 5,
+        "importPath": "src.generate_traces",
+        "description": "src.generate_traces",
+        "peekOfCode": "SEED = 42\nTICKET_TEMPLATES = [\n    # 1. Billing Grace Period & Renewal Retries\n    (\"How many times and over how many days will Cloudflare retry a failed recurring subscription renewal payment?\", \"billing_grace\"),\n    (\"What is the exact grace period for failed billing payments on my account before suspension?\", \"billing_grace\"),\n    (\"If my automatic subscription payment fails on day 1, when is the next retry attempt made?\", \"billing_grace\"),\n    (\"Does Cloudflare cancel my subscription immediately after a single payment decline or is there a retry schedule?\", \"billing_grace\"),\n    (\"How long do I have to update my credit card after a payment failure before my account is downgraded?\", \"billing_grace\"),\n    # 2. Error Code 51 & Card Declines\n    (\"What should I do if I get credit card error code 51 - Decline when paying my invoice?\", \"error_51\"),",
+        "detail": "src.generate_traces",
+        "documentation": {}
+    },
+    {
+        "label": "TICKET_TEMPLATES",
+        "kind": 5,
+        "importPath": "src.generate_traces",
+        "description": "src.generate_traces",
+        "peekOfCode": "TICKET_TEMPLATES = [\n    # 1. Billing Grace Period & Renewal Retries\n    (\"How many times and over how many days will Cloudflare retry a failed recurring subscription renewal payment?\", \"billing_grace\"),\n    (\"What is the exact grace period for failed billing payments on my account before suspension?\", \"billing_grace\"),\n    (\"If my automatic subscription payment fails on day 1, when is the next retry attempt made?\", \"billing_grace\"),\n    (\"Does Cloudflare cancel my subscription immediately after a single payment decline or is there a retry schedule?\", \"billing_grace\"),\n    (\"How long do I have to update my credit card after a payment failure before my account is downgraded?\", \"billing_grace\"),\n    # 2. Error Code 51 & Card Declines\n    (\"What should I do if I get credit card error code 51 - Decline when paying my invoice?\", \"error_51\"),\n    (\"Why is my credit card transaction failing with error code 51 on invoice checkout?\", \"error_51\"),",
+        "detail": "src.generate_traces",
+        "documentation": {}
+    },
+    {
+        "label": "DEMO_SET_QUESTIONS",
+        "kind": 5,
+        "importPath": "src.generate_traces",
+        "description": "src.generate_traces",
+        "peekOfCode": "DEMO_SET_QUESTIONS = [\n    \"How do I fix Cloudflare billing error 'Payment error: authorization failed'?\",\n    \"What URL parameter ?noapps should I add to test Zendesk tickets with all apps disabled?\",\n    \"What is the key difference between Strong Customer Authentication (SCA) and 3D Secure (3DS)?\",\n    \"What format requirements apply to the Cardholder name and Postal Code fields when resubmitting a failed card?\",\n    \"Why shouldn't I use Google Voice to receive 2-Step Verification codes?\",\n    \"What should I do if I get credit card error code 51 - Decline when paying my invoice?\",\n    \"How should I resolve credit card error code 14 - Card No. Error when saving my payment details?\",\n    \"What does Zendesk payment error code 430357 - Lost or Stolen Card mean and how do I fix it?\",\n    \"Why does Google block sign-in attempts when accessing an account from a third-party service?\",",
+        "detail": "src.generate_traces",
         "documentation": {}
     },
     {

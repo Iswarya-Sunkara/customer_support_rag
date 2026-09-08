@@ -1,0 +1,333 @@
+[
+  {
+    "q_id": "FQ01",
+    "question": "If my automatic subscription payment fails on day 1, when is the next retry attempt made and how long is the grace period?",
+    "rag_answer": "**Answer based on article_01_cloudflare_billing_errors.md (Week 3 Dense Baseline):**\n\n• With each failed charge, an email with more information about the specific payment attempt, including an error code and description, is sent to the billing contact(s) for the account.\n• If your error message i\nndesk provides a grace period allowing time to [update the card](https://support.zendesk.com/hc/en-us/articles/4408887443610).\n• | Update your payment method or manually pay the invoice before the grace period ends.\n\n*Cited from `article_01_cloudflare_billing_errors.md` (article_01_cloudflare_billing_errors.md_chunk_14) with 53.2% relevance confidence.*",
+    "citations": [
+      {
+        "filename": "article_01_cloudflare_billing_errors.md",
+        "chunk_id": "article_01_cloudflare_billing_errors.md_chunk_14",
+        "snippet": "------------------------------------------------------------------------------------------------------ |\r | \"We couldn't process your renewal payment\" | A recurring subscription charge failed. Cloudflare will retry up to 5 times over 5 days. | Update...",
+        "distance": 0.4676,
+        "similarity_score": "53.2%"
+      },
+      {
+        "filename": "article_03_zendesk_credit_card_failures.md",
+        "chunk_id": "article_03_zendesk_credit_card_failures.md_chunk_5",
+        "snippet": "ndesk provides a grace period allowing time to [update the card](https://support.zendesk.com/hc/en-us/articles/4408887443610).\r \r In this case, you have an open invoice that we were unable to charge to your card on file.\r \r With each failed charge, a...",
+        "distance": 0.5274,
+        "similarity_score": "47.3%"
+      },
+      {
+        "filename": "article_01_cloudflare_billing_errors.md",
+        "chunk_id": "article_01_cloudflare_billing_errors.md_chunk_9",
+        "snippet": "nage/pay-invoices-overdue-balances/) and wait 24 hours.                                                                                             |\r | \"You cannot modify this subscription since it is currently scheduled to be cancelled\"       | You...",
+        "distance": 0.5299,
+        "similarity_score": "47.0%"
+      },
+      {
+        "filename": "article_01_cloudflare_billing_errors.md",
+        "chunk_id": "article_01_cloudflare_billing_errors.md_chunk_12",
+        "snippet": "retry. Refer to [Resolve \"cannot remove payment method\"](https://developers.cloudflare.com/billing/troubleshoot/resolve-cannot-remove-payment-method/).                       |\r \r ## Email notifications\r \r | Email subject...",
+        "distance": 0.5632,
+        "similarity_score": "43.7%"
+      }
+    ],
+    "failure_mode": "Quotes superseded billing grace period window"
+  },
+  {
+    "q_id": "FQ02",
+    "question": "What should I do if I get credit card error code 51 - Decline when paying my invoice?",
+    "rag_answer": "**Answer based on article_03_zendesk_credit_card_failures.md (Week 3 Dense Baseline):**\n\n• |\r\n| 51 - Decline                            | Insufficient funds                                                            | Submit payment using a different credit\n|\r\n| 430285 - Do not honor                   | Bank has declined the transaction                                             | Call your credit card issuer (the phone number is usually on the back of your card) and ask them to approve the transaction.\n• |\r\n| 430360, 100 -- Not authorized, REJECTED | Insufficient funds in your account                                            | Submit payment using a different credit card\nprove the transaction.\n• |\r\n| 430190 - Not authorized                 | Bank has declined the transaction                                             | Call your credit card issuer (the phone number is usually on the back of your card) and ask them to approve the transaction.\n\n*Cited from `article_03_zendesk_credit_card_failures.md` (article_03_zendesk_credit_card_failures.md_chunk_11) with 59.2% relevance confidence.*",
+    "citations": [
+      {
+        "filename": "article_03_zendesk_credit_card_failures.md",
+        "chunk_id": "article_03_zendesk_credit_card_failures.md_chunk_11",
+        "snippet": "|\r | 41 - Hold-call                          | Pick-up card (fraud: lost card)                                               | Your card may have been reported as lost or stolen, or the account has been closed. Call your credit card issuer (the phone...",
+        "distance": 0.4076,
+        "similarity_score": "59.2%"
+      },
+      {
+        "filename": "article_03_zendesk_credit_card_failures.md",
+        "chunk_id": "article_03_zendesk_credit_card_failures.md_chunk_15",
+        "snippet": "|\r | 430285 - Do not honor                   | Bank has declined the transaction                                             | Call your credit card issuer (the phone number is usually on the back of your card) and ask them to approve the transaction...",
+        "distance": 0.4354,
+        "similarity_score": "56.5%"
+      },
+      {
+        "filename": "article_03_zendesk_credit_card_failures.md",
+        "chunk_id": "article_03_zendesk_credit_card_failures.md_chunk_14",
+        "snippet": "prove the transaction.                                                                    |\r | 430190 - Not authorized                 | Bank has declined the transaction                                             | Call your credit card issuer (the...",
+        "distance": 0.4706,
+        "similarity_score": "52.9%"
+      },
+      {
+        "filename": "article_03_zendesk_credit_card_failures.md",
+        "chunk_id": "article_03_zendesk_credit_card_failures.md_chunk_9",
+        "snippet": "ve been reported lost or stolen, or the account has been closed. Call your credit card issuer (the phone number is usually on the back of your card) to resolve the issue.      |\r | 5 - Decline                             | Do not honor...",
+        "distance": 0.4714,
+        "similarity_score": "52.9%"
+      }
+    ],
+    "failure_mode": "Confuses card decline error code 51 with system timeout"
+  },
+  {
+    "q_id": "FQ03",
+    "question": "How long does Google account recovery take if I lost my security key and have no backup second step?",
+    "rag_answer": "**Answer based on article_06_google_2step_verification.md (Week 3 Dense Baseline):**\n\n• To make a security key your required second step, [enroll in Advanced Protection](https://support.google.com/accounts/answer/7519408).\n• To enter an email address\nve the lost key from your account](https://support.google.com/titansecuritykey/answer/9115656).\n• ### If you don’t have another second step or forgot your password\n\n*Cited from `article_06_google_2step_verification.md` (article_06_google_2step_verification.md_chunk_4) with 65.2% relevance confidence.*",
+    "citations": [
+      {
+        "filename": "article_06_google_2step_verification.md",
+        "chunk_id": "article_06_google_2step_verification.md_chunk_4",
+        "snippet": "ot your password\r \r Important: 2-Step Verification requires an extra step to prove you own an account. Because of this added security, it can take 3-5 business days for Google to make sure it’s you.\r \r [Follow the steps to recover your account](https...",
+        "distance": 0.3475,
+        "similarity_score": "65.2%"
+      },
+      {
+        "filename": "article_06_google_2step_verification.md",
+        "chunk_id": "article_06_google_2step_verification.md_chunk_3",
+        "snippet": "ve the lost key from your account](https://support.google.com/titansecuritykey/answer/9115656).\r 3. [Get a new security key](https://support.google.com/accounts/answer/6103523#get_key). You may want to get an extra key you can keep in a safe place....",
+        "distance": 0.4213,
+        "similarity_score": "57.9%"
+      },
+      {
+        "filename": "article_06_google_2step_verification.md",
+        "chunk_id": "article_06_google_2step_verification.md_chunk_7",
+        "snippet": "stolen\r \r - Lost or stolen device\r - Missing or unavailable passkey\r \r ## Require a security key as your second step\r \r If you turn on 2-Step Verification and sign in on an eligible phone, you can get [Google prompts](https://support.google.com/accou...",
+        "distance": 0.4366,
+        "similarity_score": "56.3%"
+      },
+      {
+        "filename": "article_06_google_2step_verification.md",
+        "chunk_id": "article_06_google_2step_verification.md_chunk_2",
+        "snippet": ".\r \r You have several ways you can get back into your account, depending on your circumstances. Use backup options, sign in from a trusted device, get a new phone from your carrier, or recover your account.\r \r ## My security key was lost or stolen...",
+        "distance": 0.4583,
+        "similarity_score": "54.2%"
+      }
+    ],
+    "failure_mode": "Omits primary authentication fallback step for 2FA recovery"
+  },
+  {
+    "q_id": "FQ04",
+    "question": "What format requirements apply to the Cardholder name and Postal Code fields when resubmitting a failed card?",
+    "rag_answer": "**Answer based on article_03_zendesk_credit_card_failures.md (Week 3 Dense Baseline):**\n\n• - **Cardholder** field contains only the first and last name of the cardholder when possible.\n• - **Postal Code** field contains only the first five digits i\ns name is the sole name on the card).\n• You might see a payment error when you log in, after you have entered your credit card information.\n\n*Cited from `article_03_zendesk_credit_card_failures.md` (article_03_zendesk_credit_card_failures.md_chunk_3) with 67.1% relevance confidence.*",
+    "citations": [
+      {
+        "filename": "article_03_zendesk_credit_card_failures.md",
+        "chunk_id": "article_03_zendesk_credit_card_failures.md_chunk_3",
+        "snippet": "ues, and transaction limits.\r \r If you receive an error message upon saving the card, please try re-entering your card once more after clearing cache/cookies, but by using a different browser with the following criteria in mind:\r \r - **Cardholder** f...",
+        "distance": 0.3295,
+        "similarity_score": "67.1%"
+      },
+      {
+        "filename": "article_03_zendesk_credit_card_failures.md",
+        "chunk_id": "article_03_zendesk_credit_card_failures.md_chunk_4",
+        "snippet": "s name is the sole name on the card).\r - **Postal Code** field contains only the first five digits if you are in the United States. Do not include any extensions.\r - **State is required** if you are in the US.\r \r ## Resolving payment errors\r \r You mi...",
+        "distance": 0.4244,
+        "similarity_score": "57.6%"
+      },
+      {
+        "filename": "article_03_zendesk_credit_card_failures.md",
+        "chunk_id": "article_03_zendesk_credit_card_failures.md_chunk_10",
+        "snippet": "|\r | 14 - Card No. Error                     | Invalid card number                                                           | Re-submit your credit card, in case you entered your card number incorrectly, or use a different credit card....",
+        "distance": 0.543,
+        "similarity_score": "45.7%"
+      },
+      {
+        "filename": "article_03_zendesk_credit_card_failures.md",
+        "chunk_id": "article_03_zendesk_credit_card_failures.md_chunk_1",
+        "snippet": "# Resolving issues when your credit card fails\r \r Source: Zendesk\r URL: https://support.zendesk.com/hc/en-us/articles/4408832461210-Resolving-issues-when-your-credit-card-fails\r Category: Payment\r \r Sometimes you're unable to submit or update your cr...",
+        "distance": 0.559,
+        "similarity_score": "44.1%"
+      }
+    ],
+    "failure_mode": "Omits mandatory field formatting rule for special characters in Cardholder Name"
+  },
+  {
+    "q_id": "FQ05",
+    "question": "What is the exact SLA guaranteed refund window in business days for annual plan chargebacks?",
+    "rag_answer": "I don't have enough information in my knowledge base to answer this question.",
+    "citations": [],
+    "failure_mode": "Hallucinates guaranteed SLA refund window on unanswerable billing ticket"
+  },
+  {
+    "q_id": "FQ06",
+    "question": "How many times and over how many days will Cloudflare retry a failed recurring subscription renewal payment?",
+    "rag_answer": "**Answer based on article_01_cloudflare_billing_errors.md (Week 3 Dense Baseline):**\n\n• Cloudflare will retry up to 5 times over 5 days.\n• Refer to [Resolve a payment failure](https://developers.cloudflare.com/billing/troubleshoot/troubleshoot-failed-payments/).\n• Refer to [Resolve \"you cannot modify this subscription\"](https://developers.cloudflare.com/billing/trouble\nretry.\n\n*Cited from `article_01_cloudflare_billing_errors.md` (article_01_cloudflare_billing_errors.md_chunk_14) with 72.8% relevance confidence.*",
+    "citations": [
+      {
+        "filename": "article_01_cloudflare_billing_errors.md",
+        "chunk_id": "article_01_cloudflare_billing_errors.md_chunk_14",
+        "snippet": "------------------------------------------------------------------------------------------------------ |\r | \"We couldn't process your renewal payment\" | A recurring subscription charge failed. Cloudflare will retry up to 5 times over 5 days. | Update...",
+        "distance": 0.2718,
+        "similarity_score": "72.8%"
+      },
+      {
+        "filename": "article_01_cloudflare_billing_errors.md",
+        "chunk_id": "article_01_cloudflare_billing_errors.md_chunk_9",
+        "snippet": "nage/pay-invoices-overdue-balances/) and wait 24 hours.                                                                                             |\r | \"You cannot modify this subscription since it is currently scheduled to be cancelled\"       | You...",
+        "distance": 0.4054,
+        "similarity_score": "59.5%"
+      },
+      {
+        "filename": "article_01_cloudflare_billing_errors.md",
+        "chunk_id": "article_01_cloudflare_billing_errors.md_chunk_12",
+        "snippet": "retry. Refer to [Resolve \"cannot remove payment method\"](https://developers.cloudflare.com/billing/troubleshoot/resolve-cannot-remove-payment-method/).                       |\r \r ## Email notifications\r \r | Email subject...",
+        "distance": 0.4221,
+        "similarity_score": "57.8%"
+      },
+      {
+        "filename": "article_01_cloudflare_billing_errors.md",
+        "chunk_id": "article_01_cloudflare_billing_errors.md_chunk_5",
+        "snippet": ".                                                                                                               |\r | \"The payment has failed. Please contact your bank or use a different payment method.\"       | Your payment method was declined by you...",
+        "distance": 0.4261,
+        "similarity_score": "57.4%"
+      }
+    ],
+    "failure_mode": "Quotes superseded billing grace period window"
+  },
+  {
+    "q_id": "FQ07",
+    "question": "How should I resolve credit card error code 14 - Card No. Error when saving my payment details?",
+    "rag_answer": "**Answer based on article_03_zendesk_credit_card_failures.md (Week 3 Dense Baseline):**\n\n• If you receive an error message upon saving the card, please try re-\n# Resolving issues when your credit card fails\n• - Resolving transaction errors\r\n- Resolving payment errors\r\n- Resolving other types of errors\r\n- Conta\n|\r\n| 14 - Card No.\n• You might one of the following transaction errors when you submit your credit card information.\n\n*Cited from `article_03_zendesk_credit_card_failures.md` (article_03_zendesk_credit_card_failures.md_chunk_2) with 58.7% relevance confidence.*",
+    "citations": [
+      {
+        "filename": "article_03_zendesk_credit_card_failures.md",
+        "chunk_id": "article_03_zendesk_credit_card_failures.md_chunk_2",
+        "snippet": "Resolving transaction errors\r - Resolving payment errors\r - Resolving other types of errors\r - Contacting Zendesk Customer Support\r \r ## Resolving transaction errors\r \r You might one of the following transaction errors when you submit your credit car...",
+        "distance": 0.4128,
+        "similarity_score": "58.7%"
+      },
+      {
+        "filename": "article_03_zendesk_credit_card_failures.md",
+        "chunk_id": "article_03_zendesk_credit_card_failures.md_chunk_1",
+        "snippet": "# Resolving issues when your credit card fails\r \r Source: Zendesk\r URL: https://support.zendesk.com/hc/en-us/articles/4408832461210-Resolving-issues-when-your-credit-card-fails\r Category: Payment\r \r Sometimes you're unable to submit or update your cr...",
+        "distance": 0.424,
+        "similarity_score": "57.6%"
+      },
+      {
+        "filename": "article_03_zendesk_credit_card_failures.md",
+        "chunk_id": "article_03_zendesk_credit_card_failures.md_chunk_10",
+        "snippet": "|\r | 14 - Card No. Error                     | Invalid card number                                                           | Re-submit your credit card, in case you entered your card number incorrectly, or use a different credit card....",
+        "distance": 0.4243,
+        "similarity_score": "57.6%"
+      },
+      {
+        "filename": "article_03_zendesk_credit_card_failures.md",
+        "chunk_id": "article_03_zendesk_credit_card_failures.md_chunk_3",
+        "snippet": "ues, and transaction limits.\r \r If you receive an error message upon saving the card, please try re-entering your card once more after clearing cache/cookies, but by using a different browser with the following criteria in mind:\r \r - **Cardholder** f...",
+        "distance": 0.4419,
+        "similarity_score": "55.8%"
+      }
+    ],
+    "failure_mode": "Confuses card decline error code 51 with system timeout"
+  },
+  {
+    "q_id": "FQ08",
+    "question": "What does Zendesk payment error code 430357 - Lost or Stolen Card mean and how do I fix it?",
+    "rag_answer": "**Answer based on article_03_zendesk_credit_card_failures.md (Week 3 Dense Baseline):**\n\n• **Category:** Payment\n\n*Cited from `article_03_zendesk_credit_card_failures.md` (article_03_zendesk_credit_card_failures.md_chunk_18) with 78.2% relevance confidence.*",
+    "citations": [
+      {
+        "filename": "article_03_zendesk_credit_card_failures.md",
+        "chunk_id": "article_03_zendesk_credit_card_failures.md_chunk_18",
+        "snippet": "zendesk.com/hc/en-us/articles/4408821572506) with the new card number.               |\r \r ## Contacting Zendesk Customer Support\r \r If you continue to receive errors and your credit card provider cannot resolve the issue, [contact Zendesk Customer Su...",
+        "distance": 0.2182,
+        "similarity_score": "78.2%"
+      },
+      {
+        "filename": "article_03_zendesk_credit_card_failures.md",
+        "chunk_id": "article_03_zendesk_credit_card_failures.md_chunk_1",
+        "snippet": "# Resolving issues when your credit card fails\r \r Source: Zendesk\r URL: https://support.zendesk.com/hc/en-us/articles/4408832461210-Resolving-issues-when-your-credit-card-fails\r Category: Payment\r \r Sometimes you're unable to submit or update your cr...",
+        "distance": 0.2606,
+        "similarity_score": "73.9%"
+      },
+      {
+        "filename": "article_02_zendesk_payment_issues.md",
+        "chunk_id": "article_02_zendesk_payment_issues.md_chunk_6",
+        "snippet": "ch out to the issuing bank of the credit card for full details of the payment failure.\r - If available, try a different payment method, such as PayPal, ACH, or a different credit card\r - If all else fails, reach out to [Zendesk customer support](http...",
+        "distance": 0.2629,
+        "similarity_score": "73.7%"
+      },
+      {
+        "filename": "article_02_zendesk_payment_issues.md",
+        "chunk_id": "article_02_zendesk_payment_issues.md_chunk_1",
+        "snippet": "# Troubleshooting common payment issues\r \r Source: Zendesk\r URL: https://support.zendesk.com/hc/en-us/articles/9317629048730-Troubleshooting-common-payment-issues\r Category: Payment\r \r Your payment may fail for a few reasons. This article describes c...",
+        "distance": 0.271,
+        "similarity_score": "72.9%"
+      }
+    ],
+    "failure_mode": "Confuses card decline error code 51 with system timeout"
+  },
+  {
+    "q_id": "FQ09",
+    "question": "What steps must I follow if I lost my security key and need to regain access to my account immediately?",
+    "rag_answer": "**Answer based on article_06_google_2step_verification.md (Week 3 Dense Baseline):**\n\n• Follow the steps to [remove the lost key from your account](https://support.google.com/titansecuritykey/answer/9115656).\n• ## My security key was lost or stolen\n• ve the lost key from your account](https://support.google.com/titansecuritykey/answer/9115656).\n\n*Cited from `article_06_google_2step_verification.md` (article_06_google_2step_verification.md_chunk_2) with 74.2% relevance confidence.*",
+    "citations": [
+      {
+        "filename": "article_06_google_2step_verification.md",
+        "chunk_id": "article_06_google_2step_verification.md_chunk_2",
+        "snippet": ".\r \r You have several ways you can get back into your account, depending on your circumstances. Use backup options, sign in from a trusted device, get a new phone from your carrier, or recover your account.\r \r ## My security key was lost or stolen...",
+        "distance": 0.2582,
+        "similarity_score": "74.2%"
+      },
+      {
+        "filename": "article_06_google_2step_verification.md",
+        "chunk_id": "article_06_google_2step_verification.md_chunk_3",
+        "snippet": "ve the lost key from your account](https://support.google.com/titansecuritykey/answer/9115656).\r 3. [Get a new security key](https://support.google.com/accounts/answer/6103523#get_key). You may want to get an extra key you can keep in a safe place....",
+        "distance": 0.3008,
+        "similarity_score": "69.9%"
+      },
+      {
+        "filename": "article_06_google_2step_verification.md",
+        "chunk_id": "article_06_google_2step_verification.md_chunk_7",
+        "snippet": "stolen\r \r - Lost or stolen device\r - Missing or unavailable passkey\r \r ## Require a security key as your second step\r \r If you turn on 2-Step Verification and sign in on an eligible phone, you can get [Google prompts](https://support.google.com/accou...",
+        "distance": 0.4151,
+        "similarity_score": "58.5%"
+      },
+      {
+        "filename": "article_06_google_2step_verification.md",
+        "chunk_id": "article_06_google_2step_verification.md_chunk_1",
+        "snippet": "# Fix common issues with 2-Step Verification\r \r Source: Google\r URL: https://support.google.com/accounts/answer/185834?hl=en\r Category: Authentication\r \r ## My phone was lost or stolen\r \r We recommend you:\r \r - [Sign out of the lost or stolen phone](...",
+        "distance": 0.4501,
+        "similarity_score": "55.0%"
+      }
+    ],
+    "failure_mode": "Omits primary authentication fallback step for 2FA recovery"
+  },
+  {
+    "q_id": "FQ10",
+    "question": "Can I use accented characters or hyphenated names in the Cardholder Name field when updating my billing info?",
+    "rag_answer": "**Answer based on article_03_zendesk_credit_card_failures.md (Week 3 Dense Baseline):**\n\n• - **Cardholder** field contains only the first and last name of the cardholder when possible.\n• You might see a payment error when you log in, after you have entered your credit card information.\n• I try to submit my credit card details, but I receive a generic error such as Your credit card was declined.\n\n*Cited from `article_03_zendesk_credit_card_failures.md` (article_03_zendesk_credit_card_failures.md_chunk_3) with 48.0% relevance confidence.*",
+    "citations": [
+      {
+        "filename": "article_03_zendesk_credit_card_failures.md",
+        "chunk_id": "article_03_zendesk_credit_card_failures.md_chunk_3",
+        "snippet": "ues, and transaction limits.\r \r If you receive an error message upon saving the card, please try re-entering your card once more after clearing cache/cookies, but by using a different browser with the following criteria in mind:\r \r - **Cardholder** f...",
+        "distance": 0.5201,
+        "similarity_score": "48.0%"
+      },
+      {
+        "filename": "article_03_zendesk_credit_card_failures.md",
+        "chunk_id": "article_03_zendesk_credit_card_failures.md_chunk_4",
+        "snippet": "s name is the sole name on the card).\r - **Postal Code** field contains only the first five digits if you are in the United States. Do not include any extensions.\r - **State is required** if you are in the US.\r \r ## Resolving payment errors\r \r You mi...",
+        "distance": 0.5415,
+        "similarity_score": "45.9%"
+      },
+      {
+        "filename": "article_02_zendesk_payment_issues.md",
+        "chunk_id": "article_02_zendesk_payment_issues.md_chunk_2",
+        "snippet": "on't see the forms to update the payment method\r - Authenticate 3D secure payments\r - Other common customer payment issues\r \r ### Credit card declined\r \r ### Symptoms\r \r I try to submit my credit card details, but I receive a generic error such as Yo...",
+        "distance": 0.6736,
+        "similarity_score": "32.6%"
+      },
+      {
+        "filename": "article_03_zendesk_credit_card_failures.md",
+        "chunk_id": "article_03_zendesk_credit_card_failures.md_chunk_10",
+        "snippet": "|\r | 14 - Card No. Error                     | Invalid card number                                                           | Re-submit your credit card, in case you entered your card number incorrectly, or use a different credit card....",
+        "distance": 0.6982,
+        "similarity_score": "30.2%"
+      }
+    ],
+    "failure_mode": "Omits mandatory field formatting rule for special characters in Cardholder Name"
+  }
+]

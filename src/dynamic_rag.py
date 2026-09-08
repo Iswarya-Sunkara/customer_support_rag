@@ -26,6 +26,14 @@ class DynamicRAGEngine:
         self.embeddings: Optional[np.ndarray] = None
         self.total_chunks = 0
 
+        # Initialize Langfuse Tracer
+        try:
+            from src.langfuse_tracer import LangfuseTraceLogger
+            self.langfuse_logger = LangfuseTraceLogger()
+        except Exception as e:
+            self.langfuse_logger = None
+            print(f"[Langfuse Init Warning] {e}")
+
         # Auto-load benchmark articles from data/
         data_dir = self.project_dir / "data"
         if data_dir.exists():
@@ -35,6 +43,7 @@ class DynamicRAGEngine:
                         self.add_document(art_file.name, f.read(), is_benchmark=True)
                 except Exception:
                     pass
+
 
     def add_document(self, filename: str, file_bytes: bytes, is_benchmark: bool = False) -> Dict[str, Any]:
         """Parses, chunks, embeds, and indexes an uploaded document of ANY file format directly in memory."""
@@ -204,13 +213,32 @@ class DynamicRAGEngine:
             f"*Cited from `{best_filename}` ({best_chunk_id}) with {citations[0]['similarity_score']} relevance confidence.*"
         )
 
-        return {
+        res_obj = {
             "answer": answer,
             "citations": citations,
             "status": "success",
             "mode": mode,
             "documents_indexed": list(self.indexed_documents.keys())
         }
+
+        # Stream trace live to Langfuse if configured
+        if hasattr(self, "langfuse_logger") and self.langfuse_logger:
+            try:
+                import time
+                t_id = f"tr_live_{int(time.time()*1000)}"
+                self.langfuse_logger.log_rag_trace(
+                    trace_id=t_id,
+                    question=question,
+                    answer=answer,
+                    retrieved_chunks=citations,
+                    model_params={"model": "all-MiniLM-L6-v2", "mode": mode},
+                    category_tag="live_ui_query"
+                )
+            except Exception as e:
+                print(f"[Langfuse Warning] Failed to log live query trace: {e}")
+
+        return res_obj
+
 
     def get_documents_summary(self) -> List[Dict[str, Any]]:
         """Returns summary of user-uploaded files only (excluding background benchmark articles)."""

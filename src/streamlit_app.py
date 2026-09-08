@@ -119,6 +119,21 @@ with st.sidebar:
     # Document Corpus Metrics
     docs_summary = st.session_state.rag_engine.get_documents_summary()
     st.markdown("---")
+    
+    # ALWAYS VISIBLE: Ranked Failure Taxonomy Table in Sidebar!
+    with st.expander("📊 Ranked Failure Taxonomy Table (Week 5)", expanded=True):
+        st.markdown("""
+        | Failure Mode Name | Count | Freq % |
+        |---|:---:|:---:|
+        | **Quotes superseded billing grace period** | 6 | **30.0%** |
+        | **Confuses decline code 51 with timeout** | 5 | **25.0%** |
+        | **Omits 2FA backup recovery step** | 4 | **20.0%** |
+        | **Omits Cardholder Name format rule** | 3 | **15.0%** |
+        | **Hallucinates refund SLA on ticket** | 2 | **10.0%** |
+        """)
+        st.caption("Top Fix Target: Mode #1 (30.0% frequency)")
+
+    st.markdown("---")
     st.markdown("#### 📊 Active Knowledge Base")
     
     if docs_summary:
@@ -147,28 +162,91 @@ with st.sidebar:
     else:
         st.info("No documents uploaded yet. Drop any file above!")
 
-# Main Chat View
-st.markdown('<div class="main-title">🤖 Universal Document Q&A Chatbot</div>', unsafe_allow_html=True)
-st.markdown('<div class="sub-title">Upload any document format and get instant grounded answers with exact citations.</div>', unsafe_allow_html=True)
+# Main Layout with Tabs
+tab1, tab2 = st.tabs(["💬 Customer Support Chatbot", "📊 Week 5 Error Taxonomy & 10 Framed Questions"])
 
-# Example Prompt Chips
-if docs_summary and len(st.session_state.messages) <= 1:
-    st.markdown("**Quick Action Prompts:**")
-    prompt_cols = st.columns(3)
+with tab2:
+    st.markdown("### 📊 Week 5 Practical — Ranked Failure Taxonomy Table")
+    st.caption("Domain: Customer Support Tickets | Seeded Random Sample: SEED = 42 | 20 Traces Analyzed")
     
-    if prompt_cols[0].button("💡 Summarize the document"):
-        selected_prompt = "Summarize the key information in the uploaded document."
-    elif prompt_cols[1].button("🔍 Extract key figures & facts"):
-        selected_prompt = "Extract the key figures, dates, and important facts from the document."
-    elif prompt_cols[2].button("❓ Find main action items"):
-        selected_prompt = "What are the main findings, policies, or action items mentioned?"
-    else:
-        selected_prompt = None
+    st.markdown("""
+    | Failure Mode Name | Count | Freq % | Severity | Example Trace ID |
+    |---|:---:|:---:|---|:---:|
+    | **Quotes superseded billing grace period window** | 6 | 30.0% | Embarrasses client | `tr_0026` |
+    | **Confuses card decline error code 51 with system timeout** | 5 | 25.0% | Annoys user | `tr_0031` |
+    | **Omits primary authentication fallback step for 2FA recovery** | 4 | 20.0% | Embarrasses client | `tr_0033` |
+    | **Omits mandatory field formatting rule for special characters in Cardholder Name** | 3 | 15.0% | Annoys user | `tr_0090` |
+    | **Hallucinates guaranteed SLA refund window on unanswerable billing ticket** | 2 | 10.0% | Embarrasses client | `tr_0096` |
+    """)
+    
+    st.markdown("---")
+    st.markdown("### 🎯 10 Framed Failure-Inducing Questions")
+    st.info("Click any question below to test it live in the Chatbot tab and inspect the failure mode output.")
 
-    if selected_prompt:
-        st.session_state.messages.append({"role": "user", "content": selected_prompt})
-        with st.spinner("Analyzing document content..."):
-            rag_res = st.session_state.rag_engine.query(selected_prompt)
+    framed_test_questions = [
+        {"id": "FQ01", "q": "If my automatic subscription payment fails on day 1, when is the next retry attempt made and how long is the grace period?", "mode": "Quotes superseded billing grace period window"},
+        {"id": "FQ02", "q": "What should I do if I get credit card error code 51 - Decline when paying my invoice?", "mode": "Confuses card decline error code 51 with system timeout"},
+        {"id": "FQ03", "q": "How long does Google account recovery take if I lost my security key and have no backup second step?", "mode": "Omits primary authentication fallback step for 2FA recovery"},
+        {"id": "FQ04", "q": "What format requirements apply to the Cardholder name and Postal Code fields when resubmitting a failed card?", "mode": "Omits mandatory field formatting rule for special characters in Cardholder Name"},
+        {"id": "FQ05", "q": "What is the exact SLA guaranteed refund window in business days for annual plan chargebacks?", "mode": "Hallucinates guaranteed SLA refund window on unanswerable billing ticket"},
+        {"id": "FQ06", "q": "How many times and over how many days will Cloudflare retry a failed recurring subscription renewal payment?", "mode": "Quotes superseded billing grace period window"},
+        {"id": "FQ07", "q": "How should I resolve credit card error code 14 - Card No. Error when saving my payment details?", "mode": "Confuses card decline error code 51 with system timeout"},
+        {"id": "FQ08", "q": "What does Zendesk payment error code 430357 - Lost or Stolen Card mean and how do I fix it?", "mode": "Confuses card decline error code 51 with system timeout"},
+        {"id": "FQ09", "q": "What steps must I follow if I lost my security key and need to regain access to my account immediately?", "mode": "Omits primary authentication fallback step for 2FA recovery"},
+        {"id": "FQ10", "q": "Can I use accented characters or hyphenated names in the Cardholder Name field when updating my billing info?", "mode": "Omits mandatory field formatting rule for special characters in Cardholder Name"}
+    ]
+
+    for item in framed_test_questions:
+        with st.expander(f"📌 [{item['id']}] {item['q']}"):
+            st.markdown(f"**Mapped Error Taxonomy Failure Mode:** `{item['mode']}`")
+
+with tab1:
+    st.info("💡 **Looking for the Ranked Failure Taxonomy Table?** Check the **left Sidebar** under `📊 Ranked Failure Taxonomy Table` or click the **`📊 Week 5 Error Taxonomy & 10 Framed Questions`** tab at the top!")
+    
+    # Langfuse Status Indicator
+    st.success("🟢 **Langfuse Telemetry Active:** Automatically streaming all query traces live to `https://us.cloud.langfuse.com`")
+    
+    st.markdown('<div class="main-title">🤖 Universal Support RAG Chatbot</div>', unsafe_allow_html=True)
+    st.markdown('<div class="sub-title">Week 5 Error Analysis & Customer Support Ticket Q&A Engine</div>', unsafe_allow_html=True)
+
+
+
+    # 10 Framed Question Quick Selection Buttons
+    st.markdown("#### 🎯 Quick Test — 10 Framed Failure Questions:")
+    
+    selected_framed_question = None
+    
+    col_a, col_b = st.columns(2)
+    with col_a:
+        if st.button("1️⃣ FQ01: Subscription Retry Schedule", use_container_width=True):
+            selected_framed_question = "If my automatic subscription payment fails on day 1, when is the next retry attempt made and how long is the grace period?"
+        if st.button("2️⃣ FQ02: Card Decline Error Code 51", use_container_width=True):
+            selected_framed_question = "What should I do if I get credit card error code 51 - Decline when paying my invoice?"
+        if st.button("3️⃣ FQ03: Google 2FA Security Key Lost", use_container_width=True):
+            selected_framed_question = "How long does Google account recovery take if I lost my security key and have no backup second step?"
+        if st.button("4️⃣ FQ04: Cardholder Name Special Chars", use_container_width=True):
+            selected_framed_question = "What format requirements apply to the Cardholder name and Postal Code fields when resubmitting a failed card?"
+        if st.button("5️⃣ FQ05: Annual Plan Chargeback SLA", use_container_width=True):
+            selected_framed_question = "What is the exact SLA guaranteed refund window in business days for annual plan chargebacks?"
+
+    with col_b:
+        if st.button("6️⃣ FQ06: Cloudflare Subscription Retries", use_container_width=True):
+            selected_framed_question = "How many times and over how many days will Cloudflare retry a failed recurring subscription renewal payment?"
+        if st.button("7️⃣ FQ07: Payment Error Code 14", use_container_width=True):
+            selected_framed_question = "How should I resolve credit card error code 14 - Card No. Error when saving my payment details?"
+        if st.button("8️⃣ FQ08: Lost/Stolen Card Code 430357", use_container_width=True):
+            selected_framed_question = "What does Zendesk payment error code 430357 - Lost or Stolen Card mean and how do I fix it?"
+        if st.button("9️⃣ FQ09: Emergency 2FA Account Access", use_container_width=True):
+            selected_framed_question = "What steps must I follow if I lost my security key and need to regain access to my account immediately?"
+        if st.button("🔟 FQ10: Accented Cardholder Names", use_container_width=True):
+            selected_framed_question = "Can I use accented characters or hyphenated names in the Cardholder Name field when updating my billing info?"
+
+    st.markdown("---")
+
+    if selected_framed_question:
+        st.session_state.messages.append({"role": "user", "content": selected_framed_question})
+        with st.spinner("Executing query through Week 5 RAG Engine..."):
+            rag_res = st.session_state.rag_engine.query(selected_framed_question)
             st.session_state.messages.append({
                 "role": "assistant",
                 "content": rag_res["answer"],
@@ -176,39 +254,13 @@ if docs_summary and len(st.session_state.messages) <= 1:
             })
         st.rerun()
 
-# Display Chat History
-for msg in st.session_state.messages:
-    with st.chat_message(msg["role"]):
-        st.markdown(msg["content"])
-        if msg.get("citations"):
-            with st.expander("📌 View Source Citations & Document Snippets"):
-                for cit in msg["citations"]:
-                    st.markdown(
-                        f"""
-                        <div class="citation-card">
-                            <strong>📄 File:</strong> {cit['filename']} | <strong>ID:</strong> <code>{cit['chunk_id']}</code> | <strong>Relevance:</strong> <span style="color:#38BDF8;">{cit['similarity_score']}</span><br/>
-                            <em style="color:#9CA3AF;">"{cit['snippet']}"</em>
-                        </div>
-                        """,
-                        unsafe_allow_html=True
-                    )
-
-# Chat Input Box
-user_query = st.chat_input("Ask any question about your uploaded document(s)...")
-
-if user_query:
-    st.session_state.messages.append({"role": "user", "content": user_query})
-    with st.chat_message("user"):
-        st.markdown(user_query)
-
-    with st.chat_message("assistant"):
-        with st.spinner("Searching document context..."):
-            rag_res = st.session_state.rag_engine.query(user_query)
-            st.markdown(rag_res["answer"])
-
-            if rag_res["citations"]:
+    # Display Chat History
+    for msg in st.session_state.messages:
+        with st.chat_message(msg["role"]):
+            st.markdown(msg["content"])
+            if msg.get("citations"):
                 with st.expander("📌 View Source Citations & Document Snippets"):
-                    for cit in rag_res["citations"]:
+                    for cit in msg["citations"]:
                         st.markdown(
                             f"""
                             <div class="citation-card">
@@ -219,8 +271,35 @@ if user_query:
                             unsafe_allow_html=True
                         )
 
-            st.session_state.messages.append({
-                "role": "assistant",
-                "content": rag_res["answer"],
-                "citations": rag_res["citations"]
-            })
+    # Chat Input Box
+    user_query = st.chat_input("Ask any question or click a Framed Question button above...")
+
+    if user_query:
+        st.session_state.messages.append({"role": "user", "content": user_query})
+        with st.chat_message("user"):
+            st.markdown(user_query)
+
+        with st.chat_message("assistant"):
+            with st.spinner("Searching document context..."):
+                rag_res = st.session_state.rag_engine.query(user_query)
+                st.markdown(rag_res["answer"])
+
+                if rag_res["citations"]:
+                    with st.expander("📌 View Source Citations & Document Snippets"):
+                        for cit in rag_res["citations"]:
+                            st.markdown(
+                                f"""
+                                <div class="citation-card">
+                                    <strong>📄 File:</strong> {cit['filename']} | <strong>ID:</strong> <code>{cit['chunk_id']}</code> | <strong>Relevance:</strong> <span style="color:#38BDF8;">{cit['similarity_score']}</span><br/>
+                                    <em style="color:#9CA3AF;">"{cit['snippet']}"</em>
+                                </div>
+                                """,
+                                unsafe_allow_html=True
+                            )
+
+                st.session_state.messages.append({
+                    "role": "assistant",
+                    "content": rag_res["answer"],
+                    "citations": rag_res["citations"]
+                })
+

@@ -1,0 +1,18 @@
+# ORIGINAL judge prompt (pre-Week-6 split) — kept for the record, no longer used.
+# It asked the model to check 5 things; 4 of them are string checks and moved to
+# eval/assertions.py. judge_v1.txt keeps only criterion 1.
+You are grading a customer-support ticket reply. Answer PASS only if ALL of the following hold:
+
+1. The reply resolves the customer's question with a correct, specific, actionable answer.
+2. The ticket ID is echoed in the reply.
+3. If the customer requested a refund, the refund amount is stated as a number.
+4. If the ticket tier is Priority, the reply carries the escalation tag [ESCALATE:PRIORITY].
+5. The reply does not promise a refund when the purchase is outside the 30-day refund window.
+
+Ticket (tier: {tier}, ticket ID: {ticket_id}):
+{question}
+
+Reply:
+{reply}
+
+Return JSON: {"reason": "...", "verdict": "PASS" | "FAIL"}

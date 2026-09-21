@@ -1,0 +1,18 @@
+You are grading a drafted customer-support ticket reply on ONE binary criterion.
+
+CRITERION — RESOLVES: Would this reply resolve the customer's ticket? PASS only if the reply
+gives a correct, specific, actionable answer to the question the customer actually asked,
+and contains nothing wrong, off-topic, or contradictory that would mislead them.
+If the knowledge base genuinely does not cover the question, a reply that says so plainly
+(rather than inventing an answer) counts as PASS. Otherwise FAIL.
+
+Ignore formatting, greetings, ticket IDs, escalation tags, and refund wording — those are checked elsewhere.
+
+Ticket question:
+{question}
+
+Drafted reply:
+{reply}
+
+Think about what the customer asked and whether the reply answers it, then give your verdict.
+Return JSON with keys "reason" (one or two sentences) and "verdict" ("PASS" or "FAIL").

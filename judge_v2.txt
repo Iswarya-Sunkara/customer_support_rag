@@ -1,0 +1,71 @@
+# few-shot-case-ids: C08, C21
+You are grading a drafted customer-support ticket reply on ONE binary criterion.
+
+CRITERION — RESOLVES: Would this reply resolve the customer's ticket? PASS only if the reply
+gives a correct, specific, actionable answer to the question the customer actually asked,
+and contains nothing wrong, off-topic, or contradictory that would mislead them.
+If the knowledge base genuinely does not cover the question, a reply that says so plainly
+(rather than inventing an answer) counts as PASS. Otherwise FAIL.
+
+CRITICAL INSTRUCTION: You MUST strictly ignore formatting flaws, broken Markdown tables, greetings, ticket IDs, escalation tags, and refund wording — those are checked by separate assertions elsewhere. Do not fail a reply for boilerplate refund paragraphs or table formatting issues.
+
+Here are two examples demonstrating how to apply these rules:
+
+Example 1:
+Question: Help needed - What is the exact SLA guaranteed refund window in business days for annual plan chargebacks?
+Reply:
+Ticket TKT-66518 [ESCALATE:PRIORITY]
+
+Hi there,
+
+Thanks for contacting support. Here is what we found for your question:
+
+I don't have enough information in my knowledge base to answer this question.
+
+Refund: your purchase was 12 days ago, which is inside our 30-day refund window. We will refund $49.00 to your original payment method within 5-10 business days.
+
+Best regards,
+Support Team
+
+Verdict: PASS
+Reason: The reply plainly and honestly states that the knowledge base lacks information to answer the question rather than inventing an SLA. The appended refund paragraph is boilerplate that must be ignored.
+
+Example 2:
+Question: Customer Ticket #10492: What should I do if I get credit card error code 51 - Decline when paying my invoice?
+Reply:
+Ticket TKT-38181
+
+Hi there,
+
+Thanks for contacting support. Here is what we found for your question:
+
+**Answer based on article_03_zendesk_credit_card_failures.md (Week 4 Hybrid RAG System):**
+
+• |
+| 51 - Decline                            | Insufficient funds                                                            | Submit payment using a different credit
+|
+| 430285 - Do not honor                   | Bank has declined the transaction                                             | Call your credit card issuer (the phone number is usually on the back of your card) and ask them to approve the transaction.
+• |
+| 430360, 100 -- Not authorized, REJECTED | Insufficient funds in your account                                            | Submit payment using a different credit card
+prove the transaction.
+• |
+| 430190 - Not authorized                 | Bank has declined the transaction                                             | Call your credit card issuer (the phone number is usually on the back of your card) and ask them to approve the transaction.
+
+*Cited from `article_03_zendesk_credit_card_failures.md` (article_03_zendesk_credit_card_failures.md_chunk_11) with 57.0% relevance confidence.*
+
+Best regards,
+Support Team
+
+Verdict: PASS
+Reason: The reply contains the specific error 51 decline cause (insufficient funds) and actionable solution (submit payment using a different credit card). Garbled table markup and extra table rows must be ignored per the formatting rule.
+
+Now grade the following ticket reply:
+
+Ticket question:
+{question}
+
+Drafted reply:
+{reply}
+
+Think about what the customer asked and whether the reply answers it, then give your verdict.
+Return JSON with keys "reason" (one or two sentences) and "verdict" ("PASS" or "FAIL").

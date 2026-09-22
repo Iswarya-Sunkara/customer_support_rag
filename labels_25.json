@@ -1,0 +1,158 @@
+{
+  "protocol": "Blind: labeller saw only question + drafted reply; no mode tag, trace ID, or judge output. Labels committed to git before any judge run.",
+  "criterion": "RESOLVES: Would this reply resolve the customer's ticket? PASS only if it gives a correct,\nspecific, actionable answer to the question actually asked, with nothing wrong, off-topic\nor contradictory that would mislead them. If the knowledge base genuinely doesn't cover the\nquestion, a reply that plainly says so counts as PASS.\nIgnore ticket IDs, escalation tags and refund wording (checked by assertions).",
+  "labeler": "Kiran (Human Eval Labeler)",
+  "created_at": "2026-09-22T05:48:18+00:00",
+  "labels": {
+    "C01": {
+      "label": "FAIL",
+      "note": "Leads with unrelated subscription cancellation text and fails to state when the next retry attempt is made.",
+      "reply_sha": "6e4c8c72113d27f3",
+      "labeled_at": "2026-09-22T05:48:18+00:00"
+    },
+    "C02": {
+      "label": "FAIL",
+      "note": "Off-topic subscription cancellation guidance; does not answer when the next retry attempt occurs.",
+      "reply_sha": "bbb1570e322cbf1a",
+      "labeled_at": "2026-09-22T05:48:18+00:00"
+    },
+    "C03": {
+      "label": "PASS",
+      "note": "Directly and accurately answers how many times (up to 5 times) and over how many days (5 days).",
+      "reply_sha": "9add522ce8705c45",
+      "labeled_at": "2026-09-22T05:48:18+00:00"
+    },
+    "C04": {
+      "label": "FAIL",
+      "note": "Does not state the duration of the grace period before suspension.",
+      "reply_sha": "aa97aed548166218",
+      "labeled_at": "2026-09-22T05:48:18+00:00"
+    },
+    "C05": {
+      "label": "FAIL",
+      "note": "Omits the actual grace period duration before suspension.",
+      "reply_sha": "79557563633a41b5",
+      "labeled_at": "2026-09-22T05:48:18+00:00"
+    },
+    "C06": {
+      "label": "FAIL",
+      "note": "Completely uninformative; only states 'Category: Payment' without addressing error code 51.",
+      "reply_sha": "1c1b07730375ec53",
+      "labeled_at": "2026-09-22T05:48:18+00:00"
+    },
+    "C07": {
+      "label": "FAIL",
+      "note": "Quotes wrong error code (430360/100 instead of 51) and fails to explain error 51.",
+      "reply_sha": "8da810d29b068d93",
+      "labeled_at": "2026-09-22T05:48:18+00:00"
+    },
+    "C08": {
+      "label": "PASS",
+      "note": "Provides specific cause (insufficient funds) and actionable resolution (submit payment using different credit card).",
+      "reply_sha": "0bd1bd4e19fe5c61",
+      "labeled_at": "2026-09-22T05:48:18+00:00"
+    },
+    "C09": {
+      "label": "PASS",
+      "note": "Accurately identifies the cause of error code 51 as insufficient funds.",
+      "reply_sha": "d2f0f0704fde566b",
+      "labeled_at": "2026-09-22T05:48:18+00:00"
+    },
+    "C10": {
+      "label": "FAIL",
+      "note": "Only lists table-of-contents article headings without any actionable fix for code 51.",
+      "reply_sha": "df6a82d6cfadda7c",
+      "labeled_at": "2026-09-22T05:48:18+00:00"
+    },
+    "C11": {
+      "label": "PASS",
+      "note": "Clearly answers why: you could lock yourself out of your account.",
+      "reply_sha": "fbbc7343c1ec608c",
+      "labeled_at": "2026-09-22T05:48:18+00:00"
+    },
+    "C12": {
+      "label": "FAIL",
+      "note": "Omits the recovery timeline and duration completely.",
+      "reply_sha": "70d1e20a5d059fc1",
+      "labeled_at": "2026-09-22T05:48:18+00:00"
+    },
+    "C13": {
+      "label": "PASS",
+      "note": "Explains why sign-in is blocked: when Google cannot verify account ownership identity.",
+      "reply_sha": "001ce55e52ee9765",
+      "labeled_at": "2026-09-22T05:48:18+00:00"
+    },
+    "C14": {
+      "label": "PASS",
+      "note": "Correctly states that using Google Voice risks account lockout.",
+      "reply_sha": "0344528c538ffa3b",
+      "labeled_at": "2026-09-22T05:48:18+00:00"
+    },
+    "C15": {
+      "label": "FAIL",
+      "note": "Fails to answer how long account recovery takes.",
+      "reply_sha": "d1ca7e5fae5ad59d",
+      "labeled_at": "2026-09-22T05:48:18+00:00"
+    },
+    "C16": {
+      "label": "FAIL",
+      "note": "Outputs only 'Category: Payment' with no explanation of lost/stolen card or fix.",
+      "reply_sha": "cc55832114daf3cc",
+      "labeled_at": "2026-09-22T05:48:18+00:00"
+    },
+    "C17": {
+      "label": "FAIL",
+      "note": "Irrelevant generic browser cache/cookie advice that does not resolve lost/stolen card error 430357.",
+      "reply_sha": "73a7d9cd81f784c2",
+      "labeled_at": "2026-09-22T05:48:18+00:00"
+    },
+    "C18": {
+      "label": "FAIL",
+      "note": "Truncated reply that fails to provide the resolution for card number error 14.",
+      "reply_sha": "1cdebddbc807c564",
+      "labeled_at": "2026-09-22T05:48:18+00:00"
+    },
+    "C19": {
+      "label": "PASS",
+      "note": "Correctly defines error 14 as invalid card number and tells customer to re-enter or swap card.",
+      "reply_sha": "f460939551025407",
+      "labeled_at": "2026-09-22T05:48:18+00:00"
+    },
+    "C20": {
+      "label": "FAIL",
+      "note": "Does not answer why it occurs when correctly typed; repeats generic re-enter instruction.",
+      "reply_sha": "d1853b178b42441d",
+      "labeled_at": "2026-09-22T05:48:18+00:00"
+    },
+    "C21": {
+      "label": "PASS",
+      "note": "Plainly admits knowledge base does not cover chargeback refund SLA rather than hallucinating.",
+      "reply_sha": "9ef3226d4ecd4f4a",
+      "labeled_at": "2026-09-22T05:48:18+00:00"
+    },
+    "C22": {
+      "label": "PASS",
+      "note": "Plainly acknowledges lack of information on chargeback refund SLA rather than inventing an SLA.",
+      "reply_sha": "58016b19d31b1bd8",
+      "labeled_at": "2026-09-22T05:48:18+00:00"
+    },
+    "C23": {
+      "label": "PASS",
+      "note": "Plainly states knowledge base does not cover chargeback refund SLA.",
+      "reply_sha": "273d21807a1360fd",
+      "labeled_at": "2026-09-22T05:48:18+00:00"
+    },
+    "C24": {
+      "label": "PASS",
+      "note": "Plainly states knowledge base does not cover chargeback refund SLA.",
+      "reply_sha": "0b7f5518970abe22",
+      "labeled_at": "2026-09-22T05:48:18+00:00"
+    },
+    "C25": {
+      "label": "PASS",
+      "note": "Plainly states knowledge base does not cover chargeback refund SLA.",
+      "reply_sha": "273e7316acbe6b00",
+      "labeled_at": "2026-09-22T05:48:18+00:00"
+    }
+  }
+}

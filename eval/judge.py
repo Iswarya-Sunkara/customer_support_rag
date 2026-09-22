@@ -37,6 +37,22 @@ def load_prompt(version):
     return "\n".join(body).strip(), meta
 
 
+def _get_client():
+    import os
+    from pathlib import Path
+    if not os.environ.get("ANTHROPIC_API_KEY") and not os.environ.get("ANTHROPIC_AUTH_TOKEN"):
+        cred_path = Path.home() / ".claude" / ".credentials.json"
+        if cred_path.exists():
+            try:
+                creds = json.loads(cred_path.read_text(encoding="utf-8"))
+                tok = creds.get("claudeAiOauth", {}).get("accessToken")
+                if tok:
+                    os.environ["ANTHROPIC_AUTH_TOKEN"] = tok
+            except Exception:
+                pass
+    return anthropic.Anthropic()
+
+
 def judge_cases(cases, version, refresh=False):
     template, meta = load_prompt(version)
     prompt_sha = sha(template)
@@ -53,12 +69,11 @@ def judge_cases(cases, version, refresh=False):
         hit = verdicts.get(c["case_id"])
         if hit and hit["reply_sha"] == c["reply_sha"]:
             continue
-        client = client or anthropic.Anthropic()
+        client = client or _get_client()
         prompt = template.replace("{question}", c["ticket"]["question"]).replace("{reply}", c["reply"])
         resp = client.messages.create(
             model=MODEL,
             max_tokens=512,
-            temperature=0,
             messages=[{"role": "user", "content": prompt}],
             output_config={"format": {"type": "json_schema", "schema": SCHEMA}},
         )

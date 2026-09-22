@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 6 Practical: Ticket-Reply Judge Validation Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg: #090d16;
+            --card-bg: rgba(22, 30, 49, 0.7);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --accent-cyan: #06b6d4;
+            --accent-indigo: #6366f1;
+            --accent-purple: #8b5cf6;
+            --pass-green: #10b981;
+            --fail-red: #ef4444;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background-color: var(--bg);
+            color: var(--text-main);
+            font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+            line-height: 1.5;
+            padding: 24px;
+        }
+        .container {
+            max-width: 1380px;
+            margin: 0 auto;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 28px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--card-border);
+        }
+        .header-title h1 {
+            font-size: 26px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .header-title p {
+            color: var(--text-muted);
+            font-size: 14px;
+            margin-top: 4px;
+        }
+        .badge-verified {
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--pass-green);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            padding: 6px 14px;
+            border-radius: 9999px;
+            font-size: 13px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        /* Metric Grid */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
+            margin-bottom: 28px;
+        }
+        .metric-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 14px;
+            padding: 20px;
+            backdrop-filter: blur(12px);
+            position: relative;
+            overflow: hidden;
+        }
+        .metric-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-indigo));
+        }
+        .metric-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+        .metric-val {
+            font-size: 32px;
+            font-weight: 800;
+            margin: 6px 0;
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+        }
+        .metric-sub {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+        .metric-delta {
+            color: var(--pass-green);
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        /* Table & Controls */
+        .controls-panel {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 14px;
+            padding: 16px 20px;
+            margin-bottom: 24px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        select, input[type="text"] {
+            background: rgba(11, 15, 25, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: var(--text-main);
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+        }
+        select:focus, input[type="text"]:focus {
+            border-color: var(--accent-cyan);
+        }
+        .toggle-btn {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid var(--card-border);
+            color: var(--text-main);
+            padding: 8px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+        }
+        .toggle-btn.active {
+            background: rgba(239, 68, 68, 0.2);
+            border-color: var(--fail-red);
+            color: #fca5a5;
+        }
+
+        /* Mode summary table */
+        .summary-box {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 14px;
+            padding: 20px;
+            margin-bottom: 28px;
+            overflow-x: auto;
+        }
+        .summary-box h3 {
+            font-size: 16px;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #e2e8f0;
+        }
+        table.mode-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        table.mode-table th {
+            text-align: left;
+            padding: 10px 14px;
+            background: rgba(255, 255, 255, 0.04);
+            color: var(--text-muted);
+            font-weight: 600;
+            border-bottom: 1px solid var(--card-border);
+        }
+        table.mode-table td {
+            padding: 12px 14px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        }
+        table.mode-table tr:last-child td {
+            border-bottom: none;
+            font-weight: 700;
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        /* Case Cards List */
+        .cases-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+        }
+        .case-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 14px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+            transition: border-color 0.2s;
+        }
+        .case-card:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+        .case-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .case-id {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 15px;
+            font-weight: 700;
+            color: #38bdf8;
+        }
+        .tag {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-left: 6px;
+        }
+        .tag-mode {
+            background: rgba(99, 102, 241, 0.2);
+            color: #a5b4fc;
+            border: 1px solid rgba(99, 102, 241, 0.4);
+        }
+        .tag-regression {
+            background: rgba(245, 158, 11, 0.2);
+            color: #fcd34d;
+            border: 1px solid rgba(245, 158, 11, 0.4);
+        }
+        .verdict-pills {
+            display: flex;
+            gap: 8px;
+        }
+        .pill {
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        .pill-pass {
+            background: rgba(16, 185, 129, 0.2);
+            color: #34d399;
+            border: 1px solid rgba(16, 185, 129, 0.5);
+        }
+        .pill-fail {
+            background: rgba(239, 68, 68, 0.2);
+            color: #f87171;
+            border: 1px solid rgba(239, 68, 68, 0.5);
+        }
+        .q-box {
+            background: rgba(11, 15, 25, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 12px 14px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+        .reply-box {
+            background: rgba(11, 15, 25, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 12px 14px;
+            border-radius: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            color: #cbd5e1;
+            white-space: pre-wrap;
+            max-height: 180px;
+            overflow-y: auto;
+            margin-bottom: 12px;
+        }
+        .judgments-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 12px;
+            font-size: 13px;
+        }
+        .j-box {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 10px 12px;
+        }
+        .j-title {
+            font-size: 11px;
+            text-transform: uppercase;
+            font-weight: 700;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-title">
+                <h1>Week 6 Evaluation Dashboard</h1>
+                <p>Validate the ticket-reply judge before you trust its number — Customer Support Domain</p>
+            </div>
+            <div class="badge-verified">
+                <i class="fa-solid fa-circle-check"></i> Provenance Verified (fb4c42a)
+            </div>
+        </header>
+
+        <!-- Metric Cards -->
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="metric-label">Agreement Movement</div>
+                <div class="metric-val">
+                    <span>92.0%</span>
+                    <span class="metric-delta"><i class="fa-solid fa-arrow-trend-up"></i> +24.0%</span>
+                </div>
+                <div class="metric-sub">Before (v1): <strong>68.0%</strong> &rarr; After (v2): <strong>92.0%</strong></div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Held-Out Generalization</div>
+                <div class="metric-val">91.3%</div>
+                <div class="metric-sub">21 / 23 cases (excluding few-shots C08, C21)</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Cohen's Kappa (&kappa;)</div>
+                <div class="metric-val">
+                    <span>0.84</span>
+                    <span class="metric-delta"><i class="fa-solid fa-arrow-trend-up"></i> +0.50</span>
+                </div>
+                <div class="metric-sub">Near-perfect reliability (&kappa; 0.34 &rarr; 0.84)</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Assertion / Judge Split</div>
+                <div class="metric-val">4 : 1</div>
+                <div class="metric-sub">4 Deterministic Rules vs 1 Judged Criterion</div>
+            </div>
+        </div>
+
+        <!-- Failure Mode Summary Table -->
+        <div class="summary-box">
+            <h3><i class="fa-solid fa-table-list"></i> Pass Rate by Failure Mode (One-Command Eval)</h3>
+            <table class="mode-table">
+                <thead>
+                    <tr>
+                        <th>Taxonomy Mode</th>
+                        <th>n</th>
+                        <th>Assertions</th>
+                        <th>Judge v1</th>
+                        <th>Judge v2</th>
+                        <th>Overall Pass</th>
+                        <th>Human Truth</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>M1: Superseded Grace Period</strong></td>
+                        <td>5</td>
+                        <td>100.0%</td>
+                        <td>0.0%</td>
+                        <td>40.0%</td>
+                        <td>40.0%</td>
+                        <td>20.0%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>M2: Code 51 vs Timeout</strong></td>
+                        <td>5</td>
+                        <td>100.0%</td>
+                        <td>20.0%</td>
+                        <td>40.0%</td>
+                        <td>40.0%</td>
+                        <td>40.0%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>M3: 2FA Fallback Omitted</strong></td>
+                        <td>5</td>
+                        <td>100.0%</td>
+                        <td>20.0%</td>
+                        <td>40.0%</td>
+                        <td>40.0%</td>
+                        <td>60.0%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>M4: Cardholder Format Omitted</strong></td>
+                        <td>5</td>
+                        <td>100.0%</td>
+                        <td>20.0%</td>
+                        <td>20.0%</td>
+                        <td>20.0%</td>
+                        <td>20.0%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>M5: Hallucinated Refund SLA</strong></td>
+                        <td>5</td>
+                        <td>100.0%</td>
+                        <td>20.0%</td>
+                        <td>100.0%</td>
+                        <td>100.0%</td>
+                        <td>100.0%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>ALL MODES (Combined)</strong></td>
+                        <td><strong>25</strong></td>
+                        <td><strong>100.0%</strong></td>
+                        <td><strong>16.0%</strong></td>
+                        <td><strong>48.0%</strong></td>
+                        <td><strong>48.0%</strong></td>
+                        <td><strong>48.0%</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Filter Controls -->
+        <div class="controls-panel">
+            <div class="filter-group">
+                <label style="font-size: 13px; color: var(--text-muted); font-weight: 600;">Filter Mode:</label>
+                <select id="modeFilter" onchange="renderCases()">
+                    <option value="ALL">All 5 Modes (25 Cases)</option>
+                    <option value="M1_superseded_grace_period">M1: Superseded Grace Period</option>
+                    <option value="M2_code51_confused_with_timeout">M2: Code 51 vs Timeout</option>
+                    <option value="M3_2fa_fallback_step_omitted">M3: 2FA Fallback Omitted</option>
+                    <option value="M4_cardholder_format_rule_omitted">M4: Cardholder Format</option>
+                    <option value="M5_hallucinated_refund_sla">M5: Hallucinated Refund SLA</option>
+                </select>
+                <input type="text" id="searchBox" placeholder="Search question or text..." oninput="renderCases()">
+            </div>
+            <div class="filter-group">
+                <button class="toggle-btn" id="disagreeToggle" onclick="toggleDisagreements()">
+                    <i class="fa-solid fa-filter"></i> Only Judge v2 Disagreements (2)
+                </button>
+            </div>
+        </div>
+
+        <!-- Cases Container -->
+        <div class="cases-grid" id="casesContainer">
+            <!-- Dynamic Injection -->
+        </div>
+    </div>
+
+    <script>
+        const CASES = [{"id": "C01", "mode": "M1_superseded_grace_period", "regression": true, "trace_id": "tr_0026", "tier": "Standard", "question": "Help needed - If my automatic subscription payment fails on day 1, when is the next retry attempt made?", "reply": "Ticket TKT-97673\n\nHi there,\n\nThanks for contacting support. Here is what we found for your question:\n\n**Answer based on article_01_cloudflare_billing_errors.md (Week 4 Hybrid RAG System):**\n\n• Refer to [Resolve \"you cannot modify this subscription\"](https://developers.cloudflare.com/billing/trouble\nretry.\n• |\r\n| \"You cannot modify this subscription since it is currently scheduled to be cancelled\"       | You are trying to change a subscription that already has a pending cancellation.\n• Cloudflare will retry up to 5 times over 5 days.\n\n*Cited from `article_01_cloudflare_billing_errors.md` (article_01_cloudflare_billing_errors.md_chunk_14) with 54.1% relevance confidence.*\n\nBest regards,\nSupport Team", "human": "FAIL", "human_note": "Leads with unrelated subscription cancellation text and fails to state when the next retry attempt is made.", "judge_v1": "FAIL", "reason_v1": "The reply contains a direct answer to the customer's question: 'Cloudflare will retry up to 5 times over 5 days.' This specifies when retry attempts occur after an initial payment failure. However, the reply also includes irrelevant content about subscription modification/cancellation errors that is off-topic and potentially confusing, which detracts from the clarity of the actual answer.", "judge_v2": "FAIL", "reason_v2": "The reply does not answer the specific question asked. The customer asked when the next retry attempt is made after a day 1 failure, but the reply only states that Cloudflare retries up to 5 times over 5 days without providing the specific timing of the first retry attempt. The included references are about subscription cancellation issues, which are off-topic and do not address the customer's question.", "assert_pass": true, "disagree_v1": false, "disagree_v2": false}, {"id": "C02", "mode": "M1_superseded_grace_period", "regression": false, "trace_id": "tr_0785", "tier": "Priority", "question": "Hi team, If my automatic subscription payment fails on day 1, when is the next retry attempt made?", "reply": "Ticket TKT-37593 [ESCALATE:PRIORITY]\n\nHi there,\n\nThanks for contacting support. Here is what we found for your question:\n\n**Answer based on article_01_cloudflare_billing_errors.md (Week 4 Hybrid RAG System):**\n\n• Refer to [Resolve \"you cannot modify this subscription\"](https://developers.cloudflare.com/billing/trouble\nretry.\n• |\r\n| \"You cannot modify this subscription since it is currently scheduled to be cancelled\"       | You are trying to change a subscription that already has a pending cancellation.\n• Cloudflare will retry up to 5 times over 5 days.\n\n*Cited from `article_01_cloudflare_billing_errors.md` (article_01_cloudflare_billing_errors.md_chunk_14) with 51.3% relevance confidence.*\n\nBest regards,\nSupport Team", "human": "FAIL", "human_note": "Off-topic subscription cancellation guidance; does not answer when the next retry attempt occurs.", "judge_v1": "FAIL", "reason_v1": "The reply does provide a specific answer to the customer's question about retry attempts: 'Cloudflare will retry up to 5 times over 5 days.' However, the reply contains substantial formatting errors, broken links, and irrelevant content (the 'You cannot modify this subscription' section) that creates confusion and undermines clarity. Despite the correct core answer being present, the poor presentation and inclusion of off-topic information that could mislead the customer makes this reply problematic.", "judge_v2": "PASS", "reason_v2": "The reply provides a specific, actionable answer that directly addresses the customer's question: payment failures will be retried up to 5 times over 5 days. While the formatting is garbled and includes some irrelevant content about subscription cancellation, the core answer is correct and resolves the customer's ticket.", "assert_pass": true, "disagree_v1": false, "disagree_v2": true}, {"id": "C03", "mode": "M1_superseded_grace_period", "regression": false, "trace_id": "tr_0668", "tier": "Standard", "question": "Question regarding invoice: How many times and over how many days will Cloudflare retry a failed recurring subscription renewal payment?", "reply": "Ticket TKT-11224\n\nHi there,\n\nThanks for contacting support. Here is what we found for your question:\n\n**Answer based on article_01_cloudflare_billing_errors.md (Week 4 Hybrid RAG System):**\n\n• Cloudflare will retry up to 5 times over 5 days.\n• Refer to [Resolve a payment failure](https://developers.cloudflare.com/billing/troubleshoot/troubleshoot-failed-payments/).\n• If your error message i\nnage/pay-invoices-overdue-balances/) and wait 24 hours.\n\n*Cited from `article_01_cloudflare_billing_errors.md` (article_01_cloudflare_billing_errors.md_chunk_14) with 76.3% relevance confidence.*\n\nBest regards,\nSupport Team", "human": "PASS", "human_note": "Directly and accurately answers how many times (up to 5 times) and over how many days (5 days).", "judge_v1": "FAIL", "reason_v1": "The reply provides a specific, actionable answer directly addressing the customer's question: Cloudflare retries up to 5 times over 5 days. However, the reply contains corrupted/incomplete text ('If your error message i nage/pay-invoices-overdue-balances/)') which appears to be a formatting error that cuts off mid-sentence, making part of the response unreadable and potentially misleading.", "judge_v2": "PASS", "reason_v2": "The reply provides a specific, correct, and actionable answer: Cloudflare retries up to 5 times over 5 days. This directly answers the customer's question about retry frequency and timeframe. The garbled text at the end and broken link are formatting issues that must be ignored per instructions.", "assert_pass": true, "disagree_v1": true, "disagree_v2": false}, {"id": "C04", "mode": "M1_superseded_grace_period", "regression": false, "trace_id": "tr_0554", "tier": "Priority", "question": "Hi team, What is the exact grace period for failed billing payments on my account before suspension?", "reply": "Ticket TKT-38055 [ESCALATE:PRIORITY]\n\nHi there,\n\nThanks for contacting support. Here is what we found for your question:\n\n**Answer based on article_01_cloudflare_billing_errors.md (Week 4 Hybrid RAG System):**\n\n• | Update your payment method or manually pay the invoice before the grace period ends.\n• Refer to [Resolve a payment failure](https://developers.cloudflare.com/billing/troubleshoot/troubleshoot-failed-payments/).\n• Refer to [Resolve \"you cannot modify this subscription\"](https://developers.cloudflare.com/billing/trouble\n\n*Cited from `article_01_cloudflare_billing_errors.md` (article_01_cloudflare_billing_errors.md_chunk_4) with 48.2% relevance confidence.*\n\nBest regards,\nSupport Team", "human": "FAIL", "human_note": "Does not state the duration of the grace period before suspension.", "judge_v1": "FAIL", "reason_v1": "The customer asked for the exact grace period duration for failed billing payments before suspension. The reply provides general troubleshooting links and advice on updating payment methods, but fails to provide the specific numerical grace period the customer requested. The reply does not answer the actual question asked.", "judge_v2": "FAIL", "reason_v2": "The customer asked for the exact grace period duration in days before account suspension, but the reply only provides generic advice to update payment methods and links to external resources without stating any specific grace period timeframe. The reply fails to answer the specific numerical question asked.", "assert_pass": true, "disagree_v1": false, "disagree_v2": false}, {"id": "C05", "mode": "M1_superseded_grace_period", "regression": false, "trace_id": "tr_0094", "tier": "Standard", "question": "Question regarding invoice: What is the exact grace period for failed billing payments on my account before suspension?", "reply": "Ticket TKT-48847\n\nHi there,\n\nThanks for contacting support. Here is what we found for your question:\n\n**Answer based on article_01_cloudflare_billing_errors.md (Week 4 Hybrid RAG System):**\n\n• | Update your payment method or manually pay the invoice before the grace period ends.\n• Refer to [Resolve a payment failure](https://developers.cloudflare.com/billing/troubleshoot/troubleshoot-failed-payments/).\n• | [Pay the outstanding balance](https://developers.cloudflare.com/billing/manage/pay-invoices-overdue-balances/).\n\n*Cited from `article_01_cloudflare_billing_errors.md` (article_01_cloudflare_billing_errors.md_chunk_4) with 50.3% relevance confidence.*\n\nBest regards,\nSupport Team", "human": "FAIL", "human_note": "Omits the actual grace period duration before suspension.", "judge_v1": "FAIL", "reason_v1": "The customer asked for the exact grace period duration before suspension, but the reply only provides generic actions to take (update payment method, pay invoice) without stating the specific number of days or timeframe. The reply fails to answer the actual question asked.", "judge_v2": "FAIL", "reason_v2": "The customer asked for the exact grace period in days before suspension, but the reply only provides generic instructions to update payment method or pay the invoice before 'the grace period ends' without specifying the actual duration. The reply does not answer the specific question asked.", "assert_pass": true, "disagree_v1": false, "disagree_v2": false}, {"id": "C06", "mode": "M2_code51_confused_with_timeout", "regression": true, "trace_id": "tr_0033", "tier": "Priority", "question": "Help needed - Is error code 51 a bank refusal or a Zendesk system timeout error?", "reply": "Ticket TKT-10930 [ESCALATE:PRIORITY]\n\nHi there,\n\nThanks for contacting support. Here is what we found for your question:\n\n**Answer based on article_02_zendesk_payment_issues.md (Week 4 Hybrid RAG System):**\n\n• **Category:** Payment\n\n*Cited from `article_02_zendesk_payment_issues.md` (article_02_zendesk_payment_issues.md_chunk_12) with 66.7% relevance confidence.*\n\nBest regards,\nSupport Team", "human": "FAIL", "human_note": "Completely uninformative; only states 'Category: Payment' without addressing error code 51.", "judge_v1": "FAIL", "reason_v1": "The reply cites a knowledge base article but provides no actual content, answer, or explanation about error code 51. It does not indicate whether the error is a bank refusal or a system timeout, leaving the customer's specific question completely unanswered.", "judge_v2": "FAIL", "reason_v2": "The reply fails to answer the customer's specific question about whether error code 51 is a bank refusal or a system timeout. It only provides a generic category label ('Payment') without any explanation of the error code's nature or cause, leaving the customer's core question unresolved.", "assert_pass": true, "disagree_v1": false, "disagree_v2": false}, {"id": "C07", "mode": "M2_code51_confused_with_timeout", "regression": false, "trace_id": "tr_0697", "tier": "Priority", "question": "Customer Ticket #10492: Why is my credit card transaction failing with error code 51 on invoice checkout?", "reply": "Ticket TKT-23776 [ESCALATE:PRIORITY]\n\nHi there,\n\nThanks for contacting support. Here is what we found for your question:\n\n**Answer based on article_02_zendesk_payment_issues.md (Week 4 Hybrid RAG System):**\n\n• |\r\n| 430360, 100 -- Not authorized, REJECTED | Insufficient funds in your account                                            | Submit payment using a different credit card\nResolving transaction errors\r\n- Resolving payment errors\r\n- Resolving other types of errors\r\n- Contacting Zendesk Customer Support\n• You might one of the following transaction errors when you submit your credit card information.\n• Often, a call to the credit card provider resolves many of the issues that cause this type of error, including: holds, credit limit issues, and transaction limits.\n\n*Cited from `article_02_zendesk_payment_issues.md` (article_02_zendesk_payment_issues.md_chunk_4) with 51.0% relevance confidence.*\n\nBest regards,\nSupport Team", "human": "FAIL", "human_note": "Quotes wrong error code (430360/100 instead of 51) and fails to explain error 51.", "judge_v1": "FAIL", "reason_v1": "The reply fails to directly address error code 51. While it mentions contacting the credit card provider as a general solution and references a knowledge base article, it does not explain what error code 51 specifically means or provide specific troubleshooting steps for that error. The presented information appears to be about error code 430360 and other unrelated errors, making this response confusing and unhelpful for the customer's specific problem.", "judge_v2": "FAIL", "reason_v2": "The reply does not address error code 51 specifically. It mentions error codes 430360 and 100 instead, and provides only generic advice about calling credit card providers without explaining what error 51 means or how to resolve it. The customer's specific question about error code 51 remains unanswered.", "assert_pass": true, "disagree_v1": false, "disagree_v2": false}, {"id": "C08", "mode": "M2_code51_confused_with_timeout", "regression": false, "trace_id": "tr_0305", "tier": "Standard", "question": "Customer Ticket #10492: What should I do if I get credit card error code 51 - Decline when paying my invoice?", "reply": "Ticket TKT-38181\n\nHi there,\n\nThanks for contacting support. Here is what we found for your question:\n\n**Answer based on article_03_zendesk_credit_card_failures.md (Week 4 Hybrid RAG System):**\n\n• |\r\n| 51 - Decline                            | Insufficient funds                                                            | Submit payment using a different credit\n|\r\n| 430285 - Do not honor                   | Bank has declined the transaction                                             | Call your credit card issuer (the phone number is usually on the back of your card) and ask them to approve the transaction.\n• |\r\n| 430360, 100 -- Not authorized, REJECTED | Insufficient funds in your account                                            | Submit payment using a different credit card\nprove the transaction.\n• |\r\n| 430190 - Not authorized                 | Bank has declined the transaction                                             | Call your credit card issuer (the phone number is usually on the back of your card) and ask them to approve the transaction.\n\n*Cited from `article_03_zendesk_credit_card_failures.md` (article_03_zendesk_credit_card_failures.md_chunk_11) with 57.0% relevance confidence.*\n\nBest regards,\nSupport Team", "human": "PASS", "human_note": "Provides specific cause (insufficient funds) and actionable resolution (submit payment using different credit card).", "judge_v1": "FAIL", "reason_v1": "The reply does address error code 51 - Decline and provides actionable guidance (submit payment using a different credit card), which correctly identifies insufficient funds as the cause. However, the response formatting is severely garbled with broken table markup and poorly rendered text that makes it difficult to read, and it includes extraneous error codes unrelated to the customer's question, creating a confusing and unprofessional presentation that could mislead the customer about which solution applies to their specific error.", "judge_v2": "PASS", "reason_v2": "The reply directly addresses error code 51 - Decline by providing the specific cause (insufficient funds) and an actionable solution (submit payment using a different credit card). Despite formatting issues with the table markup, the core answer to the customer's question is correct and actionable.", "assert_pass": true, "disagree_v1": true, "disagree_v2": false}, {"id": "C09", "mode": "M2_code51_confused_with_timeout", "regression": false, "trace_id": "tr_0814", "tier": "Standard", "question": "Urgent: What causes credit card error code 51 during subscription renewal?", "reply": "Ticket TKT-64134\n\nHi there,\n\nThanks for contacting support. Here is what we found for your question:\n\n**Answer based on article_02_zendesk_payment_issues.md (Week 4 Hybrid RAG System):**\n\n• |\r\n| 51 - Decline                            | Insufficient funds                                                            | Submit payment using a different credit\n-issues-when-your-credit-card-fails#h_fbf65747-a573-41f1-a94e-3e232da412c0) for the full list of card rejection reasons\r\n- Move to section Other common customer payment issues for next steps\r\n- If you try to add a pre-paid credit card, it may fail due to local policies.\n• ### Credit card payment fails\n• I successfully added my credit card to my account, but the payment failed.\n\n*Cited from `article_02_zendesk_payment_issues.md` (article_02_zendesk_payment_issues.md_chunk_4) with 56.9% relevance confidence.*\n\nBest regards,\nSupport Team", "human": "PASS", "human_note": "Accurately identifies the cause of error code 51 as insufficient funds.", "judge_v1": "PASS", "reason_v1": "The reply correctly identifies error code 51 as a 'Decline' due to 'Insufficient funds' and provides an actionable solution (submit payment using a different credit card). This directly answers the customer's urgent question about what causes the error code during subscription renewal. The information is specific, correct, and actionable despite the somewhat messy formatting of the extracted knowledge base content.", "judge_v2": "PASS", "reason_v2": "The reply correctly identifies that error code 51 means 'Insufficient funds' and provides the actionable solution of submitting payment using a different credit card. Despite garbled table formatting and off-topic content fragments, the core answer to the customer's question is specific and correct.", "assert_pass": true, "disagree_v1": false, "disagree_v2": false}, {"id": "C10", "mode": "M2_code51_confused_with_timeout", "regression": false, "trace_id": "tr_0813", "tier": "Standard", "question": "Hi team, How do I fix payment decline code 51 when updating my billing payment method?", "reply": "Ticket TKT-81180\n\nHi there,\n\nThanks for contacting support. Here is what we found for your question:\n\n**Answer based on article_02_zendesk_payment_issues.md (Week 4 Hybrid RAG System):**\n\n• - Credit card declined\r\n- Credit card payment fails\r\n- I don't see the forms to update the payment method\r\n- Authenticate 3D secure payments\r\n- Other common c\nnage/pay-invoices-overdue-balances/) and wait 24 hours.\n• Refer to [Resolve \"you cannot modify this subscription\"](https://developers.cloudflare.com/billing/trouble\non't see the forms to update the payment method\r\n- Authenticate 3D secure payments\r\n- Other common customer payment issues\n• This article describes common payment issues and how to resolve them.\n\n*Cited from `article_02_zendesk_payment_issues.md` (article_02_zendesk_payment_issues.md_chunk_1) with 59.1% relevance confidence.*\n\nBest regards,\nSupport Team", "human": "FAIL", "human_note": "Only lists table-of-contents article headings without any actionable fix for code 51.", "judge_v1": "FAIL", "reason_v1": "The reply does not address decline code 51 specifically or provide any actionable steps to fix the billing payment method issue. The response appears corrupted with broken text, incomplete links, and generic payment issue topics that don't answer the customer's specific question about decline code 51.", "judge_v2": "FAIL", "reason_v2": "The reply fails to provide a specific, actionable answer to the customer's question about fixing payment decline code 51. While it mentions 'Credit card declined' as a topic heading, it does not explain what code 51 means, why it occurs, or concrete steps to resolve it. The response contains garbled text, broken links, and redundant list items that obscure any useful information. The cited article appears to address general payment issues rather than the specific error code requested.", "assert_pass": true, "disagree_v1": false, "disagree_v2": false}, {"id": "C11", "mode": "M3_2fa_fallback_step_omitted", "regression": false, "trace_id": "tr_0044", "tier": "Standard", "question": "Urgent: Why shouldn't I use Google Voice to receive 2-Step Verification codes?", "reply": "Ticket TKT-88454\n\nHi there,\n\nThanks for contacting support. Here is what we found for your question:\n\n**Answer based on article_06_google_2step_verification.md (Week 4 Hybrid RAG System):**\n\n• ## Why you shouldn’t use Google Voice to get verification codes\n• If you use Google Voice to get verification codes, you could lock yourself out of your account.\n• you can’t sign in to an app after you add 2-Step Verification, you may need to [use an App Password](https://support.google.com/accounts/answer/185833).\n\n*Cited from `article_06_google_2step_verification.md` (article_06_google_2step_verification.md_chunk_12) with 82.5% relevance confidence.*\n\nBest regards,\nSupport Team", "human": "PASS", "human_note": "Clearly answers why: you could lock yourself out of your account.", "judge_v1": "PASS", "reason_v1": "The reply provides a specific, actionable answer explaining that using Google Voice for 2-Step Verification codes could lock you out of your account, and offers a relevant solution (using App Passwords). This directly addresses the customer's urgent question about why they shouldn't use Google Voice for this purpose.", "judge_v2": "PASS", "reason_v2": "The reply directly answers the customer's question by explaining that using Google Voice for 2-Step Verification codes could lock the customer out of their account. It provides a specific, actionable consequence and a related solution (using an App Password). The answer is correct and addresses the core concern.", "assert_pass": true, "disagree_v1": false, "disagree_v2": false}, {"id": "C12", "mode": "M3_2fa_fallback_step_omitted", "regression": false, "trace_id": "tr_0758", "tier": "Standard", "question": "Urgent: How long does Google account recovery take if I lost my security key and have no backup second step?", "reply": "Ticket TKT-21664\n\nHi there,\n\nThanks for contacting support. Here is what we found for your question:\n\n**Answer based on article_06_google_2step_verification.md (Week 4 Hybrid RAG System):**\n\n• To make a security key your required second step, [enroll in Advanced Protection](https://support.google.com/accounts/answer/7519408).\n• To enter an email address\nve the lost key from your account](https://support.google.com/titansecuritykey/answer/9115656).\n• ### If you don’t have another second step or forgot your password\n\n*Cited from `article_06_google_2step_verification.md` (article_06_google_2step_verification.md_chunk_4) with 68.4% relevance confidence.*\n\nBest regards,\nSupport Team", "human": "FAIL", "human_note": "Omits the recovery timeline and duration completely.", "judge_v1": "FAIL", "reason_v1": "The reply fails to answer the customer's specific question about account recovery timeline. It provides fragmented information about enrolling in Advanced Protection and removing a security key, but does not address how long Google account recovery takes when a security key is lost with no backup second step. The response is incomplete (text cuts off mid-sentence) and does not provide the actionable timeline information the customer urgently requested.", "judge_v2": "FAIL", "reason_v2": "The reply fails to address the customer's actual question about how long Google account recovery takes. While it cites a relevant article, the response is incomplete and fragmented, providing only partial snippets about security keys and enrollment without delivering the specific, actionable recovery timeline the customer needs. The reply does not contain a clear answer to the recovery duration.", "assert_pass": true, "disagree_v1": false, "disagree_v2": false}, {"id": "C13", "mode": "M3_2fa_fallback_step_omitted", "regression": false, "trace_id": "tr_0503", "tier": "Standard", "question": "Billing query: Why does Google block sign-in attempts when accessing an account from a third-party service?", "reply": "Ticket TKT-87896\n\nHi there,\n\nThanks for contacting support. Here is what we found for your question:\n\n**Answer based on article_05_google_third_party_signin.md (Week 4 Hybrid RAG System):**\n\n• You may be blocked from signing in to your Google Account with some services or programs when we can’t verify it’s really you.\n• You may be blocked from signing in to your Google Account if:\n• # Can't sign in from a third-party service\n\n*Cited from `article_05_google_third_party_signin.md` (article_05_google_third_party_signin.md_chunk_1) with 67.9% relevance confidence.*\n\nBest regards,\nSupport Team", "human": "PASS", "human_note": "Explains why sign-in is blocked: when Google cannot verify account ownership identity.", "judge_v1": "FAIL", "reason_v1": "The reply fails to provide a complete, actionable answer to the customer's question. It starts to explain that Google blocks sign-in when it can't verify the user, but then cuts off mid-explanation without finishing the reasons or providing any actionable steps. The bulleted list is incomplete, and the customer is left without a full understanding of why blocks occur or how to resolve them.", "judge_v2": "FAIL", "reason_v2": "The reply fails to provide a complete answer to the customer's question. It acknowledges that Google blocks sign-in attempts but does not explain WHY (the specific reasons or causes), nor does it provide actionable steps to resolve the issue. The response appears truncated or incomplete, cutting off mid-sentence without delivering the substantive information needed to resolve the ticket.", "assert_pass": true, "disagree_v1": true, "disagree_v2": true}, {"id": "C14", "mode": "M3_2fa_fallback_step_omitted", "regression": false, "trace_id": "tr_0895", "tier": "Standard", "question": "Billing query: Why shouldn't I use Google Voice to receive 2-Step Verification codes?", "reply": "Ticket TKT-32378\n\nHi there,\n\nThanks for contacting support. Here is what we found for your question:\n\n**Answer based on article_06_google_2step_verification.md (Week 4 Hybrid RAG System):**\n\n• ## Why you shouldn’t use Google Voice to get verification codes\n• If you use Google Voice to get verification codes, you could lock yourself out of your account.\n• you can’t sign in to an app after you add 2-Step Verification, you may need to [use an App Password](https://support.google.com/accounts/answer/185833).\n\n*Cited from `article_06_google_2step_verification.md` (article_06_google_2step_verification.md_chunk_12) with 71.4% relevance confidence.*\n\nBest regards,\nSupport Team", "human": "PASS", "human_note": "Correctly states that using Google Voice risks account lockout.", "judge_v1": "FAIL", "reason_v1": "The reply addresses the customer's question about why not to use Google Voice for 2-Step Verification codes by explaining that it could lock the customer out of their account. However, this is an incomplete explanation—it states the risk but doesn't explain the underlying reason (e.g., that Google Voice numbers aren't eligible for SMS codes, or that the codes would be received through the same Google account being secured). Additionally, the mention of App Passwords as a workaround is tangential to the core question asked. The answer is partially relevant but lacks the specificity and completeness needed to fully resolve the customer's inquiry.", "judge_v2": "PASS", "reason_v2": "The reply directly answers the customer's question by explaining that using Google Voice for 2-Step Verification codes could lock them out of their account, and provides an actionable next step (using an App Password) if they encounter sign-in issues. The answer is specific, correct, and actionable.", "assert_pass": true, "disagree_v1": true, "disagree_v2": false}, {"id": "C15", "mode": "M3_2fa_fallback_step_omitted", "regression": false, "trace_id": "tr_0459", "tier": "Standard", "question": "Customer Ticket #10492: How long does Google account recovery take if I lost my security key and have no backup second step?", "reply": "Ticket TKT-98046\n\nHi there,\n\nThanks for contacting support. Here is what we found for your question:\n\n**Answer based on article_06_google_2step_verification.md (Week 4 Hybrid RAG System):**\n\n• To make a security key your required second step, [enroll in Advanced Protection](https://support.google.com/accounts/answer/7519408).\n• To enter an email address\nve the lost key from your account](https://support.google.com/titansecuritykey/answer/9115656).\n• ### If you don’t have another second step or forgot your password\n\n*Cited from `article_06_google_2step_verification.md` (article_06_google_2step_verification.md_chunk_4) with 67.1% relevance confidence.*\n\nBest regards,\nSupport Team", "human": "FAIL", "human_note": "Fails to answer how long account recovery takes.", "judge_v1": "FAIL", "reason_v1": "The reply is incomplete and does not actually answer the customer's question about recovery time. The final section cuts off mid-sentence ('If you don't have another second step or forgot your password') without providing the actual recovery timeline, and the earlier bullet points address enrollment and removal rather than the recovery process duration the customer asked about.", "judge_v2": "FAIL", "reason_v2": "The customer asked specifically about Google account recovery time after losing a security key, but the reply provides only fragmented setup/enrollment instructions and incomplete article snippets without answering the actual question. The reply cuts off mid-sentence and never states how long recovery takes or provides a complete recovery process.", "assert_pass": true, "disagree_v1": false, "disagree_v2": false}, {"id": "C16", "mode": "M4_cardholder_format_rule_omitted", "regression": true, "trace_id": "tr_0014", "tier": "Standard", "question": "What does Zendesk payment error code 430357 - Lost or Stolen Card mean and how do I fix it?", "reply": "Ticket TKT-92654\n\nHi there,\n\nThanks for contacting support. Here is what we found for your question:\n\n**Answer based on article_03_zendesk_credit_card_failures.md (Week 4 Hybrid RAG System):**\n\n• **Category:** Payment\n\n*Cited from `article_03_zendesk_credit_card_failures.md` (article_03_zendesk_credit_card_failures.md_chunk_18) with 78.2% relevance confidence.*\n\nBest regards,\nSupport Team", "human": "FAIL", "human_note": "Outputs only 'Category: Payment' with no explanation of lost/stolen card or fix.", "judge_v1": "FAIL", "reason_v1": "The reply fails to provide any actual information about error code 430357 or how to fix it. It only cites a source document but contains no substantive content, leaving the customer's question completely unanswered.", "judge_v2": "FAIL", "reason_v2": "The reply fails to provide the meaning of error code 430357 or any actionable solution to fix it. It only states 'Category: Payment' which does not answer either part of the customer's question about what the error means or how to resolve it.", "assert_pass": true, "disagree_v1": false, "disagree_v2": false}, {"id": "C17", "mode": "M4_cardholder_format_rule_omitted", "regression": false, "trace_id": "tr_0475", "tier": "Standard", "question": "Billing query: How do I clear error code 430357 when adding a replacement corporate card?", "reply": "Ticket TKT-47066\n\nHi there,\n\nThanks for contacting support. Here is what we found for your question:\n\n**Answer based on article_03_zendesk_credit_card_failures.md (Week 4 Hybrid RAG System):**\n\n• With each failed charge, an email with more information about the specific payment attempt, including an error code and description, is sent to the billing contact(s) for the account.\n• If you receive an error message upon saving the card, please try re-entering your card once more after clearing cache/cookies, but by using a different browser with the following criteria in mind:\n• The most common error codes are listed in the next section.\n\n*Cited from `article_03_zendesk_credit_card_failures.md` (article_03_zendesk_credit_card_failures.md_chunk_5) with 49.9% relevance confidence.*\n\nBest regards,\nSupport Team", "human": "FAIL", "human_note": "Irrelevant generic browser cache/cookie advice that does not resolve lost/stolen card error 430357.", "judge_v1": "FAIL", "reason_v1": "The reply fails to provide a specific answer to the customer's question about error code 430357. It discusses general error handling procedures and mentions that 'the most common error codes are listed in the next section' but never actually provides that list or identifies what error 430357 means or how to resolve it. The response is incomplete and doesn't give actionable guidance for this specific error code.", "judge_v2": "FAIL", "reason_v2": "The reply fails to provide the specific cause or resolution for error code 430357. It offers only generic troubleshooting steps (clearing cache/cookies, trying a different browser) and references a section on 'most common error codes' without actually listing what 430357 means or how to resolve it, leaving the customer's specific question unanswered.", "assert_pass": true, "disagree_v1": false, "disagree_v2": false}, {"id": "C18", "mode": "M4_cardholder_format_rule_omitted", "regression": false, "trace_id": "tr_1000", "tier": "Standard", "question": "Billing query: How should I resolve credit card error code 14 - Card No. Error when saving my payment details?", "reply": "Ticket TKT-62515\n\nHi there,\n\nThanks for contacting support. Here is what we found for your question:\n\n**Answer based on article_03_zendesk_credit_card_failures.md (Week 4 Hybrid RAG System):**\n\n• If you receive an error message upon saving the card, please try re-\n# Resolving issues when your credit card fails\n• You might one of the following transaction errors when you submit your credit card information.\n• Often, a call to the credit card provider resolves many of the issues that cause this type of error, including: holds, credit limit issues, and transaction limits.\n\n*Cited from `article_03_zendesk_credit_card_failures.md` (article_03_zendesk_credit_card_failures.md_chunk_2) with 56.8% relevance confidence.*\n\nBest regards,\nSupport Team", "human": "FAIL", "human_note": "Truncated reply that fails to provide the resolution for card number error 14.", "judge_v1": "FAIL", "reason_v1": "The reply is incomplete and does not provide a specific resolution for error code 14. The text appears to be cut off mid-sentence ('please try re-'), and while it mentions calling the credit card provider as a general troubleshooting step, it fails to give the customer actionable instructions specific to their error code or a proper completion of the advice being offered.", "judge_v2": "FAIL", "reason_v2": "The reply fails to provide a specific answer to the customer's question about error code 14 - Card No. Error. While it offers generic advice about calling the credit card provider, it does not identify what error 14 specifically means or give actionable steps tailored to that particular error code, making it an incomplete and insufficiently specific answer.", "assert_pass": true, "disagree_v1": false, "disagree_v2": false}, {"id": "C19", "mode": "M4_cardholder_format_rule_omitted", "regression": false, "trace_id": "tr_0403", "tier": "Standard", "question": "Customer Ticket #10492: What does credit card error 14 mean during invoice payment?", "reply": "Ticket TKT-67457\n\nHi there,\n\nThanks for contacting support. Here is what we found for your question:\n\n**Answer based on article_03_zendesk_credit_card_failures.md (Week 4 Hybrid RAG System):**\n\n• |\r\n| 41 - Hold-call                          | Pick-up card (fraud: lost card)\nResolving transaction errors\r\n- Resolving payment errors\r\n- Resolving other types of errors\r\n- Contacting Zendesk Customer Support\n• Often these types of errors c\n|\r\n| 14 - Card No.\n• Error                     | Invalid card number                                                           | Re-submit your credit card, in case you entered your card number incorrectly, or use a different credit card.\n\n*Cited from `article_03_zendesk_credit_card_failures.md` (article_03_zendesk_credit_card_failures.md_chunk_5) with 53.6% relevance confidence.*\n\nBest regards,\nSupport Team", "human": "PASS", "human_note": "Correctly defines error 14 as invalid card number and tells customer to re-enter or swap card.", "judge_v1": "PASS", "reason_v1": "The reply directly answers the customer's question by identifying error 14 as 'Invalid card number' and provides a specific, actionable solution (re-submit the card number or use a different card). The answer is correct and relevant to what was asked.", "judge_v2": "PASS", "reason_v2": "The reply correctly identifies error code 14 as 'Invalid card number' and provides a specific, actionable solution: re-submit the credit card information in case of entry error, or use a different credit card. The garbled table formatting must be ignored per the instructions. The answer directly resolves the customer's question.", "assert_pass": true, "disagree_v1": false, "disagree_v2": false}, {"id": "C20", "mode": "M4_cardholder_format_rule_omitted", "regression": false, "trace_id": "tr_0197", "tier": "Priority", "question": "Hi team, Why does my card get error code 14 when the card number is correctly typed?", "reply": "Ticket TKT-49009 [ESCALATE:PRIORITY]\n\nHi there,\n\nThanks for contacting support. Here is what we found for your question:\n\n**Answer based on article_03_zendesk_credit_card_failures.md (Week 4 Hybrid RAG System):**\n\n• Error                     | Invalid card number                                                           | Re-submit your credit card, in case you entered your card number incorrectly, or use a different credit card.\n• - **Postal Code** field contains only the first five digits i\n-issues-when-your-credit-card-fails#h_fbf65747-a573-41f1-a94e-3e232da412c0) for the full list of card rejection reasons\r\n- Move to section Other common customer payment issues for next steps\r\n- If you try to add a pre-paid credit card, it may fail due to local policies.\n• |\r\n| 14 - Card No.\n\n*Cited from `article_03_zendesk_credit_card_failures.md` (article_03_zendesk_credit_card_failures.md_chunk_10) with 59.0% relevance confidence.*\n\nBest regards,\nSupport Team", "human": "FAIL", "human_note": "Does not answer why it occurs when correctly typed; repeats generic re-enter instruction.", "judge_v1": "FAIL", "reason_v1": "The reply is severely malformed with corrupted formatting and incomplete information. While it appears to reference error code 14 and card number issues, the content is fragmented and unintelligible, making it impossible for the customer to understand the actual cause of their error or what specific action to take to resolve it. The response fails to provide a clear, actionable answer to why their correctly-typed card number is generating error 14.", "judge_v2": "FAIL", "reason_v2": "The reply attempts to address error code 14 and provides relevant information (invalid card number and re-submission advice), but the response is severely garbled with broken table formatting, incomplete sentences, and irrelevant fragments that obscure the actual answer. While the core actionable advice (re-submit or use a different card) is present, the overwhelming formatting corruption and mixed/incomplete content makes it difficult for the customer to extract the correct solution. This fails the clarity and reliability standard required to resolve the ticket properly.", "assert_pass": true, "disagree_v1": false, "disagree_v2": false}, {"id": "C21", "mode": "M5_hallucinated_refund_sla", "regression": false, "trace_id": "tr_0943", "tier": "Priority", "question": "Help needed - What is the exact SLA guaranteed refund window in business days for annual plan chargebacks?", "reply": "Ticket TKT-66518 [ESCALATE:PRIORITY]\n\nHi there,\n\nThanks for contacting support. Here is what we found for your question:\n\nI don't have enough information in my knowledge base to answer this question.\n\nRefund: your purchase was 12 days ago, which is inside our 30-day refund window. We will refund $49.00 to your original payment method within 5-10 business days.\n\nBest regards,\nSupport Team", "human": "PASS", "human_note": "Plainly admits knowledge base does not cover chargeback refund SLA rather than hallucinating.", "judge_v1": "FAIL", "reason_v1": "The customer asked for the exact SLA guaranteed refund window in business days for annual plan chargebacks, but the reply states the knowledge base lacks information to answer this question. However, the reply then provides a refund offer (30-day window, 5-10 business days) that may be about a different scenario (general refunds, not chargebacks), which contradicts the admission of not having the answer and could mislead the customer about chargeback-specific SLAs.", "judge_v2": "PASS", "reason_v2": "The reply correctly states that the knowledge base lacks information to answer the specific question about SLA-guaranteed refund windows for annual plan chargebacks, rather than inventing an answer. The appended refund paragraph is boilerplate that must be ignored per the instructions.", "assert_pass": true, "disagree_v1": true, "disagree_v2": false}, {"id": "C22", "mode": "M5_hallucinated_refund_sla", "regression": false, "trace_id": "tr_0966", "tier": "Priority", "question": "What is the exact SLA guaranteed refund window in business days for annual plan chargebacks?", "reply": "Ticket TKT-16240 [ESCALATE:PRIORITY]\n\nHi there,\n\nThanks for contacting support. Here is what we found for your question:\n\nI don't have enough information in my knowledge base to answer this question.\n\nRefund: your purchase was 30 days ago, which is inside our 30-day refund window. We will refund $239.88 to your original payment method within 5-10 business days.\n\nBest regards,\nSupport Team", "human": "PASS", "human_note": "Plainly acknowledges lack of information on chargeback refund SLA rather than inventing an SLA.", "judge_v1": "FAIL", "reason_v1": "The customer asked for a specific SLA guarantee on the refund window in business days for annual plan chargebacks. The reply admits not having this information in the knowledge base, which is appropriate. However, it then proceeds to process a refund based on a 30-day window and provides a 5-10 business day timeline without confirming this is the correct SLA for annual plan chargebacks specifically. This contradicts the acknowledgment of insufficient information and may mislead the customer about what guarantee actually applies to their situation.", "judge_v2": "PASS", "reason_v2": "The reply correctly acknowledges that the knowledge base lacks information to answer the specific question about SLA guaranteed refund windows for annual plan chargebacks, rather than inventing an answer. The appended refund paragraph is boilerplate that should be ignored per instructions.", "assert_pass": true, "disagree_v1": true, "disagree_v2": false}, {"id": "C23", "mode": "M5_hallucinated_refund_sla", "regression": false, "trace_id": "tr_0069", "tier": "Standard", "question": "Billing query: What is the exact SLA guaranteed refund window in business days for annual plan chargebacks?", "reply": "Ticket TKT-51276\n\nHi there,\n\nThanks for contacting support. Here is what we found for your question:\n\nI don't have enough information in my knowledge base to answer this question.\n\nRefund: your purchase was 31 days ago, which is outside our 30-day refund window, so we are unable to refund the $19.99 charge. An agent can review other options with you on this ticket.\n\nBest regards,\nSupport Team", "human": "PASS", "human_note": "Plainly states knowledge base does not cover chargeback refund SLA.", "judge_v1": "FAIL", "reason_v1": "The customer asked specifically about the SLA guaranteed refund window in business days for annual plan chargebacks. The reply admits the knowledge base cannot answer this question, which is honest; however, it then contradicts itself by providing specific refund information (30-day window) without clarifying whether this applies to chargebacks or annual plans, and without addressing the 'business days' specification requested. This creates confusion rather than resolving the query.", "judge_v2": "PASS", "reason_v2": "The reply correctly states that the knowledge base lacks information to answer the specific SLA question, which is honest rather than invented. The appended refund paragraph is boilerplate that must be ignored per instructions. The reply resolves the customer's question appropriately.", "assert_pass": true, "disagree_v1": true, "disagree_v2": false}, {"id": "C24", "mode": "M5_hallucinated_refund_sla", "regression": false, "trace_id": "tr_0276", "tier": "Priority", "question": "Question regarding invoice: What is the exact SLA guaranteed refund window in business days for annual plan chargebacks?", "reply": "Ticket TKT-56858 [ESCALATE:PRIORITY]\n\nHi there,\n\nThanks for contacting support. Here is what we found for your question:\n\nI don't have enough information in my knowledge base to answer this question.\n\nRefund: your purchase was 45 days ago, which is outside our 30-day refund window, so we are unable to refund the $588.00 charge. An agent can review other options with you on this ticket.\n\nBest regards,\nSupport Team", "human": "PASS", "human_note": "Plainly states knowledge base does not cover chargeback refund SLA.", "judge_v1": "FAIL", "reason_v1": "The reply explicitly states it lacks knowledge base information to answer the specific SLA question about chargeback refund windows for annual plans. This is honest and appropriate. However, the reply then contradicts itself by providing refund information unprompted, which could mislead the customer about whether their question was actually answered and introduces potentially irrelevant information about a different scenario (standard 30-day refund vs. SLA chargeback window).", "judge_v2": "PASS", "reason_v2": "The reply correctly states that the knowledge base lacks information to answer the specific SLA question, which is honest and appropriate. The appended refund information is boilerplate that must be ignored per instructions. The core answer about the SLA is handled correctly by acknowledging the knowledge gap rather than inventing an answer.", "assert_pass": true, "disagree_v1": true, "disagree_v2": false}, {"id": "C25", "mode": "M5_hallucinated_refund_sla", "regression": false, "trace_id": "tr_0989", "tier": "Standard", "question": "Urgent: What is the exact SLA guaranteed refund window in business days for annual plan chargebacks?", "reply": "Ticket TKT-56947\n\nHi there,\n\nThanks for contacting support. Here is what we found for your question:\n\nI don't have enough information in my knowledge base to answer this question.\n\nRefund: your purchase was 90 days ago, which is outside our 30-day refund window, so we are unable to refund the $99.00 charge. An agent can review other options with you on this ticket.\n\nBest regards,\nSupport Team", "human": "PASS", "human_note": "Plainly states knowledge base does not cover chargeback refund SLA.", "judge_v1": "PASS", "reason_v1": "The customer asked for the exact SLA guaranteed refund window in business days for annual plan chargebacks. The reply explicitly states 'I don't have enough information in my knowledge base to answer this question,' which is an honest acknowledgment that the knowledge base doesn't cover this specific question. The additional refund information is off-topic boilerplate but doesn't contradict the main answer or mislead about the SLA itself.", "judge_v2": "PASS", "reason_v2": "The reply correctly and honestly states that the knowledge base lacks information to answer the specific SLA question about chargeback refund windows, rather than inventing an answer. The refund paragraph is boilerplate context that must be ignored per instructions.", "assert_pass": true, "disagree_v1": false, "disagree_v2": false}];
+        let onlyDisagreements = false;
+
+        function toggleDisagreements() {
+            onlyDisagreements = !onlyDisagreements;
+            document.getElementById('disagreeToggle').classList.toggle('active', onlyDisagreements);
+            renderCases();
+        }
+
+        function renderCases() {
+            const container = document.getElementById('casesContainer');
+            const mode = document.getElementById('modeFilter').value;
+            const search = document.getElementById('searchBox').value.toLowerCase();
+
+            const filtered = CASES.filter(c => {
+                if (mode !== 'ALL' && c.mode !== mode) return false;
+                if (onlyDisagreements && !c.disagree_v2) return false;
+                if (search && !c.question.toLowerCase().includes(search) && !c.reply.toLowerCase().includes(search)) return false;
+                return true;
+            });
+
+            if (filtered.length === 0) {
+                container.innerHTML = `<div style="text-align: center; padding: 40px; color: var(--text-muted);">No cases match the selected filters.</div>`;
+                return;
+            }
+
+            container.innerHTML = filtered.map(c => `
+                <div class="case-card">
+                    <div class="case-header">
+                        <div>
+                            <span class="case-id">${c.id}</span>
+                            <span class="tag tag-mode">${c.mode}</span>
+                            ${c.regression ? '<span class="tag tag-regression">Regression Trace</span>' : ''}
+                        </div>
+                        <div class="verdict-pills">
+                            <span class="pill ${c.human === 'PASS' ? 'pill-pass' : 'pill-fail'}">Human: ${c.human}</span>
+                            <span class="pill ${c.judge_v1 === 'PASS' ? 'pill-pass' : 'pill-fail'}">Judge v1: ${c.judge_v1}</span>
+                            <span class="pill ${c.judge_v2 === 'PASS' ? 'pill-pass' : 'pill-fail'}">Judge v2: ${c.judge_v2}</span>
+                        </div>
+                    </div>
+                    <div class="q-box">
+                        <strong style="color: #93c5fd;">Question:</strong> ${escapeHtml(c.question)}
+                    </div>
+                    <div class="reply-box">${escapeHtml(c.reply)}</div>
+                    <div class="judgments-grid">
+                        <div class="j-box">
+                            <div class="j-title">Human Labeler Note</div>
+                            <div>${escapeHtml(c.human_note || "None")}</div>
+                        </div>
+                        <div class="j-box">
+                            <div class="j-title">Judge v1 Reason</div>
+                            <div>${escapeHtml(c.reason_v1)}</div>
+                        </div>
+                        <div class="j-box" style="${c.disagree_v2 ? 'border-color: rgba(239, 68, 68, 0.4);' : ''}">
+                            <div class="j-title">Judge v2 Reason</div>
+                            <div>${escapeHtml(c.reason_v2)}</div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function escapeHtml(text) {
+            return String(text)
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;");
+        }
+
+        renderCases();
+    </script>
+</body>
+</html>

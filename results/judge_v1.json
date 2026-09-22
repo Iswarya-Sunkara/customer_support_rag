@@ -1,0 +1,133 @@
+{
+  "version": "v1",
+  "model": "claude-haiku-4-5",
+  "prompt_sha": "ce51240e098111b3",
+  "first_run_at": "2026-09-22T05:50:29+00:00",
+  "verdicts": {
+    "C01": {
+      "reason": "The reply contains a direct answer to the customer's question: 'Cloudflare will retry up to 5 times over 5 days.' This specifies when retry attempts occur after an initial payment failure. However, the reply also includes irrelevant content about subscription modification/cancellation errors that is off-topic and potentially confusing, which detracts from the clarity of the actual answer.",
+      "verdict": "FAIL",
+      "reply_sha": "6e4c8c72113d27f3"
+    },
+    "C02": {
+      "reason": "The reply does provide a specific answer to the customer's question about retry attempts: 'Cloudflare will retry up to 5 times over 5 days.' However, the reply contains substantial formatting errors, broken links, and irrelevant content (the 'You cannot modify this subscription' section) that creates confusion and undermines clarity. Despite the correct core answer being present, the poor presentation and inclusion of off-topic information that could mislead the customer makes this reply problematic.",
+      "verdict": "FAIL",
+      "reply_sha": "bbb1570e322cbf1a"
+    },
+    "C03": {
+      "reason": "The reply provides a specific, actionable answer directly addressing the customer's question: Cloudflare retries up to 5 times over 5 days. However, the reply contains corrupted/incomplete text ('If your error message i nage/pay-invoices-overdue-balances/)') which appears to be a formatting error that cuts off mid-sentence, making part of the response unreadable and potentially misleading.",
+      "verdict": "FAIL",
+      "reply_sha": "9add522ce8705c45"
+    },
+    "C04": {
+      "reason": "The customer asked for the exact grace period duration for failed billing payments before suspension. The reply provides general troubleshooting links and advice on updating payment methods, but fails to provide the specific numerical grace period the customer requested. The reply does not answer the actual question asked.",
+      "verdict": "FAIL",
+      "reply_sha": "aa97aed548166218"
+    },
+    "C05": {
+      "reason": "The customer asked for the exact grace period duration before suspension, but the reply only provides generic actions to take (update payment method, pay invoice) without stating the specific number of days or timeframe. The reply fails to answer the actual question asked.",
+      "verdict": "FAIL",
+      "reply_sha": "79557563633a41b5"
+    },
+    "C06": {
+      "reason": "The reply cites a knowledge base article but provides no actual content, answer, or explanation about error code 51. It does not indicate whether the error is a bank refusal or a system timeout, leaving the customer's specific question completely unanswered.",
+      "verdict": "FAIL",
+      "reply_sha": "1c1b07730375ec53"
+    },
+    "C07": {
+      "reason": "The reply fails to directly address error code 51. While it mentions contacting the credit card provider as a general solution and references a knowledge base article, it does not explain what error code 51 specifically means or provide specific troubleshooting steps for that error. The presented information appears to be about error code 430360 and other unrelated errors, making this response confusing and unhelpful for the customer's specific problem.",
+      "verdict": "FAIL",
+      "reply_sha": "8da810d29b068d93"
+    },
+    "C08": {
+      "reason": "The reply does address error code 51 - Decline and provides actionable guidance (submit payment using a different credit card), which correctly identifies insufficient funds as the cause. However, the response formatting is severely garbled with broken table markup and poorly rendered text that makes it difficult to read, and it includes extraneous error codes unrelated to the customer's question, creating a confusing and unprofessional presentation that could mislead the customer about which solution applies to their specific error.",
+      "verdict": "FAIL",
+      "reply_sha": "0bd1bd4e19fe5c61"
+    },
+    "C09": {
+      "reason": "The reply correctly identifies error code 51 as a 'Decline' due to 'Insufficient funds' and provides an actionable solution (submit payment using a different credit card). This directly answers the customer's urgent question about what causes the error code during subscription renewal. The information is specific, correct, and actionable despite the somewhat messy formatting of the extracted knowledge base content.",
+      "verdict": "PASS",
+      "reply_sha": "d2f0f0704fde566b"
+    },
+    "C10": {
+      "reason": "The reply does not address decline code 51 specifically or provide any actionable steps to fix the billing payment method issue. The response appears corrupted with broken text, incomplete links, and generic payment issue topics that don't answer the customer's specific question about decline code 51.",
+      "verdict": "FAIL",
+      "reply_sha": "df6a82d6cfadda7c"
+    },
+    "C11": {
+      "reason": "The reply provides a specific, actionable answer explaining that using Google Voice for 2-Step Verification codes could lock you out of your account, and offers a relevant solution (using App Passwords). This directly addresses the customer's urgent question about why they shouldn't use Google Voice for this purpose.",
+      "verdict": "PASS",
+      "reply_sha": "fbbc7343c1ec608c"
+    },
+    "C12": {
+      "reason": "The reply fails to answer the customer's specific question about account recovery timeline. It provides fragmented information about enrolling in Advanced Protection and removing a security key, but does not address how long Google account recovery takes when a security key is lost with no backup second step. The response is incomplete (text cuts off mid-sentence) and does not provide the actionable timeline information the customer urgently requested.",
+      "verdict": "FAIL",
+      "reply_sha": "70d1e20a5d059fc1"
+    },
+    "C13": {
+      "reason": "The reply fails to provide a complete, actionable answer to the customer's question. It starts to explain that Google blocks sign-in when it can't verify the user, but then cuts off mid-explanation without finishing the reasons or providing any actionable steps. The bulleted list is incomplete, and the customer is left without a full understanding of why blocks occur or how to resolve them.",
+      "verdict": "FAIL",
+      "reply_sha": "001ce55e52ee9765"
+    },
+    "C14": {
+      "reason": "The reply addresses the customer's question about why not to use Google Voice for 2-Step Verification codes by explaining that it could lock the customer out of their account. However, this is an incomplete explanation—it states the risk but doesn't explain the underlying reason (e.g., that Google Voice numbers aren't eligible for SMS codes, or that the codes would be received through the same Google account being secured). Additionally, the mention of App Passwords as a workaround is tangential to the core question asked. The answer is partially relevant but lacks the specificity and completeness needed to fully resolve the customer's inquiry.",
+      "verdict": "FAIL",
+      "reply_sha": "0344528c538ffa3b"
+    },
+    "C15": {
+      "reason": "The reply is incomplete and does not actually answer the customer's question about recovery time. The final section cuts off mid-sentence ('If you don't have another second step or forgot your password') without providing the actual recovery timeline, and the earlier bullet points address enrollment and removal rather than the recovery process duration the customer asked about.",
+      "verdict": "FAIL",
+      "reply_sha": "d1ca7e5fae5ad59d"
+    },
+    "C16": {
+      "reason": "The reply fails to provide any actual information about error code 430357 or how to fix it. It only cites a source document but contains no substantive content, leaving the customer's question completely unanswered.",
+      "verdict": "FAIL",
+      "reply_sha": "cc55832114daf3cc"
+    },
+    "C17": {
+      "reason": "The reply fails to provide a specific answer to the customer's question about error code 430357. It discusses general error handling procedures and mentions that 'the most common error codes are listed in the next section' but never actually provides that list or identifies what error 430357 means or how to resolve it. The response is incomplete and doesn't give actionable guidance for this specific error code.",
+      "verdict": "FAIL",
+      "reply_sha": "73a7d9cd81f784c2"
+    },
+    "C18": {
+      "reason": "The reply is incomplete and does not provide a specific resolution for error code 14. The text appears to be cut off mid-sentence ('please try re-'), and while it mentions calling the credit card provider as a general troubleshooting step, it fails to give the customer actionable instructions specific to their error code or a proper completion of the advice being offered.",
+      "verdict": "FAIL",
+      "reply_sha": "1cdebddbc807c564"
+    },
+    "C19": {
+      "reason": "The reply directly answers the customer's question by identifying error 14 as 'Invalid card number' and provides a specific, actionable solution (re-submit the card number or use a different card). The answer is correct and relevant to what was asked.",
+      "verdict": "PASS",
+      "reply_sha": "f460939551025407"
+    },
+    "C20": {
+      "reason": "The reply is severely malformed with corrupted formatting and incomplete information. While it appears to reference error code 14 and card number issues, the content is fragmented and unintelligible, making it impossible for the customer to understand the actual cause of their error or what specific action to take to resolve it. The response fails to provide a clear, actionable answer to why their correctly-typed card number is generating error 14.",
+      "verdict": "FAIL",
+      "reply_sha": "d1853b178b42441d"
+    },
+    "C21": {
+      "reason": "The customer asked for the exact SLA guaranteed refund window in business days for annual plan chargebacks, but the reply states the knowledge base lacks information to answer this question. However, the reply then provides a refund offer (30-day window, 5-10 business days) that may be about a different scenario (general refunds, not chargebacks), which contradicts the admission of not having the answer and could mislead the customer about chargeback-specific SLAs.",
+      "verdict": "FAIL",
+      "reply_sha": "9ef3226d4ecd4f4a"
+    },
+    "C22": {
+      "reason": "The customer asked for a specific SLA guarantee on the refund window in business days for annual plan chargebacks. The reply admits not having this information in the knowledge base, which is appropriate. However, it then proceeds to process a refund based on a 30-day window and provides a 5-10 business day timeline without confirming this is the correct SLA for annual plan chargebacks specifically. This contradicts the acknowledgment of insufficient information and may mislead the customer about what guarantee actually applies to their situation.",
+      "verdict": "FAIL",
+      "reply_sha": "58016b19d31b1bd8"
+    },
+    "C23": {
+      "reason": "The customer asked specifically about the SLA guaranteed refund window in business days for annual plan chargebacks. The reply admits the knowledge base cannot answer this question, which is honest; however, it then contradicts itself by providing specific refund information (30-day window) without clarifying whether this applies to chargebacks or annual plans, and without addressing the 'business days' specification requested. This creates confusion rather than resolving the query.",
+      "verdict": "FAIL",
+      "reply_sha": "273d21807a1360fd"
+    },
+    "C24": {
+      "reason": "The reply explicitly states it lacks knowledge base information to answer the specific SLA question about chargeback refund windows for annual plans. This is honest and appropriate. However, the reply then contradicts itself by providing refund information unprompted, which could mislead the customer about whether their question was actually answered and introduces potentially irrelevant information about a different scenario (standard 30-day refund vs. SLA chargeback window).",
+      "verdict": "FAIL",
+      "reply_sha": "0b7f5518970abe22"
+    },
+    "C25": {
+      "reason": "The customer asked for the exact SLA guaranteed refund window in business days for annual plan chargebacks. The reply explicitly states 'I don't have enough information in my knowledge base to answer this question,' which is an honest acknowledgment that the knowledge base doesn't cover this specific question. The additional refund information is off-topic boilerplate but doesn't contradict the main answer or mislead about the SLA itself.",
+      "verdict": "PASS",
+      "reply_sha": "273e7316acbe6b00"
+    }
+  }
+}

@@ -1,0 +1,82 @@
+[
+  {
+    "case_id": "C03",
+    "mode": "M1_superseded_grace_period",
+    "question": "Question regarding invoice: How many times and over how many days will Cloudflare retry a failed recurring subscription renewal payment?",
+    "reply": "Ticket TKT-11224\n\nHi there,\n\nThanks for contacting support. Here is what we found for your question:\n\n**Answer based on article_01_cloudflare_billing_errors.md (Week 4 Hybrid RAG System):**\n\n• Cloudflare will retry up to 5 times over 5 days.\n• Refer to [Resolve a payment failure](https://developers.cloudflare.com/billing/troubleshoot/troubleshoot-failed-payments/).\n• If your error message i\nnage/pay-invoices-overdue-balances/) and wait 24 hours.\n\n*Cited from `article_01_cloudflare_billing_errors.md` (article_01_cloudflare_billing_errors.md_chunk_14) with 76.3% relevance confidence.*\n\nBest regards,\nSupport Team",
+    "human": "PASS",
+    "human_note": "Directly and accurately answers how many times (up to 5 times) and over how many days (5 days).",
+    "judge": "FAIL",
+    "judge_reason": "The reply provides a specific, actionable answer directly addressing the customer's question: Cloudflare retries up to 5 times over 5 days. However, the reply contains corrupted/incomplete text ('If your error message i nage/pay-invoices-overdue-balances/)') which appears to be a formatting error that cuts off mid-sentence, making part of the response unreadable and potentially misleading."
+  },
+  {
+    "case_id": "C08",
+    "mode": "M2_code51_confused_with_timeout",
+    "question": "Customer Ticket #10492: What should I do if I get credit card error code 51 - Decline when paying my invoice?",
+    "reply": "Ticket TKT-38181\n\nHi there,\n\nThanks for contacting support. Here is what we found for your question:\n\n**Answer based on article_03_zendesk_credit_card_failures.md (Week 4 Hybrid RAG System):**\n\n• |\r\n| 51 - Decline                            | Insufficient funds                                                            | Submit payment using a different credit\n|\r\n| 430285 - Do not honor                   | Bank has declined the transaction                                             | Call your credit card issuer (the phone number is usually on the back of your card) and ask them to approve the transaction.\n• |\r\n| 430360, 100 -- Not authorized, REJECTED | Insufficient funds in your account                                            | Submit payment using a different credit card\nprove the transaction.\n• |\r\n| 430190 - Not authorized                 | Bank has declined the transaction                                             | Call your credit card issuer (the phone number is usually on the back of your card) and ask them to approve the transaction.\n\n*Cited from `article_03_zendesk_credit_card_failures.md` (article_03_zendesk_credit_card_failures.md_chunk_11) with 57.0% relevance confidence.*\n\nBest regards,\nSupport Team",
+    "human": "PASS",
+    "human_note": "Provides specific cause (insufficient funds) and actionable resolution (submit payment using different credit card).",
+    "judge": "FAIL",
+    "judge_reason": "The reply does address error code 51 - Decline and provides actionable guidance (submit payment using a different credit card), which correctly identifies insufficient funds as the cause. However, the response formatting is severely garbled with broken table markup and poorly rendered text that makes it difficult to read, and it includes extraneous error codes unrelated to the customer's question, creating a confusing and unprofessional presentation that could mislead the customer about which solution applies to their specific error."
+  },
+  {
+    "case_id": "C13",
+    "mode": "M3_2fa_fallback_step_omitted",
+    "question": "Billing query: Why does Google block sign-in attempts when accessing an account from a third-party service?",
+    "reply": "Ticket TKT-87896\n\nHi there,\n\nThanks for contacting support. Here is what we found for your question:\n\n**Answer based on article_05_google_third_party_signin.md (Week 4 Hybrid RAG System):**\n\n• You may be blocked from signing in to your Google Account with some services or programs when we can’t verify it’s really you.\n• You may be blocked from signing in to your Google Account if:\n• # Can't sign in from a third-party service\n\n*Cited from `article_05_google_third_party_signin.md` (article_05_google_third_party_signin.md_chunk_1) with 67.9% relevance confidence.*\n\nBest regards,\nSupport Team",
+    "human": "PASS",
+    "human_note": "Explains why sign-in is blocked: when Google cannot verify account ownership identity.",
+    "judge": "FAIL",
+    "judge_reason": "The reply fails to provide a complete, actionable answer to the customer's question. It starts to explain that Google blocks sign-in when it can't verify the user, but then cuts off mid-explanation without finishing the reasons or providing any actionable steps. The bulleted list is incomplete, and the customer is left without a full understanding of why blocks occur or how to resolve them."
+  },
+  {
+    "case_id": "C14",
+    "mode": "M3_2fa_fallback_step_omitted",
+    "question": "Billing query: Why shouldn't I use Google Voice to receive 2-Step Verification codes?",
+    "reply": "Ticket TKT-32378\n\nHi there,\n\nThanks for contacting support. Here is what we found for your question:\n\n**Answer based on article_06_google_2step_verification.md (Week 4 Hybrid RAG System):**\n\n• ## Why you shouldn’t use Google Voice to get verification codes\n• If you use Google Voice to get verification codes, you could lock yourself out of your account.\n• you can’t sign in to an app after you add 2-Step Verification, you may need to [use an App Password](https://support.google.com/accounts/answer/185833).\n\n*Cited from `article_06_google_2step_verification.md` (article_06_google_2step_verification.md_chunk_12) with 71.4% relevance confidence.*\n\nBest regards,\nSupport Team",
+    "human": "PASS",
+    "human_note": "Correctly states that using Google Voice risks account lockout.",
+    "judge": "FAIL",
+    "judge_reason": "The reply addresses the customer's question about why not to use Google Voice for 2-Step Verification codes by explaining that it could lock the customer out of their account. However, this is an incomplete explanation—it states the risk but doesn't explain the underlying reason (e.g., that Google Voice numbers aren't eligible for SMS codes, or that the codes would be received through the same Google account being secured). Additionally, the mention of App Passwords as a workaround is tangential to the core question asked. The answer is partially relevant but lacks the specificity and completeness needed to fully resolve the customer's inquiry."
+  },
+  {
+    "case_id": "C21",
+    "mode": "M5_hallucinated_refund_sla",
+    "question": "Help needed - What is the exact SLA guaranteed refund window in business days for annual plan chargebacks?",
+    "reply": "Ticket TKT-66518 [ESCALATE:PRIORITY]\n\nHi there,\n\nThanks for contacting support. Here is what we found for your question:\n\nI don't have enough information in my knowledge base to answer this question.\n\nRefund: your purchase was 12 days ago, which is inside our 30-day refund window. We will refund $49.00 to your original payment method within 5-10 business days.\n\nBest regards,\nSupport Team",
+    "human": "PASS",
+    "human_note": "Plainly admits knowledge base does not cover chargeback refund SLA rather than hallucinating.",
+    "judge": "FAIL",
+    "judge_reason": "The customer asked for the exact SLA guaranteed refund window in business days for annual plan chargebacks, but the reply states the knowledge base lacks information to answer this question. However, the reply then provides a refund offer (30-day window, 5-10 business days) that may be about a different scenario (general refunds, not chargebacks), which contradicts the admission of not having the answer and could mislead the customer about chargeback-specific SLAs."
+  },
+  {
+    "case_id": "C22",
+    "mode": "M5_hallucinated_refund_sla",
+    "question": "What is the exact SLA guaranteed refund window in business days for annual plan chargebacks?",
+    "reply": "Ticket TKT-16240 [ESCALATE:PRIORITY]\n\nHi there,\n\nThanks for contacting support. Here is what we found for your question:\n\nI don't have enough information in my knowledge base to answer this question.\n\nRefund: your purchase was 30 days ago, which is inside our 30-day refund window. We will refund $239.88 to your original payment method within 5-10 business days.\n\nBest regards,\nSupport Team",
+    "human": "PASS",
+    "human_note": "Plainly acknowledges lack of information on chargeback refund SLA rather than inventing an SLA.",
+    "judge": "FAIL",
+    "judge_reason": "The customer asked for a specific SLA guarantee on the refund window in business days for annual plan chargebacks. The reply admits not having this information in the knowledge base, which is appropriate. However, it then proceeds to process a refund based on a 30-day window and provides a 5-10 business day timeline without confirming this is the correct SLA for annual plan chargebacks specifically. This contradicts the acknowledgment of insufficient information and may mislead the customer about what guarantee actually applies to their situation."
+  },
+  {
+    "case_id": "C23",
+    "mode": "M5_hallucinated_refund_sla",
+    "question": "Billing query: What is the exact SLA guaranteed refund window in business days for annual plan chargebacks?",
+    "reply": "Ticket TKT-51276\n\nHi there,\n\nThanks for contacting support. Here is what we found for your question:\n\nI don't have enough information in my knowledge base to answer this question.\n\nRefund: your purchase was 31 days ago, which is outside our 30-day refund window, so we are unable to refund the $19.99 charge. An agent can review other options with you on this ticket.\n\nBest regards,\nSupport Team",
+    "human": "PASS",
+    "human_note": "Plainly states knowledge base does not cover chargeback refund SLA.",
+    "judge": "FAIL",
+    "judge_reason": "The customer asked specifically about the SLA guaranteed refund window in business days for annual plan chargebacks. The reply admits the knowledge base cannot answer this question, which is honest; however, it then contradicts itself by providing specific refund information (30-day window) without clarifying whether this applies to chargebacks or annual plans, and without addressing the 'business days' specification requested. This creates confusion rather than resolving the query."
+  },
+  {
+    "case_id": "C24",
+    "mode": "M5_hallucinated_refund_sla",
+    "question": "Question regarding invoice: What is the exact SLA guaranteed refund window in business days for annual plan chargebacks?",
+    "reply": "Ticket TKT-56858 [ESCALATE:PRIORITY]\n\nHi there,\n\nThanks for contacting support. Here is what we found for your question:\n\nI don't have enough information in my knowledge base to answer this question.\n\nRefund: your purchase was 45 days ago, which is outside our 30-day refund window, so we are unable to refund the $588.00 charge. An agent can review other options with you on this ticket.\n\nBest regards,\nSupport Team",
+    "human": "PASS",
+    "human_note": "Plainly states knowledge base does not cover chargeback refund SLA.",
+    "judge": "FAIL",
+    "judge_reason": "The reply explicitly states it lacks knowledge base information to answer the specific SLA question about chargeback refund windows for annual plans. This is honest and appropriate. However, the reply then contradicts itself by providing refund information unprompted, which could mislead the customer about whether their question was actually answered and introduces potentially irrelevant information about a different scenario (standard 30-day refund vs. SLA chargeback window)."
+  }
+]

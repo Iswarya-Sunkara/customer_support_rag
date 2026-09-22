@@ -1,0 +1,22 @@
+[
+  {
+    "case_id": "C02",
+    "mode": "M1_superseded_grace_period",
+    "question": "Hi team, If my automatic subscription payment fails on day 1, when is the next retry attempt made?",
+    "reply": "Ticket TKT-37593 [ESCALATE:PRIORITY]\n\nHi there,\n\nThanks for contacting support. Here is what we found for your question:\n\n**Answer based on article_01_cloudflare_billing_errors.md (Week 4 Hybrid RAG System):**\n\n• Refer to [Resolve \"you cannot modify this subscription\"](https://developers.cloudflare.com/billing/trouble\nretry.\n• |\r\n| \"You cannot modify this subscription since it is currently scheduled to be cancelled\"       | You are trying to change a subscription that already has a pending cancellation.\n• Cloudflare will retry up to 5 times over 5 days.\n\n*Cited from `article_01_cloudflare_billing_errors.md` (article_01_cloudflare_billing_errors.md_chunk_14) with 51.3% relevance confidence.*\n\nBest regards,\nSupport Team",
+    "human": "FAIL",
+    "human_note": "Off-topic subscription cancellation guidance; does not answer when the next retry attempt occurs.",
+    "judge": "PASS",
+    "judge_reason": "The reply provides a specific, actionable answer that directly addresses the customer's question: payment failures will be retried up to 5 times over 5 days. While the formatting is garbled and includes some irrelevant content about subscription cancellation, the core answer is correct and resolves the customer's ticket."
+  },
+  {
+    "case_id": "C13",
+    "mode": "M3_2fa_fallback_step_omitted",
+    "question": "Billing query: Why does Google block sign-in attempts when accessing an account from a third-party service?",
+    "reply": "Ticket TKT-87896\n\nHi there,\n\nThanks for contacting support. Here is what we found for your question:\n\n**Answer based on article_05_google_third_party_signin.md (Week 4 Hybrid RAG System):**\n\n• You may be blocked from signing in to your Google Account with some services or programs when we can’t verify it’s really you.\n• You may be blocked from signing in to your Google Account if:\n• # Can't sign in from a third-party service\n\n*Cited from `article_05_google_third_party_signin.md` (article_05_google_third_party_signin.md_chunk_1) with 67.9% relevance confidence.*\n\nBest regards,\nSupport Team",
+    "human": "PASS",
+    "human_note": "Explains why sign-in is blocked: when Google cannot verify account ownership identity.",
+    "judge": "FAIL",
+    "judge_reason": "The reply fails to provide a complete answer to the customer's question. It acknowledges that Google blocks sign-in attempts but does not explain WHY (the specific reasons or causes), nor does it provide actionable steps to resolve the issue. The response appears truncated or incomplete, cutting off mid-sentence without delivering the substantive information needed to resolve the ticket."
+  }
+]

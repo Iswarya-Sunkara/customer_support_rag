@@ -1,0 +1,15 @@
+{
+  "judge": "v2",
+  "n_cases": 25,
+  "assertions": 4,
+  "judged_criteria": 1,
+  "agreement": 92.0,
+  "kappa": 0.84,
+  "confusion": {
+    "FAIL/FAIL": 12,
+    "FAIL/PASS": 1,
+    "PASS/PASS": 11,
+    "PASS/FAIL": 1
+  },
+  "agreement_held_out": 91.3
+}

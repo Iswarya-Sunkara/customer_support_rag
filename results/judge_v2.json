@@ -1,0 +1,133 @@
+{
+  "version": "v2",
+  "model": "claude-haiku-4-5",
+  "prompt_sha": "3eef7830116c9856",
+  "first_run_at": "2026-09-22T06:08:11+00:00",
+  "verdicts": {
+    "C01": {
+      "reason": "The reply does not answer the specific question asked. The customer asked when the next retry attempt is made after a day 1 failure, but the reply only states that Cloudflare retries up to 5 times over 5 days without providing the specific timing of the first retry attempt. The included references are about subscription cancellation issues, which are off-topic and do not address the customer's question.",
+      "verdict": "FAIL",
+      "reply_sha": "6e4c8c72113d27f3"
+    },
+    "C02": {
+      "reason": "The reply provides a specific, actionable answer that directly addresses the customer's question: payment failures will be retried up to 5 times over 5 days. While the formatting is garbled and includes some irrelevant content about subscription cancellation, the core answer is correct and resolves the customer's ticket.",
+      "verdict": "PASS",
+      "reply_sha": "bbb1570e322cbf1a"
+    },
+    "C03": {
+      "reason": "The reply provides a specific, correct, and actionable answer: Cloudflare retries up to 5 times over 5 days. This directly answers the customer's question about retry frequency and timeframe. The garbled text at the end and broken link are formatting issues that must be ignored per instructions.",
+      "verdict": "PASS",
+      "reply_sha": "9add522ce8705c45"
+    },
+    "C04": {
+      "reason": "The customer asked for the exact grace period duration in days before account suspension, but the reply only provides generic advice to update payment methods and links to external resources without stating any specific grace period timeframe. The reply fails to answer the specific numerical question asked.",
+      "verdict": "FAIL",
+      "reply_sha": "aa97aed548166218"
+    },
+    "C05": {
+      "reason": "The customer asked for the exact grace period in days before suspension, but the reply only provides generic instructions to update payment method or pay the invoice before 'the grace period ends' without specifying the actual duration. The reply does not answer the specific question asked.",
+      "verdict": "FAIL",
+      "reply_sha": "79557563633a41b5"
+    },
+    "C06": {
+      "reason": "The reply fails to answer the customer's specific question about whether error code 51 is a bank refusal or a system timeout. It only provides a generic category label ('Payment') without any explanation of the error code's nature or cause, leaving the customer's core question unresolved.",
+      "verdict": "FAIL",
+      "reply_sha": "1c1b07730375ec53"
+    },
+    "C07": {
+      "reason": "The reply does not address error code 51 specifically. It mentions error codes 430360 and 100 instead, and provides only generic advice about calling credit card providers without explaining what error 51 means or how to resolve it. The customer's specific question about error code 51 remains unanswered.",
+      "verdict": "FAIL",
+      "reply_sha": "8da810d29b068d93"
+    },
+    "C08": {
+      "reason": "The reply directly addresses error code 51 - Decline by providing the specific cause (insufficient funds) and an actionable solution (submit payment using a different credit card). Despite formatting issues with the table markup, the core answer to the customer's question is correct and actionable.",
+      "verdict": "PASS",
+      "reply_sha": "0bd1bd4e19fe5c61"
+    },
+    "C09": {
+      "reason": "The reply correctly identifies that error code 51 means 'Insufficient funds' and provides the actionable solution of submitting payment using a different credit card. Despite garbled table formatting and off-topic content fragments, the core answer to the customer's question is specific and correct.",
+      "verdict": "PASS",
+      "reply_sha": "d2f0f0704fde566b"
+    },
+    "C10": {
+      "reason": "The reply fails to provide a specific, actionable answer to the customer's question about fixing payment decline code 51. While it mentions 'Credit card declined' as a topic heading, it does not explain what code 51 means, why it occurs, or concrete steps to resolve it. The response contains garbled text, broken links, and redundant list items that obscure any useful information. The cited article appears to address general payment issues rather than the specific error code requested.",
+      "verdict": "FAIL",
+      "reply_sha": "df6a82d6cfadda7c"
+    },
+    "C11": {
+      "reason": "The reply directly answers the customer's question by explaining that using Google Voice for 2-Step Verification codes could lock the customer out of their account. It provides a specific, actionable consequence and a related solution (using an App Password). The answer is correct and addresses the core concern.",
+      "verdict": "PASS",
+      "reply_sha": "fbbc7343c1ec608c"
+    },
+    "C12": {
+      "reason": "The reply fails to address the customer's actual question about how long Google account recovery takes. While it cites a relevant article, the response is incomplete and fragmented, providing only partial snippets about security keys and enrollment without delivering the specific, actionable recovery timeline the customer needs. The reply does not contain a clear answer to the recovery duration.",
+      "verdict": "FAIL",
+      "reply_sha": "70d1e20a5d059fc1"
+    },
+    "C13": {
+      "reason": "The reply fails to provide a complete answer to the customer's question. It acknowledges that Google blocks sign-in attempts but does not explain WHY (the specific reasons or causes), nor does it provide actionable steps to resolve the issue. The response appears truncated or incomplete, cutting off mid-sentence without delivering the substantive information needed to resolve the ticket.",
+      "verdict": "FAIL",
+      "reply_sha": "001ce55e52ee9765"
+    },
+    "C14": {
+      "reason": "The reply directly answers the customer's question by explaining that using Google Voice for 2-Step Verification codes could lock them out of their account, and provides an actionable next step (using an App Password) if they encounter sign-in issues. The answer is specific, correct, and actionable.",
+      "verdict": "PASS",
+      "reply_sha": "0344528c538ffa3b"
+    },
+    "C15": {
+      "reason": "The customer asked specifically about Google account recovery time after losing a security key, but the reply provides only fragmented setup/enrollment instructions and incomplete article snippets without answering the actual question. The reply cuts off mid-sentence and never states how long recovery takes or provides a complete recovery process.",
+      "verdict": "FAIL",
+      "reply_sha": "d1ca7e5fae5ad59d"
+    },
+    "C16": {
+      "reason": "The reply fails to provide the meaning of error code 430357 or any actionable solution to fix it. It only states 'Category: Payment' which does not answer either part of the customer's question about what the error means or how to resolve it.",
+      "verdict": "FAIL",
+      "reply_sha": "cc55832114daf3cc"
+    },
+    "C17": {
+      "reason": "The reply fails to provide the specific cause or resolution for error code 430357. It offers only generic troubleshooting steps (clearing cache/cookies, trying a different browser) and references a section on 'most common error codes' without actually listing what 430357 means or how to resolve it, leaving the customer's specific question unanswered.",
+      "verdict": "FAIL",
+      "reply_sha": "73a7d9cd81f784c2"
+    },
+    "C18": {
+      "reason": "The reply fails to provide a specific answer to the customer's question about error code 14 - Card No. Error. While it offers generic advice about calling the credit card provider, it does not identify what error 14 specifically means or give actionable steps tailored to that particular error code, making it an incomplete and insufficiently specific answer.",
+      "verdict": "FAIL",
+      "reply_sha": "1cdebddbc807c564"
+    },
+    "C19": {
+      "reason": "The reply correctly identifies error code 14 as 'Invalid card number' and provides a specific, actionable solution: re-submit the credit card information in case of entry error, or use a different credit card. The garbled table formatting must be ignored per the instructions. The answer directly resolves the customer's question.",
+      "verdict": "PASS",
+      "reply_sha": "f460939551025407"
+    },
+    "C20": {
+      "reason": "The reply attempts to address error code 14 and provides relevant information (invalid card number and re-submission advice), but the response is severely garbled with broken table formatting, incomplete sentences, and irrelevant fragments that obscure the actual answer. While the core actionable advice (re-submit or use a different card) is present, the overwhelming formatting corruption and mixed/incomplete content makes it difficult for the customer to extract the correct solution. This fails the clarity and reliability standard required to resolve the ticket properly.",
+      "verdict": "FAIL",
+      "reply_sha": "d1853b178b42441d"
+    },
+    "C21": {
+      "reason": "The reply correctly states that the knowledge base lacks information to answer the specific question about SLA-guaranteed refund windows for annual plan chargebacks, rather than inventing an answer. The appended refund paragraph is boilerplate that must be ignored per the instructions.",
+      "verdict": "PASS",
+      "reply_sha": "9ef3226d4ecd4f4a"
+    },
+    "C22": {
+      "reason": "The reply correctly acknowledges that the knowledge base lacks information to answer the specific question about SLA guaranteed refund windows for annual plan chargebacks, rather than inventing an answer. The appended refund paragraph is boilerplate that should be ignored per instructions.",
+      "verdict": "PASS",
+      "reply_sha": "58016b19d31b1bd8"
+    },
+    "C23": {
+      "reason": "The reply correctly states that the knowledge base lacks information to answer the specific SLA question, which is honest rather than invented. The appended refund paragraph is boilerplate that must be ignored per instructions. The reply resolves the customer's question appropriately.",
+      "verdict": "PASS",
+      "reply_sha": "273d21807a1360fd"
+    },
+    "C24": {
+      "reason": "The reply correctly states that the knowledge base lacks information to answer the specific SLA question, which is honest and appropriate. The appended refund information is boilerplate that must be ignored per instructions. The core answer about the SLA is handled correctly by acknowledging the knowledge gap rather than inventing an answer.",
+      "verdict": "PASS",
+      "reply_sha": "0b7f5518970abe22"
+    },
+    "C25": {
+      "reason": "The reply correctly and honestly states that the knowledge base lacks information to answer the specific SLA question about chargeback refund windows, rather than inventing an answer. The refund paragraph is boilerplate context that must be ignored per instructions.",
+      "verdict": "PASS",
+      "reply_sha": "273e7316acbe6b00"
+    }
+  }
+}

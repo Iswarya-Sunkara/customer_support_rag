@@ -1,0 +1,1 @@
+Few-shot examples demonstrating that knowledge-base gap acknowledgments must be graded PASS despite boilerplate refund paragraphs and that answers providing the exact error-code resolution must not be failed for table formatting flaws will resolve disagreements on refund-SLA cases (C21-C24) and error 51 (C08), raising agreement from 68% to over 85%.

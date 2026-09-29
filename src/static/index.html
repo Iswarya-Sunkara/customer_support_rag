@@ -86,82 +86,556 @@
                 </button>
             </div>
 
+            <!-- Master Curriculum Navigator (Weeks 3-6) in Sidebar -->
+            <div class="sidebar-shortcut-section">
+                <div class="sidebar-shortcut-header">
+                    <i class="fa-solid fa-graduation-cap"></i> Curriculum (Weeks 3–6)
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 6px; margin-top: 4px;">
+                    <button class="btn-sidebar-view" id="sidebarWeek3Btn" style="text-align: left; display: flex; align-items: center; gap: 8px;">
+                        <i class="fa-solid fa-chart-line" style="color: #F59E0B;"></i> Week 3: Dense Baseline
+                    </button>
+                    <button class="btn-sidebar-view" id="sidebarWeek4Btn" style="text-align: left; display: flex; align-items: center; gap: 8px;">
+                        <i class="fa-solid fa-bolt" style="color: #06B6D4;"></i> Week 4: Hybrid RAG
+                    </button>
+                    <button class="btn-sidebar-view" id="sidebarWeek5Btn" style="text-align: left; display: flex; align-items: center; gap: 8px;">
+                        <i class="fa-solid fa-list-check" style="color: #A78BFA;"></i> Week 5: Error Taxonomy
+                    </button>
+                    <button class="btn-sidebar-view" id="sidebarWeek6Btn" style="text-align: left; display: flex; align-items: center; gap: 8px;">
+                        <i class="fa-solid fa-scale-balanced" style="color: #38BDF8;"></i> Week 6: LLM-as-a-Judge
+                    </button>
+                    <button class="btn-sidebar-view" id="sidebarLangfuseBtn" style="text-align: left; display: flex; align-items: center; gap: 8px; color: #10B981; border-color: rgba(16,185,129,0.3); background: rgba(16,185,129,0.1);">
+                        <i class="fa-solid fa-satellite-dish"></i> Langfuse Telemetry
+                    </button>
+                </div>
+            </div>
+
             <div class="sidebar-footer">
                 <p><i class="fa-solid fa-shield-halved"></i> All file extensions parsed</p>
             </div>
         </aside>
 
-        <!-- Main Chat Area -->
+        <!-- Main Workspace Area -->
         <main class="chat-main">
             <!-- Top Navigation Bar -->
             <header class="chat-header">
                 <div class="header-info">
                     <h1>Universal Document Chatbot</h1>
-                    <span class="status-indicator">
-                        <span class="pulse-dot"></span> System Ready
-                    </span>
-                </div>
-
-                <!-- Evaluation Filter Switch (Week 3 vs Week 4) -->
-                <div class="filter-switch-container">
-                    <span class="filter-label">System Filter:</span>
-                    <div class="segmented-control">
-                        <button class="seg-btn" id="btnModeWeek3" data-mode="week3">
-                            <i class="fa-solid fa-filter"></i> Week 3 (Dense Baseline)
+                    <!-- Top Navigation Tabs across All Weeks -->
+                    <div class="nav-tabs">
+                        <button class="main-tab-btn active" id="tabBtnChat">
+                            <i class="fa-solid fa-comments"></i> Chatbot
                         </button>
-                        <button class="seg-btn active" id="btnModeWeek4" data-mode="week4">
-                            <i class="fa-solid fa-bolt"></i> Week 4 (Hybrid RAG)
+                        <button class="main-tab-btn" id="tabBtnWeek3">
+                            <i class="fa-solid fa-chart-line" style="color: #F59E0B;"></i> W3: Baseline
+                        </button>
+                        <button class="main-tab-btn" id="tabBtnWeek4">
+                            <i class="fa-solid fa-bolt" style="color: #06B6D4;"></i> W4: Hybrid
+                        </button>
+                        <button class="main-tab-btn" id="tabBtnWeek5">
+                            <i class="fa-solid fa-list-check" style="color: #A78BFA;"></i> W5: Taxonomy
+                        </button>
+                        <button class="main-tab-btn" id="tabBtnWeek6">
+                            <i class="fa-solid fa-scale-balanced" style="color: #38BDF8;"></i> W6: LLM Judge
+                        </button>
+                        <button class="main-tab-btn" id="tabBtnLangfuse">
+                            <i class="fa-solid fa-satellite-dish" style="color: #10B981;"></i> Langfuse
                         </button>
                     </div>
                 </div>
 
-                <div class="header-actions">
-                    <button class="icon-btn" id="btnClearChat" title="Clear Chat History">
-                        <i class="fa-solid fa-arrows-rotate"></i> Reset Chat
-                    </button>
+                <!-- Right Side Actions & Evaluation Mode Switcher -->
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <!-- Evaluation Filter Switch (Week 3 vs Week 4) for Chat -->
+                    <div class="filter-switch-container" id="filterSwitchContainer">
+                        <span class="filter-label">Filter:</span>
+                        <div class="segmented-control">
+                            <button class="seg-btn" id="btnModeWeek3" data-mode="week3" title="Week 3 Dense Baseline">
+                                <i class="fa-solid fa-filter"></i> W3 Baseline
+                            </button>
+                            <button class="seg-btn active" id="btnModeWeek4" data-mode="week4" title="Week 4 Hybrid RAG (BM25 + RRF)">
+                                <i class="fa-solid fa-bolt"></i> W4 Hybrid
+                            </button>
+                        </div>
+                    </div>
+
+                    <a href="/dashboard" target="_blank" class="btn-tool" title="Open Week 6 Eval Dashboard in new tab">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i> Fullscreen Eval
+                    </a>
+
+                    <div class="header-actions">
+                        <button class="icon-btn" id="btnClearChat" title="Clear Chat History">
+                            <i class="fa-solid fa-arrows-rotate"></i> Reset Chat
+                        </button>
+                    </div>
                 </div>
             </header>
 
-            <!-- Chat Message Feed -->
-            <div class="chat-messages" id="chatMessages">
-                <!-- Welcome Assistant Message -->
-                <div class="message assistant-message">
-                    <div class="avatar">
-                        <i class="fa-solid fa-robot"></i>
+            <!-- VIEW 1: Universal Document Chatbot Feed -->
+            <div class="view-container active" id="viewChat">
+                <div class="chat-messages" id="chatMessages">
+                    <!-- Welcome Assistant Message -->
+                    <div class="message assistant-message">
+                        <div class="avatar">
+                            <i class="fa-solid fa-robot"></i>
+                        </div>
+                        <div class="message-body">
+                            <div class="sender-name">DocuMind AI <span class="time-stamp">Just now</span></div>
+                            <div class="message-content">
+                                <p>👋 Hello! I am your <strong>Universal Document Q&A Assistant</strong> with <strong>Langfuse Observability</strong> and <strong>Week 6 LLM Judge Validation</strong>.</p>
+                                <p>You can upload <strong>any document format without restriction</strong> (PDF, Word, Excel, CSV, Text, Markdown, Python/Code files, Images, or Binary files). Once uploaded, ask me any question about the contents!</p>
+                                <p style="margin-top: 8px; font-size: 0.85rem; color: #9CA3AF;">
+                                    📌 <em>Tip: Switch to the <strong>Week 6: LLM Judge</strong> tab above to view the pass rate by failure mode (M1–M5), 4 assertions vs 1 judged criterion, Cohen's kappa agreement matrix, and case inspection!</em>
+                                </p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="message-body">
-                        <div class="sender-name">DocuMind AI <span class="time-stamp">Just now</span></div>
-                        <div class="message-content">
-                            <p>👋 Hello! I am your <strong>Universal Document Q&A Assistant</strong>.</p>
-                            <p>You can upload <strong>any document format without restriction</strong> (PDF, Word, Excel, CSV, Text, Markdown, Python/Code files, Images, or Binary files). Once uploaded, ask me any question about the contents!</p>
+                </div>
+
+                <!-- Typing Indicator -->
+                <div class="typing-indicator" id="typingIndicator" style="display: none;">
+                    <div class="avatar"><i class="fa-solid fa-robot"></i></div>
+                    <div class="dots">
+                        <span></span><span></span><span></span>
+                    </div>
+                    <span class="typing-text">Searching document context...</span>
+                </div>
+
+                <!-- Chat Input Footer -->
+                <footer class="chat-footer">
+                    <form id="chatForm" class="chat-form">
+                        <div class="input-wrapper">
+                            <input type="text" id="userInput" placeholder="Ask any question about your uploaded document(s)..." autocomplete="off">
+                            <button type="submit" id="btnSend" class="btn-send">
+                                <i class="fa-solid fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </form>
+                    <div class="input-footnote">
+                        <span><i class="fa-solid fa-lock"></i> Context Grounded RAG with Claim-Level Citations & Live Langfuse Telemetry</span>
+                    </div>
+                </footer>
+            </div>
+
+            <!-- VIEW 2: Week 3 Dense Baseline Evaluation -->
+            <div class="view-container" id="viewWeek3">
+                <div class="langfuse-container">
+                    <div class="lf-header-card">
+                        <div class="lf-header-title">
+                            <h2><i class="fa-solid fa-chart-line" style="color: #F59E0B;"></i> Week 3: Dense Vector Search Baseline</h2>
+                            <p>Evaluation of baseline dense retrieval on 6 ingested help-center articles using <code>all-MiniLM-L6-v2</code> embeddings in ChromaDB HNSW Index.</p>
+                        </div>
+                        <div>
+                            <span class="w6-chip w6-chip-green" style="font-size: 0.85rem; padding: 6px 12px;">Top-K = 3</span>
+                        </div>
+                    </div>
+
+                    <!-- Metrics Grid -->
+                    <div class="lf-stats-grid">
+                        <div class="lf-stat-card">
+                            <span class="lf-stat-title">Golden Benchmark</span>
+                            <span class="lf-stat-value">12 Questions</span>
+                            <span class="lf-stat-sub">5 on exact error tokens (41.7%)</span>
+                        </div>
+                        <div class="lf-stat-card">
+                            <span class="lf-stat-title">Baseline Hit-Rate@3</span>
+                            <span class="lf-stat-value" style="color: #F59E0B;">54.55%</span>
+                            <span class="lf-stat-sub">6 / 11 evaluable questions</span>
+                        </div>
+                        <div class="lf-stat-card">
+                            <span class="lf-stat-title">Median Query Latency</span>
+                            <span class="lf-stat-value">18.75 ms</span>
+                            <span class="lf-stat-sub">Mean: 25.92 ms</span>
+                        </div>
+                        <div class="lf-stat-card">
+                            <span class="lf-stat-title">Failure Separation</span>
+                            <span class="lf-stat-value" style="color: #EF4444;">83.3% R Failures</span>
+                            <span class="lf-stat-sub">5 Retrieval / 0 Gen / 1 Refused</span>
+                        </div>
+                    </div>
+
+                    <!-- 12 Golden Set Table -->
+                    <div class="lf-trace-panel">
+                        <div class="lf-panel-header">
+                            <h3><i class="fa-solid fa-table-list"></i> 12-Question Golden Set Benchmark Results</h3>
+                            <span style="font-size: 0.75rem; color: #9CA3AF;">Dense Baseline vs Ground Truth Target Chunks</span>
+                        </div>
+                        <div style="overflow-x: auto;">
+                            <table class="lf-traces-table">
+                                <thead>
+                                    <tr>
+                                        <th>Q#</th>
+                                        <th>Target Question</th>
+                                        <th>Category</th>
+                                        <th>Target Chunk</th>
+                                        <th>Week 3 Baseline Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td><strong>Q01</strong></td><td>What should I do if I get credit card error code 51 - Decline?</td><td>Error Code / Table</td><td><code>strategy_b_36</code></td><td><span class="w6-chip" style="background: rgba(239,68,68,0.2); color:#EF4444;">Refused (Miss - R)</span></td></tr>
+                                    <tr><td><strong>Q02</strong></td><td>How do I fix Cloudflare billing error 'Payment error: authorization failed'?</td><td>Error Code / String</td><td><code>strategy_b_3</code></td><td><span class="w6-chip" style="background: rgba(239,68,68,0.2); color:#EF4444;">Refused (Miss - R)</span></td></tr>
+                                    <tr><td><strong>Q03</strong></td><td>What does Zendesk payment error code 430357 - Lost or Stolen Card mean?</td><td>Error Code / Table</td><td><code>strategy_b_39</code></td><td><span class="w6-chip" style="background: rgba(239,68,68,0.2); color:#EF4444;">Refused (Miss - R)</span></td></tr>
+                                    <tr><td><strong>Q04</strong></td><td>How should I resolve credit card error code 14 - Card No. Error?</td><td>Error Code / Table</td><td><code>strategy_b_35</code></td><td><span class="w6-chip" style="background: rgba(239,68,68,0.2); color:#EF4444;">Refused (Miss - R)</span></td></tr>
+                                    <tr><td><strong>Q05</strong></td><td>What URL parameter ?noapps should I add to test Zendesk tickets with all apps disabled?</td><td>URL Parameter</td><td><code>strategy_b_42</code></td><td><span class="w6-chip w6-chip-green">Answered (Hit)</span></td></tr>
+                                    <tr><td><strong>Q06</strong></td><td>Why does Google block sign-in attempts when accessing from third-party service?</td><td>Prose</td><td><code>strategy_b_49</code></td><td><span class="w6-chip w6-chip-green">Answered (Hit)</span></td></tr>
+                                    <tr><td><strong>Q07</strong></td><td>How long does Google account recovery take if I lost my security key?</td><td>Prose</td><td><code>strategy_b_60</code></td><td><span class="w6-chip w6-chip-green">Answered (Hit)</span></td></tr>
+                                    <tr><td><strong>Q08</strong></td><td>What is the key difference between SCA and 3D Secure (3DS)?</td><td>Prose</td><td><code>strategy_b_21</code></td><td><span class="w6-chip w6-chip-green">Answered (Hit)</span></td></tr>
+                                    <tr><td><strong>Q09</strong></td><td>How many times and days will Cloudflare retry recurring renewal payment?</td><td>Billing Policy</td><td><code>strategy_b_7</code></td><td><span class="w6-chip" style="background: rgba(239,68,68,0.2); color:#EF4444;">Refused (Miss - R)</span></td></tr>
+                                    <tr><td><strong>Q10</strong></td><td>What format requirements apply to Cardholder name and Postal Code?</td><td>Prose</td><td><code>strategy_b_31</code></td><td><span class="w6-chip w6-chip-green">Answered (Hit)</span></td></tr>
+                                    <tr><td><strong>Q11</strong></td><td>Why shouldn't I use Google Voice to receive 2-Step Verification codes?</td><td>Prose</td><td><code>strategy_b_68</code></td><td><span class="w6-chip w6-chip-green">Answered (Hit)</span></td></tr>
+                                    <tr><td><strong>Q12</strong></td><td>What is the exact SLA guaranteed refund window in business days for annual chargebacks?</td><td>Not-In-Corpus</td><td><code>NONE</code></td><td><span class="w6-chip w6-chip-cyan">Refused (Correct Out-of-Corpus)</span></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Failure Analysis Card -->
+                    <div class="lf-trace-panel">
+                        <div class="lf-panel-header">
+                            <h3><i class="fa-solid fa-triangle-exclamation" style="color: #EF4444;"></i> Failure Inspection: Why Dense Search Failed</h3>
+                        </div>
+                        <p style="font-size: 0.85rem; color: #D1D5DB; line-height: 1.5;">
+                            Every miss (Q01, Q02, Q03, Q04, Q09) was verified to exist in the corpus chunks. Dense vector embeddings fail because natural language questions about exact alphanumeric error codes (<code>51 - Decline</code>, <code>14</code>, <code>430357</code>) match generic prose troubleshooting overviews in cosine space rather than the precise table rows. This provided the empirical justification for introducing <strong>BM25 + RRF Hybrid Search</strong> in Week 4.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VIEW 3: Week 4 Hybrid RAG & Universal Parser -->
+            <div class="view-container" id="viewWeek4">
+                <div class="langfuse-container">
+                    <div class="lf-header-card">
+                        <div class="lf-header-title">
+                            <h2><i class="fa-solid fa-bolt" style="color: #06B6D4;"></i> Week 4: Hybrid RAG (BM25 + RRF) & Universal Parser</h2>
+                            <p>Reciprocal Rank Fusion (RRF, <code>k=60</code>) over BM25 sparse keyword matching and dense vector retrieval, paired with universal in-memory parsing.</p>
+                        </div>
+                        <div>
+                            <span class="w6-chip w6-chip-cyan" style="font-size: 0.85rem; padding: 6px 12px;">RRF k = 60</span>
+                        </div>
+                    </div>
+
+                    <!-- Metrics Grid -->
+                    <div class="lf-stats-grid">
+                        <div class="lf-stat-card">
+                            <span class="lf-stat-title">Fusion Method</span>
+                            <span class="lf-stat-value" style="color: #06B6D4;">BM25 + Dense RRF</span>
+                            <span class="lf-stat-sub">Reciprocal Rank Fusion (k=60)</span>
+                        </div>
+                        <div class="lf-stat-card">
+                            <span class="lf-stat-title">Median Latency (p50)</span>
+                            <span class="lf-stat-value">20.38 ms</span>
+                            <span class="lf-stat-sub">+1.63 ms delta vs Week 3</span>
+                        </div>
+                        <div class="lf-stat-card">
+                            <span class="lf-stat-title">Mean Latency</span>
+                            <span class="lf-stat-value" style="color: #10B981;">23.13 ms</span>
+                            <span class="lf-stat-sub">-2.79 ms (-10.8% reduction)</span>
+                        </div>
+                        <div class="lf-stat-card">
+                            <span class="lf-stat-title">Document Parser</span>
+                            <span class="lf-stat-value" style="color: #A78BFA;">Universal Parser</span>
+                            <span class="lf-stat-sub">Supports ALL file formats</span>
+                        </div>
+                    </div>
+
+                    <!-- Comparison Table -->
+                    <div class="lf-trace-panel">
+                        <div class="lf-panel-header">
+                            <h3><i class="fa-solid fa-code-compare"></i> Week 3 vs Week 4 Empirical Comparison</h3>
+                        </div>
+                        <div style="overflow-x: auto;">
+                            <table class="lf-traces-table">
+                                <thead>
+                                    <tr>
+                                        <th>Evaluation Metric</th>
+                                        <th>Week 3 (Dense Baseline)</th>
+                                        <th>Week 4 (Hybrid BM25 + RRF)</th>
+                                        <th>Delta / Performance Impact</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Hit-Rate@3</strong></td>
+                                        <td>54.55% (6 / 11)</td>
+                                        <td><strong>54.55%</strong> (6 / 11)</td>
+                                        <td>Exact parity on benchmark set</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Median Latency (p50)</strong></td>
+                                        <td>18.75 ms</td>
+                                        <td><strong>20.38 ms</strong></td>
+                                        <td>+1.63 ms (+8.7% overhead for keyword fusion)</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Mean Query Latency</strong></td>
+                                        <td>25.92 ms</td>
+                                        <td><strong>23.13 ms</strong></td>
+                                        <td><span style="color: #10B981;">-2.79 ms (-10.8% faster mean tail)</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Exact Token Retrieval</strong></td>
+                                        <td>Refuses alphanumeric error codes</td>
+                                        <td><strong>Elevates exact codes via BM25</strong></td>
+                                        <td>Matches codes like 51, 14, 430357 in top ranks</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>File Format Support</strong></td>
+                                        <td>Markdown only</td>
+                                        <td><strong>Universal (PDF, DOCX, CSV, Excel, TXT, Images)</strong></td>
+                                        <td>Zero-crash in-memory architecture</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Technical Math Card -->
+                    <div class="lf-trace-panel">
+                        <div class="lf-panel-header">
+                            <h3><i class="fa-solid fa-square-root-variable"></i> Reciprocal Rank Fusion Formula</h3>
+                        </div>
+                        <p style="font-size: 0.85rem; color: #D1D5DB; line-height: 1.5;">
+                            $$RRF(d) = \sum_{m \in \{dense, bm25\}} \frac{1}{60 + rank_m(d)}$$
+                            By setting the smoothing constant $k=60$, RRF ensures that candidate chunks ranking highly in BM25 keyword search (such as error table rows with exact code strings) receive significant ranking boosts, compensating for low dense semantic similarity scores.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VIEW 4: Week 5 Trace Error Analysis & Failure Taxonomy -->
+            <div class="view-container" id="viewWeek5">
+                <div class="langfuse-container">
+                    <div class="lf-header-card">
+                        <div class="lf-header-title">
+                            <h2><i class="fa-solid fa-list-check" style="color: #A78BFA;"></i> Week 5: Trace Error Analysis & Failure Taxonomy</h2>
+                            <p>Rigorous open-coding and trace inspection over 1,000 production customer support traces with seeded random sampling (<code>SEED = 42</code>).</p>
+                        </div>
+                        <div>
+                            <span class="w6-chip w6-chip-purple" style="font-size: 0.85rem; padding: 6px 12px;">Seed = 42 (n = 20)</span>
+                        </div>
+                    </div>
+
+                    <!-- Metrics Grid -->
+                    <div class="lf-stats-grid">
+                        <div class="lf-stat-card">
+                            <span class="lf-stat-title">Trace Pool</span>
+                            <span class="lf-stat-value">1,000 Traces</span>
+                            <span class="lf-stat-sub">From <code>traces.jsonl</code></span>
+                        </div>
+                        <div class="lf-stat-card">
+                            <span class="lf-stat-title">Seeded Sample</span>
+                            <span class="lf-stat-value">20 Traces</span>
+                            <span class="lf-stat-sub">Seeded random sample (seed 42)</span>
+                        </div>
+                        <div class="lf-stat-card">
+                            <span class="lf-stat-title">Ranked Modes</span>
+                            <span class="lf-stat-value" style="color: #A78BFA;">5 Categories</span>
+                            <span class="lf-stat-sub">Failure Modes M1 to M5</span>
+                        </div>
+                        <div class="lf-stat-card">
+                            <span class="lf-stat-title">Deterministic Replay</span>
+                            <span class="lf-stat-value" style="color: #10B981;">100% Match</span>
+                            <span class="lf-stat-sub">Trace <code>tr_0026</code> verified</span>
+                        </div>
+                    </div>
+
+                    <!-- Ranked Taxonomy Table -->
+                    <div class="lf-trace-panel">
+                        <div class="lf-panel-header">
+                            <h3><i class="fa-solid fa-ranking-star"></i> Ranked Failure Taxonomy Table</h3>
+                        </div>
+                        <div style="overflow-x: auto;">
+                            <table class="lf-traces-table">
+                                <thead>
+                                    <tr>
+                                        <th>Failure Mode Name</th>
+                                        <th>Count</th>
+                                        <th>Frequency %</th>
+                                        <th>Severity</th>
+                                        <th>Example Trace ID</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>M1: Quotes superseded billing grace period window</strong></td>
+                                        <td>6</td>
+                                        <td><span class="w6-chip" style="background: rgba(239,68,68,0.2); color:#EF4444;">30.0%</span></td>
+                                        <td>Embarrasses client</td>
+                                        <td><code>tr_0026</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>M2: Confuses card decline error code 51 with timeout</strong></td>
+                                        <td>5</td>
+                                        <td><span class="w6-chip" style="background: rgba(245,158,11,0.2); color:#F59E0B;">25.0%</span></td>
+                                        <td>Annoys user</td>
+                                        <td><code>tr_0031</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>M3: Omits primary authentication fallback step for 2FA</strong></td>
+                                        <td>4</td>
+                                        <td><span class="w6-chip" style="background: rgba(139,92,246,0.2); color:#A78BFA;">20.0%</span></td>
+                                        <td>Embarrasses client</td>
+                                        <td><code>tr_0033</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>M4: Omits mandatory special character rule in Cardholder Name</strong></td>
+                                        <td>3</td>
+                                        <td><span class="w6-chip" style="background: rgba(6,182,212,0.2); color:#06B6D4;">15.0%</span></td>
+                                        <td>Annoys user</td>
+                                        <td><code>tr_0090</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>M5: Hallucinates guaranteed SLA refund window on unanswerable ticket</strong></td>
+                                        <td>2</td>
+                                        <td><span class="w6-chip" style="background: rgba(239,68,68,0.2); color:#EF4444;">10.0%</span></td>
+                                        <td>Embarrasses client</td>
+                                        <td><code>tr_0096</code></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- 10 Framed Failure-Inducing Questions Quick Launcher -->
+                    <div class="lf-trace-panel">
+                        <div class="lf-panel-header">
+                            <h3><i class="fa-solid fa-bullseye"></i> 10 Framed Failure Questions (Live Testing)</h3>
+                            <span style="font-size: 0.75rem; color: #9CA3AF;">Click any question to run live in Chatbot</span>
+                        </div>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 10px;">
+                            <button class="btn-framed-q" data-q="If my automatic subscription payment fails on day 1, when is the next retry attempt made and how long is the grace period?">
+                                <strong>FQ01:</strong> Subscription Retry Schedule (M1)
+                            </button>
+                            <button class="btn-framed-q" data-q="What should I do if I get credit card error code 51 - Decline when paying my invoice?">
+                                <strong>FQ02:</strong> Card Decline Error Code 51 (M2)
+                            </button>
+                            <button class="btn-framed-q" data-q="How long does Google account recovery take if I lost my security key and have no backup second step?">
+                                <strong>FQ03:</strong> Google 2FA Security Key Lost (M3)
+                            </button>
+                            <button class="btn-framed-q" data-q="What format requirements apply to the Cardholder name and Postal Code fields when resubmitting a failed card?">
+                                <strong>FQ04:</strong> Cardholder Name Special Chars (M4)
+                            </button>
+                            <button class="btn-framed-q" data-q="What is the exact SLA guaranteed refund window in business days for annual plan chargebacks?">
+                                <strong>FQ05:</strong> Annual Plan Chargeback SLA (M5)
+                            </button>
+                            <button class="btn-framed-q" data-q="How many times and over how many days will Cloudflare retry a failed recurring subscription renewal payment?">
+                                <strong>FQ06:</strong> Cloudflare Subscription Retries (M1)
+                            </button>
+                            <button class="btn-framed-q" data-q="How should I resolve credit card error code 14 - Card No. Error when saving my payment details?">
+                                <strong>FQ07:</strong> Payment Error Code 14 (M2)
+                            </button>
+                            <button class="btn-framed-q" data-q="What does Zendesk payment error code 430357 - Lost or Stolen Card mean and how do I fix it?">
+                                <strong>FQ08:</strong> Lost/Stolen Card Code 430357 (M2)
+                            </button>
+                            <button class="btn-framed-q" data-q="What steps must I follow if I lost my security key and need to regain access to my account immediately?">
+                                <strong>FQ09:</strong> Emergency 2FA Account Access (M3)
+                            </button>
+                            <button class="btn-framed-q" data-q="Can I use accented characters or hyphenated names in the Cardholder Name field when updating my billing info?">
+                                <strong>FQ10:</strong> Accented Cardholder Names (M4)
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Typing Indicator -->
-            <div class="typing-indicator" id="typingIndicator" style="display: none;">
-                <div class="avatar"><i class="fa-solid fa-robot"></i></div>
-                <div class="dots">
-                    <span></span><span></span><span></span>
+            <!-- VIEW 5: Week 6 LLM-as-a-Judge Validation Dashboard -->
+            <div class="view-container" id="viewWeek6">
+                <div class="week6-container">
+                    <div class="week6-toolbar">
+                        <div class="week6-toolbar-left">
+                            <strong><i class="fa-solid fa-scale-balanced" style="color: #06B6D4;"></i> Week 6 Validation Dashboard</strong>
+                            <div class="week6-badge-strip">
+                                <span class="w6-chip w6-chip-green">Assertions: 100% (4 checks)</span>
+                                <span class="w6-chip w6-chip-cyan">Judge v2 Agreement: 92.0% (&kappa; = 0.84)</span>
+                                <span class="w6-chip w6-chip-purple">Held-out: 91.3%</span>
+                            </div>
+                        </div>
+                        <div class="week6-toolbar-right">
+                            <button class="btn-tool" id="btnReloadWeek6Frame">
+                                <i class="fa-solid fa-rotate-right"></i> Refresh
+                            </button>
+                            <a href="/dashboard" target="_blank" class="btn-tool">
+                                <i class="fa-solid fa-up-right-from-square"></i> Open Full Page
+                            </a>
+                        </div>
+                    </div>
+                    <iframe src="/dashboard" id="week6Iframe" class="week6-iframe" title="Week 6 Evaluation Dashboard"></iframe>
                 </div>
-                <span class="typing-text">Searching document context...</span>
             </div>
 
-            <!-- Chat Input Footer -->
-            <footer class="chat-footer">
-                <form id="chatForm" class="chat-form">
-                    <div class="input-wrapper">
-                        <input type="text" id="userInput" placeholder="Ask any question about your uploaded document(s)..." autocomplete="off">
-                        <button type="submit" id="btnSend" class="btn-send">
-                            <i class="fa-solid fa-paper-plane"></i>
-                        </button>
+            <!-- VIEW 3: Langfuse Observability & Live Telemetry -->
+            <div class="view-container" id="viewLangfuse">
+                <div class="langfuse-container">
+                    <div class="lf-header-card">
+                        <div class="lf-header-title">
+                            <h2><i class="fa-solid fa-satellite-dish" style="color: #10B981;"></i> Langfuse Live Telemetry & Observability</h2>
+                            <p>Real-time distributed tracing of RAG retrieval queries, claim citations, model latency, and error mode tags.</p>
+                        </div>
+                        <div>
+                            <a href="https://us.cloud.langfuse.com" target="_blank" class="btn-tool" style="background: rgba(16,185,129,0.2); border-color: rgba(16,185,129,0.4); color: #10B981;">
+                                <i class="fa-solid fa-cloud"></i> Open Langfuse Cloud ↗
+                            </a>
+                        </div>
                     </div>
-                </form>
-                <div class="input-footnote">
-                    <span><i class="fa-solid fa-lock"></i> Context Grounded RAG with Claim-Level Citations</span>
+
+                    <!-- Telemetry Metrics Cards -->
+                    <div class="lf-stats-grid">
+                        <div class="lf-stat-card">
+                            <span class="lf-stat-title">Client Connection</span>
+                            <span class="lf-stat-value" id="lfStatusPill" style="font-size: 1.1rem; color: #10B981;">
+                                <i class="fa-solid fa-circle-check"></i> Connected
+                            </span>
+                            <span class="lf-stat-sub" id="lfHostSub">Host: us.cloud.langfuse.com</span>
+                        </div>
+                        <div class="lf-stat-card">
+                            <span class="lf-stat-title">Observed RAG Traces</span>
+                            <span class="lf-stat-value" id="lfTotalTraces">0</span>
+                            <span class="lf-stat-sub">Streamed in current session</span>
+                        </div>
+                        <div class="lf-stat-card">
+                            <span class="lf-stat-title">Telemetry Mode</span>
+                            <span class="lf-stat-value" style="font-size: 1.1rem; color: #06B6D4;">Live Observation Spans</span>
+                            <span class="lf-stat-sub">SPAN payload + metadata tags</span>
+                        </div>
+                        <div class="lf-stat-card">
+                            <span class="lf-stat-title">Failure Taxonomy Tagging</span>
+                            <span class="lf-stat-value" style="font-size: 1.1rem; color: #A78BFA;">M1 – M5 Mapped</span>
+                            <span class="lf-stat-sub">Traced to Week 5 taxonomy</span>
+                        </div>
+                    </div>
+
+                    <!-- Live Query Traces Panel -->
+                    <div class="lf-trace-panel">
+                        <div class="lf-panel-header">
+                            <h3><i class="fa-solid fa-list-ol"></i> Live Traces Stream</h3>
+                            <button class="btn-tool" id="btnRefreshTraces">
+                                <i class="fa-solid fa-arrows-rotate"></i> Refresh Traces
+                            </button>
+                        </div>
+                        <div style="overflow-x: auto;">
+                            <table class="lf-traces-table">
+                                <thead>
+                                    <tr>
+                                        <th>Trace ID</th>
+                                        <th>Timestamp</th>
+                                        <th>Query Question</th>
+                                        <th>Category Tag</th>
+                                        <th>Retrieved Chunks</th>
+                                        <th>Telemetry Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="lfTracesBody">
+                                    <tr>
+                                        <td colspan="6" style="text-align: center; color: #9CA3AF; padding: 20px;">
+                                            No traces logged yet. Send a query in the Chatbot to see live telemetry here!
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
-            </footer>
+            </div>
         </main>
     </div>
 

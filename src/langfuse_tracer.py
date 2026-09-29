@@ -33,6 +33,10 @@ class LangfuseTraceLogger:
         self.secret_key = os.getenv("LANGFUSE_SECRET_KEY", "").strip()
         self.host = os.getenv("LANGFUSE_BASE_URL", os.getenv("LANGFUSE_HOST", "https://us.cloud.langfuse.com")).strip()
         
+        self.recent_traces: List[Dict[str, Any]] = []
+        self.traces_file = PROJECT_DIR / "traces_live.jsonl"
+        self._load_cached_traces()
+
         if LANGFUSE_AVAILABLE and self.public_key and self.secret_key:
             try:
                 self.client = Langfuse(
@@ -51,7 +55,34 @@ class LangfuseTraceLogger:
             self.enabled = False
             print(f"[Langfuse] SDK available: {LANGFUSE_AVAILABLE}, Public key present: {bool(self.public_key)}, Secret key present: {bool(self.secret_key)}")
 
+    def _load_cached_traces(self):
+        """Loads locally stored live traces if present."""
+        if self.traces_file.exists():
+            import json
+            try:
+                with open(self.traces_file, "r", encoding="utf-8") as f:
+                    for line in f:
+                        line = line.strip()
+                        if line:
+                            self.recent_traces.append(json.loads(line))
+            except Exception:
+                pass
 
+    def get_status(self) -> Dict[str, Any]:
+        """Returns the current Langfuse configuration and telemetry status."""
+        return {
+            "enabled": self.enabled,
+            "sdk_available": LANGFUSE_AVAILABLE,
+            "has_public_key": bool(self.public_key),
+            "has_secret_key": bool(self.secret_key),
+            "host": self.host,
+            "cloud_url": self.host,
+            "total_live_traces": len(self.recent_traces)
+        }
+
+    def get_recent_traces(self, limit: int = 50) -> List[Dict[str, Any]]:
+        """Returns the most recent RAG query traces."""
+        return list(reversed(self.recent_traces[-limit:]))
 
     def log_rag_trace(
         self,
@@ -64,10 +95,33 @@ class LangfuseTraceLogger:
         status: str = "success"
     ):
         """
-        Logs a single RAG trace execution to Langfuse dashboard.
+        Logs a single RAG trace execution to Langfuse dashboard and locally.
         """
+        import datetime
+        import json
+        
+        record = {
+            "trace_id": trace_id,
+            "timestamp": datetime.datetime.now(datetime.timezone.utc).isoformat(),
+            "question": question,
+            "answer": answer,
+            "status": status,
+            "category_tag": category_tag,
+            "model_params": model_params,
+            "retrieved_chunks": retrieved_chunks,
+            "cloud_synced": self.enabled
+        }
+        self.recent_traces.append(record)
+        
+        # Save to local traces_live.jsonl
+        try:
+            with open(self.traces_file, "a", encoding="utf-8") as f:
+                f.write(json.dumps(record, ensure_ascii=False) + "\n")
+        except Exception:
+            pass
+
         if not self.enabled:
-            print(f"[Langfuse Offline] Trace `{trace_id}` logged locally.")
+            print(f"[Langfuse Telemetry] Recorded trace `{trace_id}` locally (Cloud sync waiting for API keys).")
             return
             
         try:
@@ -100,4 +154,5 @@ if __name__ == "__main__":
         model_params={"model": "all-MiniLM-L6-v2", "mode": "week4_hybrid"},
         category_tag="billing_grace"
     )
+
 

@@ -22,6 +22,7 @@ app = FastAPI(
 )
 
 STATIC_DIR = PROJECT_DIR / "src" / "static"
+EVAL_DIR = PROJECT_DIR / "eval"
 
 # Mount static files
 app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
@@ -54,6 +55,54 @@ async def serve_index():
     if not index_file.exists():
         raise HTTPException(status_code=404, detail="Frontend index.html not found.")
     return HTMLResponse(content=index_file.read_text(encoding="utf-8"))
+
+@app.get("/dashboard", response_class=HTMLResponse)
+@app.get("/eval", response_class=HTMLResponse)
+async def serve_dashboard():
+    """Serves the complete interactive Week 6 LLM Judge Evaluation Dashboard."""
+    dashboard_file = EVAL_DIR / "dashboard.html"
+    if not dashboard_file.exists():
+        # Auto-generate if missing
+        try:
+            import subprocess
+            subprocess.run([sys.executable, str(EVAL_DIR / "generate_dashboard.py")], check=True)
+        except Exception:
+            raise HTTPException(status_code=404, detail="Eval dashboard.html could not be loaded or generated.")
+    return HTMLResponse(content=dashboard_file.read_text(encoding="utf-8"))
+
+@app.get("/api/eval/summary")
+async def get_eval_summary():
+    """Returns summary stats for Week 6 LLM Judge validation."""
+    import json
+    res_dir = PROJECT_DIR / "results"
+    try:
+        s1 = json.loads((res_dir / "summary_v1.json").read_text(encoding="utf-8"))
+        s2 = json.loads((res_dir / "summary_v2.json").read_text(encoding="utf-8"))
+        labels = json.loads((PROJECT_DIR / "labels_25.json").read_text(encoding="utf-8"))
+        return JSONResponse(content={
+            "status": "success",
+            "summary_v1": s1,
+            "summary_v2": s2,
+            "total_cases": len(labels.get("labels", {})),
+            "assertions": ["ticket_id_echoed", "escalation_tag_matches_tier", "refund_amount_present_numeric", "no_refund_outside_30_days"],
+            "judged_criteria": ["resolves_ticket"]
+        })
+    except Exception as e:
+        return JSONResponse(status_code=500, content={"error": str(e)})
+
+@app.get("/api/langfuse/status")
+async def get_langfuse_status():
+    """Returns live Langfuse telemetry status."""
+    if hasattr(rag_engine, "langfuse_logger") and rag_engine.langfuse_logger:
+        return JSONResponse(content=rag_engine.langfuse_logger.get_status())
+    return JSONResponse(content={"enabled": False, "sdk_available": False, "total_live_traces": 0})
+
+@app.get("/api/langfuse/traces")
+async def get_langfuse_traces(limit: int = 50):
+    """Returns recently recorded live traces for telemetry inspection."""
+    if hasattr(rag_engine, "langfuse_logger") and rag_engine.langfuse_logger:
+        return JSONResponse(content={"traces": rag_engine.langfuse_logger.get_recent_traces(limit)})
+    return JSONResponse(content={"traces": []})
 
 @app.get("/api/golden-set")
 async def get_golden_set():

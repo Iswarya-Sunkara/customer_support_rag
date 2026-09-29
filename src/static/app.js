@@ -331,7 +331,169 @@ document.addEventListener('DOMContentLoaded', () => {
             .replace(/\n/g, '<br/>');
     }
 
+    // --- Tab Navigation & View Switcher (Weeks 3-6) ---
+    const tabBtnChat = document.getElementById('tabBtnChat');
+    const tabBtnWeek3 = document.getElementById('tabBtnWeek3');
+    const tabBtnWeek4 = document.getElementById('tabBtnWeek4');
+    const tabBtnWeek5 = document.getElementById('tabBtnWeek5');
+    const tabBtnWeek6 = document.getElementById('tabBtnWeek6');
+    const tabBtnLangfuse = document.getElementById('tabBtnLangfuse');
+
+    const viewChat = document.getElementById('viewChat');
+    const viewWeek3 = document.getElementById('viewWeek3');
+    const viewWeek4 = document.getElementById('viewWeek4');
+    const viewWeek5 = document.getElementById('viewWeek5');
+    const viewWeek6 = document.getElementById('viewWeek6');
+    const viewLangfuse = document.getElementById('viewLangfuse');
+
+    const sidebarWeek3Btn = document.getElementById('sidebarWeek3Btn');
+    const sidebarWeek4Btn = document.getElementById('sidebarWeek4Btn');
+    const sidebarWeek5Btn = document.getElementById('sidebarWeek5Btn');
+    const sidebarWeek6Btn = document.getElementById('sidebarWeek6Btn');
+    const sidebarLangfuseBtn = document.getElementById('sidebarLangfuseBtn');
+    const btnReloadWeek6Frame = document.getElementById('btnReloadWeek6Frame');
+    const week6Iframe = document.getElementById('week6Iframe');
+
+    const filterSwitchContainer = document.getElementById('filterSwitchContainer');
+
+    const allTabBtns = [tabBtnChat, tabBtnWeek3, tabBtnWeek4, tabBtnWeek5, tabBtnWeek6, tabBtnLangfuse].filter(Boolean);
+    const allViews = [viewChat, viewWeek3, viewWeek4, viewWeek5, viewWeek6, viewLangfuse].filter(Boolean);
+
+    function switchView(target) {
+        allTabBtns.forEach(btn => btn.classList.remove('active'));
+        allViews.forEach(v => v.classList.remove('active'));
+
+        if (filterSwitchContainer) {
+            filterSwitchContainer.style.display = (target === 'chat') ? 'flex' : 'none';
+        }
+
+        if (target === 'chat') {
+            if (tabBtnChat) tabBtnChat.classList.add('active');
+            if (viewChat) viewChat.classList.add('active');
+        } else if (target === 'week3') {
+            if (tabBtnWeek3) tabBtnWeek3.classList.add('active');
+            if (viewWeek3) viewWeek3.classList.add('active');
+        } else if (target === 'week4') {
+            if (tabBtnWeek4) tabBtnWeek4.classList.add('active');
+            if (viewWeek4) viewWeek4.classList.add('active');
+        } else if (target === 'week5') {
+            if (tabBtnWeek5) tabBtnWeek5.classList.add('active');
+            if (viewWeek5) viewWeek5.classList.add('active');
+        } else if (target === 'week6') {
+            if (tabBtnWeek6) tabBtnWeek6.classList.add('active');
+            if (viewWeek6) viewWeek6.classList.add('active');
+        } else if (target === 'langfuse') {
+            if (tabBtnLangfuse) tabBtnLangfuse.classList.add('active');
+            if (viewLangfuse) viewLangfuse.classList.add('active');
+            fetchLangfuseTelemetry();
+        }
+    }
+
+    if (tabBtnChat) tabBtnChat.addEventListener('click', () => switchView('chat'));
+    if (tabBtnWeek3) tabBtnWeek3.addEventListener('click', () => switchView('week3'));
+    if (tabBtnWeek4) tabBtnWeek4.addEventListener('click', () => switchView('week4'));
+    if (tabBtnWeek5) tabBtnWeek5.addEventListener('click', () => switchView('week5'));
+    if (tabBtnWeek6) tabBtnWeek6.addEventListener('click', () => switchView('week6'));
+    if (tabBtnLangfuse) tabBtnLangfuse.addEventListener('click', () => switchView('langfuse'));
+
+    if (sidebarWeek3Btn) sidebarWeek3Btn.addEventListener('click', () => switchView('week3'));
+    if (sidebarWeek4Btn) sidebarWeek4Btn.addEventListener('click', () => switchView('week4'));
+    if (sidebarWeek5Btn) sidebarWeek5Btn.addEventListener('click', () => switchView('week5'));
+    if (sidebarWeek6Btn) sidebarWeek6Btn.addEventListener('click', () => switchView('week6'));
+    if (sidebarLangfuseBtn) sidebarLangfuseBtn.addEventListener('click', () => switchView('langfuse'));
+
+    // Framed Questions Launchers in Week 5 view
+    document.querySelectorAll('.btn-framed-q').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const q = btn.getAttribute('data-q');
+            if (q) {
+                switchView('chat');
+                userInput.value = q;
+                chatForm.dispatchEvent(new Event('submit'));
+            }
+        });
+    });
+
+    if (btnReloadWeek6Frame) {
+        btnReloadWeek6Frame.addEventListener('click', () => {
+            if (week6Iframe) {
+                week6Iframe.src = '/dashboard?t=' + Date.now();
+            }
+        });
+    }
+
+    // --- Langfuse Live Telemetry Fetcher ---
+    const btnRefreshTraces = document.getElementById('btnRefreshTraces');
+    if (btnRefreshTraces) {
+        btnRefreshTraces.addEventListener('click', () => fetchLangfuseTelemetry());
+    }
+
+    async function fetchLangfuseTelemetry() {
+        const lfStatusPill = document.getElementById('lfStatusPill');
+        const lfHostSub = document.getElementById('lfHostSub');
+        const lfTotalTraces = document.getElementById('lfTotalTraces');
+        const lfTracesBody = document.getElementById('lfTracesBody');
+
+        try {
+            // 1. Fetch status
+            const statusRes = await fetch('/api/langfuse/status');
+            const statusData = await statusRes.json();
+
+            if (statusData.enabled) {
+                lfStatusPill.innerHTML = '<i class="fa-solid fa-circle-check" style="color: #10B981;"></i> Cloud Synced';
+                lfStatusPill.style.color = '#10B981';
+                lfHostSub.textContent = `Host: ${statusData.host}`;
+            } else {
+                lfStatusPill.innerHTML = '<i class="fa-solid fa-server" style="color: #06B6D4;"></i> Local Buffer Active';
+                lfStatusPill.style.color = '#06B6D4';
+                lfHostSub.textContent = 'Observability buffer active (Offline/Local)';
+            }
+            lfTotalTraces.textContent = statusData.total_live_traces || 0;
+
+            // 2. Fetch traces
+            const tracesRes = await fetch('/api/langfuse/traces');
+            const tracesData = await tracesRes.json();
+            const traces = tracesData.traces || [];
+
+            if (traces.length === 0) {
+                lfTracesBody.innerHTML = `
+                    <tr>
+                        <td colspan="6" style="text-align: center; color: #9CA3AF; padding: 25px;">
+                            No query traces captured yet. Ask a question in the <strong>Chatbot tab</strong> to stream live spans here!
+                        </td>
+                    </tr>
+                `;
+            } else {
+                lfTracesBody.innerHTML = traces.map(tr => {
+                    const timeStr = tr.timestamp ? new Date(tr.timestamp).toLocaleTimeString() : 'Recent';
+                    const chunkCount = (tr.retrieved_chunks || []).length;
+                    const isSynced = tr.cloud_synced;
+                    const syncBadge = isSynced 
+                        ? '<span class="w6-chip w6-chip-green"><i class="fa-solid fa-cloud-arrow-up"></i> Cloud</span>'
+                        : '<span class="w6-chip w6-chip-cyan"><i class="fa-solid fa-hard-drive"></i> Local</span>';
+
+                    return `
+                        <tr>
+                            <td><code>${escapeHtml(tr.trace_id || 'tr_live')}</code></td>
+                            <td style="color: #9CA3AF;">${timeStr}</td>
+                            <td style="max-width: 280px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="${escapeHtml(tr.question || '')}">
+                                ${escapeHtml(tr.question || '')}
+                            </td>
+                            <td><span class="w6-chip w6-chip-purple">${escapeHtml(tr.category_tag || 'query')}</span></td>
+                            <td><span style="color: #38BDF8; font-weight: 600;">${chunkCount} chunks</span></td>
+                            <td>${syncBadge}</td>
+                        </tr>
+                    `;
+                }).join('');
+            }
+        } catch (err) {
+            console.warn('Failed to fetch Langfuse telemetry:', err);
+        }
+    }
+
     // Initial Load
     fetchDocumentsList();
     fetchGoldenSet();
+    fetchLangfuseTelemetry();
 });
+

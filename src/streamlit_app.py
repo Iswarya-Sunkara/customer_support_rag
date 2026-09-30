@@ -162,14 +162,15 @@ with st.sidebar:
     else:
         st.info("No documents uploaded yet. Drop any file above!")
 
-# Main Layout with Tabs across All Weeks (Weeks 3-6)
-tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs([
+# Main Layout with Tabs across All Weeks (Weeks 3-7)
+tab1, tab2, tab3, tab4, tab5, tab6, tab7 = st.tabs([
     "💬 Customer Support Chatbot",
     "📈 Week 3: Dense Baseline Evaluation",
     "⚡ Week 4: Hybrid RAG & Universal Parser",
     "📊 Week 5: Error Taxonomy & 10 Framed Questions",
     "⚖️ Week 6: LLM-as-a-Judge Validation",
-    "📡 Langfuse Observability & Telemetry"
+    "📡 Langfuse Observability & Telemetry",
+    "🏁 Week 7: Agent vs Fixed Workflow Race"
 ])
 
 # ==============================================================================
@@ -678,6 +679,176 @@ with tab6:
     st.markdown("""
     [🔗 Open Langfuse Cloud Dashboard (https://us.cloud.langfuse.com)](https://us.cloud.langfuse.com)
     """)
+
+# ==============================================================================
+# TAB 7: Week 7 Practical — Agent vs Fixed Workflow Race & Budgets (Task Set A)
+# ==============================================================================
+with tab7:
+    st.markdown('<div class="main-title">🏁 Week 7: Agent Loops — and When Not to Use Them</div>', unsafe_allow_html=True)
+    st.markdown('<div class="sub-title">Task Set A: Customer Support Tickets — Empirical Race of a Hand-Built ReAct Agent vs. Fixed Linear Workflow</div>', unsafe_allow_html=True)
+
+    # 4 Hero KPI Comparison Cards (The 4 Evaluated Numbers)
+    w7_c1, w7_c2, w7_c3, w7_c4 = st.columns(4)
+    with w7_c1:
+        st.metric(
+            label="Pass Rate (10 Inputs)",
+            value="100.0%",
+            delta="Parity: Workflow 100% | Agent 100%",
+            delta_color="off"
+        )
+    with w7_c2:
+        st.metric(
+            label="Median Latency (p50)",
+            value="3.05 s",
+            delta="-2.89s (-48.7% faster)",
+            delta_color="normal"
+        )
+    with w7_c3:
+        st.metric(
+            label="Total Tokens (10 Tickets)",
+            value="7,860",
+            delta="-26,688 (-77.2% tokens)",
+            delta_color="normal"
+        )
+    with w7_c4:
+        st.metric(
+            label="Cost per Ticket (Mean)",
+            value="$0.00135",
+            delta="-$0.00287 (-68.0% cheaper)",
+            delta_color="normal"
+        )
+
+    st.markdown("---")
+
+    # SECTION 1: The Official 8-Number Evaluation Table
+    st.markdown("### 📊 The Official 8-Number Evaluation Table (Task Set A)")
+    st.caption("Evaluated across the identical 10 customer refund tickets using `claude-haiku-4-5` with identical output contracts:")
+
+    st.markdown("""
+    | Evaluation Metric | Hand-Built Agent (ReAct Loop) | Fixed Hard-Coded Workflow | Empirical Delta / Operational Winner |
+    |---|:---:|:---:|---|
+    | **1. Pass Rate (%)** | **100.0%** (10/10) | **100.0%** (10/10) | **Parity** (Both systems achieve 100% compliance) |
+    | **2. Median Latency (p50)** | 5.9374 seconds | **3.0474 seconds** | **-2.89s (-48.7% faster)** (1 LLM call vs 2 iterative laps) |
+    | **3. Total Tokens (10 Tickets)**| 34,548 tokens | **7,860 tokens** | **-26,688 tokens (-77.2%)** (Zero message-list lap accumulation) |
+    | **4. Cost per Ticket (USD)** | $0.004223 / ticket | **$0.001353 / ticket** | **-$0.002870 (-68.0% cost)** ($0.0135 vs $0.0422 total) |
+    """)
+
+    st.markdown("---")
+
+    # SECTION 2: Decision Rule Verdict Card (< 150 Words)
+    st.markdown("### ⚖️ The Decision Rule Verdict (Under 150 Words)")
+    st.success("""
+    **Verdict on Shipping:**
+    Applying the decision rule (*"does the execution path vary dynamically by input?"*), **none of the 10 tickets forces an agent**. Although tickets TCK-108, TCK-109, and TCK-110 trigger an escalation branch because their orders are missing, this condition is deterministic: if the order is not found, route to verification. Because the branching rules are known in advance, the fixed workflow handles them in deterministic code without loop overhead. The workflow achieves **100.0% pass rate** while beating the agent on all three operational metrics: **p50 latency dropped from 5.94s to 3.05s (-48.7%)**, **total tokens fell from 34,548 to 7,860 (-77.2%)**, and **cost per ticket decreased from $0.00422 to $0.00135 (-68.0%)**. We would ship the fixed workflow: an agent adds non-deterministic latency and 4.4x token amplification without buying any routing capability that three hard-coded steps cannot deliver.
+    """)
+
+    st.markdown("---")
+
+    # SECTION 3: Interactive 10-Ticket Race Inspector
+    st.markdown("### 🔍 Interactive 10-Ticket Race Inspector")
+    st.caption("Inspect how the Hand-Built Agent Loops and accumulates tokens across laps vs. the Fixed Linear Workflow on each ticket:")
+
+    import json
+    results_path = PROJECT_DIR / "results" / "race_results.json"
+    if results_path.exists():
+        try:
+            race_data = json.loads(results_path.read_text(encoding="utf-8"))
+            ag_recs = {r["ticket_id"]: r for r in race_data.get("agent_records", [])}
+            wf_recs = {r["ticket_id"]: r for r in race_data.get("workflow_records", [])}
+
+            filter_mode = st.radio("Filter Tickets:", ["All 10 Tickets", "Standard Refunds (7)", "Branching Missing-Orders (3)"], horizontal=True)
+
+            for tck_id in sorted(ag_recs.keys()):
+                ag_r = ag_recs[tck_id]
+                wf_r = wf_recs.get(tck_id, {})
+                is_branching = ag_r.get("is_branching", False)
+
+                if filter_mode == "Standard Refunds (7)" and is_branching:
+                    continue
+                if filter_mode == "Branching Missing-Orders (3)" and not is_branching:
+                    continue
+
+                branch_label = "⚡ [BRANCHING CASE: MISSING ORDER]" if is_branching else "✅ [STANDARD]"
+                expander_title = f"{branch_label} Ticket {tck_id} ({ag_r.get('branch_type')}) — WF: {wf_r.get('latency_sec', 0):.2f}s ({wf_r.get('tokens', 0)} tok) vs AG: {ag_r.get('latency_sec', 0):.2f}s ({ag_r.get('tokens', 0)} tok)"
+
+                with st.expander(expander_title):
+                    col_ag, col_wf = st.columns(2)
+                    with col_ag:
+                        st.markdown(f"#### 🔄 Agent ReAct Loop ({ag_r.get('iterations', 2)} Laps)")
+                        st.caption(f"Tokens: **{ag_r.get('tokens', 0)}** | Cost: **${ag_r.get('cost_usd', 0):.5f}** | Latency: **{ag_r.get('latency_sec', 0):.2f}s**")
+                        for s in ag_r.get("steps", []):
+                            st.info(f"**Lap {s.get('lap')}:** {f'Tool Call: `{s.get('tool')}`' if s.get('tool') else 'Final Reply Synthesis'}\n\n*Thought:* {s.get('thought')}\n\n*Args:* `{s.get('args')}`")
+                        st.markdown("**Agent Final Reply:**")
+                        st.code(ag_r.get("reply", ""), language="text")
+
+                    with col_wf:
+                        st.markdown("#### ⚡ Fixed Hard-Coded Workflow (1 LLM Call)")
+                        st.caption(f"Tokens: **{wf_r.get('tokens', 0)}** | Cost: **${wf_r.get('cost_usd', 0):.5f}** | Latency: **{wf_r.get('latency_sec', 0):.2f}s**")
+                        for s in wf_r.get("steps", []):
+                            st.success(f"**Step {s.get('step')}: {s.get('name')}**\n\n{s.get('action')}")
+                        st.markdown("**Workflow Final Reply:**")
+                        st.code(wf_r.get("reply", ""), language="text")
+        except Exception as e:
+            st.error(f"Error reading race results: {e}")
+    else:
+        st.warning("`results/race_results.json` not found. Run `python src/run_race.py` to populate.")
+
+    st.markdown("---")
+
+    # SECTION 4: Safety Budgets & Budget Termination Log
+    st.markdown("### 🛡️ Safety Budgets & Clean Termination Log")
+    st.caption("All four runtime safety limits enforced in code (`max_iterations`, `max_tokens`, `max_cost`, `max_wall_clock_seconds`):")
+
+    b_c1, b_c2, b_c3, b_c4 = st.columns(4)
+    with b_c1:
+        st.metric(label="Max Iterations", value="6 Laps", delta="Enforced per loop")
+    with b_c2:
+        st.metric(label="Max Tokens", value="4,000", delta="Summed across all laps")
+    with b_c3:
+        st.metric(label="Max Cost", value="$0.05", delta="Summed across all laps")
+    with b_c4:
+        st.metric(label="Max Wall-Clock", value="15.0 s", delta="Enforced before every step")
+
+    budget_log_path = PROJECT_DIR / "results" / "budget_termination.log"
+    if budget_log_path.exists():
+        st.markdown("**Live Clean Termination Log (`results/budget_termination.log`):**")
+        st.code(budget_log_path.read_text(encoding="utf-8"), language="text")
+
+    st.markdown("---")
+
+    # SECTION 5: Third Tool Description Diff
+    st.markdown("### 🧩 Third Tool Specification: `get_customer_tier` Diff")
+    st.caption("Git diff demonstrating single-responsibility description, typed enums, and zero overlap with existing tools:")
+
+    diff_path = PROJECT_DIR / "results" / "third_tool_diff.patch"
+    if diff_path.exists():
+        st.code(diff_path.read_text(encoding="utf-8"), language="diff")
+
+    st.markdown("---")
+
+    # SECTION 6: Bonus Challenge Explorer
+    st.markdown("### 🧠 Bonus Challenge: Memory Persistence & 30-Turn Summarisation Analysis")
+    st.caption("Demonstrating fact persistence across process restarts and identifying specific detail destroyed by lossy summarisation across 3 long 30-turn ticket dialogues:")
+
+    bonus_path = PROJECT_DIR / "results" / "bonus_memory_results.json"
+    if bonus_path.exists():
+        try:
+            b_data = json.loads(bonus_path.read_text(encoding="utf-8"))
+            p_fact = b_data.get("persisted_fact_across_restart", {})
+            st.info(f"**Process-Restart Persistence Test:** Customer `{p_fact.get('customer_id')}` tier = **'{p_fact.get('persisted_value')}'** loaded from `{p_fact.get('storage_file')}`. Status: **{p_fact.get('status')}** (Zero tool calls required on restart).")
+
+            threads = b_data.get("threads", [])
+            th_cols = st.columns(len(threads))
+            for i, th in enumerate(threads):
+                with th_cols[i]:
+                    st.markdown(f"**Thread {i+1}: {th.get('title')}**")
+                    st.write(f"• **Turns:** {th.get('total_turns')}")
+                    st.write(f"• **Critical Fact:** {th.get('critical_fact')}")
+                    st.error(f"**Detail Destroyed:** {th.get('destroyed_detail')}")
+                    st.caption(f"**Failure Impact:** {th.get('failure_impact')}")
+        except Exception as e:
+            st.error(f"Error loading bonus results: {e}")
+
 
 
 

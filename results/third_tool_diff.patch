@@ -1,0 +1,56 @@
+--- a/src/tools.py	(revision base: 2 tools)
++++ b/src/tools.py	(revision added: third tool get_customer_tier)
+@@ -18,6 +18,18 @@
+     SERVICES = "services"
+ 
+ 
+++class SupportChannelEnum(str, Enum):
+++    WEB = "web"
+++    EMAIL = "email"
+++    API = "api"
+++    PHONE = "phone"
+++
+++
+++class CustomerTierEnum(str, Enum):
+++    STANDARD = "Standard"
+++    PRIORITY = "Priority"
+++    ENTERPRISE = "Enterprise"
+++
+ 
+ # ==============================================================================
+ # Tool 1: fetch_order_details
+@@ -52,10 +64,36 @@
+ }
+ 
+ 
++# ==============================================================================
++# Tool 3 (New): get_customer_tier
++# ==============================================================================
++
+++TOOL_GET_CUSTOMER_TIER = {
+++    "name": "get_customer_tier",
+++    "description": "Retrieve customer account tier and SLA escalation priority for a customer ID.",
+++    "input_schema": {
+++        "type": "object",
+++        "properties": {
+++            "customer_id": {
+++                "type": "string",
+++                "description": "The unique customer account identifier (e.g., 'CUST-401')."
+++            },
+++            "channel": {
+++                "type": "string",
+++                "enum": ["web", "email", "api", "phone"],
+++                "description": "The inbound communication channel used by the customer."
+++            }
+++        },
+++        "required": ["customer_id", "channel"],
+++        "additionalProperties": False
+++    }
+++}
++
+ # The complete tool registry exposed to the LLM agent
+ TOOLS_REGISTRY = [
+     TOOL_FETCH_ORDER,
+     TOOL_LOOKUP_POLICY,
+++   TOOL_GET_CUSTOMER_TIER
+ ]

@@ -1,0 +1,21 @@
+{
+  "customers": {
+    "CUST-403": {
+      "customer_tier": "Priority",
+      "_updated_at": "2026-09-29T05:39:36Z"
+    },
+    "CUST-406": {
+      "customer_tier": "Standard",
+      "_updated_at": "2026-09-29T05:37:09Z"
+    },
+    "CUST-401": {
+      "customer_tier": "Standard",
+      "_updated_at": "2026-09-29T05:39:42Z"
+    },
+    "CUST-407": {
+      "customer_tier": "Standard",
+      "_updated_at": "2026-09-29T05:39:44Z"
+    }
+  },
+  "orders": {}
+}

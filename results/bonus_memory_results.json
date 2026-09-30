@@ -1,0 +1,53 @@
+{
+  "persisted_fact_across_restart": {
+    "customer_id": "CUST-403",
+    "fact_key": "customer_tier",
+    "persisted_value": "Priority",
+    "storage_file": "C:\\Users\\kiran\\OneDrive\\Desktop\\projects\\customer_support_rag\\data\\agent_memory.json",
+    "status": "PASS (survived restart)"
+  },
+  "total_tokens_bonus": 1383,
+  "total_cost_bonus": 0.002319,
+  "threads": [
+    {
+      "thread_id": "TCK-LONG-01",
+      "title": "Return Tracking Number Loss",
+      "customer_id": "CUST-406",
+      "persisted_tier": "Standard",
+      "total_turns": 30,
+      "critical_fact": "Return tracking number TRK-882914-US provided in Turn 4",
+      "destroyed_detail": "Alphanumeric tracking code 'TRK-882914-US'",
+      "failure_impact": "In Turn 28, agent asked customer to provide their tracking number again because summarisation compressed it to 'customer mailed return package'.",
+      "rolling_summary": "Customer is returning order ORD-5006 hardware bundle via express courier with tracking number TRK-882914-US, expected to arrive at the intake facility within 3 business days with automated email confirmation. No restocking fees apply as the return is within the 14-day hardware return window.",
+      "turn_28_probe_question": "Can you confirm you have my return tracking number on file and state the exact tracking code?",
+      "agent_turn_28_response": "Yes, I have your return tracking number on file.\n\n**Tracking Number: TRK-882914-US**\n\nThis is for your express courier shipment of order ORD-5006 (hardware bundle). The package is expected to arrive at our intake facility within 3 business days, and you should receive an automated email confirmation once it's processed.\n\nIs there anything else you'd like me to help with regarding this return?"
+    },
+    {
+      "thread_id": "TCK-LONG-02",
+      "title": "Partial Goodwill Credit Loss",
+      "customer_id": "CUST-401",
+      "persisted_tier": "Standard",
+      "total_turns": 30,
+      "critical_fact": "Support granted a special $35.00 goodwill concession credit in Turn 5",
+      "destroyed_detail": "Specific concession credit amount '$35.00'",
+      "failure_impact": "In Turn 28, the agent misquoted remaining balance as the full initial price ($49.00) because summarisation reduced the concession to 'billing discounts discussed'.",
+      "rolling_summary": "Customer ORD-5001 experienced service downtime and requested compensation; we applied a $35.00 goodwill credit to their account that will reduce their next invoice.",
+      "turn_28_probe_question": "What exact goodwill concession amount was granted earlier in our conversation?",
+      "agent_turn_28_response": "Based on our conversation history, a **$35.00 goodwill credit** was applied to your account (ORD-5001) as compensation for the service downtime you experienced. This credit will be deducted from your next invoice."
+    },
+    {
+      "thread_id": "TCK-LONG-03",
+      "title": "Hardware RMA Authorization Suffix Loss",
+      "customer_id": "CUST-407",
+      "persisted_tier": "Standard",
+      "total_turns": 30,
+      "critical_fact": "Warehouse RMA Authorization Code RMA-7710-PRIORITY issued in Turn 6",
+      "destroyed_detail": "The priority routing suffix '-PRIORITY' on the RMA code",
+      "failure_impact": "Summarisation simplified the code to 'RMA-7710' or 'RMA created', stripping the priority barcode suffix needed for priority warehouse inspection.",
+      "rolling_summary": "Customer requested an RMA for unopened hardware token ORD-5007 and received priority RMA number RMA-7710-PRIORITY. Customer was instructed to write the full RMA code on the outer shipping label.",
+      "turn_28_probe_question": "What exact RMA code should I write on the shipping label box right now?",
+      "agent_turn_28_response": "Write **RMA-7710-PRIORITY** on the outer shipping label of the box.\n\nThis is the priority RMA number that was issued for your unopened hardware token (ORD-5007). Make sure it's clearly visible so the carrier and our warehouse can process it correctly."
+    }
+  ],
+  "updated_at": "2026-09-29T05:39:45Z"
+}

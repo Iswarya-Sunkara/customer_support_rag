@@ -13,8 +13,6 @@ import uvicorn
 PROJECT_DIR = Path(__file__).resolve().parent.parent
 sys.path.append(str(PROJECT_DIR))
 
-from src.dynamic_rag import DynamicRAGEngine
-
 app = FastAPI(
     title="Universal Document Q&A Chatbot API",
     description="Backend RAG API supporting universal document uploading without file extension restrictions.",
@@ -27,8 +25,12 @@ EVAL_DIR = PROJECT_DIR / "eval"
 # Mount static files
 app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
 
-# Instantiate global RAG Engine
-rag_engine = DynamicRAGEngine()
+try:
+    from src.dynamic_rag import DynamicRAGEngine
+    rag_engine = DynamicRAGEngine()
+except Exception as _rag_err:
+    print(f"[WARN] DynamicRAGEngine offline ({_rag_err}). Operating in eval/race benchmark mode.")
+    rag_engine = None
 
 class ChatRequest(BaseModel):
     question: str
@@ -165,6 +167,99 @@ async def clear_documents():
     """
     res = rag_engine.clear_documents()
     return JSONResponse(content=res)
+
+# ==============================================================================
+# Week 7: Agent vs Fixed Workflow Race Endpoints
+# ==============================================================================
+
+RACE_RESULTS_JSON = PROJECT_DIR / "results" / "race_results.json"
+BUDGET_LOG_FILE = PROJECT_DIR / "results" / "budget_termination.log"
+DIFF_PATCH_FILE = PROJECT_DIR / "results" / "third_tool_diff.patch"
+BONUS_RESULTS_JSON = PROJECT_DIR / "results" / "bonus_memory_results.json"
+
+@app.get("/api/race/results")
+async def get_race_results():
+    """
+    Returns the official 8-number comparison table, per-ticket breakdown,
+    budget termination log, and third-tool diff for Week 7.
+    """
+    import json
+    if not RACE_RESULTS_JSON.exists():
+        # Generate on demand if missing
+        try:
+            from src.run_race import run_race
+            run_race(system="all")
+        except Exception as e:
+            return JSONResponse(status_code=500, content={"error": f"Failed to generate race results: {e}"})
+
+    try:
+        data = json.loads(RACE_RESULTS_JSON.read_text(encoding="utf-8"))
+        budget_log = BUDGET_LOG_FILE.read_text(encoding="utf-8") if BUDGET_LOG_FILE.exists() else "No budget log found."
+        tool_diff = DIFF_PATCH_FILE.read_text(encoding="utf-8") if DIFF_PATCH_FILE.exists() else "No tool diff found."
+        
+        bonus_data = {}
+        if BONUS_RESULTS_JSON.exists():
+            try:
+                bonus_data = json.loads(BONUS_RESULTS_JSON.read_text(encoding="utf-8"))
+            except Exception:
+                pass
+
+        return JSONResponse(content={
+            "status": "success",
+            "summary": data.get("summary", {}),
+            "agent_records": data.get("agent_records", []),
+            "workflow_records": data.get("workflow_records", []),
+            "budget_log": budget_log,
+            "tool_diff": tool_diff,
+            "bonus_data": bonus_data,
+            "updated_at": data.get("updated_at")
+        })
+    except Exception as e:
+        return JSONResponse(status_code=500, content={"error": str(e)})
+
+@app.post("/api/race/run")
+def trigger_race_run():
+    """
+    Executes a fresh race run across all 10 tickets for both Agent and Fixed Workflow.
+    Uses sync def so FastAPI executes in threadpool without blocking event loop.
+    """
+    try:
+        from src.run_race import run_race
+        results = run_race(system="all", refresh=True)
+        return JSONResponse(content={"status": "success", "results": results})
+    except Exception as e:
+        return JSONResponse(status_code=500, content={"error": str(e)})
+
+@app.post("/api/race/budget-test")
+def trigger_budget_test():
+    """
+    Executes the budget termination test with a restrictive limit and returns the clean log.
+    Uses sync def so FastAPI executes in threadpool without blocking event loop.
+    """
+    try:
+        from src.run_race import test_budget_termination
+        from src.llm import get_anthropic_client
+        client = get_anthropic_client()
+        res = test_budget_termination(client)
+        log_content = BUDGET_LOG_FILE.read_text(encoding="utf-8") if BUDGET_LOG_FILE.exists() else ""
+        return JSONResponse(content={"status": "success", "test_result": res, "log": log_content})
+    except Exception as e:
+        return JSONResponse(status_code=500, content={"error": str(e)})
+
+@app.get("/api/race/bonus")
+async def get_bonus_results():
+    """
+    Returns the persistent memory and 30-turn thread summarisation loss results.
+    """
+    import json
+    if not BONUS_RESULTS_JSON.exists():
+        return JSONResponse(content={"status": "pending", "message": "Bonus experiments not yet completed."})
+    try:
+        data = json.loads(BONUS_RESULTS_JSON.read_text(encoding="utf-8"))
+        return JSONResponse(content={"status": "success", "data": data})
+    except Exception as e:
+        return JSONResponse(status_code=500, content={"error": str(e)})
+
 
 if __name__ == "__main__":
     print("[SERVER] Starting Universal Document Chatbot Server on http://127.0.0.1:8050")

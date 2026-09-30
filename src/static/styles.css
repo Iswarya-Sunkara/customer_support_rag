@@ -1028,5 +1028,449 @@ body {
     transform: translateY(-1px);
 }
 
+/* ==============================================================================
+   WEEK 7: Agent vs Fixed Workflow Race Styling
+   ============================================================================== */
 
+.w7-container {
+    padding: 24px 30px;
+    height: 100%;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
 
+.w7-header-card {
+    background: linear-gradient(135deg, rgba(31, 41, 55, 0.8) 0%, rgba(17, 24, 39, 0.95) 100%);
+    border: 1px solid rgba(236, 72, 153, 0.35);
+    border-radius: 14px;
+    padding: 22px 26px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(12px);
+}
+
+.w7-header-title h2 {
+    font-family: var(--font-heading);
+    font-size: 1.55rem;
+    font-weight: 700;
+    color: #F9FAFB;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.w7-header-title p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-top: 6px;
+}
+
+.w7-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.w7-btn {
+    background: rgba(236, 72, 153, 0.18);
+    border: 1px solid rgba(236, 72, 153, 0.45);
+    color: #F472B6;
+    padding: 9px 16px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+}
+
+.w7-btn:hover {
+    background: rgba(236, 72, 153, 0.3);
+    color: #FFF;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(236, 72, 153, 0.25);
+}
+
+.w7-btn-cyan {
+    background: rgba(6, 182, 212, 0.18);
+    border-color: rgba(6, 182, 212, 0.45);
+    color: #38BDF8;
+}
+
+.w7-btn-cyan:hover {
+    background: rgba(6, 182, 212, 0.3);
+    color: #FFF;
+    box-shadow: 0 4px 12px rgba(6, 182, 212, 0.25);
+}
+
+/* 4 KPI Hero Cards */
+.w7-kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+}
+
+.w7-kpi-card {
+    background: rgba(17, 24, 39, 0.8);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 18px 20px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.2s;
+}
+
+.w7-kpi-card:hover {
+    border-color: rgba(236, 72, 153, 0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px -4px rgba(0, 0, 0, 0.5);
+}
+
+.w7-kpi-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--accent-cyan);
+}
+
+.w7-kpi-card.kpi-pink::before {
+    background: #EC4899;
+}
+.w7-kpi-card.kpi-purple::before {
+    background: #8B5CF6;
+}
+.w7-kpi-card.kpi-emerald::before {
+    background: #10B981;
+}
+
+.w7-kpi-title {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+}
+
+.w7-kpi-values {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin: 12px 0 8px 0;
+}
+
+.w7-kpi-val-workflow {
+    font-size: 1.55rem;
+    font-weight: 800;
+    font-family: var(--font-heading);
+    color: #10B981;
+}
+
+.w7-kpi-val-agent {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: #9CA3AF;
+    text-decoration: line-through;
+    opacity: 0.8;
+}
+
+.w7-kpi-delta {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.76rem;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 999px;
+    background: rgba(16, 185, 129, 0.15);
+    color: #34D399;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.w7-kpi-delta.tie {
+    background: rgba(59, 130, 246, 0.15);
+    color: #60A5FA;
+    border-color: rgba(59, 130, 246, 0.3);
+}
+
+.w7-kpi-sub {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-top: 6px;
+    display: block;
+}
+
+/* Race Summary Table */
+.w7-section-card {
+    background: rgba(17, 24, 39, 0.75);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 22px 24px;
+}
+
+.w7-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.w7-section-header h3 {
+    font-family: var(--font-heading);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #F9FAFB;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.w7-summary-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+}
+
+.w7-summary-table th {
+    background: rgba(31, 41, 55, 0.8);
+    color: #D1D5DB;
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 600;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.w7-summary-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid rgba(75, 85, 99, 0.2);
+    color: #F3F4F6;
+}
+
+.w7-summary-table tr:hover td {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.w7-winner-badge {
+    background: rgba(16, 185, 129, 0.2);
+    color: #34D399;
+    border: 1px solid rgba(16, 185, 129, 0.4);
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-size: 0.74rem;
+    font-weight: 700;
+    margin-left: 6px;
+}
+
+/* Ticket Filter Controls */
+.w7-filter-bar {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.w7-filter-btn {
+    background: rgba(31, 41, 55, 0.6);
+    border: 1px solid var(--border-color);
+    color: var(--text-muted);
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.w7-filter-btn.active, .w7-filter-btn:hover {
+    background: rgba(236, 72, 153, 0.2);
+    border-color: rgba(236, 72, 153, 0.4);
+    color: #FFF;
+}
+
+/* 10 Tickets Inspector List */
+.w7-ticket-card {
+    background: rgba(17, 24, 39, 0.65);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    margin-bottom: 12px;
+    overflow: hidden;
+    transition: all 0.2s;
+}
+
+.w7-ticket-card.branching-card {
+    border-color: rgba(245, 158, 11, 0.4);
+    background: rgba(245, 158, 11, 0.04);
+}
+
+.w7-ticket-header {
+    padding: 14px 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    background: rgba(31, 41, 55, 0.4);
+}
+
+.w7-ticket-header:hover {
+    background: rgba(31, 41, 55, 0.7);
+}
+
+.w7-ticket-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.w7-tck-id {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    color: #38BDF8;
+    font-size: 0.95rem;
+}
+
+.w7-tag {
+    font-size: 0.74rem;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 4px;
+}
+
+.w7-tag-branch {
+    background: rgba(245, 158, 11, 0.2);
+    color: #FBBF24;
+    border: 1px solid rgba(245, 158, 11, 0.4);
+}
+
+.w7-tag-std {
+    background: rgba(59, 130, 246, 0.2);
+    color: #93C5FD;
+    border: 1px solid rgba(59, 130, 246, 0.4);
+}
+
+.w7-tag-priority {
+    background: rgba(236, 72, 153, 0.2);
+    color: #F472B6;
+    border: 1px solid rgba(236, 72, 153, 0.4);
+}
+
+/* Side-by-Side Trace Grid inside Ticket */
+.w7-trace-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    padding: 18px;
+    background: rgba(11, 15, 25, 0.85);
+    border-top: 1px solid var(--border-color);
+}
+
+.w7-trace-col {
+    background: rgba(17, 24, 39, 0.7);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.w7-trace-col-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(75, 85, 99, 0.3);
+    padding-bottom: 8px;
+}
+
+.w7-trace-col-title {
+    font-weight: 700;
+    font-size: 0.88rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.w7-trace-badge {
+    font-size: 0.74rem;
+    font-weight: 600;
+    color: #9CA3AF;
+}
+
+.w7-step-item {
+    background: rgba(31, 41, 55, 0.5);
+    border-left: 3px solid #8B5CF6;
+    border-radius: 4px;
+    padding: 8px 12px;
+    font-size: 0.8rem;
+}
+
+.w7-step-item.step-wf {
+    border-left-color: #10B981;
+}
+
+.w7-reply-box {
+    background: rgba(15, 23, 42, 0.95);
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    border-radius: 6px;
+    padding: 12px 14px;
+    font-family: monospace;
+    font-size: 0.78rem;
+    white-space: pre-wrap;
+    color: #E2E8F0;
+    max-height: 220px;
+    overflow-y: auto;
+}
+
+/* Pre / Code Boxes for Logs & Diffs */
+.w7-pre-box {
+    background: #0D1117;
+    border: 1px solid #30363D;
+    border-radius: 8px;
+    padding: 14px 16px;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 0.8rem;
+    color: #C9D1D9;
+    overflow-x: auto;
+    max-height: 320px;
+    line-height: 1.5;
+}
+
+.diff-add {
+    color: #3FB950;
+    background: rgba(46, 160, 67, 0.15);
+}
+
+.diff-del {
+    color: #F85149;
+    background: rgba(248, 81, 73, 0.15);
+}
+
+/* Verdict Card */
+.w7-verdict-card {
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.9) 0%, rgba(15, 23, 42, 0.95) 100%);
+    border: 1px solid rgba(16, 185, 129, 0.4);
+    border-left: 6px solid #10B981;
+    border-radius: 12px;
+    padding: 20px 24px;
+}
+
+.w7-verdict-card h4 {
+    font-family: var(--font-heading);
+    font-size: 1.15rem;
+    color: #34D399;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.w7-verdict-p {
+    font-size: 0.92rem;
+    line-height: 1.6;
+    color: #E2E8F0;
+}

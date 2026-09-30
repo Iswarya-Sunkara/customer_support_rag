@@ -89,7 +89,7 @@
             <!-- Master Curriculum Navigator (Weeks 3-6) in Sidebar -->
             <div class="sidebar-shortcut-section">
                 <div class="sidebar-shortcut-header">
-                    <i class="fa-solid fa-graduation-cap"></i> Curriculum (Weeks 3–6)
+                    <i class="fa-solid fa-graduation-cap"></i> Curriculum (Weeks 3–7)
                 </div>
                 <div style="display: flex; flex-direction: column; gap: 6px; margin-top: 4px;">
                     <button class="btn-sidebar-view" id="sidebarWeek3Btn" style="text-align: left; display: flex; align-items: center; gap: 8px;">
@@ -103,6 +103,9 @@
                     </button>
                     <button class="btn-sidebar-view" id="sidebarWeek6Btn" style="text-align: left; display: flex; align-items: center; gap: 8px;">
                         <i class="fa-solid fa-scale-balanced" style="color: #38BDF8;"></i> Week 6: LLM-as-a-Judge
+                    </button>
+                    <button class="btn-sidebar-view" id="sidebarWeek7Btn" style="text-align: left; display: flex; align-items: center; gap: 8px; color: #F472B6; border-color: rgba(236,72,153,0.3); background: rgba(236,72,153,0.1);">
+                        <i class="fa-solid fa-code-compare" style="color: #EC4899;"></i> Week 7: Agent vs Workflow
                     </button>
                     <button class="btn-sidebar-view" id="sidebarLangfuseBtn" style="text-align: left; display: flex; align-items: center; gap: 8px; color: #10B981; border-color: rgba(16,185,129,0.3); background: rgba(16,185,129,0.1);">
                         <i class="fa-solid fa-satellite-dish"></i> Langfuse Telemetry
@@ -137,6 +140,9 @@
                         </button>
                         <button class="main-tab-btn" id="tabBtnWeek6">
                             <i class="fa-solid fa-scale-balanced" style="color: #38BDF8;"></i> W6: LLM Judge
+                        </button>
+                        <button class="main-tab-btn" id="tabBtnWeek7">
+                            <i class="fa-solid fa-code-compare" style="color: #EC4899;"></i> W7: Race & Budgets
                         </button>
                         <button class="main-tab-btn" id="tabBtnLangfuse">
                             <i class="fa-solid fa-satellite-dish" style="color: #10B981;"></i> Langfuse
@@ -632,6 +638,196 @@
                                     </tr>
                                 </tbody>
                             </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VIEW 4: Week 7 Agent Loops vs Fixed Workflow Race -->
+            <div class="view-container" id="viewWeek7">
+                <div class="w7-container">
+                    <!-- Header Card -->
+                    <div class="w7-header-card">
+                        <div class="w7-header-title">
+                            <h2>
+                                <i class="fa-solid fa-code-compare" style="color: #EC4899;"></i>
+                                Week 7 Practical: Agent Loops — and When Not to Use Them
+                            </h2>
+                            <p>
+                                <strong>Task Set A: Customer Support Tickets.</strong> Head-to-head empirical race of a hand-built ReAct agent vs. a fixed linear workflow over the identical 10 tickets (including 3 branching cases).
+                            </p>
+                        </div>
+                        <div class="w7-actions">
+                            <button class="w7-btn w7-btn-cyan" id="btnW7RunBudgetTest">
+                                <i class="fa-solid fa-shield-halved"></i> Test Budget Limit
+                            </button>
+                            <button class="w7-btn" id="btnW7RunRace">
+                                <i class="fa-solid fa-bolt"></i> Re-Run Race
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- 4 Hero KPI Comparison Cards (The 4 Evaluated Numbers) -->
+                    <div class="w7-kpi-grid">
+                        <!-- KPI 1: Pass Rate -->
+                        <div class="w7-kpi-card kpi-purple">
+                            <span class="w7-kpi-title">Pass Rate</span>
+                            <div class="w7-kpi-values">
+                                <span class="w7-kpi-val-workflow" id="kpiWfPass">100.0%</span>
+                                <span class="w7-kpi-val-agent" id="kpiAgPass">100.0%</span>
+                            </div>
+                            <span class="w7-kpi-delta tie"><i class="fa-solid fa-equals"></i> Parity (10/10)</span>
+                            <span class="w7-kpi-sub">Workflow: 100% | Agent: 100%</span>
+                        </div>
+
+                        <!-- KPI 2: p50 Latency -->
+                        <div class="w7-kpi-card kpi-emerald">
+                            <span class="w7-kpi-title">Median Latency (p50)</span>
+                            <div class="w7-kpi-values">
+                                <span class="w7-kpi-val-workflow" id="kpiWfLatency">3.05s</span>
+                                <span class="w7-kpi-val-agent" id="kpiAgLatency">5.94s</span>
+                            </div>
+                            <span class="w7-kpi-delta"><i class="fa-solid fa-arrow-down"></i> 48.7% Faster</span>
+                            <span class="w7-kpi-sub">Workflow: 3.05s | Agent: 5.94s</span>
+                        </div>
+
+                        <!-- KPI 3: Total Tokens -->
+                        <div class="w7-kpi-card kpi-pink">
+                            <span class="w7-kpi-title">Total Tokens (10 Tickets)</span>
+                            <div class="w7-kpi-values">
+                                <span class="w7-kpi-val-workflow" id="kpiWfTokens">7,860</span>
+                                <span class="w7-kpi-val-agent" id="kpiAgTokens">34,548</span>
+                            </div>
+                            <span class="w7-kpi-delta"><i class="fa-solid fa-arrow-down"></i> 77.2% Fewer</span>
+                            <span class="w7-kpi-sub">786 tok/tck vs 3,455 tok/tck</span>
+                        </div>
+
+                        <!-- KPI 4: Cost per Ticket -->
+                        <div class="w7-kpi-card">
+                            <span class="w7-kpi-title">Cost per Ticket</span>
+                            <div class="w7-kpi-values">
+                                <span class="w7-kpi-val-workflow" id="kpiWfCost">$0.00135</span>
+                                <span class="w7-kpi-val-agent" id="kpiAgCost">$0.00422</span>
+                            </div>
+                            <span class="w7-kpi-delta"><i class="fa-solid fa-arrow-down"></i> 68.0% Cheaper</span>
+                            <span class="w7-kpi-sub">$0.0135 total vs $0.0422 total</span>
+                        </div>
+                    </div>
+
+                    <!-- SECTION 1: The Official 8-Number Evaluation Table -->
+                    <div class="w7-section-card">
+                        <div class="w7-section-header">
+                            <h3><i class="fa-solid fa-table-list" style="color: #EC4899;"></i> The Official 8-Number Evaluation Table (Task Set A)</h3>
+                            <span style="font-size: 0.8rem; color: var(--text-muted);">Model: <code>claude-haiku-4-5</code> | 10 Identical Tickets</span>
+                        </div>
+                        <div style="overflow-x: auto;">
+                            <table class="w7-summary-table">
+                                <thead>
+                                    <tr>
+                                        <th>Evaluation Metric</th>
+                                        <th>Hand-Built Agent (ReAct Loop)</th>
+                                        <th>Fixed Hard-Coded Workflow</th>
+                                        <th>Empirical Delta / Winner</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>1. Pass Rate (%)</strong></td>
+                                        <td><span class="w7-kpi-delta tie">100.0% (10/10)</span></td>
+                                        <td><span class="w7-kpi-delta tie">100.0% (10/10)</span></td>
+                                        <td><strong>Parity</strong> (Both satisfy 100% assertions)</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>2. Median Latency (p50)</strong></td>
+                                        <td>5.9374 seconds</td>
+                                        <td><strong style="color: #34D399;">3.0474 seconds</strong> <span class="w7-winner-badge">WINNER</span></td>
+                                        <td><strong style="color: #34D399;">-2.89s (-48.7% faster)</strong> (1 LLM call vs 2 laps)</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>3. Total Tokens (10 Tickets)</strong></td>
+                                        <td>34,548 tokens</td>
+                                        <td><strong style="color: #34D399;">7,860 tokens</strong> <span class="w7-winner-badge">WINNER</span></td>
+                                        <td><strong style="color: #34D399;">-26,688 (-77.2% tokens)</strong> (Zero lap accumulation)</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>4. Cost per Ticket (USD)</strong></td>
+                                        <td>$0.004223 / ticket</td>
+                                        <td><strong style="color: #34D399;">$0.001353 / ticket</strong> <span class="w7-winner-badge">WINNER</span></td>
+                                        <td><strong style="color: #34D399;">-$0.002870 (-68.0% cost)</strong> ($0.0135 vs $0.0422)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- SECTION 2: Decision Rule Verdict Card (< 150 words) -->
+                    <div class="w7-verdict-card">
+                        <h4><i class="fa-solid fa-gavel"></i> The Decision Rule Verdict (Under 150 Words)</h4>
+                        <p class="w7-verdict-p">
+                            Applying the decision rule (<em>"does the execution path vary dynamically by input?"</em>), <strong>none of the 10 tickets forces an agent</strong>. Although tickets TCK-108, TCK-109, and TCK-110 trigger an escalation branch because their orders are missing, this condition is deterministic: if the order is not found, route to verification. Because the branching rules are known in advance, the fixed workflow handles them in deterministic code without loop overhead. The workflow achieves <strong>100.0% pass rate</strong> while beating the agent on all three operational metrics: <strong>p50 latency dropped from 5.94s to 3.05s (-48.7%)</strong>, <strong>total tokens fell from 34,548 to 7,860 (-77.2%)</strong>, and <strong>cost per ticket decreased from $0.00422 to $0.00135 (-68.0%)</strong>. We would ship the fixed workflow: an agent adds non-deterministic latency and 4.4x token amplification without buying any routing capability that three hard-coded steps cannot deliver.
+                        </p>
+                    </div>
+
+                    <!-- SECTION 3: Interactive 10-Ticket Race Inspector -->
+                    <div class="w7-section-card">
+                        <div class="w7-section-header">
+                            <h3><i class="fa-solid fa-list-check" style="color: #06B6D4;"></i> Interactive 10-Ticket Race Inspector</h3>
+                            <div class="w7-filter-bar">
+                                <button class="w7-filter-btn active" data-filter="all">All 10 Tickets</button>
+                                <button class="w7-filter-btn" data-filter="standard">Standard Refunds (7)</button>
+                                <button class="w7-filter-btn" data-filter="branching">Branching Cases (3)</button>
+                            </div>
+                        </div>
+                        <div id="w7TicketsListContainer">
+                            <!-- Populated dynamically by app.js -->
+                        </div>
+                    </div>
+
+                    <!-- SECTION 4: Safety Budgets & Live Termination Log -->
+                    <div class="w7-section-card">
+                        <div class="w7-section-header">
+                            <div>
+                                <h3><i class="fa-solid fa-shield-virus" style="color: #F59E0B;"></i> Enforced Safety Budgets & Clean Termination Log</h3>
+                                <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">
+                                    All 4 budgets actively enforced inside the loop on every single lap: max_iterations (6), max_tokens (4000), max_cost ($0.05), max_wall_clock (15.0s).
+                                </p>
+                            </div>
+                            <button class="w7-btn w7-btn-cyan" id="btnTriggerBudgetLive">
+                                <i class="fa-solid fa-play"></i> Trigger Budget Limit Test
+                            </button>
+                        </div>
+                        <div style="margin-top: 12px;">
+                            <pre class="w7-pre-box" id="w7BudgetLogBox">Loading budget termination log...</pre>
+                        </div>
+                    </div>
+
+                    <!-- SECTION 5: Third Tool Specification & Parameter Enums Diff -->
+                    <div class="w7-section-card">
+                        <div class="w7-section-header">
+                            <div>
+                                <h3><i class="fa-solid fa-code-branch" style="color: #10B981;"></i> Third Tool Specification: <code>get_customer_tier</code> Diff</h3>
+                                <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">
+                                    Single responsibility, typed parameter enums (<code>SupportChannelEnum</code>, <code>CustomerTierEnum</code>), zero description overlap with existing tools.
+                                </p>
+                            </div>
+                        </div>
+                        <div style="margin-top: 12px;">
+                            <pre class="w7-pre-box" id="w7ToolDiffBox">Loading third tool diff...</pre>
+                        </div>
+                    </div>
+
+                    <!-- SECTION 6: Bonus Challenge Explorer -->
+                    <div class="w7-section-card">
+                        <div class="w7-section-header">
+                            <div>
+                                <h3><i class="fa-solid fa-brain" style="color: #A78BFA;"></i> Bonus Challenge: Memory Persistence & 30-Turn Summarisation Analysis</h3>
+                                <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">
+                                    Customer tier persisted to disk across full process restarts. Stress tested across 3 long 30-turn ticket dialogues.
+                                </p>
+                            </div>
+                        </div>
+                        <div id="w7BonusContentContainer" style="margin-top: 12px;">
+                            <!-- Populated dynamically by app.js -->
                         </div>
                     </div>
                 </div>

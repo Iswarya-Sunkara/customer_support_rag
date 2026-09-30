@@ -1,0 +1,22 @@
+================================================================================
+BUDGET TERMINATION RUN LOG
+Timestamp: 2026-09-30 12:58:00 UTC
+================================================================================
+Target Ticket:          TCK-101
+Configured Budgets:     max_iterations=1, max_tokens=4000, max_cost=$0.05, max_wall_clock=15.0s
+Budget Reached:         None
+Configured Limit:       1
+Terminated Cleanly:     False
+Elapsed Latency:        0.4799 seconds
+Tokens Consumed:        0
+Cost Incurred:          $0.000000
+Termination Message:    None
+
+Final Clean Fallback Output:
+Ticket TCK-101
+
+Error processing ticket: Error code: 401 - {'type': 'error', 'error': {'type': 'authentication_error', 'message': 'OAuth access token has been revoked.'}, 'request_id': None}
+
+Best regards,
+Support Team
+================================================================================

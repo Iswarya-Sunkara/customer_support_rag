@@ -115,12 +115,108 @@ TOOL_GET_CUSTOMER_TIER = {
     }
 }
 
-# The complete tool registry exposed to the LLM agent
+# The complete tool registry exposed to the LLM agent (Baseline)
 TOOLS_REGISTRY = [
     TOOL_FETCH_ORDER,
     TOOL_LOOKUP_POLICY,
     TOOL_GET_CUSTOMER_TIER
 ]
+
+
+# ==============================================================================
+# Single Mitigation: Tighter Tool Descriptions & Mandatory Precondition Enforced
+# ==============================================================================
+
+TOOL_FETCH_ORDER_MITIGATED = {
+    "name": "fetch_order_details",
+    "description": (
+        "MANDATORY PREREQUISITE TOOL: Retrieve official financial transaction record for an order "
+        "(purchase date, amount paid, item category, and fulfillment status). "
+        "You MUST ALWAYS call this tool first for every ticket to verify the order in the database. "
+        "NEVER trust customer claims about order ID, amount, or purchase date in the message text. "
+        "Do NOT draft any response before receiving the record from this tool."
+    ),
+    "input_schema": {
+        "type": "object",
+        "properties": {
+            "order_id": {
+                "type": "string",
+                "pattern": "^ORD-[0-9]{4}$",
+                "description": "The unique 8-character order code (e.g., 'ORD-5001', 'ORD-9991'). Must match ORD-XXXX format."
+            }
+        },
+        "required": ["order_id"],
+        "additionalProperties": False
+    }
+}
+
+TOOL_LOOKUP_POLICY_MITIGATED = {
+    "name": "lookup_refund_policy",
+    "description": (
+        "Retrieve refund policy terms, window duration in days, and return conditions for a product category. "
+        "PREREQUISITE: Only call this tool AFTER verifying that an order exists in fetch_order_details. "
+        "Do NOT call this tool if the order status is NOT_FOUND or already REFUNDED."
+    ),
+    "input_schema": {
+        "type": "object",
+        "properties": {
+            "category": {
+                "type": "string",
+                "enum": ["subscription", "software", "hardware", "services"],
+                "description": "The official product classification enum to check policy rules against."
+            }
+        },
+        "required": ["category"],
+        "additionalProperties": False
+    }
+}
+
+# The mitigated tool registry enforcing tighter descriptions & pre-conditions
+MITIGATED_TOOLS_REGISTRY = [
+    TOOL_FETCH_ORDER_MITIGATED,
+    TOOL_LOOKUP_POLICY_MITIGATED,
+    TOOL_GET_CUSTOMER_TIER
+]
+
+
+def validate_tool_call_arguments(name: str, arguments: Dict[str, Any]) -> Dict[str, Any]:
+    """
+    Validates whether tool call arguments conform to schema regex and enums.
+    Returns {'valid': bool, 'errors': List[str]}.
+    """
+    import re
+    errors = []
+    if name == "fetch_order_details":
+        order_id = str(arguments.get("order_id", "")).strip().upper()
+        if not order_id:
+            errors.append("Missing required argument 'order_id'")
+        elif not re.match(r"^ORD-\d{4}$", order_id):
+            errors.append(f"Invalid order_id format '{order_id}': expected ORD-XXXX")
+    elif name == "lookup_refund_policy":
+        category = str(arguments.get("category", "")).strip().lower()
+        valid_cats = [c.value for c in RefundCategoryEnum]
+        if not category:
+            errors.append("Missing required argument 'category'")
+        elif category not in valid_cats:
+            errors.append(f"Invalid category '{category}': must be one of {valid_cats}")
+    elif name == "get_customer_tier":
+        customer_id = str(arguments.get("customer_id", "")).strip().upper()
+        channel = str(arguments.get("channel", "")).strip().lower()
+        valid_channels = [ch.value for ch in SupportChannelEnum]
+        if not customer_id:
+            errors.append("Missing required argument 'customer_id'")
+        elif not re.match(r"^CUST-\d{3}$", customer_id):
+            errors.append(f"Invalid customer_id format '{customer_id}': expected CUST-XXX")
+        if channel and channel not in valid_channels:
+            errors.append(f"Invalid channel '{channel}': must be one of {valid_channels}")
+    else:
+        errors.append(f"Unknown tool name '{name}'")
+
+    return {
+        "valid": len(errors) == 0,
+        "errors": errors
+    }
+
 
 
 # ==============================================================================

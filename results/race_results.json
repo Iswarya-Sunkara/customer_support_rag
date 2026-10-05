@@ -4,23 +4,23 @@
       "system": "Hand-Built Agent",
       "tickets_evaluated": 10,
       "pass_rate_pct": 100.0,
-      "p50_latency_sec": 5.7553,
-      "mean_latency_sec": 6.0339,
-      "total_tokens": 34235,
-      "mean_tokens_per_ticket": 3423.5,
-      "total_cost_usd": 0.041391,
-      "cost_per_ticket_usd": 0.004139
+      "p50_latency_sec": 5.0656,
+      "mean_latency_sec": 5.15,
+      "total_tokens": 34547,
+      "mean_tokens_per_ticket": 3454.7,
+      "total_cost_usd": 0.042492,
+      "cost_per_ticket_usd": 0.004249
     },
     "workflow": {
       "system": "Fixed Workflow",
       "tickets_evaluated": 10,
       "pass_rate_pct": 100.0,
-      "p50_latency_sec": 2.9475,
-      "mean_latency_sec": 2.9705,
-      "total_tokens": 7720,
-      "mean_tokens_per_ticket": 772,
-      "total_cost_usd": 0.012966,
-      "cost_per_ticket_usd": 0.001297
+      "p50_latency_sec": 2.5956,
+      "mean_latency_sec": 2.871,
+      "total_tokens": 7863,
+      "mean_tokens_per_ticket": 786.3,
+      "total_cost_usd": 0.013538,
+      "cost_per_ticket_usd": 0.001354
     }
   },
   "agent_records": [
@@ -28,17 +28,17 @@
       "ticket_id": "TCK-101",
       "system": "Agent",
       "pass": true,
-      "latency_sec": 8.3596,
-      "tokens": 3459,
-      "cost_usd": 0.004156,
+      "latency_sec": 4.9796,
+      "tokens": 3527,
+      "cost_usd": 0.0044024,
       "iterations": 2,
       "branch_type": "standard_within_window",
       "is_branching": false,
-      "reply": "Ticket TCK-101\n\nHi there,\n\nI've reviewed your refund request for order ORD-5001, and I'm happy to help. Here's what I found:\n\n**Order Details:**\n- Order ID: ORD-5001\n- Amount: $49.00\n- Product: Cloudflare Pro Monthly (Subscription)\n- Purchase Date: 8 days ago\n- Status: Completed\n\n**Refund Decision: APPROVED**\n\nYour refund request qualifies for approval. The charge of $49.00 is within our 30-day refund window for subscriptions, and you haven't used the service, which meets our refund policy requirements. I'm processing a full refund of $49.00 to your original payment method immediately.\n\n**Next Steps:**\nYou can expect the refund to appear back on your card within 5-10 business days, depending on your bank's processing time. Once your bank processes the funds, they'll be credited to your account.\n\nThank you for your patience, and please let me know if you have any questions!\n\nBest regards,\nSupport Team",
+      "reply": "Ticket TCK-101\n\nHi there,\n\nI've reviewed your refund request for order ORD-5001. Here's what I found:\n\n**Order Details:**\n- Order ID: ORD-5001\n- Amount Charged: $49.00\n- Product: Cloudflare Pro Monthly (subscription)\n- Purchase Date: 8 days ago\n- Current Status: Not yet refunded\n\n**Refund Policy:**\nOur subscription refund policy allows full refunds within 30 days of billing if the service is unused or due to recurring billing renewal errors. Your purchase was made 8 days ago, which is well within the 30-day refund window.\n\n**Resolution:**\n✓ Your refund request is **APPROVED**. The $49.00 charge is within our refund eligibility window, and since you haven't used the account, you qualify for a full refund. We will process the refund to your original payment method immediately. You should see the funds returned to your card within 5-10 business days. Please note that your bank may take an additional 1-2 business days to post the credit to your account, depending on your financial institution.\n\nIf you have any questions or the refund does not appear within 10 business days, please don't hesitate to reach out.\n\nBest regards,\nSupport Team",
       "steps": [
         {
           "lap": 1,
-          "thought": "I'll help you resolve this ticket. Let me gather the necessary information to process this refund request.",
+          "thought": "I'll help resolve this refund request. Let me gather the necessary information by checking the order details, refund policy, and customer tier.",
           "tool": "fetch_order_details",
           "args": {
             "order_id": "ORD-5001"
@@ -54,12 +54,12 @@
             "days_since_purchase": 8,
             "refunded_date": null
           },
-          "tokens": 1471,
-          "cost": 0.0017656
+          "tokens": 1479,
+          "cost": 0.0017976
         },
         {
           "lap": 1,
-          "thought": "I'll help you resolve this ticket. Let me gather the necessary information to process this refund request.",
+          "thought": "I'll help resolve this refund request. Let me gather the necessary information by checking the order details, refund policy, and customer tier.",
           "tool": "lookup_refund_policy",
           "args": {
             "category": "subscription"
@@ -70,12 +70,12 @@
             "rules": "Full refund allowed within 30 days of billing if service is unused or recurring billing renewal error.",
             "found": true
           },
-          "tokens": 1471,
-          "cost": 0.0017656
+          "tokens": 1479,
+          "cost": 0.0017976
         },
         {
           "lap": 1,
-          "thought": "I'll help you resolve this ticket. Let me gather the necessary information to process this refund request.",
+          "thought": "I'll help resolve this refund request. Let me gather the necessary information by checking the order details, refund policy, and customer tier.",
           "tool": "get_customer_tier",
           "args": {
             "customer_id": "CUST-401",
@@ -90,17 +90,17 @@
             "loyalty_years": 1,
             "found": true
           },
-          "tokens": 1471,
-          "cost": 0.0017656
+          "tokens": 1479,
+          "cost": 0.0017976
         },
         {
           "lap": 2,
-          "thought": "Ticket TCK-101\n\nHi there,\n\nI've reviewed your refund request for order ORD-5001, and I'm happy to help. Here's what I found:\n\n**Order Details:**\n- Order ID: ORD-5001\n- Amount: $49.00\n- Product: Cloudflare Pro Monthly (Subscription)\n- Purchase Date: 8 days ago\n- Status: Completed\n\n**Refund Decision: APPROVED**\n\nYour refund request qualifies for approval. The charge of $49.00 is within our 30-day refund window for subscriptions, and you haven't used the service, which meets our refund policy requirements. I'm processing a full refund of $49.00 to your original payment method immediately.\n\n**Next Steps:**\nYou can expect the refund to appear back on your card within 5-10 business days, depending on your bank's processing time. Once your bank processes the funds, they'll be credited to your account.\n\nThank you for your patience, and please let me know if you have any questions!\n\nBest regards,\nSupport Team",
+          "thought": "Ticket TCK-101\n\nHi there,\n\nI've reviewed your refund request for order ORD-5001. Here's what I found:\n\n**Order Details:**\n- Order ID: ORD-5001\n- Amount Charged: $49.00\n- Product: Cloudflare Pro Monthly (subscription)\n- Purchase Date: 8 days ago\n- Current Status: Not yet refunded\n\n**Refund Policy:**\nOur subscription refund policy allows full refunds within 30 days of billing if the service is unused or due to recurring billing renewal errors. Your purchase was made 8 days ago, which is well within the 30-day refund window.\n\n**Resolution:**\n✓ Your refund request is **APPROVED**. The $49.00 charge is within our refund eligibility window, and since you haven't used the account, you qualify for a full refund. We will process the refund to your original payment method immediately. You should see the funds returned to your card within 5-10 business days. Please note that your bank may take an additional 1-2 business days to post the credit to your account, depending on your financial institution.\n\nIf you have any questions or the refund does not appear within 10 business days, please don't hesitate to reach out.\n\nBest regards,\nSupport Team",
           "tool": null,
           "args": null,
           "result": null,
-          "tokens": 1988,
-          "cost": 0.0023904
+          "tokens": 2048,
+          "cost": 0.0026048
         }
       ]
     },
@@ -108,17 +108,17 @@
       "ticket_id": "TCK-102",
       "system": "Agent",
       "pass": true,
-      "latency_sec": 5.7019,
-      "tokens": 3492,
-      "cost_usd": 0.0042624,
+      "latency_sec": 4.4266,
+      "tokens": 3438,
+      "cost_usd": 0.004056,
       "iterations": 2,
       "branch_type": "standard_outside_window",
       "is_branching": false,
-      "reply": "Ticket TCK-102\n\nHi there,\n\nThank you for contacting us regarding your refund request for order ORD-5002.\n\nI've reviewed your account and the details of your charge. Here's what I found:\n\n**Order Amount:** $199.00  \n**Purchase Date:** 45 days ago  \n**Product:** Cloudflare Business Add-on (Subscription)  \n**Refund Window:** 30 days\n\nUnfortunately, your purchase falls outside our standard refund window. Our refund policy for subscriptions allows full refunds within 30 days of billing if the service is unused or if there's a recurring billing renewal error. Since your purchase was 45 days ago, it is now outside the eligible refund period.\n\nHowever, I understand your situation and want to help. I recommend reaching out to our agent team for a manual review of your case. Given that you're not actively using the service, there may be options available to discuss, such as service cancellation going forward to prevent future charges or potential exceptions based on your account history.\n\nTo proceed with an agent review, please reply to this ticket and we'll escalate your case to our senior support team.\n\nBest regards,\nSupport Team",
+      "reply": "Ticket TCK-102\n\nHi there,\n\nThank you for reaching out about your refund request for order ORD-5002.\n\nI've reviewed your account and order details. You were charged $199.00 for the Cloudflare Business Add-on subscription 45 days ago. Unfortunately, this purchase falls outside our refund window for subscription services. Our policy allows full refunds within 30 days of billing when a service is unused or if there is a recurring billing error. Since your purchase was 45 days ago, it exceeds the 30-day refund window, and we are unable to process a refund at this time.\n\nHowever, I understand your situation. I'd like to escalate this to one of our senior agents for a courtesy review, as you've been a loyal customer for 2 years. Please reply to this ticket confirming you would like us to proceed with a manual review, and we'll do our best to assist you further.\n\nBest regards,\nSupport Team",
       "steps": [
         {
           "lap": 1,
-          "thought": "I'll help resolve this refund request. Let me gather the necessary information by checking the order details, refund policy, and customer tier.",
+          "thought": "I'll help you resolve this ticket. Let me gather the necessary information about the order, customer tier, and refund policy.",
           "tool": "fetch_order_details",
           "args": {
             "order_id": "ORD-5002"
@@ -134,12 +134,12 @@
             "days_since_purchase": 45,
             "refunded_date": null
           },
-          "tokens": 1478,
-          "cost": 0.0017968
+          "tokens": 1475,
+          "cost": 0.0017848
         },
         {
           "lap": 1,
-          "thought": "I'll help resolve this refund request. Let me gather the necessary information by checking the order details, refund policy, and customer tier.",
+          "thought": "I'll help you resolve this ticket. Let me gather the necessary information about the order, customer tier, and refund policy.",
           "tool": "get_customer_tier",
           "args": {
             "customer_id": "CUST-402",
@@ -154,12 +154,12 @@
             "loyalty_years": 2,
             "found": true
           },
-          "tokens": 1478,
-          "cost": 0.0017968
+          "tokens": 1475,
+          "cost": 0.0017848
         },
         {
           "lap": 1,
-          "thought": "I'll help resolve this refund request. Let me gather the necessary information by checking the order details, refund policy, and customer tier.",
+          "thought": "I'll help you resolve this ticket. Let me gather the necessary information about the order, customer tier, and refund policy.",
           "tool": "lookup_refund_policy",
           "args": {
             "category": "subscription"
@@ -170,17 +170,17 @@
             "rules": "Full refund allowed within 30 days of billing if service is unused or recurring billing renewal error.",
             "found": true
           },
-          "tokens": 1478,
-          "cost": 0.0017968
+          "tokens": 1475,
+          "cost": 0.0017848
         },
         {
           "lap": 2,
-          "thought": "Ticket TCK-102\n\nHi there,\n\nThank you for contacting us regarding your refund request for order ORD-5002.\n\nI've reviewed your account and the details of your charge. Here's what I found:\n\n**Order Amount:** $199.00  \n**Purchase Date:** 45 days ago  \n**Product:** Cloudflare Business Add-on (Subscription)  \n**Refund Window:** 30 days\n\nUnfortunately, your purchase falls outside our standard refund window. Our refund policy for subscriptions allows full refunds within 30 days of billing if the service is unused or if there's a recurring billing renewal error. Since your purchase was 45 days ago, it is now outside the eligible refund period.\n\nHowever, I understand your situation and want to help. I recommend reaching out to our agent team for a manual review of your case. Given that you're not actively using the service, there may be options available to discuss, such as service cancellation going forward to prevent future charges or potential exceptions based on your account history.\n\nTo proceed with an agent review, please reply to this ticket and we'll escalate your case to our senior support team.\n\nBest regards,\nSupport Team",
+          "thought": "Ticket TCK-102\n\nHi there,\n\nThank you for reaching out about your refund request for order ORD-5002.\n\nI've reviewed your account and order details. You were charged $199.00 for the Cloudflare Business Add-on subscription 45 days ago. Unfortunately, this purchase falls outside our refund window for subscription services. Our policy allows full refunds within 30 days of billing when a service is unused or if there is a recurring billing error. Since your purchase was 45 days ago, it exceeds the 30-day refund window, and we are unable to process a refund at this time.\n\nHowever, I understand your situation. I'd like to escalate this to one of our senior agents for a courtesy review, as you've been a loyal customer for 2 years. Please reply to this ticket confirming you would like us to proceed with a manual review, and we'll do our best to assist you further.\n\nBest regards,\nSupport Team",
           "tool": null,
           "args": null,
           "result": null,
-          "tokens": 2014,
-          "cost": 0.0024656
+          "tokens": 1963,
+          "cost": 0.0022712
         }
       ]
     },
@@ -188,17 +188,17 @@
       "ticket_id": "TCK-103",
       "system": "Agent",
       "pass": true,
-      "latency_sec": 6.8061,
-      "tokens": 3491,
-      "cost_usd": 0.004236,
+      "latency_sec": 5.1398,
+      "tokens": 3520,
+      "cost_usd": 0.0043328,
       "iterations": 2,
       "branch_type": "priority_within_window",
       "is_branching": false,
-      "reply": "Ticket TCK-103 [ESCALATE:PRIORITY]\n\nHi there,\n\nThank you for contacting us, and we appreciate your Priority support status with us. I've reviewed your refund request for order ORD-5003.\n\n**Refund Approved:**\n\nYour order totaling **$250.00** for the Onboarding Consultation Package is **eligible for a full refund**. The purchase was made 14 days ago, which falls well within our 30-day refund window for services. According to our policy, consulting and onboarding packages are refundable within 30 days if hours have not been consumed—and your project was canceled before service delivery began.\n\nI'm processing your full refund of **$250.00** immediately. The funds will be returned to your original payment method within 5-10 business days. Please allow an additional 1-3 business days for your bank to clear the credit to your account.\n\nGiven your Priority customer status and 4-year loyalty with us, I've flagged this for expedited processing. You should see the refund reflected sooner than the standard window.\n\nBest regards,\nSupport Team",
+      "reply": "Ticket TCK-103 [ESCALATE:PRIORITY]\n\nHi there,\n\nGreat news! I've reviewed your refund request for the Onboarding Consultation Package and I'm pleased to confirm that your refund **is approved**.\n\n**Order Details:**\n- Order ID: ORD-5003\n- Amount: $250.00\n- Purchase Date: 14 days ago\n- Item: Onboarding Consultation Package\n\nYour purchase falls **within the 30-day refund window** for services. Our policy allows full refunds on consulting and onboarding packages within 30 days if hours have not been consumed. Since your project was canceled internally and the service has not yet been utilized, you qualify for a complete refund.\n\n**Next Steps:**\nYour refund of **$250.00** will be processed immediately to your original payment method. Please allow 5-10 business days for the funds to appear in your account. Depending on your financial institution, it may take an additional 1-2 business days for the amount to fully clear on your bank's side.\n\nThank you for your business with us, and we appreciate your patience. As a Priority customer, this request has been expedited accordingly.\n\nBest regards,\nSupport Team",
       "steps": [
         {
           "lap": 1,
-          "thought": "I'll help you resolve this ticket. Let me gather the necessary information by checking the order details, customer tier, and refund policy.",
+          "thought": "I'll resolve this ticket by gathering the necessary information. Let me fetch the order details, check the refund policy for services, and verify the customer's tier status.",
           "tool": "fetch_order_details",
           "args": {
             "order_id": "ORD-5003"
@@ -214,12 +214,28 @@
             "days_since_purchase": 14,
             "refunded_date": null
           },
-          "tokens": 1480,
-          "cost": 0.0017952
+          "tokens": 1486,
+          "cost": 0.0018192
         },
         {
           "lap": 1,
-          "thought": "I'll help you resolve this ticket. Let me gather the necessary information by checking the order details, customer tier, and refund policy.",
+          "thought": "I'll resolve this ticket by gathering the necessary information. Let me fetch the order details, check the refund policy for services, and verify the customer's tier status.",
+          "tool": "lookup_refund_policy",
+          "args": {
+            "category": "services"
+          },
+          "result": {
+            "category": "services",
+            "window_days": 30,
+            "rules": "Consulting and onboarding packages refundable within 30 days if hours have not been consumed.",
+            "found": true
+          },
+          "tokens": 1486,
+          "cost": 0.0018192
+        },
+        {
+          "lap": 1,
+          "thought": "I'll resolve this ticket by gathering the necessary information. Let me fetch the order details, check the refund policy for services, and verify the customer's tier status.",
           "tool": "get_customer_tier",
           "args": {
             "customer_id": "CUST-403",
@@ -234,33 +250,17 @@
             "loyalty_years": 4,
             "found": true
           },
-          "tokens": 1480,
-          "cost": 0.0017952
-        },
-        {
-          "lap": 1,
-          "thought": "I'll help you resolve this ticket. Let me gather the necessary information by checking the order details, customer tier, and refund policy.",
-          "tool": "lookup_refund_policy",
-          "args": {
-            "category": "services"
-          },
-          "result": {
-            "category": "services",
-            "window_days": 30,
-            "rules": "Consulting and onboarding packages refundable within 30 days if hours have not been consumed.",
-            "found": true
-          },
-          "tokens": 1480,
-          "cost": 0.0017952
+          "tokens": 1486,
+          "cost": 0.0018192
         },
         {
           "lap": 2,
-          "thought": "Ticket TCK-103 [ESCALATE:PRIORITY]\n\nHi there,\n\nThank you for contacting us, and we appreciate your Priority support status with us. I've reviewed your refund request for order ORD-5003.\n\n**Refund Approved:**\n\nYour order totaling **$250.00** for the Onboarding Consultation Package is **eligible for a full refund**. The purchase was made 14 days ago, which falls well within our 30-day refund window for services. According to our policy, consulting and onboarding packages are refundable within 30 days if hours have not been consumed—and your project was canceled before service delivery began.\n\nI'm processing your full refund of **$250.00** immediately. The funds will be returned to your original payment method within 5-10 business days. Please allow an additional 1-3 business days for your bank to clear the credit to your account.\n\nGiven your Priority customer status and 4-year loyalty with us, I've flagged this for expedited processing. You should see the refund reflected sooner than the standard window.\n\nBest regards,\nSupport Team",
+          "thought": "Ticket TCK-103 [ESCALATE:PRIORITY]\n\nHi there,\n\nGreat news! I've reviewed your refund request for the Onboarding Consultation Package and I'm pleased to confirm that your refund **is approved**.\n\n**Order Details:**\n- Order ID: ORD-5003\n- Amount: $250.00\n- Purchase Date: 14 days ago\n- Item: Onboarding Consultation Package\n\nYour purchase falls **within the 30-day refund window** for services. Our policy allows full refunds on consulting and onboarding packages within 30 days if hours have not been consumed. Since your project was canceled internally and the service has not yet been utilized, you qualify for a complete refund.\n\n**Next Steps:**\nYour refund of **$250.00** will be processed immediately to your original payment method. Please allow 5-10 business days for the funds to appear in your account. Depending on your financial institution, it may take an additional 1-2 business days for the amount to fully clear on your bank's side.\n\nThank you for your business with us, and we appreciate your patience. As a Priority customer, this request has been expedited accordingly.\n\nBest regards,\nSupport Team",
           "tool": null,
           "args": null,
           "result": null,
-          "tokens": 2011,
-          "cost": 0.0024408
+          "tokens": 2034,
+          "cost": 0.0025136
         }
       ]
     },
@@ -268,17 +268,17 @@
       "ticket_id": "TCK-104",
       "system": "Agent",
       "pass": true,
-      "latency_sec": 5.3779,
-      "tokens": 3431,
-      "cost_usd": 0.0040664,
+      "latency_sec": 5.3861,
+      "tokens": 3524,
+      "cost_usd": 0.0044256,
       "iterations": 2,
       "branch_type": "priority_outside_window",
       "is_branching": false,
-      "reply": "Ticket TCK-104 [ESCALATE:PRIORITY]\n\nHi there,\n\nThank you for reaching out regarding your urgent refund request for order ORD-5004.\n\nI've reviewed your account and order details. Your Dedicated Migration Engineer consulting package was billed for **$600.00** 60 days ago. However, our refund policy for services specifies a 30-day refund window for consulting and onboarding packages when hours have not been consumed. Since your purchase was placed 60 days ago, this request falls outside our standard refund window.\n\n**However**, given that you are a valued Priority customer with 5 years of loyalty, and considering your request for an executive exception due to vendor delays, I am escalating this case immediately to our senior management team for special review. Your Priority account status ensures expedited handling of this exception request.\n\nA senior agent will contact you within 24 business hours to discuss potential options and resolution pathways specific to your circumstances.\n\nBest regards,\nSupport Team",
+      "reply": "Ticket TCK-104 [ESCALATE:PRIORITY]\n\nHi there,\n\nThank you for reaching out regarding your refund request for order ORD-5004.\n\nI've reviewed your account and found the following:\n\n**Order Details:**\n- Order ID: ORD-5004\n- Amount: $600.00\n- Service: Dedicated Migration Engineer\n- Purchase Date: 60 days ago\n- Status: Completed\n\n**Refund Policy Status:**\nYour order falls under our services category, which has a standard refund window of 30 days for consulting and onboarding packages (if hours have not been consumed). Your purchase was placed 60 days ago, which places it **outside the standard refund window**.\n\n**Priority Account Exception:**\nHowever, I've noted that Apex Holdings is a valued Priority customer with 5 years of loyalty. Given your account status and the vendor delay circumstances you've mentioned, **this request qualifies for executive review and escalation**. \n\nYour case has been flagged for priority handling due to:\n1. Your Priority account tier status\n2. The stated vendor delay impacting service delivery\n3. Your long-standing customer relationship\n\nA senior support manager will contact you within 24 hours to discuss a potential executive exception to our standard refund policy. Please have any supporting documentation regarding the vendor delay ready for review.\n\nBest regards,\nSupport Team",
       "steps": [
         {
           "lap": 1,
-          "thought": "I'll help you resolve this ticket. Let me gather the necessary information about the order, customer tier, and refund policy.",
+          "thought": "I'll help you resolve this refund ticket. Let me gather the necessary information by checking the order details, refund policy, and customer tier.",
           "tool": "fetch_order_details",
           "args": {
             "order_id": "ORD-5004"
@@ -294,12 +294,28 @@
             "days_since_purchase": 60,
             "refunded_date": null
           },
-          "tokens": 1470,
-          "cost": 0.0017808
+          "tokens": 1474,
+          "cost": 0.0017968
         },
         {
           "lap": 1,
-          "thought": "I'll help you resolve this ticket. Let me gather the necessary information about the order, customer tier, and refund policy.",
+          "thought": "I'll help you resolve this refund ticket. Let me gather the necessary information by checking the order details, refund policy, and customer tier.",
+          "tool": "lookup_refund_policy",
+          "args": {
+            "category": "services"
+          },
+          "result": {
+            "category": "services",
+            "window_days": 30,
+            "rules": "Consulting and onboarding packages refundable within 30 days if hours have not been consumed.",
+            "found": true
+          },
+          "tokens": 1474,
+          "cost": 0.0017968
+        },
+        {
+          "lap": 1,
+          "thought": "I'll help you resolve this refund ticket. Let me gather the necessary information by checking the order details, refund policy, and customer tier.",
           "tool": "get_customer_tier",
           "args": {
             "customer_id": "CUST-404",
@@ -314,33 +330,17 @@
             "loyalty_years": 5,
             "found": true
           },
-          "tokens": 1470,
-          "cost": 0.0017808
-        },
-        {
-          "lap": 1,
-          "thought": "I'll help you resolve this ticket. Let me gather the necessary information about the order, customer tier, and refund policy.",
-          "tool": "lookup_refund_policy",
-          "args": {
-            "category": "services"
-          },
-          "result": {
-            "category": "services",
-            "window_days": 30,
-            "rules": "Consulting and onboarding packages refundable within 30 days if hours have not been consumed.",
-            "found": true
-          },
-          "tokens": 1470,
-          "cost": 0.0017808
+          "tokens": 1474,
+          "cost": 0.0017968
         },
         {
           "lap": 2,
-          "thought": "Ticket TCK-104 [ESCALATE:PRIORITY]\n\nHi there,\n\nThank you for reaching out regarding your urgent refund request for order ORD-5004.\n\nI've reviewed your account and order details. Your Dedicated Migration Engineer consulting package was billed for **$600.00** 60 days ago. However, our refund policy for services specifies a 30-day refund window for consulting and onboarding packages when hours have not been consumed. Since your purchase was placed 60 days ago, this request falls outside our standard refund window.\n\n**However**, given that you are a valued Priority customer with 5 years of loyalty, and considering your request for an executive exception due to vendor delays, I am escalating this case immediately to our senior management team for special review. Your Priority account status ensures expedited handling of this exception request.\n\nA senior agent will contact you within 24 business hours to discuss potential options and resolution pathways specific to your circumstances.\n\nBest regards,\nSupport Team",
+          "thought": "Ticket TCK-104 [ESCALATE:PRIORITY]\n\nHi there,\n\nThank you for reaching out regarding your refund request for order ORD-5004.\n\nI've reviewed your account and found the following:\n\n**Order Details:**\n- Order ID: ORD-5004\n- Amount: $600.00\n- Service: Dedicated Migration Engineer\n- Purchase Date: 60 days ago\n- Status: Completed\n\n**Refund Policy Status:**\nYour order falls under our services category, which has a standard refund window of 30 days for consulting and onboarding packages (if hours have not been consumed). Your purchase was placed 60 days ago, which places it **outside the standard refund window**.\n\n**Priority Account Exception:**\nHowever, I've noted that Apex Holdings is a valued Priority customer with 5 years of loyalty. Given your account status and the vendor delay circumstances you've mentioned, **this request qualifies for executive review and escalation**. \n\nYour case has been flagged for priority handling due to:\n1. Your Priority account tier status\n2. The stated vendor delay impacting service delivery\n3. Your long-standing customer relationship\n\nA senior support manager will contact you within 24 hours to discuss a potential executive exception to our standard refund policy. Please have any supporting documentation regarding the vendor delay ready for review.\n\nBest regards,\nSupport Team",
           "tool": null,
           "args": null,
           "result": null,
-          "tokens": 1961,
-          "cost": 0.0022856
+          "tokens": 2050,
+          "cost": 0.0026288
         }
       ]
     },
@@ -348,37 +348,17 @@
       "ticket_id": "TCK-105",
       "system": "Agent",
       "pass": true,
-      "latency_sec": 5.3095,
-      "tokens": 3450,
-      "cost_usd": 0.00412,
+      "latency_sec": 5.4147,
+      "tokens": 3465,
+      "cost_usd": 0.0041768,
       "iterations": 2,
       "branch_type": "already_refunded",
       "is_branching": false,
-      "reply": "Ticket TCK-105\n\nHi there,\n\nThank you for reaching out about your refund status for order ORD-5005.\n\nI've reviewed your account and order records, and I can confirm that your refund for the $79.00 Zendesk Integration License has already been processed and issued. The refund was initiated on September 24, 2026, which is within the 30-day refund window for software licenses.\n\nSince the refund has already been processed, the credit may not be immediately visible on your card statement due to bank processing times. Refunds typically take 5-10 business days to appear, depending on your financial institution. Since the refund was initiated on September 24th, it should be reflected on your account very soon if it hasn't already.\n\nPlease check your bank or credit card statement again, and if you still don't see the credit after 10 business days from the refund date, please reply to this ticket with your bank statement showing the transaction, and we'll investigate further with our payment processor.\n\nBest regards,\nSupport Team",
+      "reply": "Ticket TCK-105\n\nHi there,\n\nThank you for reaching out regarding your refund status for order ORD-5005. I've reviewed your account and have good news!\n\nYour refund of $79.00 for the Zendesk Integration License has already been processed and approved. The refund was issued on September 24, 2026. Since digital software license refunds are eligible within our 30-day policy window, your request was within the eligible timeframe and has been completed.\n\nThe reason you may not yet see the credit on your card statement is due to bank processing times. Refunds typically take 5-10 business days to appear on your original payment method after processing, and in some cases, your financial institution may require an additional 2-3 business days for final clearing. We recommend checking your bank account again within the next few business days—the credit should appear shortly.\n\nIf you continue to see the refund missing from your account after 10 business days from the processing date (September 24), please let us know and we'll escalate this with your bank to investigate further.\n\nBest regards,\nSupport Team",
       "steps": [
         {
           "lap": 1,
-          "thought": "I'll help you resolve this ticket. Let me gather the necessary information about the customer, order, and refund policy.",
-          "tool": "get_customer_tier",
-          "args": {
-            "customer_id": "CUST-405",
-            "channel": "email"
-          },
-          "result": {
-            "customer_id": "CUST-405",
-            "name": "Carol Danvers",
-            "tier": "Standard",
-            "channel": "email",
-            "is_priority": false,
-            "loyalty_years": 1,
-            "found": true
-          },
-          "tokens": 1470,
-          "cost": 0.0017776
-        },
-        {
-          "lap": 1,
-          "thought": "I'll help you resolve this ticket. Let me gather the necessary information about the customer, order, and refund policy.",
+          "thought": "I'll help you resolve this ticket. Let me gather the necessary information about the order, customer tier, and refund policy.",
           "tool": "fetch_order_details",
           "args": {
             "order_id": "ORD-5005"
@@ -394,12 +374,32 @@
             "days_since_purchase": 12,
             "refunded_date": "2026-09-24"
           },
-          "tokens": 1470,
-          "cost": 0.0017776
+          "tokens": 1471,
+          "cost": 0.0017816
         },
         {
           "lap": 1,
-          "thought": "I'll help you resolve this ticket. Let me gather the necessary information about the customer, order, and refund policy.",
+          "thought": "I'll help you resolve this ticket. Let me gather the necessary information about the order, customer tier, and refund policy.",
+          "tool": "get_customer_tier",
+          "args": {
+            "customer_id": "CUST-405",
+            "channel": "email"
+          },
+          "result": {
+            "customer_id": "CUST-405",
+            "name": "Carol Danvers",
+            "tier": "Standard",
+            "channel": "email",
+            "is_priority": false,
+            "loyalty_years": 1,
+            "found": true
+          },
+          "tokens": 1471,
+          "cost": 0.0017816
+        },
+        {
+          "lap": 1,
+          "thought": "I'll help you resolve this ticket. Let me gather the necessary information about the order, customer tier, and refund policy.",
           "tool": "lookup_refund_policy",
           "args": {
             "category": "software"
@@ -410,17 +410,17 @@
             "rules": "Digital software licenses eligible for refund within 30 days of activation key purchase.",
             "found": true
           },
-          "tokens": 1470,
-          "cost": 0.0017776
+          "tokens": 1471,
+          "cost": 0.0017816
         },
         {
           "lap": 2,
-          "thought": "Ticket TCK-105\n\nHi there,\n\nThank you for reaching out about your refund status for order ORD-5005.\n\nI've reviewed your account and order records, and I can confirm that your refund for the $79.00 Zendesk Integration License has already been processed and issued. The refund was initiated on September 24, 2026, which is within the 30-day refund window for software licenses.\n\nSince the refund has already been processed, the credit may not be immediately visible on your card statement due to bank processing times. Refunds typically take 5-10 business days to appear, depending on your financial institution. Since the refund was initiated on September 24th, it should be reflected on your account very soon if it hasn't already.\n\nPlease check your bank or credit card statement again, and if you still don't see the credit after 10 business days from the refund date, please reply to this ticket with your bank statement showing the transaction, and we'll investigate further with our payment processor.\n\nBest regards,\nSupport Team",
+          "thought": "Ticket TCK-105\n\nHi there,\n\nThank you for reaching out regarding your refund status for order ORD-5005. I've reviewed your account and have good news!\n\nYour refund of $79.00 for the Zendesk Integration License has already been processed and approved. The refund was issued on September 24, 2026. Since digital software license refunds are eligible within our 30-day policy window, your request was within the eligible timeframe and has been completed.\n\nThe reason you may not yet see the credit on your card statement is due to bank processing times. Refunds typically take 5-10 business days to appear on your original payment method after processing, and in some cases, your financial institution may require an additional 2-3 business days for final clearing. We recommend checking your bank account again within the next few business days—the credit should appear shortly.\n\nIf you continue to see the refund missing from your account after 10 business days from the processing date (September 24), please let us know and we'll escalate this with your bank to investigate further.\n\nBest regards,\nSupport Team",
           "tool": null,
           "args": null,
           "result": null,
-          "tokens": 1980,
-          "cost": 0.0023424
+          "tokens": 1994,
+          "cost": 0.0023952
         }
       ]
     },
@@ -428,17 +428,17 @@
       "ticket_id": "TCK-106",
       "system": "Agent",
       "pass": true,
-      "latency_sec": 5.0055,
-      "tokens": 3450,
-      "cost_usd": 0.0040496,
+      "latency_sec": 4.5281,
+      "tokens": 3528,
+      "cost_usd": 0.0043616,
       "iterations": 2,
       "branch_type": "hardware_within_14d",
       "is_branching": false,
-      "reply": "Ticket TCK-106\n\nHi there,\n\nThank you for contacting us regarding your FIDO2 Security Key 2-Pack purchase. I've reviewed your order and refund eligibility.\n\n**Refund Approved**\n\nYour order ORD-5006 for **$120.00** qualifies for a full refund. The purchase was made 10 days ago, which is within our 14-day refund window for hardware devices. According to our policy, physical security keys are eligible for refund within 14 days of delivery when returned in original packaging.\n\nYour refund of **$120.00** will be processed to your original payment method within 5-10 business days. Please ensure the FIDO2 Security Key 2-Pack is returned in its original packaging to expedite the process.\n\nIf you have any questions about the return shipping process or need further assistance, please let me know.\n\nBest regards,\nSupport Team",
+      "reply": "Ticket TCK-106\n\nHi there,\n\nThank you for contacting us regarding your FIDO2 Security Key 2-Pack purchase. I've reviewed your order and refund eligibility.\n\n**Order Details:**\n- Order ID: ORD-5006\n- Amount: $120.00\n- Purchase Date: 10 days ago\n- Item: FIDO2 Security Key 2-Pack (Hardware)\n- Current Status: Completed\n\n**Refund Decision: APPROVED**\n\nGreat news! Your refund request is approved. The purchase was made 10 days ago, which is within our 14-day refund window for hardware items. Our policy allows full refunds on physical security keys and hardware devices within 14 days of delivery when returned in original packaging.\n\nYour full refund of **$120.00** will be processed to your original payment method within 5-10 business days. Please allow an additional 2-3 business days for your bank to clear the funds, depending on your financial institution.\n\nTo proceed, please ensure the FIDO2 Security Key 2-Pack is returned in its original packaging and condition. If you have not already initiated the return, please reply with confirmation and we'll send you a prepaid return shipping label.\n\nBest regards,\nSupport Team",
       "steps": [
         {
           "lap": 1,
-          "thought": "I'll help you resolve this refund ticket. Let me gather the necessary information about the order, refund policy, and customer tier.",
+          "thought": "I'll help you resolve this ticket. Let me gather the necessary information by checking the order details, refund policy, and customer tier.",
           "tool": "fetch_order_details",
           "args": {
             "order_id": "ORD-5006"
@@ -459,7 +459,7 @@
         },
         {
           "lap": 1,
-          "thought": "I'll help you resolve this refund ticket. Let me gather the necessary information about the order, refund policy, and customer tier.",
+          "thought": "I'll help you resolve this ticket. Let me gather the necessary information by checking the order details, refund policy, and customer tier.",
           "tool": "lookup_refund_policy",
           "args": {
             "category": "hardware"
@@ -475,17 +475,17 @@
         },
         {
           "lap": 1,
-          "thought": "I'll help you resolve this refund ticket. Let me gather the necessary information about the order, refund policy, and customer tier.",
+          "thought": "I'll help you resolve this ticket. Let me gather the necessary information by checking the order details, refund policy, and customer tier.",
           "tool": "get_customer_tier",
           "args": {
             "customer_id": "CUST-406",
-            "channel": "email"
+            "channel": "web"
           },
           "result": {
             "customer_id": "CUST-406",
             "name": "David Miller",
             "tier": "Standard",
-            "channel": "email",
+            "channel": "web",
             "is_priority": false,
             "loyalty_years": 3,
             "found": true
@@ -495,12 +495,12 @@
         },
         {
           "lap": 2,
-          "thought": "Ticket TCK-106\n\nHi there,\n\nThank you for contacting us regarding your FIDO2 Security Key 2-Pack purchase. I've reviewed your order and refund eligibility.\n\n**Refund Approved**\n\nYour order ORD-5006 for **$120.00** qualifies for a full refund. The purchase was made 10 days ago, which is within our 14-day refund window for hardware devices. According to our policy, physical security keys are eligible for refund within 14 days of delivery when returned in original packaging.\n\nYour refund of **$120.00** will be processed to your original payment method within 5-10 business days. Please ensure the FIDO2 Security Key 2-Pack is returned in its original packaging to expedite the process.\n\nIf you have any questions about the return shipping process or need further assistance, please let me know.\n\nBest regards,\nSupport Team",
+          "thought": "Ticket TCK-106\n\nHi there,\n\nThank you for contacting us regarding your FIDO2 Security Key 2-Pack purchase. I've reviewed your order and refund eligibility.\n\n**Order Details:**\n- Order ID: ORD-5006\n- Amount: $120.00\n- Purchase Date: 10 days ago\n- Item: FIDO2 Security Key 2-Pack (Hardware)\n- Current Status: Completed\n\n**Refund Decision: APPROVED**\n\nGreat news! Your refund request is approved. The purchase was made 10 days ago, which is within our 14-day refund window for hardware items. Our policy allows full refunds on physical security keys and hardware devices within 14 days of delivery when returned in original packaging.\n\nYour full refund of **$120.00** will be processed to your original payment method within 5-10 business days. Please allow an additional 2-3 business days for your bank to clear the funds, depending on your financial institution.\n\nTo proceed, please ensure the FIDO2 Security Key 2-Pack is returned in its original packaging and condition. If you have not already initiated the return, please reply with confirmation and we'll send you a prepaid return shipping label.\n\nBest regards,\nSupport Team",
           "tool": null,
           "args": null,
           "result": null,
-          "tokens": 1967,
-          "cost": 0.002252
+          "tokens": 2045,
+          "cost": 0.002564
         }
       ]
     },
@@ -508,17 +508,17 @@
       "ticket_id": "TCK-107",
       "system": "Agent",
       "pass": true,
-      "latency_sec": 5.5306,
-      "tokens": 3429,
-      "cost_usd": 0.0040904,
+      "latency_sec": 4.9914,
+      "tokens": 3444,
+      "cost_usd": 0.0040928,
       "iterations": 2,
       "branch_type": "hardware_outside_14d",
       "is_branching": false,
-      "reply": "Ticket TCK-107\n\nHi there,\n\nThank you for reaching out regarding your refund request for order ORD-5007.\n\nI've reviewed your account and order details. Unfortunately, I must inform you that your refund request cannot be approved at this time. Your FIDO2 Security Key 2-Pack purchase of $120.00 was made 22 days ago, which falls **outside our refund window of 14 days** for hardware products. While I understand the item remains in original, sealed packaging, our policy stipulates that refunds for physical security hardware must be requested within 14 days of delivery.\n\nBecause your purchase is outside the eligible refund window, I am unable to process a refund to your original payment method at this time.\n\nHowever, I recognize this is just outside our standard window. I'd like to escalate your case to our senior support team for a discretionary review of your refund eligibility. Please reply to this message confirming you'd like us to proceed with an agent review, and we'll assess your specific situation further.\n\nBest regards,\nSupport Team",
+      "reply": "Ticket TCK-107\n\nHi there,\n\nThank you for reaching out regarding your refund request for order ORD-5007.\n\nI've reviewed your request and unfortunately I must inform you that your refund cannot be approved at this time. Your purchase of the FIDO2 Security Key 2-Pack for **$120.00** was made **22 days ago**, which is **outside the refund window** for hardware products. Our refund policy allows for returns of physical security keys and hardware devices within **14 days of delivery** when in original packaging.\n\nWhile your item is still sealed in its original packaging, the purchase date exceeds our refund eligibility period by 8 days. Due to this policy constraint, I'm unable to process a refund for this order.\n\nHowever, I encourage you to reply to this ticket if you believe there are extenuating circumstances. Your case can be escalated to our senior support team for manual review and consideration of exceptions.\n\nBest regards,\nSupport Team",
       "steps": [
         {
           "lap": 1,
-          "thought": "I'll help you resolve this refund request. Let me gather the necessary information.",
+          "thought": "I'll help you resolve this refund ticket. Let me gather the necessary information by checking the order details, refund policy for hardware, and the customer's tier status.",
           "tool": "fetch_order_details",
           "args": {
             "order_id": "ORD-5007"
@@ -534,12 +534,28 @@
             "days_since_purchase": 22,
             "refunded_date": null
           },
-          "tokens": 1457,
-          "cost": 0.0017416
+          "tokens": 1475,
+          "cost": 0.0018136
         },
         {
           "lap": 1,
-          "thought": "I'll help you resolve this refund request. Let me gather the necessary information.",
+          "thought": "I'll help you resolve this refund ticket. Let me gather the necessary information by checking the order details, refund policy for hardware, and the customer's tier status.",
+          "tool": "lookup_refund_policy",
+          "args": {
+            "category": "hardware"
+          },
+          "result": {
+            "category": "hardware",
+            "window_days": 14,
+            "rules": "Physical security keys and hardware devices eligible for refund within 14 days of delivery in original packaging.",
+            "found": true
+          },
+          "tokens": 1475,
+          "cost": 0.0018136
+        },
+        {
+          "lap": 1,
+          "thought": "I'll help you resolve this refund ticket. Let me gather the necessary information by checking the order details, refund policy for hardware, and the customer's tier status.",
           "tool": "get_customer_tier",
           "args": {
             "customer_id": "CUST-407",
@@ -554,33 +570,17 @@
             "loyalty_years": 1,
             "found": true
           },
-          "tokens": 1457,
-          "cost": 0.0017416
-        },
-        {
-          "lap": 1,
-          "thought": "I'll help you resolve this refund request. Let me gather the necessary information.",
-          "tool": "lookup_refund_policy",
-          "args": {
-            "category": "hardware"
-          },
-          "result": {
-            "category": "hardware",
-            "window_days": 14,
-            "rules": "Physical security keys and hardware devices eligible for refund within 14 days of delivery in original packaging.",
-            "found": true
-          },
-          "tokens": 1457,
-          "cost": 0.0017416
+          "tokens": 1475,
+          "cost": 0.0018136
         },
         {
           "lap": 2,
-          "thought": "Ticket TCK-107\n\nHi there,\n\nThank you for reaching out regarding your refund request for order ORD-5007.\n\nI've reviewed your account and order details. Unfortunately, I must inform you that your refund request cannot be approved at this time. Your FIDO2 Security Key 2-Pack purchase of $120.00 was made 22 days ago, which falls **outside our refund window of 14 days** for hardware products. While I understand the item remains in original, sealed packaging, our policy stipulates that refunds for physical security hardware must be requested within 14 days of delivery.\n\nBecause your purchase is outside the eligible refund window, I am unable to process a refund to your original payment method at this time.\n\nHowever, I recognize this is just outside our standard window. I'd like to escalate your case to our senior support team for a discretionary review of your refund eligibility. Please reply to this message confirming you'd like us to proceed with an agent review, and we'll assess your specific situation further.\n\nBest regards,\nSupport Team",
+          "thought": "Ticket TCK-107\n\nHi there,\n\nThank you for reaching out regarding your refund request for order ORD-5007.\n\nI've reviewed your request and unfortunately I must inform you that your refund cannot be approved at this time. Your purchase of the FIDO2 Security Key 2-Pack for **$120.00** was made **22 days ago**, which is **outside the refund window** for hardware products. Our refund policy allows for returns of physical security keys and hardware devices within **14 days of delivery** when in original packaging.\n\nWhile your item is still sealed in its original packaging, the purchase date exceeds our refund eligibility period by 8 days. Due to this policy constraint, I'm unable to process a refund for this order.\n\nHowever, I encourage you to reply to this ticket if you believe there are extenuating circumstances. Your case can be escalated to our senior support team for manual review and consideration of exceptions.\n\nBest regards,\nSupport Team",
           "tool": null,
           "args": null,
           "result": null,
-          "tokens": 1972,
-          "cost": 0.0023488
+          "tokens": 1969,
+          "cost": 0.0022792
         }
       ]
     },
@@ -588,17 +588,17 @@
       "ticket_id": "TCK-108",
       "system": "Agent",
       "pass": true,
-      "latency_sec": 5.8086,
-      "tokens": 3297,
-      "cost_usd": 0.0039784,
+      "latency_sec": 4.8619,
+      "tokens": 3319,
+      "cost_usd": 0.0040824,
       "iterations": 2,
       "branch_type": "missing_order_receipt_verification",
       "is_branching": true,
-      "reply": "Ticket TCK-108\n\nHi there,\n\nThank you for contacting us regarding your $85.00 charge. I've conducted a thorough search of our billing transaction records, and the order ORD-9991 does not appear in our system at this time.\n\nThis could occur due to a processing delay or a system synchronization issue. Here's what I recommend:\n\n**Next Steps:**\n1. Please provide a screenshot or details from your bank/payment method statement showing the $85.00 charge, including the transaction date and merchant name.\n2. Include any confirmation email or receipt you may have received at the time of purchase.\n3. Provide the exact date and time of when the charge was processed on your account.\n\nOnce we have this information, I can escalate this to our technical team and billing department to:\n- Locate the missing transaction in our database\n- Verify the charge legitimacy\n- Process an immediate refund if the charge cannot be reconciled\n- Investigate any system processing delays\n\nThis type of issue requires investigation across multiple systems, and your payment proof will help us expedite the resolution. Please reply with the requested documentation, and we'll prioritize your case.\n\nBest regards,\nSupport Team",
+      "reply": "Ticket TCK-108\n\nHi there,\n\nThank you for bringing this to our attention. I've investigated your refund request for order ORD-9991 ($85.00), and I've discovered that this order could not be located in our billing transaction records. This aligns with your report that the order is missing from your billing dashboard.\n\nSince the charge appears in your account but is not showing in our system, this indicates a potential processing or synchronization issue. Here's what I recommend:\n\n1. **Please provide payment proof**: Send us a screenshot or copy of your bank statement showing the $85.00 charge with the transaction date and any reference/confirmation numbers associated with it. This will help us locate and match the transaction in our backend systems.\n\n2. **Escalation path**: Once we have the payment proof, we can escalate this to our billing and technical teams to investigate the discrepancy. Given that this charge occurred yesterday, there may be a temporary system lag or a transaction that hasn't fully propagated through our database yet.\n\n3. **Immediate resolution**: Our team will prioritize locating this transaction and processing your refund to your original payment method within 5-10 business days once we can confirm the charge details.\n\nPlease reply with your bank statement details or payment confirmation, and we'll get this resolved for you right away.\n\nBest regards,\nSupport Team",
       "steps": [
         {
           "lap": 1,
-          "thought": "I'll help you resolve this ticket. Let me gather the necessary information by checking the order details, refund policy, and customer tier.",
+          "thought": "I'll help you resolve this ticket. Let me gather the necessary information to investigate this order and refund request.",
           "tool": "fetch_order_details",
           "args": {
             "order_id": "ORD-9991"
@@ -609,37 +609,37 @@
             "order_id": "ORD-9991",
             "error": "Order ORD-9991 was not found in billing transaction records."
           },
-          "tokens": 1433,
-          "cost": 0.0016328
+          "tokens": 1428,
+          "cost": 0.0016128
         },
         {
           "lap": 1,
-          "thought": "I'll help you resolve this ticket. Let me gather the necessary information by checking the order details, refund policy, and customer tier.",
+          "thought": "I'll help you resolve this ticket. Let me gather the necessary information to investigate this order and refund request.",
           "tool": "get_customer_tier",
           "args": {
             "customer_id": "CUST-408",
-            "channel": "email"
+            "channel": "web"
           },
           "result": {
             "customer_id": "CUST-408",
             "name": "Frank Castle",
             "tier": "Standard",
-            "channel": "email",
+            "channel": "web",
             "is_priority": false,
             "loyalty_years": 2,
             "found": true
           },
-          "tokens": 1433,
-          "cost": 0.0016328
+          "tokens": 1428,
+          "cost": 0.0016128
         },
         {
           "lap": 2,
-          "thought": "Ticket TCK-108\n\nHi there,\n\nThank you for contacting us regarding your $85.00 charge. I've conducted a thorough search of our billing transaction records, and the order ORD-9991 does not appear in our system at this time.\n\nThis could occur due to a processing delay or a system synchronization issue. Here's what I recommend:\n\n**Next Steps:**\n1. Please provide a screenshot or details from your bank/payment method statement showing the $85.00 charge, including the transaction date and merchant name.\n2. Include any confirmation email or receipt you may have received at the time of purchase.\n3. Provide the exact date and time of when the charge was processed on your account.\n\nOnce we have this information, I can escalate this to our technical team and billing department to:\n- Locate the missing transaction in our database\n- Verify the charge legitimacy\n- Process an immediate refund if the charge cannot be reconciled\n- Investigate any system processing delays\n\nThis type of issue requires investigation across multiple systems, and your payment proof will help us expedite the resolution. Please reply with the requested documentation, and we'll prioritize your case.\n\nBest regards,\nSupport Team",
+          "thought": "Ticket TCK-108\n\nHi there,\n\nThank you for bringing this to our attention. I've investigated your refund request for order ORD-9991 ($85.00), and I've discovered that this order could not be located in our billing transaction records. This aligns with your report that the order is missing from your billing dashboard.\n\nSince the charge appears in your account but is not showing in our system, this indicates a potential processing or synchronization issue. Here's what I recommend:\n\n1. **Please provide payment proof**: Send us a screenshot or copy of your bank statement showing the $85.00 charge with the transaction date and any reference/confirmation numbers associated with it. This will help us locate and match the transaction in our backend systems.\n\n2. **Escalation path**: Once we have the payment proof, we can escalate this to our billing and technical teams to investigate the discrepancy. Given that this charge occurred yesterday, there may be a temporary system lag or a transaction that hasn't fully propagated through our database yet.\n\n3. **Immediate resolution**: Our team will prioritize locating this transaction and processing your refund to your original payment method within 5-10 business days once we can confirm the charge details.\n\nPlease reply with your bank statement details or payment confirmation, and we'll get this resolved for you right away.\n\nBest regards,\nSupport Team",
           "tool": null,
           "args": null,
           "result": null,
-          "tokens": 1864,
-          "cost": 0.0023456
+          "tokens": 1891,
+          "cost": 0.0024696
         }
       ]
     },
@@ -647,17 +647,17 @@
       "ticket_id": "TCK-109",
       "system": "Agent",
       "pass": true,
-      "latency_sec": 6.0986,
-      "tokens": 3379,
-      "cost_usd": 0.00422,
+      "latency_sec": 5.3923,
+      "tokens": 3382,
+      "cost_usd": 0.0042064,
       "iterations": 2,
       "branch_type": "missing_order_priority_escalation",
       "is_branching": true,
-      "reply": "Ticket TCK-109 [ESCALATE:PRIORITY]\n\nHi there,\n\nThank you for reaching out, and I understand your concern regarding the $1,200.00 charge under order reference ORD-9992. I've immediately investigated this matter in our system.\n\n**Investigation Results:**\nOur records show that order ORD-9992 was not found in our billing transaction database. This is a critical issue that requires urgent attention, especially given your Priority customer status with us at Vanguard Global.\n\n**Next Steps:**\nTo resolve this charge discrepancy quickly, I need your assistance with the following:\n\n1. **Provide proof of charge:** Please forward a screenshot or copy of your credit card statement showing the $1,200.00 transaction, including the transaction date and merchant reference details.\n2. **Bank statement documentation:** If available, attach the corresponding bank statement extract showing this charge.\n\nGiven that we cannot locate this order in our system and you're a valued Priority customer with 6 years of loyalty, I'm immediately escalating this to our billing investigation team for expedited review. They will:\n- Cross-reference the charge against our payment gateway records\n- Investigate whether this is a duplicate, fraudulent, or system error\n- Authorize a reversal or credit if the charge cannot be verified\n- Provide you with a resolution within 24 business hours\n\nPlease reply with the requested documentation, and rest assured this will be treated as our highest priority.\n\nBest regards,\nSupport Team",
+      "reply": "Ticket TCK-109 [ESCALATE:PRIORITY]\n\nHi there,\n\nThank you for bringing this urgent matter to our attention. I've investigated the charge of $1,200.00 referenced as ORD-9992, and I can confirm that **this order was not found in our billing transaction records**.\n\nGiven that the charge appears on your credit card statement but does not exist in our system, this requires immediate escalation. Here's what we need to do:\n\n**Next Steps:**\n1. **Provide payment proof**: Please reply with a screenshot or copy of your credit card statement showing the charge for ORD-9992 ($1,200.00), including the transaction date and merchant name as displayed by your bank.\n2. **Fraud review**: Given your Priority customer status and the missing order record, this ticket is being escalated to our Finance & Fraud Investigation team for urgent review.\n3. **Potential outcomes**: This could indicate:\n   - A duplicate charge error on our end (reversible)\n   - A fraudulent transaction using our reference (requiring bank dispute filing)\n   - A system processing error that requires manual investigation\n\n**Your Priority Status Guarantee**: As a valued 6-year customer with Priority tier status, you will receive dedicated investigation support and a resolution response within 24 business hours.\n\nPlease send the payment proof at your earliest convenience so we can fast-track this investigation.\n\nBest regards,\nSupport Team",
       "steps": [
         {
           "lap": 1,
-          "thought": "I'll help you resolve this ticket. Let me gather the necessary information about this order and customer.",
+          "thought": "I'll help you resolve this ticket. Let me gather the necessary information by checking the order details, customer tier, and refund policy.",
           "tool": "fetch_order_details",
           "args": {
             "order_id": "ORD-9992"
@@ -668,12 +668,12 @@
             "order_id": "ORD-9992",
             "error": "Order ORD-9992 was not found in billing transaction records."
           },
-          "tokens": 1441,
-          "cost": 0.0016136
+          "tokens": 1449,
+          "cost": 0.0016456
         },
         {
           "lap": 1,
-          "thought": "I'll help you resolve this ticket. Let me gather the necessary information about this order and customer.",
+          "thought": "I'll help you resolve this ticket. Let me gather the necessary information by checking the order details, customer tier, and refund policy.",
           "tool": "get_customer_tier",
           "args": {
             "customer_id": "CUST-409",
@@ -688,17 +688,17 @@
             "loyalty_years": 6,
             "found": true
           },
-          "tokens": 1441,
-          "cost": 0.0016136
+          "tokens": 1449,
+          "cost": 0.0016456
         },
         {
           "lap": 2,
-          "thought": "Ticket TCK-109 [ESCALATE:PRIORITY]\n\nHi there,\n\nThank you for reaching out, and I understand your concern regarding the $1,200.00 charge under order reference ORD-9992. I've immediately investigated this matter in our system.\n\n**Investigation Results:**\nOur records show that order ORD-9992 was not found in our billing transaction database. This is a critical issue that requires urgent attention, especially given your Priority customer status with us at Vanguard Global.\n\n**Next Steps:**\nTo resolve this charge discrepancy quickly, I need your assistance with the following:\n\n1. **Provide proof of charge:** Please forward a screenshot or copy of your credit card statement showing the $1,200.00 transaction, including the transaction date and merchant reference details.\n2. **Bank statement documentation:** If available, attach the corresponding bank statement extract showing this charge.\n\nGiven that we cannot locate this order in our system and you're a valued Priority customer with 6 years of loyalty, I'm immediately escalating this to our billing investigation team for expedited review. They will:\n- Cross-reference the charge against our payment gateway records\n- Investigate whether this is a duplicate, fraudulent, or system error\n- Authorize a reversal or credit if the charge cannot be verified\n- Provide you with a resolution within 24 business hours\n\nPlease reply with the requested documentation, and rest assured this will be treated as our highest priority.\n\nBest regards,\nSupport Team",
+          "thought": "Ticket TCK-109 [ESCALATE:PRIORITY]\n\nHi there,\n\nThank you for bringing this urgent matter to our attention. I've investigated the charge of $1,200.00 referenced as ORD-9992, and I can confirm that **this order was not found in our billing transaction records**.\n\nGiven that the charge appears on your credit card statement but does not exist in our system, this requires immediate escalation. Here's what we need to do:\n\n**Next Steps:**\n1. **Provide payment proof**: Please reply with a screenshot or copy of your credit card statement showing the charge for ORD-9992 ($1,200.00), including the transaction date and merchant name as displayed by your bank.\n2. **Fraud review**: Given your Priority customer status and the missing order record, this ticket is being escalated to our Finance & Fraud Investigation team for urgent review.\n3. **Potential outcomes**: This could indicate:\n   - A duplicate charge error on our end (reversible)\n   - A fraudulent transaction using our reference (requiring bank dispute filing)\n   - A system processing error that requires manual investigation\n\n**Your Priority Status Guarantee**: As a valued 6-year customer with Priority tier status, you will receive dedicated investigation support and a resolution response within 24 business hours.\n\nPlease send the payment proof at your earliest convenience so we can fast-track this investigation.\n\nBest regards,\nSupport Team",
           "tool": null,
           "args": null,
           "result": null,
-          "tokens": 1938,
-          "cost": 0.0026064
+          "tokens": 1933,
+          "cost": 0.0025608
         }
       ]
     },
@@ -706,33 +706,17 @@
       "ticket_id": "TCK-110",
       "system": "Agent",
       "pass": true,
-      "latency_sec": 6.3406,
-      "tokens": 3357,
-      "cost_usd": 0.004212,
+      "latency_sec": 6.3794,
+      "tokens": 3400,
+      "cost_usd": 0.0043552,
       "iterations": 2,
       "branch_type": "missing_order_fraud_escalation",
       "is_branching": true,
-      "reply": "Ticket TCK-110\n\nHi there,\n\nThank you for reporting this serious concern. I've investigated your claim regarding the $350 charge for ORD-9993, and here's what I found:\n\n**Critical Finding:**\nThe order ORD-9993 was not found in our billing transaction records. This is significant given your fraud alert report. The charge appearing on your card combined with the order not existing in our system suggests potential unauthorized activity.\n\n**Next Steps:**\n1. **Fraud Protection:** I strongly recommend you immediately contact your card issuer to:\n   - Dispute the $350 charge as fraudulent\n   - Request account monitoring for additional unauthorized transactions\n   - Have your card reissued if necessary\n\n2. **Our Investigation:** To escalate this internally and file a formal fraud claim on our end, I need you to provide:\n   - A copy of your bank/card statement showing the $350 charge and merchant name\n   - The exact date the charge appeared\n   - Any transaction reference or confirmation numbers from the charge\n\n3. **Account Security:** Since you mention never creating this account (CUST-410), this pattern is consistent with account takeover. Once you provide the supporting documentation, I will:\n   - File an official fraud report with our Payment Security team\n   - Secure your account to prevent further unauthorized activity\n   - Coordinate with our fraud investigation team for resolution\n\nPlease reply with your payment documentation at your earliest convenience so we can escalate this matter immediately.\n\nBest regards,\nSupport Team",
+      "reply": "Ticket TCK-110\n\nHi there,\n\nThank you for reporting this fraud alert immediately. I've investigated your concern with the utmost priority.\n\n**Finding:** Order ORD-9993 was not found in our billing transaction records. This aligns with your report that the order ID generated an error. The $350 charge on your card appears to be problematic and requires immediate escalation.\n\n**What This Means:**\nSince the order does not exist in our system, this transaction cannot be verified as a legitimate purchase through our platform. This strengthens the likelihood of unauthorized activity on your card.\n\n**Immediate Actions Required:**\n1. **Contact Your Bank/Card Issuer Immediately:** Report this $350 charge as fraudulent to your bank or credit card company. They have dedicated fraud teams and can initiate a chargeback dispute if the charge is confirmed as unauthorized.\n2. **Provide Documentation:** Please reply with a copy of your bank statement or payment confirmation showing the $350 debit to ORD-9993 so we can further investigate from our end.\n3. **Account Security:** If you did not create an account associated with CUST-410, we recommend changing your password immediately or verifying your account credentials at your earliest convenience.\n\n**Our Support:**\nGiven that this order does not exist in our system, we cannot process a refund through our normal channels. However, your bank's fraud protection and chargeback process is your most direct path to recovery. I will escalate this case to our fraud investigation team for parallel investigation, and we will work with your bank if they contact us directly.\n\nBest regards,\nSupport Team",
       "steps": [
         {
           "lap": 1,
-          "thought": "I'll help you resolve this ticket. Let me gather the necessary information to investigate this fraud claim.",
-          "tool": "fetch_order_details",
-          "args": {
-            "order_id": "ORD-9993"
-          },
-          "result": {
-            "found": false,
-            "status": "NOT_FOUND",
-            "order_id": "ORD-9993",
-            "error": "Order ORD-9993 was not found in billing transaction records."
-          },
-          "tokens": 1429,
-          "cost": 0.001604
-        },
-        {
-          "lap": 1,
-          "thought": "I'll help you resolve this ticket. Let me gather the necessary information to investigate this fraud claim.",
+          "thought": "I'll help resolve this fraud alert ticket. Let me gather the necessary information by checking the customer tier, order details, and refund policy.",
           "tool": "get_customer_tier",
           "args": {
             "customer_id": "CUST-410",
@@ -747,17 +731,33 @@
             "loyalty_years": 3,
             "found": true
           },
-          "tokens": 1429,
-          "cost": 0.001604
+          "tokens": 1438,
+          "cost": 0.00164
+        },
+        {
+          "lap": 1,
+          "thought": "I'll help resolve this fraud alert ticket. Let me gather the necessary information by checking the customer tier, order details, and refund policy.",
+          "tool": "fetch_order_details",
+          "args": {
+            "order_id": "ORD-9993"
+          },
+          "result": {
+            "found": false,
+            "status": "NOT_FOUND",
+            "order_id": "ORD-9993",
+            "error": "Order ORD-9993 was not found in billing transaction records."
+          },
+          "tokens": 1438,
+          "cost": 0.00164
         },
         {
           "lap": 2,
-          "thought": "Ticket TCK-110\n\nHi there,\n\nThank you for reporting this serious concern. I've investigated your claim regarding the $350 charge for ORD-9993, and here's what I found:\n\n**Critical Finding:**\nThe order ORD-9993 was not found in our billing transaction records. This is significant given your fraud alert report. The charge appearing on your card combined with the order not existing in our system suggests potential unauthorized activity.\n\n**Next Steps:**\n1. **Fraud Protection:** I strongly recommend you immediately contact your card issuer to:\n   - Dispute the $350 charge as fraudulent\n   - Request account monitoring for additional unauthorized transactions\n   - Have your card reissued if necessary\n\n2. **Our Investigation:** To escalate this internally and file a formal fraud claim on our end, I need you to provide:\n   - A copy of your bank/card statement showing the $350 charge and merchant name\n   - The exact date the charge appeared\n   - Any transaction reference or confirmation numbers from the charge\n\n3. **Account Security:** Since you mention never creating this account (CUST-410), this pattern is consistent with account takeover. Once you provide the supporting documentation, I will:\n   - File an official fraud report with our Payment Security team\n   - Secure your account to prevent further unauthorized activity\n   - Coordinate with our fraud investigation team for resolution\n\nPlease reply with your payment documentation at your earliest convenience so we can escalate this matter immediately.\n\nBest regards,\nSupport Team",
+          "thought": "Ticket TCK-110\n\nHi there,\n\nThank you for reporting this fraud alert immediately. I've investigated your concern with the utmost priority.\n\n**Finding:** Order ORD-9993 was not found in our billing transaction records. This aligns with your report that the order ID generated an error. The $350 charge on your card appears to be problematic and requires immediate escalation.\n\n**What This Means:**\nSince the order does not exist in our system, this transaction cannot be verified as a legitimate purchase through our platform. This strengthens the likelihood of unauthorized activity on your card.\n\n**Immediate Actions Required:**\n1. **Contact Your Bank/Card Issuer Immediately:** Report this $350 charge as fraudulent to your bank or credit card company. They have dedicated fraud teams and can initiate a chargeback dispute if the charge is confirmed as unauthorized.\n2. **Provide Documentation:** Please reply with a copy of your bank statement or payment confirmation showing the $350 debit to ORD-9993 so we can further investigate from our end.\n3. **Account Security:** If you did not create an account associated with CUST-410, we recommend changing your password immediately or verifying your account credentials at your earliest convenience.\n\n**Our Support:**\nGiven that this order does not exist in our system, we cannot process a refund through our normal channels. However, your bank's fraud protection and chargeback process is your most direct path to recovery. I will escalate this case to our fraud investigation team for parallel investigation, and we will work with your bank if they contact us directly.\n\nBest regards,\nSupport Team",
           "tool": null,
           "args": null,
           "result": null,
-          "tokens": 1928,
-          "cost": 0.002608
+          "tokens": 1962,
+          "cost": 0.0027152
         }
       ]
     }
@@ -767,13 +767,13 @@
       "ticket_id": "TCK-101",
       "system": "Workflow",
       "pass": true,
-      "latency_sec": 2.4659,
-      "tokens": 759,
-      "cost_usd": 0.0011896,
+      "latency_sec": 2.4735,
+      "tokens": 775,
+      "cost_usd": 0.0012536,
       "iterations": 1,
       "branch_type": "standard_within_window",
       "is_branching": false,
-      "reply": "Ticket TCK-101\n\nHi there,\n\nThank you for reaching out regarding your subscription renewal charge. I've reviewed your account and order details, and I'm happy to help.\n\nI can confirm that you were charged $49.00 for your Cloudflare Pro Monthly subscription on order ORD-5001 eight days ago. Since your purchase is well within our 30-day refund window for unused subscriptions, you are eligible for a full refund. The $49.00 will be processed back to your original payment method (your card) within 5-10 business days.\n\nYour refund has been approved and is being processed now. Please allow 5-10 business days for the funds to appear in your account, as this timeframe includes bank clearing time on their end.\n\nBest regards,\nSupport Team",
+      "reply": "Ticket TCK-101\n\nHi there,\n\nThank you for reaching out. I've reviewed your account and located order ORD-5001 for your Cloudflare Pro Monthly subscription charge of $49.00.\n\nGood news — your refund request qualifies for approval. Since your purchase was made 8 days ago and falls well within our 30-day refund window for unused subscription services, I'm approving a full refund of $49.00 to your original payment method. You can expect this refund to appear in your account within 5-10 business days. Please note that depending on your bank's processing time, it may take an additional 1-2 business days for the funds to clear on your end.\n\nIf you have any questions or don't see the refund within the stated timeframe, please don't hesitate to reach out.\n\nBest regards,\nSupport Team",
       "steps": [
         {
           "step": 1,
@@ -790,7 +790,7 @@
             "days_since_purchase": 8,
             "refunded_date": null
           },
-          "elapsed": 0.001
+          "elapsed": 0.0003
         },
         {
           "step": 2,
@@ -805,7 +805,7 @@
             "loyalty_years": 1,
             "found": true
           },
-          "elapsed": 0.0006
+          "elapsed": 0.0002
         },
         {
           "step": 3,
@@ -817,7 +817,7 @@
             "rules": "Full refund allowed within 30 days of billing if service is unused or recurring billing renewal error.",
             "found": true
           },
-          "elapsed": 0.0006
+          "elapsed": 0.0002
         },
         {
           "step": 4,
@@ -825,10 +825,10 @@
           "action": "Single LLM contract synthesis",
           "payload": {
             "input_tokens": 577,
-            "output_tokens": 182,
-            "cost": 0.0011896
+            "output_tokens": 198,
+            "cost": 0.0012536
           },
-          "elapsed": 2.4636
+          "elapsed": 2.4729
         }
       ]
     },
@@ -836,13 +836,13 @@
       "ticket_id": "TCK-102",
       "system": "Workflow",
       "pass": true,
-      "latency_sec": 2.4656,
-      "tokens": 765,
-      "cost_usd": 0.0012104,
+      "latency_sec": 2.3538,
+      "tokens": 759,
+      "cost_usd": 0.0011864,
       "iterations": 1,
       "branch_type": "standard_outside_window",
       "is_branching": false,
-      "reply": "Ticket TCK-102\n\nHi there,\n\nThank you for reaching out regarding your refund request for order ORD-5002.\n\nI've reviewed your account and found the charge of $199.00 for the Cloudflare Business Add-on subscription. Unfortunately, your purchase was made 45 days ago, which is outside our standard 30-day refund window for subscription services. According to our refund policy, full refunds are only available within 30 days of billing if the service is unused or in cases of recurring billing renewal errors.\n\nSince your purchase falls outside this window, I'm unable to process a refund at this time. However, I'd like to escalate your case to our support team for a manual review, as they may be able to explore additional options based on your account history and circumstances.\n\nBest regards,\nSupport Team",
+      "reply": "Ticket TCK-102\n\nHi there,\n\nThank you for reaching out regarding your refund request for order ORD-5002.\n\nI've reviewed your account and found the charge of $199.00 for the Cloudflare Business Add-on subscription. Unfortunately, your purchase was made 45 days ago, which falls outside our 30-day refund window for subscription services. According to our refund policy, we are unable to process a refund for this order as it exceeds the eligible timeframe.\n\nHowever, I understand your concern about not using the service. I'd like to escalate your case to one of our support agents who may be able to review your situation further and explore any available options. Please reply to this ticket, and an agent will be in touch with you shortly.\n\nBest regards,\nSupport Team",
       "steps": [
         {
           "step": 1,
@@ -874,7 +874,7 @@
             "loyalty_years": 2,
             "found": true
           },
-          "elapsed": 0.0002
+          "elapsed": 0.0003
         },
         {
           "step": 3,
@@ -886,7 +886,7 @@
             "rules": "Full refund allowed within 30 days of billing if service is unused or recurring billing renewal error.",
             "found": true
           },
-          "elapsed": 0.0002
+          "elapsed": 0.0004
         },
         {
           "step": 4,
@@ -894,10 +894,10 @@
           "action": "Single LLM contract synthesis",
           "payload": {
             "input_tokens": 578,
-            "output_tokens": 187,
-            "cost": 0.0012104
+            "output_tokens": 181,
+            "cost": 0.0011864
           },
-          "elapsed": 2.4649
+          "elapsed": 2.3527
         }
       ]
     },
@@ -905,13 +905,13 @@
       "ticket_id": "TCK-103",
       "system": "Workflow",
       "pass": true,
-      "latency_sec": 3.0324,
-      "tokens": 822,
-      "cost_usd": 0.0014224,
+      "latency_sec": 2.4743,
+      "tokens": 832,
+      "cost_usd": 0.0014624,
       "iterations": 1,
       "branch_type": "priority_within_window",
       "is_branching": false,
-      "reply": "Ticket TCK-103 [ESCALATE:PRIORITY]\n\nHi there,\n\nThank you for reaching out, and we appreciate your priority status with us.\n\nWe've reviewed your refund request for order ORD-5003. Here are our findings:\n\n**Order Details:**\n- Amount: $250.00\n- Service: Onboarding Consultation Package\n- Days Since Purchase: 14 days\n\n**Refund Eligibility:**\nYour request falls well within our 30-day refund window for consulting and onboarding packages. Since the project was canceled internally and the hours have not been consumed, your refund of $250.00 is approved.\n\nWe will process this refund to your original payment method immediately. Please allow 5-10 business days for the funds to appear in your account, as this timeframe accounts for standard bank clearing times.\n\nYou should see the refund reflected shortly. If you have any questions or don't see the refund within the stated timeframe, please don't hesitate to reach back out.\n\nBest regards,\nSupport Team",
+      "reply": "Ticket TCK-103 [ESCALATE:PRIORITY]\n\nHi there,\n\nThank you for reaching out, and we appreciate your priority status with us.\n\nWe've reviewed your refund request for order ORD-5003. Here are our findings:\n\n**Order Details:**\n- Order ID: ORD-5003\n- Service: Onboarding Consultation Package\n- Amount: $250.00\n- Purchase Date: 14 days ago\n\n**Refund Decision: APPROVED**\n\nYour refund request falls within our 30-day refund window for consulting and onboarding packages. Since the project was canceled internally and hours have not been consumed, your full refund of $250.00 is approved and will be processed to your original payment method within 5-10 business days.\n\nPlease allow an additional 1-3 business days for your bank to clear the funds, depending on your financial institution's processing times.\n\nWe're sorry the project didn't move forward as planned. If you have any questions or need further assistance, please don't hesitate to reach out.\n\nBest regards,\nSupport Team",
       "steps": [
         {
           "step": 1,
@@ -928,7 +928,7 @@
             "days_since_purchase": 14,
             "refunded_date": null
           },
-          "elapsed": 0.0011
+          "elapsed": 0.0013
         },
         {
           "step": 2,
@@ -943,76 +943,7 @@
             "loyalty_years": 4,
             "found": true
           },
-          "elapsed": 0.0012
-        },
-        {
-          "step": 3,
-          "name": "branch_policy_resolution",
-          "action": "Category Policy Lookup for 'services'",
-          "payload": {
-            "category": "services",
-            "window_days": 30,
-            "rules": "Consulting and onboarding packages refundable within 30 days if hours have not been consumed.",
-            "found": true
-          },
-          "elapsed": 0.0009
-        },
-        {
-          "step": 4,
-          "name": "llm_draft_reply",
-          "action": "Single LLM contract synthesis",
-          "payload": {
-            "input_tokens": 583,
-            "output_tokens": 239,
-            "cost": 0.0014224
-          },
-          "elapsed": 3.0291
-        }
-      ]
-    },
-    {
-      "ticket_id": "TCK-104",
-      "system": "Workflow",
-      "pass": true,
-      "latency_sec": 2.8626,
-      "tokens": 784,
-      "cost_usd": 0.0013088,
-      "iterations": 1,
-      "branch_type": "priority_outside_window",
-      "is_branching": false,
-      "reply": "Ticket TCK-104 [ESCALATE:PRIORITY]\n\nHi there,\n\nThank you for reaching out regarding your refund request for order ORD-5004.\n\nI've reviewed your account and order details. Your Dedicated Migration Engineer consulting package was billed 60 days ago for $600.00. According to our refund policy, consulting and onboarding packages are refundable within 30 days if hours have not been consumed. Unfortunately, your purchase falls outside this 30-day refund window, which means we are unable to process a standard refund at this time.\n\nHowever, given your Priority status and the circumstances you've described regarding the vendor delay, I am escalating your request for executive review. Our management team will assess whether an exception can be made in your case and will contact you within 24 business hours with a resolution.\n\nWe truly value your 5 years of loyalty with us and appreciate your patience.\n\nBest regards,\nSupport Team",
-      "steps": [
-        {
-          "step": 1,
-          "name": "fetch_order_details",
-          "action": "Lookup financial record for ORD-5004",
-          "payload": {
-            "found": true,
-            "status": "COMPLETED",
-            "order_id": "ORD-5004",
-            "customer_id": "CUST-404",
-            "item": "Dedicated Migration Engineer",
-            "category": "services",
-            "amount": 600.0,
-            "days_since_purchase": 60,
-            "refunded_date": null
-          },
-          "elapsed": 0.0009
-        },
-        {
-          "step": 2,
-          "name": "get_customer_tier",
-          "action": "Lookup tier and SLA priority for CUST-404",
-          "payload": {
-            "customer_id": "CUST-404",
-            "name": "Apex Holdings",
-            "tier": "Priority",
-            "channel": "email",
-            "is_priority": true,
-            "loyalty_years": 5,
-            "found": true
-          },
-          "elapsed": 0.0011
+          "elapsed": 0.001
         },
         {
           "step": 3,
@@ -1031,11 +962,80 @@
           "name": "llm_draft_reply",
           "action": "Single LLM contract synthesis",
           "payload": {
-            "input_tokens": 571,
-            "output_tokens": 213,
-            "cost": 0.0013088
+            "input_tokens": 583,
+            "output_tokens": 249,
+            "cost": 0.0014624
           },
-          "elapsed": 2.8597
+          "elapsed": 2.4711
+        }
+      ]
+    },
+    {
+      "ticket_id": "TCK-104",
+      "system": "Workflow",
+      "pass": true,
+      "latency_sec": 2.6266,
+      "tokens": 778,
+      "cost_usd": 0.0012848,
+      "iterations": 1,
+      "branch_type": "priority_outside_window",
+      "is_branching": false,
+      "reply": "Ticket TCK-104 [ESCALATE:PRIORITY]\n\nHi there,\n\nThank you for reaching out regarding your refund request for order ORD-5004.\n\nI've reviewed your account and order details. Your Dedicated Migration Engineer consulting package was billed 60 days ago for $600.00. According to our refund policy, consulting and onboarding packages are refundable within 30 days if hours have not been consumed. Unfortunately, your purchase falls outside this 30-day refund window, which means we are unable to process a standard refund at this time.\n\nHowever, given your Priority status and the circumstances you've described regarding the vendor delay, I am escalating your request for executive review. Our management team will assess your situation for a potential exception and will reach out to you within one business day with a resolution.\n\nWe appreciate your 5 years of loyalty and partnership with us.\n\nBest regards,\nSupport Team",
+      "steps": [
+        {
+          "step": 1,
+          "name": "fetch_order_details",
+          "action": "Lookup financial record for ORD-5004",
+          "payload": {
+            "found": true,
+            "status": "COMPLETED",
+            "order_id": "ORD-5004",
+            "customer_id": "CUST-404",
+            "item": "Dedicated Migration Engineer",
+            "category": "services",
+            "amount": 600.0,
+            "days_since_purchase": 60,
+            "refunded_date": null
+          },
+          "elapsed": 0.0005
+        },
+        {
+          "step": 2,
+          "name": "get_customer_tier",
+          "action": "Lookup tier and SLA priority for CUST-404",
+          "payload": {
+            "customer_id": "CUST-404",
+            "name": "Apex Holdings",
+            "tier": "Priority",
+            "channel": "email",
+            "is_priority": true,
+            "loyalty_years": 5,
+            "found": true
+          },
+          "elapsed": 0.0003
+        },
+        {
+          "step": 3,
+          "name": "branch_policy_resolution",
+          "action": "Category Policy Lookup for 'services'",
+          "payload": {
+            "category": "services",
+            "window_days": 30,
+            "rules": "Consulting and onboarding packages refundable within 30 days if hours have not been consumed.",
+            "found": true
+          },
+          "elapsed": 0.0002
+        },
+        {
+          "step": 4,
+          "name": "llm_draft_reply",
+          "action": "Single LLM contract synthesis",
+          "payload": {
+            "input_tokens": 571,
+            "output_tokens": 207,
+            "cost": 0.0012848
+          },
+          "elapsed": 2.6255
         }
       ]
     },
@@ -1043,13 +1043,13 @@
       "ticket_id": "TCK-105",
       "system": "Workflow",
       "pass": true,
-      "latency_sec": 2.3957,
-      "tokens": 725,
-      "cost_usd": 0.0011048,
+      "latency_sec": 2.5646,
+      "tokens": 752,
+      "cost_usd": 0.0012128,
       "iterations": 1,
       "branch_type": "already_refunded",
       "is_branching": false,
-      "reply": "Ticket TCK-105\n\nHi there,\n\nThank you for reaching out about your refund for order ORD-5005.\n\nI've reviewed your account and can confirm that your refund of $79.00 for the Zendesk Integration License has already been processed and completed on September 24, 2026. Since the refund was recently submitted, please allow an additional 5-10 business days for the credit to appear on your card statement, as banks typically require this time to clear and post the funds to your account.\n\nIf you don't see the refund reflected within this timeframe, please don't hesitate to reach out again, and we'll be happy to investigate further with your financial institution.\n\nBest regards,\nSupport Team",
+      "reply": "Ticket TCK-105\n\nHi there,\n\nThank you for reaching out regarding your refund request for order ORD-5005.\n\nI've reviewed your account and can confirm that your refund of $79.00 for the Zendesk Integration License has already been processed and submitted to your original payment method on September 24, 2026. \n\nSince the refund has been initiated, it typically takes 5-10 business days for the credit to appear on your card statement, depending on your bank's processing time. Bank clearing times can occasionally extend beyond this window, so we recommend checking with your financial institution if you don't see the credit within the next few business days.\n\nIf you still don't see the refund reflected after 10 business days, please let us know and we'll be happy to investigate further with your bank.\n\nBest regards,\nSupport Team",
       "steps": [
         {
           "step": 1,
@@ -1066,7 +1066,7 @@
             "days_since_purchase": 12,
             "refunded_date": "2026-09-24"
           },
-          "elapsed": 0.0003
+          "elapsed": 0.0002
         },
         {
           "step": 2,
@@ -1081,7 +1081,7 @@
             "loyalty_years": 1,
             "found": true
           },
-          "elapsed": 0.0002
+          "elapsed": 0.0001
         },
         {
           "step": 3,
@@ -1099,10 +1099,10 @@
           "action": "Single LLM contract synthesis",
           "payload": {
             "input_tokens": 561,
-            "output_tokens": 164,
-            "cost": 0.0011048
+            "output_tokens": 191,
+            "cost": 0.0012128
           },
-          "elapsed": 2.3952
+          "elapsed": 2.5642
         }
       ]
     },
@@ -1110,13 +1110,13 @@
       "ticket_id": "TCK-106",
       "system": "Workflow",
       "pass": true,
-      "latency_sec": 3.4622,
-      "tokens": 807,
-      "cost_usd": 0.0013496,
+      "latency_sec": 2.7724,
+      "tokens": 791,
+      "cost_usd": 0.0012856,
       "iterations": 1,
       "branch_type": "hardware_within_14d",
       "is_branching": false,
-      "reply": "Ticket TCK-106\n\nHi there,\n\nThank you for reaching out, David. I've reviewed your order ORD-5006 for the FIDO2 Security Key 2-Pack purchased for $120.00.\n\nI'm happy to help! Your purchase was made 10 days ago, which falls within our 14-day refund window for hardware devices. Since your security key is still within the eligible refund period and our policy allows returns of physical security hardware in original packaging, I can process a full refund of $120.00 to your original payment method. You can expect to see this refund reflected in your account within 5-10 business days. Please note that depending on your bank, it may take an additional 1-2 business days for the funds to fully clear on your end.\n\nTo proceed with the return, please reply with confirmation that the item is in its original packaging, and I'll provide you with return shipping instructions right away.\n\nBest regards,\nSupport Team",
+      "reply": "Ticket TCK-106\n\nHi there,\n\nThank you for reaching out, David. I've reviewed your order ORD-5006 for the FIDO2 Security Key 2-Pack totaling $120.00.\n\nGood news—your purchase is within our refund window. Hardware devices like security keys are eligible for refund within 14 days of delivery in original packaging, and your order is only 10 days old. Since you've requested the return due to compatibility concerns, we can proceed with a full refund of $120.00 to your original payment method. Please allow 5-10 business days for the refund to appear in your account, as processing time includes bank clearing.\n\nTo complete this return, please reply with confirmation that the FIDO2 Security Key 2-Pack is in original, unused packaging and we'll provide you with a prepaid shipping label.\n\nBest regards,\nSupport Team",
       "steps": [
         {
           "step": 1,
@@ -1133,7 +1133,7 @@
             "days_since_purchase": 10,
             "refunded_date": null
           },
-          "elapsed": 0.0003
+          "elapsed": 0.0002
         },
         {
           "step": 2,
@@ -1148,7 +1148,7 @@
             "loyalty_years": 3,
             "found": true
           },
-          "elapsed": 0.0002
+          "elapsed": 0.0007
         },
         {
           "step": 3,
@@ -1160,7 +1160,7 @@
             "rules": "Physical security keys and hardware devices eligible for refund within 14 days of delivery in original packaging.",
             "found": true
           },
-          "elapsed": 0.0001
+          "elapsed": 0.001
         },
         {
           "step": 4,
@@ -1168,10 +1168,10 @@
           "action": "Single LLM contract synthesis",
           "payload": {
             "input_tokens": 587,
-            "output_tokens": 220,
-            "cost": 0.0013496
+            "output_tokens": 204,
+            "cost": 0.0012856
           },
-          "elapsed": 3.4616
+          "elapsed": 2.7704
         }
       ]
     },
@@ -1179,13 +1179,13 @@
       "ticket_id": "TCK-107",
       "system": "Workflow",
       "pass": true,
-      "latency_sec": 2.7717,
-      "tokens": 765,
-      "cost_usd": 0.0012232,
+      "latency_sec": 2.4581,
+      "tokens": 763,
+      "cost_usd": 0.0012152,
       "iterations": 1,
       "branch_type": "hardware_outside_14d",
       "is_branching": false,
-      "reply": "Ticket TCK-107\n\nHi there,\n\nThank you for contacting us regarding your refund request for order ORD-5007.\n\nI've reviewed your account and order details. Your FIDO2 Security Key 2-Pack was purchased 22 days ago for $120.00. While I appreciate that the item remains sealed in its original packaging, your purchase falls outside our refund window for hardware devices. Our policy permits refunds for physical security keys and hardware devices within 14 days of delivery. Since your purchase was 22 days ago, we are unfortunately unable to process a refund at this time.\n\nHowever, I'd like to have one of our senior agents review your case to explore any available options. Please reply to this ticket if you have any additional context we should consider, and we'll look into this further for you.\n\nBest regards,\nSupport Team",
+      "reply": "Ticket TCK-107\n\nHi there,\n\nThank you for reaching out regarding your refund request for order ORD-5007.\n\nI've reviewed your account and order details. Your FIDO2 Security Key 2-Pack was purchased 22 days ago for $120.00. While I appreciate that the item remains sealed in its original packaging, this purchase falls outside our refund window for hardware devices. Our policy allows refunds for hardware items within 14 days of delivery, and your order exceeds this timeframe by 8 days.\n\nUnfortunately, I'm unable to process a refund at this time given the policy constraints. However, I'd like to have one of our senior agents review your case to explore any available options. Please reply to this ticket if you'd like us to escalate your request for further consideration.\n\nBest regards,\nSupport Team",
       "steps": [
         {
           "step": 1,
@@ -1202,7 +1202,7 @@
             "days_since_purchase": 22,
             "refunded_date": null
           },
-          "elapsed": 0.0017
+          "elapsed": 0.0015
         },
         {
           "step": 2,
@@ -1229,7 +1229,7 @@
             "rules": "Physical security keys and hardware devices eligible for refund within 14 days of delivery in original packaging.",
             "found": true
           },
-          "elapsed": 0.0008
+          "elapsed": 0.0009
         },
         {
           "step": 4,
@@ -1237,10 +1237,10 @@
           "action": "Single LLM contract synthesis",
           "payload": {
             "input_tokens": 574,
-            "output_tokens": 191,
-            "cost": 0.0012232
+            "output_tokens": 189,
+            "cost": 0.0012152
           },
-          "elapsed": 2.7681
+          "elapsed": 2.4546
         }
       ]
     },
@@ -1248,13 +1248,13 @@
       "ticket_id": "TCK-108",
       "system": "Workflow",
       "pass": true,
-      "latency_sec": 3.3343,
-      "tokens": 755,
-      "cost_usd": 0.0013752,
+      "latency_sec": 3.1431,
+      "tokens": 762,
+      "cost_usd": 0.0014032,
       "iterations": 1,
       "branch_type": "missing_order_receipt_verification",
       "is_branching": true,
-      "reply": "Ticket TCK-108\n\nHi there,\n\nThank you for reaching out to us regarding the charge of $85 for order ORD-9991. We understand your concern about this missing transaction.\n\nAfter checking our backend systems, we were unable to locate order ORD-9991 in our billing records. This could be due to a processing delay, a system sync issue, or a potential duplicate charge that hasn't yet been fully recorded in our database.\n\nTo help us investigate this matter thoroughly, please provide us with:\n- A screenshot or details from your bank statement showing the $85 charge\n- The exact date and time the charge appeared on your account\n- The payment method used (credit card, debit card, etc.)\n\nOnce we receive this information, we will escalate your case to our specialized billing team for a detailed investigation. They will either locate the transaction in our system or initiate a refund to your original payment method if the charge cannot be verified on our end.\n\nWe apologize for the inconvenience and appreciate your patience as we work to resolve this issue.\n\nBest regards,\nSupport Team",
+      "reply": "Ticket TCK-108\n\nHi there,\n\nThank you for reaching out to us regarding your charge of $85.00. We understand your concern about the missing order from your billing dashboard.\n\nAfter checking our records, we were unable to locate order ORD-9991 in our billing transaction database. This can occasionally happen due to processing delays or system synchronization issues. To help us investigate this matter further and locate your charge, please provide us with:\n\n- A screenshot or details from your bank statement showing the $85.00 transaction\n- The exact date and time the charge appeared on your account\n- The payment method used (credit/debit card, PayPal, etc.)\n\nOnce we receive this information, we'll be able to trace the transaction in our system and determine the appropriate resolution. If we confirm the charge was processed in error or does not correspond to a valid order in our records, we will process a refund promptly to your original payment method within 5-10 business days.\n\nPlease reply to this ticket with the requested details, and we'll escalate this to our specialized team for immediate investigation.\n\nBest regards,\nSupport Team",
       "steps": [
         {
           "step": 1,
@@ -1266,7 +1266,7 @@
             "order_id": "ORD-9991",
             "error": "Order ORD-9991 was not found in billing transaction records."
           },
-          "elapsed": 0.0007
+          "elapsed": 0.0003
         },
         {
           "step": 2,
@@ -1281,7 +1281,7 @@
             "loyalty_years": 2,
             "found": true
           },
-          "elapsed": 0.0005
+          "elapsed": 0.0002
         },
         {
           "step": 3,
@@ -1299,10 +1299,10 @@
           "action": "Single LLM contract synthesis",
           "payload": {
             "input_tokens": 514,
-            "output_tokens": 241,
-            "cost": 0.0013752
+            "output_tokens": 248,
+            "cost": 0.0014032
           },
-          "elapsed": 3.3331
+          "elapsed": 3.1425
         }
       ]
     },
@@ -1310,13 +1310,13 @@
       "ticket_id": "TCK-109",
       "system": "Workflow",
       "pass": true,
-      "latency_sec": 3.0681,
-      "tokens": 764,
-      "cost_usd": 0.0013504,
+      "latency_sec": 3.4167,
+      "tokens": 802,
+      "cost_usd": 0.0015024,
       "iterations": 1,
       "branch_type": "missing_order_priority_escalation",
       "is_branching": true,
-      "reply": "Ticket TCK-109 [ESCALATE:PRIORITY]\n\nHi there,\n\nThank you for reaching out, and we sincerely apologize for the concern regarding the $1,200 charge associated with ORD-9992.\n\nAfter reviewing our billing records, we were unable to locate order ORD-9992 in our system. This could indicate a processing error, a third-party transaction, or a potential unauthorized charge that requires immediate investigation.\n\nTo help us resolve this quickly, please provide:\n- A copy of your bank or credit card statement showing the charge details\n- The transaction date and merchant name as it appears on your statement\n- Any confirmation emails or receipts you may have received\n\nGiven your Priority status, we are escalating this case to our specialized billing investigation team immediately. They will contact you within 2 business hours to verify the transaction and determine the appropriate resolution—whether this requires a reversal, refund, or fraud investigation.\n\nWe appreciate your patience and loyalty as a valued long-term customer.\n\nBest regards,\nSupport Team",
+      "reply": "Ticket TCK-109 [ESCALATE:PRIORITY]\n\nHi there,\n\nThank you for reaching out, and we sincerely appreciate your immediate notification of this concern.\n\nWe conducted a thorough search of our billing records for order ORD-9992 ($1,200.00) and were unable to locate this transaction in our system. This could indicate a few possibilities: the charge may have originated from a third-party vendor, a duplicate entry, or a processing anomaly that hasn't yet synchronized with our records.\n\nTo help us investigate this matter urgently and accurately, we kindly request that you provide us with:\n- A copy of the relevant section of your credit card or bank statement showing this charge\n- The exact transaction date and merchant name as it appears on your statement\n- Any additional transaction reference or authorization codes\n\nGiven your Priority status and the nature of this issue, we are escalating your case for immediate manual review by our specialized billing investigation team. They will work directly with our payment processor to trace this charge and determine the appropriate resolution—whether that's a reversal, refund, or clarification of the transaction source.\n\nYou can expect direct contact from our team within 24 business hours.\n\nBest regards,\nSupport Team",
       "steps": [
         {
           "step": 1,
@@ -1328,7 +1328,7 @@
             "order_id": "ORD-9992",
             "error": "Order ORD-9992 was not found in billing transaction records."
           },
-          "elapsed": 0.0007
+          "elapsed": 0.0013
         },
         {
           "step": 2,
@@ -1341,68 +1341,6 @@
             "channel": "web",
             "is_priority": true,
             "loyalty_years": 6,
-            "found": true
-          },
-          "elapsed": 0.0009
-        },
-        {
-          "step": 3,
-          "name": "branch_policy_resolution",
-          "action": "Missing Order Escalation Path (no policy lookup applicable)",
-          "payload": {
-            "status": "NOT_APPLICABLE",
-            "reason": "Order missing from billing database"
-          },
-          "elapsed": 0.0
-        },
-        {
-          "step": 4,
-          "name": "llm_draft_reply",
-          "action": "Single LLM contract synthesis",
-          "payload": {
-            "input_tokens": 533,
-            "output_tokens": 231,
-            "cost": 0.0013504
-          },
-          "elapsed": 3.0665
-        }
-      ]
-    },
-    {
-      "ticket_id": "TCK-110",
-      "system": "Workflow",
-      "pass": true,
-      "latency_sec": 3.8464,
-      "tokens": 774,
-      "cost_usd": 0.001432,
-      "iterations": 1,
-      "branch_type": "missing_order_fraud_escalation",
-      "is_branching": true,
-      "reply": "Ticket TCK-110\n\nHi there,\n\nThank you for reaching out, and we sincerely apologize for the concern you've raised. We take fraud reports very seriously.\n\nWe searched our billing records for order ORD-9993 but were unable to locate it in our system. This could indicate an unauthorized transaction, a processing error, or a charge from a different merchant that may appear similar on your statement.\n\nTo help us investigate this matter thoroughly, please reply with:\n- A photo or screenshot of the charge on your bank/card statement (showing the transaction date, amount, and merchant name)\n- Any confirmation emails or receipts you may have received\n- The exact date the $350 charge appeared on your account\n\nOnce we receive this information, we will escalate your case to our fraud investigation team for immediate review. If this charge is confirmed as unauthorized, we will work with you to file a formal fraud claim and coordinate with your card issuer for a chargeback if necessary.\n\nIn the meantime, if you believe your card has been compromised, we recommend contacting your bank directly to report the suspicious activity and request card replacement.\n\nBest regards,\nSupport Team",
-      "steps": [
-        {
-          "step": 1,
-          "name": "fetch_order_details",
-          "action": "Lookup financial record for ORD-9993",
-          "payload": {
-            "found": false,
-            "status": "NOT_FOUND",
-            "order_id": "ORD-9993",
-            "error": "Order ORD-9993 was not found in billing transaction records."
-          },
-          "elapsed": 0.0011
-        },
-        {
-          "step": 2,
-          "name": "get_customer_tier",
-          "action": "Lookup tier and SLA priority for CUST-410",
-          "payload": {
-            "customer_id": "CUST-410",
-            "name": "Grace Hopper",
-            "tier": "Standard",
-            "channel": "email",
-            "is_priority": false,
-            "loyalty_years": 3,
             "found": true
           },
           "elapsed": 0.0013
@@ -1422,14 +1360,76 @@
           "name": "llm_draft_reply",
           "action": "Single LLM contract synthesis",
           "payload": {
-            "input_tokens": 520,
-            "output_tokens": 254,
-            "cost": 0.001432
+            "input_tokens": 533,
+            "output_tokens": 269,
+            "cost": 0.0015024
           },
-          "elapsed": 3.8439
+          "elapsed": 3.4141
+        }
+      ]
+    },
+    {
+      "ticket_id": "TCK-110",
+      "system": "Workflow",
+      "pass": true,
+      "latency_sec": 4.4273,
+      "tokens": 849,
+      "cost_usd": 0.001732,
+      "iterations": 1,
+      "branch_type": "missing_order_fraud_escalation",
+      "is_branching": true,
+      "reply": "Ticket TCK-110\n\nHi there,\n\nThank you for reaching out, and I sincerely apologize for the concern regarding the $350 charge and the account access issue you've reported.\n\nI've investigated your account and order ORD-9993 in our system, and I'm unable to locate this order in our billing transaction records. This is unusual and warrants immediate attention, especially given your fraud alert.\n\nHere's what I recommend:\n\n1. **Verify with your bank**: Please contact your card issuer directly to confirm the charge details, merchant name, and transaction date. Your bank can provide the most authoritative information about this debit.\n\n2. **Provide transaction proof**: If you have your bank statement or payment confirmation showing this $350 charge, please reply with those details. This will help us trace the transaction in our systems.\n\n3. **File a fraud claim**: Given that you did not authorize this transaction, I strongly encourage you to file a fraud dispute with your bank or credit card company immediately. They have dedicated fraud teams and can initiate a chargeback if needed.\n\n4. **Account security**: If you believe your personal information was compromised, please secure your account credentials and consider monitoring your financial accounts closely.\n\nI'm escalating this case for further investigation by our specialized support team. They will work with our backend database administrators to locate any record of this charge and determine what occurred.\n\nYou can expect contact from our team within 24 business hours with additional findings.\n\nBest regards,\nSupport Team",
+      "steps": [
+        {
+          "step": 1,
+          "name": "fetch_order_details",
+          "action": "Lookup financial record for ORD-9993",
+          "payload": {
+            "found": false,
+            "status": "NOT_FOUND",
+            "order_id": "ORD-9993",
+            "error": "Order ORD-9993 was not found in billing transaction records."
+          },
+          "elapsed": 0.0006
+        },
+        {
+          "step": 2,
+          "name": "get_customer_tier",
+          "action": "Lookup tier and SLA priority for CUST-410",
+          "payload": {
+            "customer_id": "CUST-410",
+            "name": "Grace Hopper",
+            "tier": "Standard",
+            "channel": "email",
+            "is_priority": false,
+            "loyalty_years": 3,
+            "found": true
+          },
+          "elapsed": 0.0003
+        },
+        {
+          "step": 3,
+          "name": "branch_policy_resolution",
+          "action": "Missing Order Escalation Path (no policy lookup applicable)",
+          "payload": {
+            "status": "NOT_APPLICABLE",
+            "reason": "Order missing from billing database"
+          },
+          "elapsed": 0.0
+        },
+        {
+          "step": 4,
+          "name": "llm_draft_reply",
+          "action": "Single LLM contract synthesis",
+          "payload": {
+            "input_tokens": 520,
+            "output_tokens": 329,
+            "cost": 0.001732
+          },
+          "elapsed": 4.4264
         }
       ]
     }
   ],
-  "updated_at": "2026-09-29T06:18:21Z"
+  "updated_at": "2026-10-03T10:53:52Z"
 }

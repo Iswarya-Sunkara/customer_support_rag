@@ -25,7 +25,7 @@ if str(_REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(_REPO_ROOT))
 
 from src.llm import get_anthropic_client, MODEL_NAME, calculate_cost
-from src.tools import TOOLS_REGISTRY, execute_tool
+from src.tools import TOOLS_REGISTRY, MITIGATED_TOOLS_REGISTRY, execute_tool
 
 logger = logging.getLogger("TicketAgent")
 
@@ -34,9 +34,9 @@ logger = logging.getLogger("TicketAgent")
 class AgentBudgets:
     """Enforceable runtime safety limits for the agent loop."""
     max_iterations: int = 6
-    max_tokens: int = 4000
-    max_cost: float = 0.05
-    max_wall_clock_seconds: float = 15.0
+    max_tokens: int = 8000
+    max_cost: float = 0.08
+    max_wall_clock_seconds: float = 20.0
 
 
 @dataclass
@@ -93,6 +93,36 @@ OUTPUT CONTRACT RULES (STRICTLY REQUIRED):
    Support Team
 """
 
+# ==============================================================================
+# Single Mitigation: Tighter System Prompt with Strict Prerequisite Contract
+# ==============================================================================
+
+MITIGATED_SYSTEM_PROMPT = """You are a senior customer support refund agent.
+Your job is to resolve customer refund and order inquiry tickets by using your available tools.
+
+You have access to 3 tools:
+1. `fetch_order_details`: Retrieve financial transaction records (amount, date, status, category).
+2. `lookup_refund_policy`: Retrieve refund window duration and rules for a product category.
+3. `get_customer_tier`: Retrieve customer account tier (Standard vs Priority) and SLA routing.
+
+CRITICAL EXECUTION PRECONDITIONS (MANDATORY TRAJECTORY RULES):
+1. MANDATORY PREREQUISITE: You MUST ALWAYS execute `fetch_order_details` first before taking any action or deciding on any resolution. You are strictly forbidden from relying on or trusting order numbers, dates, or dollar amounts self-reported by the customer in their message text.
+2. NO SPECULATIVE LOOKUPS: If an order is NOT_FOUND in billing records, do NOT call `lookup_refund_policy` — escalate immediately to missing order verification.
+3. STRICT ARGUMENT FORMATTING: Tool arguments must strictly match expected formats (e.g. order_id must be 'ORD-XXXX').
+
+OUTPUT CONTRACT RULES (STRICTLY REQUIRED):
+1. First line MUST be: "Ticket <ticket_id>" (If customer tier is Priority, append " [ESCALATE:PRIORITY]").
+2. Second line must be empty, followed by "Hi there,".
+3. Next section must explain findings clearly:
+   - For approved refund: Quote amount ($X.XX), state it is within the window, promise refund to original payment method within 5-10 business days.
+   - For denied refund: Quote amount ($X.XX), state purchase was outside refund window, state inability to refund, offer agent review.
+   - For already refunded: Quote amount ($X.XX), confirm refund was already processed on the recorded date, explain bank clearing time.
+   - For missing/not found order: State order was not found in records, request bank statement / payment proof, explain escalation path.
+4. Closing MUST end with:
+   Best regards,
+   Support Team
+"""
+
 
 def _check_budgets(
     budgets: AgentBudgets,
@@ -121,7 +151,8 @@ Tuple_Budget = Any
 def run_agent(
     ticket: Dict[str, Any],
     budgets: Optional[AgentBudgets] = None,
-    client: Optional[Any] = None
+    client: Optional[Any] = None,
+    mitigated: bool = False
 ) -> AgentResult:
     """
     Runs the ReAct agent loop on a single ticket until task completion or budget exhaustion.
@@ -159,6 +190,9 @@ def run_agent(
     budget_hit = None
     termination_message = None
 
+    active_system_prompt = MITIGATED_SYSTEM_PROMPT if mitigated else SYSTEM_PROMPT
+    active_tools_registry = MITIGATED_TOOLS_REGISTRY if mitigated else TOOLS_REGISTRY
+
     while True:
         iteration += 1
         elapsed = time.perf_counter() - start_time
@@ -193,8 +227,8 @@ def run_agent(
             response = client.messages.create(
                 model=MODEL_NAME,
                 max_tokens=1024,
-                system=SYSTEM_PROMPT,
-                tools=TOOLS_REGISTRY,
+                system=active_system_prompt,
+                tools=active_tools_registry,
                 messages=messages
             )
         except Exception as e:

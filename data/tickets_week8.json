@@ -1,0 +1,303 @@
+{
+  "policies": {
+    "subscription": {
+      "category": "subscription",
+      "window_days": 30,
+      "rules": "Full refund allowed within 30 days of billing if service is unused or recurring billing renewal error."
+    },
+    "software": {
+      "category": "software",
+      "window_days": 30,
+      "rules": "Digital software licenses eligible for refund within 30 days of activation key purchase."
+    },
+    "hardware": {
+      "category": "hardware",
+      "window_days": 14,
+      "rules": "Physical security keys and hardware devices eligible for refund within 14 days of delivery in original packaging."
+    },
+    "services": {
+      "category": "services",
+      "window_days": 30,
+      "rules": "Consulting and onboarding packages refundable within 30 days if hours have not been consumed."
+    }
+  },
+  "customers": {
+    "CUST-401": {"customer_id": "CUST-401", "name": "Alice Chen", "tier": "Standard", "channel": "web", "loyalty_years": 1},
+    "CUST-402": {"customer_id": "CUST-402", "name": "Bob Martin", "tier": "Standard", "channel": "email", "loyalty_years": 2},
+    "CUST-403": {"customer_id": "CUST-403", "name": "Nexus Corp", "tier": "Priority", "channel": "web", "loyalty_years": 4},
+    "CUST-404": {"customer_id": "CUST-404", "name": "Apex Holdings", "tier": "Priority", "channel": "email", "loyalty_years": 5},
+    "CUST-405": {"customer_id": "CUST-405", "name": "Carol Danvers", "tier": "Standard", "channel": "web", "loyalty_years": 1},
+    "CUST-406": {"customer_id": "CUST-406", "name": "David Miller", "tier": "Standard", "channel": "email", "loyalty_years": 3},
+    "CUST-407": {"customer_id": "CUST-407", "name": "Elena Rostova", "tier": "Standard", "channel": "web", "loyalty_years": 1},
+    "CUST-408": {"customer_id": "CUST-408", "name": "Frank Castle", "tier": "Standard", "channel": "email", "loyalty_years": 2},
+    "CUST-409": {"customer_id": "CUST-409", "name": "Vanguard Global", "tier": "Priority", "channel": "web", "loyalty_years": 6},
+    "CUST-410": {"customer_id": "CUST-410", "name": "Grace Hopper", "tier": "Standard", "channel": "email", "loyalty_years": 3}
+  },
+  "orders": {
+    "ORD-5001": {
+      "order_id": "ORD-5001",
+      "customer_id": "CUST-401",
+      "item": "Cloudflare Pro Monthly",
+      "category": "subscription",
+      "amount": 49.00,
+      "days_since_purchase": 8,
+      "status": "COMPLETED"
+    },
+    "ORD-5002": {
+      "order_id": "ORD-5002",
+      "customer_id": "CUST-402",
+      "item": "Cloudflare Business Add-on",
+      "category": "subscription",
+      "amount": 199.00,
+      "days_since_purchase": 45,
+      "status": "COMPLETED"
+    },
+    "ORD-5003": {
+      "order_id": "ORD-5003",
+      "customer_id": "CUST-403",
+      "item": "Onboarding Consultation Package",
+      "category": "services",
+      "amount": 250.00,
+      "days_since_purchase": 14,
+      "status": "COMPLETED"
+    },
+    "ORD-5004": {
+      "order_id": "ORD-5004",
+      "customer_id": "CUST-404",
+      "item": "Dedicated Migration Engineer",
+      "category": "services",
+      "amount": 600.00,
+      "days_since_purchase": 60,
+      "status": "COMPLETED"
+    },
+    "ORD-5005": {
+      "order_id": "ORD-5005",
+      "customer_id": "CUST-405",
+      "item": "Zendesk Integration License",
+      "category": "software",
+      "amount": 79.00,
+      "days_since_purchase": 12,
+      "status": "REFUNDED",
+      "refunded_date": "2026-09-24"
+    },
+    "ORD-5006": {
+      "order_id": "ORD-5006",
+      "customer_id": "CUST-406",
+      "item": "FIDO2 Security Key 2-Pack",
+      "category": "hardware",
+      "amount": 120.00,
+      "days_since_purchase": 10,
+      "status": "COMPLETED"
+    },
+    "ORD-5007": {
+      "order_id": "ORD-5007",
+      "customer_id": "CUST-407",
+      "item": "FIDO2 Security Key 2-Pack",
+      "category": "hardware",
+      "amount": 120.00,
+      "days_since_purchase": 22,
+      "status": "COMPLETED"
+    }
+  },
+  "tickets": [
+    {
+      "ticket_id": "TCK-101",
+      "customer_id": "CUST-401",
+      "order_id": "ORD-5001",
+      "tier": "Standard",
+      "channel": "web",
+      "question": "Hi, I was charged $49 for my monthly subscription renewal 8 days ago under order ORD-5001. I haven't used the account and would like a full refund to my card.",
+      "expected_outcome": "APPROVE_REFUND",
+      "expected_amount": 49.00,
+      "steps_needed": 3,
+      "alternate_paths_allowed": true,
+      "path_rationale": "Order exists and is within window. Legitimate paths allow fetching customer tier before or after order details, followed by policy check.",
+      "valid_tool_sequences": [
+        ["fetch_order_details", "lookup_refund_policy", "get_customer_tier"],
+        ["fetch_order_details", "get_customer_tier", "lookup_refund_policy"],
+        ["get_customer_tier", "fetch_order_details", "lookup_refund_policy"]
+      ],
+      "mandatory_tools": ["fetch_order_details", "get_customer_tier", "lookup_refund_policy"],
+      "forbidden_tools": []
+    },
+    {
+      "ticket_id": "TCK-102",
+      "customer_id": "CUST-402",
+      "order_id": "ORD-5002",
+      "tier": "Standard",
+      "channel": "email",
+      "question": "I noticed an annual charge of $199 on my statement for order ORD-5002 from 45 days ago. Can I please get a refund as I am not using the service?",
+      "expected_outcome": "DENY_OUTSIDE_WINDOW",
+      "expected_amount": 199.00,
+      "steps_needed": 3,
+      "alternate_paths_allowed": true,
+      "path_rationale": "Order exists but is 45 days old (> 30 days). Standard denial path allows tier check before or after order lookup.",
+      "valid_tool_sequences": [
+        ["fetch_order_details", "lookup_refund_policy", "get_customer_tier"],
+        ["fetch_order_details", "get_customer_tier", "lookup_refund_policy"],
+        ["get_customer_tier", "fetch_order_details", "lookup_refund_policy"]
+      ],
+      "mandatory_tools": ["fetch_order_details", "get_customer_tier", "lookup_refund_policy"],
+      "forbidden_tools": []
+    },
+    {
+      "ticket_id": "TCK-103",
+      "customer_id": "CUST-403",
+      "order_id": "ORD-5003",
+      "tier": "Priority",
+      "channel": "web",
+      "question": "Priority support needed: Nexus Corp was billed $250 for onboarding consulting under ORD-5003 14 days ago, but the project was canceled internally. Please process a full refund.",
+      "expected_outcome": "APPROVE_REFUND_PRIORITY",
+      "expected_amount": 250.00,
+      "steps_needed": 3,
+      "alternate_paths_allowed": true,
+      "path_rationale": "Priority tier customer within services 30d window. Customer tier check and order record can be pulled in either sequence.",
+      "valid_tool_sequences": [
+        ["fetch_order_details", "lookup_refund_policy", "get_customer_tier"],
+        ["fetch_order_details", "get_customer_tier", "lookup_refund_policy"],
+        ["get_customer_tier", "fetch_order_details", "lookup_refund_policy"]
+      ],
+      "mandatory_tools": ["fetch_order_details", "get_customer_tier", "lookup_refund_policy"],
+      "forbidden_tools": []
+    },
+    {
+      "ticket_id": "TCK-104",
+      "customer_id": "CUST-404",
+      "order_id": "ORD-5004",
+      "tier": "Priority",
+      "channel": "email",
+      "question": "Apex Holdings urgent refund request for $600 consulting package ORD-5004 billed 60 days ago. We require an executive exception due to vendor delay.",
+      "expected_outcome": "DENY_OUTSIDE_WINDOW_PRIORITY",
+      "expected_amount": 600.00,
+      "steps_needed": 3,
+      "alternate_paths_allowed": true,
+      "path_rationale": "Priority tier outside window (60d > 30d). Requires priority tag and denial explanation. Valid sequences accept either initial tool.",
+      "valid_tool_sequences": [
+        ["fetch_order_details", "lookup_refund_policy", "get_customer_tier"],
+        ["fetch_order_details", "get_customer_tier", "lookup_refund_policy"],
+        ["get_customer_tier", "fetch_order_details", "lookup_refund_policy"]
+      ],
+      "mandatory_tools": ["fetch_order_details", "get_customer_tier", "lookup_refund_policy"],
+      "forbidden_tools": []
+    },
+    {
+      "ticket_id": "TCK-105",
+      "customer_id": "CUST-405",
+      "order_id": "ORD-5005",
+      "tier": "Standard",
+      "channel": "web",
+      "question": "Where is my refund for order ORD-5005? I submitted a request last week for the $79 license charge and still don't see the credit on my card statement.",
+      "expected_outcome": "ALREADY_REFUNDED",
+      "expected_amount": 79.00,
+      "steps_needed": 2,
+      "alternate_paths_allowed": true,
+      "path_rationale": "Order is already refunded in DB. Strategy A (2-step optimal) checks order and tier then resolves. Strategy B (3-step defensive) additionally verifies policy before answering. Both are legitimate.",
+      "valid_tool_sequences": [
+        ["fetch_order_details", "get_customer_tier"],
+        ["get_customer_tier", "fetch_order_details"],
+        ["fetch_order_details", "get_customer_tier", "lookup_refund_policy"],
+        ["fetch_order_details", "lookup_refund_policy", "get_customer_tier"],
+        ["get_customer_tier", "fetch_order_details", "lookup_refund_policy"]
+      ],
+      "mandatory_tools": ["fetch_order_details", "get_customer_tier"],
+      "forbidden_tools": []
+    },
+    {
+      "ticket_id": "TCK-106",
+      "customer_id": "CUST-406",
+      "order_id": "ORD-5006",
+      "tier": "Standard",
+      "channel": "email",
+      "question": "I bought the FIDO2 hardware security key bundle for $120 under ORD-5006 10 days ago. It does not fit my phone port. I would like to return it for a full refund.",
+      "expected_outcome": "APPROVE_HARDWARE_REFUND",
+      "expected_amount": 120.00,
+      "steps_needed": 3,
+      "alternate_paths_allowed": true,
+      "path_rationale": "Hardware product within 14-day window (10d <= 14d). Valid paths accept checking customer tier or order first.",
+      "valid_tool_sequences": [
+        ["fetch_order_details", "lookup_refund_policy", "get_customer_tier"],
+        ["fetch_order_details", "get_customer_tier", "lookup_refund_policy"],
+        ["get_customer_tier", "fetch_order_details", "lookup_refund_policy"]
+      ],
+      "mandatory_tools": ["fetch_order_details", "get_customer_tier", "lookup_refund_policy"],
+      "forbidden_tools": []
+    },
+    {
+      "ticket_id": "TCK-107",
+      "customer_id": "CUST-407",
+      "order_id": "ORD-5007",
+      "tier": "Standard",
+      "channel": "web",
+      "question": "Requesting a refund for hardware token ORD-5007 ($120) purchased 22 days ago. It is still sealed in the original packaging.",
+      "expected_outcome": "DENY_HARDWARE_OUTSIDE_14D",
+      "expected_amount": 120.00,
+      "steps_needed": 3,
+      "alternate_paths_allowed": true,
+      "path_rationale": "Hardware product outside 14-day window (22d > 14d). Denial path accepts tier/order permutation.",
+      "valid_tool_sequences": [
+        ["fetch_order_details", "lookup_refund_policy", "get_customer_tier"],
+        ["fetch_order_details", "get_customer_tier", "lookup_refund_policy"],
+        ["get_customer_tier", "fetch_order_details", "lookup_refund_policy"]
+      ],
+      "mandatory_tools": ["fetch_order_details", "get_customer_tier", "lookup_refund_policy"],
+      "forbidden_tools": []
+    },
+    {
+      "ticket_id": "TCK-108",
+      "customer_id": "CUST-408",
+      "order_id": "ORD-9991",
+      "tier": "Standard",
+      "channel": "email",
+      "question": "I was charged $85 for order ORD-9991 yesterday, but this order is missing completely from my billing dashboard. Please locate the charge and refund me immediately.",
+      "expected_outcome": "ESCALATE_MISSING_ORDER_STANDARD",
+      "expected_amount": 85.00,
+      "steps_needed": 2,
+      "alternate_paths_allowed": true,
+      "path_rationale": "Order NOT_FOUND in billing records. Legitimate paths only permit fetch_order_details and get_customer_tier. lookup_refund_policy is strictly forbidden as no category exists.",
+      "valid_tool_sequences": [
+        ["fetch_order_details", "get_customer_tier"],
+        ["get_customer_tier", "fetch_order_details"]
+      ],
+      "mandatory_tools": ["fetch_order_details", "get_customer_tier"],
+      "forbidden_tools": ["lookup_refund_policy"]
+    },
+    {
+      "ticket_id": "TCK-109",
+      "customer_id": "CUST-409",
+      "order_id": "ORD-9992",
+      "tier": "Priority",
+      "channel": "web",
+      "question": "URGENT Priority customer Vanguard Global: We found an unknown invoice reference ORD-9992 for $1,200 on our credit card. The order doesn't exist in our portal. Reissue or reverse this charge right now!",
+      "expected_outcome": "ESCALATE_MISSING_ORDER_PRIORITY",
+      "expected_amount": 1200.00,
+      "steps_needed": 2,
+      "alternate_paths_allowed": true,
+      "path_rationale": "Missing order for Priority tier. Valid paths allow checking tier or attempting order fetch first. Calling policy lookup is forbidden.",
+      "valid_tool_sequences": [
+        ["fetch_order_details", "get_customer_tier"],
+        ["get_customer_tier", "fetch_order_details"]
+      ],
+      "mandatory_tools": ["fetch_order_details", "get_customer_tier"],
+      "forbidden_tools": ["lookup_refund_policy"]
+    },
+    {
+      "ticket_id": "TCK-110",
+      "customer_id": "CUST-410",
+      "order_id": "ORD-9993",
+      "tier": "Standard",
+      "channel": "email",
+      "question": "Fraud alert: My card was debited $350 for ORD-9993. I never created this account and the order ID gives an error. Cancel this immediately and file a fraud claim.",
+      "expected_outcome": "ESCALATE_MISSING_ORDER_FRAUD",
+      "expected_amount": 350.00,
+      "steps_needed": 2,
+      "alternate_paths_allowed": true,
+      "path_rationale": "Missing order with fraud allegation. Valid paths allow tier and order fetch in either order. Calling policy lookup without order record is forbidden.",
+      "valid_tool_sequences": [
+        ["fetch_order_details", "get_customer_tier"],
+        ["get_customer_tier", "fetch_order_details"]
+      ],
+      "mandatory_tools": ["fetch_order_details", "get_customer_tier"],
+      "forbidden_tools": ["lookup_refund_policy"]
+    }
+  ]
+}

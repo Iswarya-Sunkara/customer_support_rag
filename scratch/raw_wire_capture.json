@@ -1,0 +1,176 @@
+[
+  {
+    "phase": "1_initialize",
+    "request": {
+      "jsonrpc": "2.0",
+      "id": 1,
+      "method": "initialize",
+      "params": {
+        "protocolVersion": "2024-11-05",
+        "capabilities": {
+          "roots": {
+            "listChanged": true
+          },
+          "sampling": {}
+        },
+        "clientInfo": {
+          "name": "mcp-agent-host",
+          "version": "1.0.0"
+        }
+      }
+    },
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 1,
+      "result": {
+        "protocolVersion": "2024-11-05",
+        "capabilities": {
+          "logging": {},
+          "prompts": {
+            "listChanged": false
+          },
+          "resources": {
+            "subscribe": false,
+            "listChanged": false
+          },
+          "tools": {
+            "listChanged": true
+          }
+        },
+        "serverInfo": {
+          "name": "ticket-history-server",
+          "version": "4.0.11"
+        }
+      }
+    }
+  },
+  {
+    "phase": "2_initialized_notification",
+    "notification": {
+      "jsonrpc": "2.0",
+      "method": "notifications/initialized"
+    }
+  },
+  {
+    "phase": "3_tools_list",
+    "request": {
+      "jsonrpc": "2.0",
+      "id": 2,
+      "method": "tools/list",
+      "params": {}
+    },
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 2,
+      "result": {
+        "tools": [
+          {
+            "_meta": {
+              "fastmcp": {
+                "tags": []
+              }
+            },
+            "description": "Retrieve the escalation history, prior agent touches, and escalation level for a support ticket.",
+            "inputSchema": {
+              "properties": {
+                "ticket_id": {
+                  "type": "string",
+                  "description": "The unique support ticket code (e.g., 'TCK-101', 'TCK-103')."
+                }
+              },
+              "required": [
+                "ticket_id"
+              ],
+              "type": "object",
+              "additionalProperties": false
+            },
+            "name": "lookup_ticket_history",
+            "outputSchema": {
+              "properties": {
+                "result": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "result"
+              ],
+              "type": "object",
+              "x-fastmcp-wrap-result": true
+            },
+            "title": "Lookup Ticket History"
+          },
+          {
+            "_meta": {
+              "fastmcp": {
+                "tags": []
+              }
+            },
+            "description": "Retrieve ticket intake metadata, customer message summary, and reported channel.",
+            "inputSchema": {
+              "properties": {
+                "ticket_id": {
+                  "type": "string",
+                  "description": "The unique support ticket code (e.g., 'TCK-101', 'TCK-103')."
+                }
+              },
+              "required": [
+                "ticket_id"
+              ],
+              "type": "object",
+              "additionalProperties": false
+            },
+            "name": "get_ticket_details",
+            "outputSchema": {
+              "properties": {
+                "result": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "result"
+              ],
+              "type": "object",
+              "x-fastmcp-wrap-result": true
+            },
+            "title": "Get Ticket Details"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "phase": "4_tools_call",
+    "request": {
+      "jsonrpc": "2.0",
+      "id": 3,
+      "method": "tools/call",
+      "params": {
+        "name": "lookup_ticket_history",
+        "arguments": {
+          "ticket_id": "TCK-103"
+        }
+      }
+    },
+    "response": {
+      "jsonrpc": "2.0",
+      "id": 3,
+      "result": {
+        "_meta": {
+          "fastmcp": {
+            "wrap_result": true
+          }
+        },
+        "content": [
+          {
+            "text": "{\n  \"status\": \"success\",\n  \"found\": true,\n  \"ticket_id\": \"TCK-103\",\n  \"customer_id\": \"CUST-403\",\n  \"order_id\": \"ORD-5003\",\n  \"current_status\": \"ESCALATED\",\n  \"escalation_level\": \"L2_PRIORITY\",\n  \"is_escalated\": true,\n  \"total_touches\": 3,\n  \"audit_trail\": [\n    {\n      \"timestamp\": \"2026-09-29T09:15:00Z\",\n      \"agent\": \"Automated Ingestion\",\n      \"action\": \"Ticket created via Web Portal\",\n      \"note\": \"Priority client Nexus Corp requested $250 refund for onboarding consulting under ORD-5003.\"\n    },\n    {\n      \"timestamp\": \"2026-09-29T10:00:00Z\",\n      \"agent\": \"Agent Sarah\",\n      \"action\": \"Escalated to Priority Tier Support\",\n      \"note\": \"Customer holds Priority SLA. Escalated to tier 2 for expedited supervisor review.\"\n    },\n    {\n      \"timestamp\": \"2026-09-29T11:30:00Z\",\n      \"agent\": \"Supervisor Marcus\",\n      \"action\": \"Review in progress\",\n      \"note\": \"Confirmed services unconsumed. Ready for refund execution approval.\"\n    }\n  ]\n}",
+            "type": "text"
+          }
+        ],
+        "isError": false,
+        "structuredContent": {
+          "result": "{\n  \"status\": \"success\",\n  \"found\": true,\n  \"ticket_id\": \"TCK-103\",\n  \"customer_id\": \"CUST-403\",\n  \"order_id\": \"ORD-5003\",\n  \"current_status\": \"ESCALATED\",\n  \"escalation_level\": \"L2_PRIORITY\",\n  \"is_escalated\": true,\n  \"total_touches\": 3,\n  \"audit_trail\": [\n    {\n      \"timestamp\": \"2026-09-29T09:15:00Z\",\n      \"agent\": \"Automated Ingestion\",\n      \"action\": \"Ticket created via Web Portal\",\n      \"note\": \"Priority client Nexus Corp requested $250 refund for onboarding consulting under ORD-5003.\"\n    },\n    {\n      \"timestamp\": \"2026-09-29T10:00:00Z\",\n      \"agent\": \"Agent Sarah\",\n      \"action\": \"Escalated to Priority Tier Support\",\n      \"note\": \"Customer holds Priority SLA. Escalated to tier 2 for expedited supervisor review.\"\n    },\n    {\n      \"timestamp\": \"2026-09-29T11:30:00Z\",\n      \"agent\": \"Supervisor Marcus\",\n      \"action\": \"Review in progress\",\n      \"note\": \"Confirmed services unconsumed. Ready for refund execution approval.\"\n    }\n  ]\n}"
+        }
+      }
+    }
+  }
+]

@@ -1,0 +1,18 @@
+{
+  "mcpServers": {
+    "rag-support-server": {
+      "command": "python",
+      "args": [
+        "src/mcp_rag_server.py"
+      ],
+      "env": {}
+    },
+    "ticket-history-server": {
+      "command": "python",
+      "args": [
+        "src/mcp_ticket_history_server.py"
+      ],
+      "env": {}
+    }
+  }
+}

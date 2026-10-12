@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "unified-gateway": {
+      "command": "python",
+      "args": [
+        "src/mcp_gateway.py"
+      ],
+      "env": {
+        "MCP_CALLER_TOKEN": "token-tier1-support"
+      }
+    }
+  }
+}

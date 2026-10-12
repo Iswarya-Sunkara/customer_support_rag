@@ -1,0 +1,205 @@
+{
+  "_comment": "WEEK 9 · MODULE 5 — RAW JSON-RPC MCP WIRE PROTOCOL EXCHANGE (Support Ops ticket-history-server)",
+  "model_call_location_statement": "The model call (LLM inference) happens exclusively on the host/client agent side; the MCP server never executes an LLM call or knows about the model.",
+  "exchange_summary": {
+    "transport": "Standard Input / Standard Output (stdio) Streams",
+    "protocol": "JSON-RPC 2.0",
+    "client": "mcp-agent-host (Host Agent)",
+    "server": "ticket-history-server (Support Ops MCP Server)"
+  },
+  "messages": [
+    {
+      "step": 1,
+      "message_name": "initialize_request",
+      "direction": "Client -> Server (Host Agent to MCP Server)",
+      "payload": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "method": "initialize",
+        "params": {
+          "protocolVersion": "2024-11-05",
+          "capabilities": {
+            "roots": {
+              "listChanged": true
+            },
+            "sampling": {}
+          },
+          "clientInfo": {
+            "name": "mcp-agent-host",
+            "version": "1.0.0"
+          }
+        }
+      },
+      "annotations": {
+        "jsonrpc": "Specifies the JSON-RPC standard version (must be strictly '2.0').",
+        "id": "Unique integer or string identifier for this request; the server must echo back this exact ID in its response.",
+        "method": "The MCP lifecycle RPC method name being invoked ('initialize').",
+        "params": "Object containing the handshake parameters negotiation: requested protocol version, client capabilities (e.g. roots tracking, LLM sampling support), and client identity metadata."
+      }
+    },
+    {
+      "step": 2,
+      "message_name": "initialize_response",
+      "direction": "Server -> Client (MCP Server to Host Agent)",
+      "payload": {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "result": {
+          "protocolVersion": "2024-11-05",
+          "capabilities": {
+            "logging": {},
+            "prompts": {
+              "listChanged": false
+            },
+            "resources": {
+              "subscribe": false,
+              "listChanged": false
+            },
+            "tools": {
+              "listChanged": true
+            }
+          },
+          "serverInfo": {
+            "name": "ticket-history-server",
+            "version": "4.0.11"
+          }
+        }
+      },
+      "annotations": {
+        "jsonrpc": "Confirms the JSON-RPC version ('2.0') used by the server.",
+        "id": "Matches the client request ID (1), linking this response to the initial handshake request.",
+        "result": "The server's capability declaration and metadata payload. Indicates tools capability is enabled ('tools': {'listChanged': true}) and reveals server name ('ticket-history-server') and implementation version ('4.0.11')."
+      }
+    },
+    {
+      "step": 3,
+      "message_name": "notifications_initialized",
+      "direction": "Client -> Server (Host Agent to MCP Server)",
+      "payload": {
+        "jsonrpc": "2.0",
+        "method": "notifications/initialized"
+      },
+      "annotations": {
+        "jsonrpc": "JSON-RPC specification version ('2.0').",
+        "method": "Lifecycle notification confirming the host agent has received the server's initialize response and is now ready for operational traffic.",
+        "params": "Omitted because this notification carries no additional parameters.",
+        "id": "Omitted because JSON-RPC notifications must not receive a response from the server."
+      }
+    },
+    {
+      "step": 4,
+      "message_name": "tools_list_request",
+      "direction": "Client -> Server (Host Agent to MCP Server)",
+      "payload": {
+        "jsonrpc": "2.0",
+        "id": 2,
+        "method": "tools/list",
+        "params": {}
+      },
+      "annotations": {
+        "jsonrpc": "Specifies JSON-RPC 2.0 protocol.",
+        "id": "Unique request sequence identifier (2) for tracking asynchronous replies.",
+        "method": "Standard MCP tool discovery method ('tools/list') requesting all available tools exposed by this server.",
+        "params": "Empty parameter object (can optionally include pagination cursor if supported)."
+      }
+    },
+    {
+      "step": 5,
+      "message_name": "tools_list_response",
+      "direction": "Server -> Client (MCP Server to Host Agent)",
+      "payload": {
+        "jsonrpc": "2.0",
+        "id": 2,
+        "result": {
+          "tools": [
+            {
+              "name": "lookup_ticket_history",
+              "description": "Retrieve the escalation history, prior agent touches, and escalation level for a support ticket.",
+              "inputSchema": {
+                "type": "object",
+                "properties": {
+                  "ticket_id": {
+                    "type": "string",
+                    "description": "The unique support ticket code (e.g., 'TCK-101', 'TCK-103')."
+                  }
+                },
+                "required": [
+                  "ticket_id"
+                ],
+                "additionalProperties": false
+              }
+            },
+            {
+              "name": "get_ticket_details",
+              "description": "Retrieve ticket intake metadata, customer message summary, and reported channel.",
+              "inputSchema": {
+                "type": "object",
+                "properties": {
+                  "ticket_id": {
+                    "type": "string",
+                    "description": "The unique support ticket code (e.g., 'TCK-101', 'TCK-103')."
+                  }
+                },
+                "required": [
+                  "ticket_id"
+                ],
+                "additionalProperties": false
+              }
+            }
+          ]
+        }
+      },
+      "annotations": {
+        "jsonrpc": "Protocol version ('2.0').",
+        "id": "Matches request ID 2.",
+        "result": "Contains the list of discovered tools with their exact JSON Schema definitions (inputSchema). The host agent reads these schemas dynamically and translates them to Claude Anthropic function schemas without hardcoding."
+      }
+    },
+    {
+      "step": 6,
+      "message_name": "tools_call_request",
+      "direction": "Client -> Server (Host Agent to MCP Server)",
+      "payload": {
+        "jsonrpc": "2.0",
+        "id": 3,
+        "method": "tools/call",
+        "params": {
+          "name": "lookup_ticket_history",
+          "arguments": {
+            "ticket_id": "TCK-103"
+          }
+        }
+      },
+      "annotations": {
+        "jsonrpc": "Specifies JSON-RPC 2.0 protocol.",
+        "id": "Unique request sequence identifier (3).",
+        "method": "Tool execution method ('tools/call') invoked by host agent after Claude decides to use the discovered tool.",
+        "params": "Execution payload identifying the target tool ('lookup_ticket_history') and the arguments object passed by the model ('ticket_id': 'TCK-103')."
+      }
+    },
+    {
+      "step": 7,
+      "message_name": "tools_call_response",
+      "direction": "Server -> Client (MCP Server to Host Agent)",
+      "payload": {
+        "jsonrpc": "2.0",
+        "id": 3,
+        "result": {
+          "content": [
+            {
+              "type": "text",
+              "text": "{\n  \"status\": \"success\",\n  \"found\": true,\n  \"ticket_id\": \"TCK-103\",\n  \"customer_id\": \"CUST-403\",\n  \"order_id\": \"ORD-5003\",\n  \"current_status\": \"ESCALATED\",\n  \"escalation_level\": \"L2_PRIORITY\",\n  \"is_escalated\": true,\n  \"total_touches\": 3,\n  \"audit_trail\": [\n    {\n      \"timestamp\": \"2026-09-29T09:15:00Z\",\n      \"agent\": \"Automated Ingestion\",\n      \"action\": \"Ticket created via Web Portal\",\n      \"note\": \"Priority client Nexus Corp requested $250 refund for onboarding consulting under ORD-5003.\"\n    },\n    {\n      \"timestamp\": \"2026-09-29T10:00:00Z\",\n      \"agent\": \"Agent Sarah\",\n      \"action\": \"Escalated to Priority Tier Support\",\n      \"note\": \"Customer holds Priority SLA. Escalated to tier 2 for expedited supervisor review.\"\n    },\n    {\n      \"timestamp\": \"2026-09-29T11:30:00Z\",\n      \"agent\": \"Supervisor Marcus\",\n      \"action\": \"Review in progress\",\n      \"note\": \"Confirmed services unconsumed. Ready for refund execution approval.\"\n    }\n  ]\n}"
+            }
+          ],
+          "isError": false
+        }
+      },
+      "annotations": {
+        "jsonrpc": "Specifies JSON-RPC 2.0 protocol.",
+        "id": "Correlates back to request ID 3.",
+        "result": "The tool output envelope containing a 'content' array of MCP blocks. In this case, a text block with JSON payload detailing the complete escalation history, prior agent touches, and escalation status.",
+        "isError": "Boolean flag indicating whether the tool invocation encountered an unhandled execution failure (false = successful execution)."
+      }
+    }
+  ]
+}

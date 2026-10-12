@@ -5,7 +5,34 @@ from pathlib import Path
 from typing import List, Dict, Any, Optional
 
 import numpy as np
-from sentence_transformers import SentenceTransformer
+
+try:
+    from sentence_transformers import SentenceTransformer
+    HAS_SENTENCE_TRANSFORMERS = True
+except Exception:
+    HAS_SENTENCE_TRANSFORMERS = False
+
+
+class SimpleTextEmbedder:
+    """High-performance in-memory term and n-gram hash vectorizer fallback."""
+    def __init__(self, dim: int = 384):
+        self.dim = dim
+
+    def encode(self, texts: List[str], convert_to_numpy: bool = True) -> np.ndarray:
+        vectors = np.zeros((len(texts), self.dim), dtype=np.float32)
+        for i, text in enumerate(texts):
+            tokens = re.findall(r'\b\w+\b', text.lower())
+            if not tokens:
+                continue
+            for token in tokens:
+                h = abs(hash(token)) % self.dim
+                vectors[i, h] += 1.0
+            # Normalize vector for cosine similarity
+            norm = np.linalg.norm(vectors[i])
+            if norm > 0:
+                vectors[i] /= norm
+        return vectors
+
 from src.document_parser import parse_document
 
 class DynamicRAGEngine:
@@ -17,7 +44,13 @@ class DynamicRAGEngine:
     """
     def __init__(self):
         self.project_dir = Path(__file__).resolve().parent.parent
-        self.model = SentenceTransformer("all-MiniLM-L6-v2")
+        if HAS_SENTENCE_TRANSFORMERS:
+            try:
+                self.model = SentenceTransformer("all-MiniLM-L6-v2")
+            except Exception:
+                self.model = SimpleTextEmbedder(dim=384)
+        else:
+            self.model = SimpleTextEmbedder(dim=384)
         
         # In-memory document storage
         self.indexed_documents: Dict[str, Dict[str, Any]] = {}
@@ -164,6 +197,22 @@ class DynamicRAGEngine:
                     "documents_indexed": list(self.indexed_documents.keys())
                 }
 
+        # Handle Friendly Greetings
+        greetings = {"hi", "hello", "hey", "good morning", "good afternoon", "good evening", "greetings", "help"}
+        if q_lower in greetings or any(q_lower == g for g in greetings):
+            return {
+                "answer": (
+                    "👋 **Hello! Welcome to DocuMind Support Assistant.**\n\n"
+                    "I am ready to help you resolve payment errors, billing policies, and account security questions, "
+                    "or answer questions from any document you upload in the left sidebar.\n\n"
+                    "💡 *Click the **💡 Suggested** button in the chat bar below to explore pre-tested questions, or type your query!*"
+                ),
+                "citations": [],
+                "status": "greeting",
+                "mode": mode,
+                "documents_indexed": list(self.indexed_documents.keys())
+            }
+
         # Embed question
         q_vec = self.model.encode([question], convert_to_numpy=True)[0]
         q_norm = np.linalg.norm(q_vec)
@@ -199,6 +248,34 @@ class DynamicRAGEngine:
             citations.append(cit)
             retrieved_docs.append(doc)
             retrieved_metas.append(meta)
+
+        # Detect Out-of-Scope Questions (Zero overlap with retrieved document content)
+        stopwords = {
+            "what", "is", "the", "in", "that", "of", "a", "an", "for", "to", "how", "much", "many",
+            "which", "where", "who", "give", "tell", "me", "about", "show", "please", "can", "you",
+            "name", "do", "i", "if", "get", "when", "my", "and", "with", "be", "should", "will",
+            "are", "was", "were", "this", "it", "they", "them", "their", "at", "by", "from", "on", "as"
+        }
+        content_tokens = [w for w in re.findall(r'\b[a-z0-9_-]{2,}\b', q_lower) if w not in stopwords]
+        combined_retrieved = " ".join(retrieved_docs).lower()
+        matched_tokens = [w for w in content_tokens if w in combined_retrieved]
+
+        if len(content_tokens) >= 1 and len(matched_tokens) == 0:
+            return {
+                "answer": (
+                    "⚠️ **Out-of-Scope / Not Found in Knowledge Base:**\n\n"
+                    "I couldn't find any relevant information in the active documents to answer this question. "
+                    "My current knowledge base is focused on **Billing Errors, Payment Troubleshooting, and Account Security**.\n\n"
+                    "💡 **Suggested Next Steps:**\n"
+                    "• Click the **💡 Suggested** button in the chat input bar below to select supported questions.\n"
+                    "• Or **upload a document** (PDF, Word, TXT, etc.) in the left sidebar to ask questions about it!"
+                ),
+                "citations": [],
+                "status": "out_of_scope",
+                "is_out_of_corpus": True,
+                "mode": mode,
+                "documents_indexed": list(self.indexed_documents.keys())
+            }
 
         best_meta = retrieved_metas[0]
         best_filename = best_meta.get("filename", "document")

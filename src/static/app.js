@@ -23,6 +23,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const typingIndicator = document.getElementById('typingIndicator');
     const btnClearChat = document.getElementById('btnClearChat');
 
+    // Sidebar Toggle (Mobile / Desktop)
+    const btnToggleSidebar = document.getElementById('btnToggleSidebar');
+    const sidebar = document.querySelector('.sidebar');
+    if (btnToggleSidebar && sidebar) {
+        btnToggleSidebar.addEventListener('click', () => {
+            sidebar.classList.toggle('collapsed');
+        });
+    }
+
     // 1. Filter Switch Event Listeners (Week 3 vs Week 4)
     btnModeWeek3.addEventListener('click', () => {
         currentMode = 'week3';
@@ -313,6 +322,41 @@ document.addEventListener('DOMContentLoaded', () => {
         appendAssistantMessage('👋 Chat history reset! Select any of the 12 Golden Set Questions or upload a document to begin.');
     });
 
+    // Suggested Questions Toggle & Click-to-Send Handlers
+    const btnSuggestedQuestions = document.getElementById('btnSuggestedQuestions');
+    const suggestedPanel = document.getElementById('suggestedPanel');
+    const btnCloseSuggested = document.getElementById('btnCloseSuggested');
+
+    if (btnSuggestedQuestions && suggestedPanel) {
+        btnSuggestedQuestions.addEventListener('click', (e) => {
+            e.preventDefault();
+            const isHidden = suggestedPanel.style.display === 'none';
+            suggestedPanel.style.display = isHidden ? 'flex' : 'none';
+            btnSuggestedQuestions.classList.toggle('active', isHidden);
+        });
+    }
+
+    if (btnCloseSuggested && suggestedPanel) {
+        btnCloseSuggested.addEventListener('click', (e) => {
+            e.preventDefault();
+            suggestedPanel.style.display = 'none';
+            if (btnSuggestedQuestions) btnSuggestedQuestions.classList.remove('active');
+        });
+    }
+
+    document.querySelectorAll('.suggest-chip').forEach(chip => {
+        chip.addEventListener('click', (e) => {
+            e.preventDefault();
+            const q = chip.getAttribute('data-q');
+            if (q) {
+                userInput.value = q;
+                if (suggestedPanel) suggestedPanel.style.display = 'none';
+                if (btnSuggestedQuestions) btnSuggestedQuestions.classList.remove('active');
+                chatForm.dispatchEvent(new Event('submit'));
+            }
+        });
+    });
+
     function getCurrentTime() {
         const now = new Date();
         return now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
@@ -331,7 +375,7 @@ document.addEventListener('DOMContentLoaded', () => {
             .replace(/\n/g, '<br/>');
     }
 
-    // --- Tab Navigation & View Switcher (Weeks 3-6) ---
+    // --- Tab Navigation & View Switcher (Weeks 3-9 + Langfuse) ---
     const tabBtnChat = document.getElementById('tabBtnChat');
     const tabBtnWeek3 = document.getElementById('tabBtnWeek3');
     const tabBtnWeek4 = document.getElementById('tabBtnWeek4');
@@ -339,7 +383,45 @@ document.addEventListener('DOMContentLoaded', () => {
     const tabBtnWeek6 = document.getElementById('tabBtnWeek6');
     const tabBtnWeek7 = document.getElementById('tabBtnWeek7');
     const tabBtnWeek8 = document.getElementById('tabBtnWeek8');
+    const tabBtnWeek9 = document.getElementById('tabBtnWeek9');
     const tabBtnLangfuse = document.getElementById('tabBtnLangfuse');
+
+    const btnWeeksPopover = document.getElementById('btnWeeksPopover');
+    const weeksPopoverMenu = document.getElementById('weeksPopoverMenu');
+    const popoverCurrentLabel = document.getElementById('popoverCurrentLabel');
+
+    const WEEK_META = {
+        week3: { short: 'W3: Baseline', icon: 'fa-chart-line', color: '#F59E0B' },
+        week4: { short: 'W4: Hybrid', icon: 'fa-bolt', color: '#06B6D4' },
+        week5: { short: 'W5: Taxonomy', icon: 'fa-list-check', color: '#A78BFA' },
+        week6: { short: 'W6: LLM Judge', icon: 'fa-scale-balanced', color: '#38BDF8' },
+        week7: { short: 'W7: Race & Budgets', icon: 'fa-code-compare', color: '#EC4899' },
+        week8: { short: 'W8: Trajectory', icon: 'fa-route', color: '#6366F1' },
+        week9: { short: 'W9: MCP & Tools', icon: 'fa-network-wired', color: '#A855F7' },
+        langfuse: { short: 'Langfuse', icon: 'fa-satellite-dish', color: '#10B981' }
+    };
+
+    function closeWeeksPopover() {
+        if (weeksPopoverMenu) weeksPopoverMenu.classList.remove('open');
+        if (btnWeeksPopover) {
+            btnWeeksPopover.classList.remove('open');
+            btnWeeksPopover.setAttribute('aria-expanded', 'false');
+        }
+    }
+
+    function toggleWeeksPopover() {
+        if (!weeksPopoverMenu) return;
+        const isOpen = weeksPopoverMenu.classList.contains('open');
+        if (isOpen) {
+            closeWeeksPopover();
+        } else {
+            weeksPopoverMenu.classList.add('open');
+            if (btnWeeksPopover) {
+                btnWeeksPopover.classList.add('open');
+                btnWeeksPopover.setAttribute('aria-expanded', 'true');
+            }
+        }
+    }
 
     const viewChat = document.getElementById('viewChat');
     const viewWeek3 = document.getElementById('viewWeek3');
@@ -348,6 +430,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const viewWeek6 = document.getElementById('viewWeek6');
     const viewWeek7 = document.getElementById('viewWeek7');
     const viewWeek8 = document.getElementById('viewWeek8');
+    const viewWeek9 = document.getElementById('viewWeek9');
     const viewLangfuse = document.getElementById('viewLangfuse');
 
     const sidebarWeek3Btn = document.getElementById('sidebarWeek3Btn');
@@ -355,16 +438,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const sidebarWeek5Btn = document.getElementById('sidebarWeek5Btn');
     const sidebarWeek6Btn = document.getElementById('sidebarWeek6Btn');
     const sidebarWeek7Btn = document.getElementById('sidebarWeek7Btn');
+    const sidebarWeek8Btn = document.getElementById('sidebarWeek8Btn');
+    const sidebarWeek9Btn = document.getElementById('sidebarWeek9Btn');
     const sidebarLangfuseBtn = document.getElementById('sidebarLangfuseBtn');
     const btnReloadWeek6Frame = document.getElementById('btnReloadWeek6Frame');
     const week6Iframe = document.getElementById('week6Iframe');
 
     const filterSwitchContainer = document.getElementById('filterSwitchContainer');
 
-    const allTabBtns = [tabBtnChat, tabBtnWeek3, tabBtnWeek4, tabBtnWeek5, tabBtnWeek6, tabBtnWeek7, tabBtnWeek8, tabBtnLangfuse].filter(Boolean);
-    const allViews = [viewChat, viewWeek3, viewWeek4, viewWeek5, viewWeek6, viewWeek7, viewWeek8, viewLangfuse].filter(Boolean);
+    const allTabBtns = [tabBtnChat, tabBtnWeek3, tabBtnWeek4, tabBtnWeek5, tabBtnWeek6, tabBtnWeek7, tabBtnWeek8, tabBtnWeek9, tabBtnLangfuse].filter(Boolean);
+    const allViews = [viewChat, viewWeek3, viewWeek4, viewWeek5, viewWeek6, viewWeek7, viewWeek8, viewWeek9, viewLangfuse].filter(Boolean);
 
     function switchView(target) {
+        closeWeeksPopover();
+
         allTabBtns.forEach(btn => btn.classList.remove('active'));
         allViews.forEach(v => {
             v.classList.remove('active');
@@ -377,72 +464,126 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (target === 'chat') {
             if (tabBtnChat) tabBtnChat.classList.add('active');
+            if (btnWeeksPopover) btnWeeksPopover.classList.remove('active');
+            if (popoverCurrentLabel) {
+                popoverCurrentLabel.innerHTML = `
+                    <i class="fa-solid fa-layer-group" style="color: #A855F7;"></i>
+                    <span>Curriculum Modules</span>
+                `;
+            }
             if (viewChat) {
                 viewChat.classList.add('active');
                 viewChat.style.display = 'flex';
             }
-        } else if (target === 'week3') {
-            if (tabBtnWeek3) tabBtnWeek3.classList.add('active');
-            if (viewWeek3) {
-                viewWeek3.classList.add('active');
-                viewWeek3.style.display = 'flex';
+        } else {
+            if (tabBtnChat) tabBtnChat.classList.remove('active');
+            if (btnWeeksPopover) btnWeeksPopover.classList.add('active');
+
+            if (WEEK_META[target] && popoverCurrentLabel) {
+                const meta = WEEK_META[target];
+                popoverCurrentLabel.innerHTML = `
+                    <i class="fa-solid ${meta.icon}" style="color: ${meta.color};"></i>
+                    <span>${meta.short}</span>
+                `;
             }
-        } else if (target === 'week4') {
-            if (tabBtnWeek4) tabBtnWeek4.classList.add('active');
-            if (viewWeek4) {
-                viewWeek4.classList.add('active');
-                viewWeek4.style.display = 'flex';
+
+            if (target === 'week3') {
+                if (tabBtnWeek3) tabBtnWeek3.classList.add('active');
+                if (viewWeek3) {
+                    viewWeek3.classList.add('active');
+                    viewWeek3.style.display = 'flex';
+                }
+            } else if (target === 'week4') {
+                if (tabBtnWeek4) tabBtnWeek4.classList.add('active');
+                if (viewWeek4) {
+                    viewWeek4.classList.add('active');
+                    viewWeek4.style.display = 'flex';
+                }
+            } else if (target === 'week5') {
+                if (tabBtnWeek5) tabBtnWeek5.classList.add('active');
+                if (viewWeek5) {
+                    viewWeek5.classList.add('active');
+                    viewWeek5.style.display = 'flex';
+                }
+            } else if (target === 'week6') {
+                if (tabBtnWeek6) tabBtnWeek6.classList.add('active');
+                if (viewWeek6) {
+                    viewWeek6.classList.add('active');
+                    viewWeek6.style.display = 'flex';
+                }
+            } else if (target === 'week7') {
+                if (tabBtnWeek7) tabBtnWeek7.classList.add('active');
+                if (viewWeek7) {
+                    viewWeek7.classList.add('active');
+                    viewWeek7.style.display = 'flex';
+                }
+                fetchWeek7RaceData();
+            } else if (target === 'week8') {
+                if (tabBtnWeek8) tabBtnWeek8.classList.add('active');
+                if (viewWeek8) {
+                    viewWeek8.classList.add('active');
+                    viewWeek8.style.display = 'flex';
+                }
+                fetchWeek8TrajectoryData();
+            } else if (target === 'week9') {
+                if (tabBtnWeek9) tabBtnWeek9.classList.add('active');
+                if (viewWeek9) {
+                    viewWeek9.classList.add('active');
+                    viewWeek9.style.display = 'flex';
+                }
+                fetchWeek9Data();
+            } else if (target === 'langfuse') {
+                if (tabBtnLangfuse) tabBtnLangfuse.classList.add('active');
+                if (viewLangfuse) {
+                    viewLangfuse.classList.add('active');
+                    viewLangfuse.style.display = 'flex';
+                }
+                fetchLangfuseTelemetry();
             }
-        } else if (target === 'week5') {
-            if (tabBtnWeek5) tabBtnWeek5.classList.add('active');
-            if (viewWeek5) {
-                viewWeek5.classList.add('active');
-                viewWeek5.style.display = 'flex';
-            }
-        } else if (target === 'week6') {
-            if (tabBtnWeek6) tabBtnWeek6.classList.add('active');
-            if (viewWeek6) {
-                viewWeek6.classList.add('active');
-                viewWeek6.style.display = 'flex';
-            }
-        } else if (target === 'week7') {
-            if (tabBtnWeek7) tabBtnWeek7.classList.add('active');
-            if (viewWeek7) {
-                viewWeek7.classList.add('active');
-                viewWeek7.style.display = 'flex';
-            }
-            fetchWeek7RaceData();
-        } else if (target === 'week8') {
-            if (tabBtnWeek8) tabBtnWeek8.classList.add('active');
-            if (viewWeek8) {
-                viewWeek8.classList.add('active');
-                viewWeek8.style.display = 'flex';
-            }
-            fetchWeek8TrajectoryData();
-        } else if (target === 'langfuse') {
-            if (tabBtnLangfuse) tabBtnLangfuse.classList.add('active');
-            if (viewLangfuse) {
-                viewLangfuse.classList.add('active');
-                viewLangfuse.style.display = 'flex';
-            }
-            fetchLangfuseTelemetry();
         }
     }
 
     if (tabBtnChat) tabBtnChat.addEventListener('click', () => switchView('chat'));
-    if (tabBtnWeek3) tabBtnWeek3.addEventListener('click', () => switchView('week3'));
-    if (tabBtnWeek4) tabBtnWeek4.addEventListener('click', () => switchView('week4'));
-    if (tabBtnWeek5) tabBtnWeek5.addEventListener('click', () => switchView('week5'));
-    if (tabBtnWeek6) tabBtnWeek6.addEventListener('click', () => switchView('week6'));
-    if (tabBtnWeek7) tabBtnWeek7.addEventListener('click', () => switchView('week7'));
-    if (tabBtnWeek8) tabBtnWeek8.addEventListener('click', () => switchView('week8'));
-    if (tabBtnLangfuse) tabBtnLangfuse.addEventListener('click', () => switchView('langfuse'));
+
+    if (btnWeeksPopover) {
+        btnWeeksPopover.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleWeeksPopover();
+        });
+    }
+
+    document.querySelectorAll('.popover-week-card').forEach(card => {
+        card.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const target = card.getAttribute('data-target');
+            if (target) {
+                switchView(target);
+            }
+        });
+    });
+
+    // Close on outside click
+    document.addEventListener('click', (e) => {
+        const wrapper = document.getElementById('weeksPopoverWrapper');
+        if (wrapper && !wrapper.contains(e.target)) {
+            closeWeeksPopover();
+        }
+    });
+
+    // Close on escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            closeWeeksPopover();
+        }
+    });
 
     if (sidebarWeek3Btn) sidebarWeek3Btn.addEventListener('click', () => switchView('week3'));
     if (sidebarWeek4Btn) sidebarWeek4Btn.addEventListener('click', () => switchView('week4'));
     if (sidebarWeek5Btn) sidebarWeek5Btn.addEventListener('click', () => switchView('week5'));
     if (sidebarWeek6Btn) sidebarWeek6Btn.addEventListener('click', () => switchView('week6'));
     if (sidebarWeek7Btn) sidebarWeek7Btn.addEventListener('click', () => switchView('week7'));
+    if (sidebarWeek8Btn) sidebarWeek8Btn.addEventListener('click', () => switchView('week8'));
+    if (sidebarWeek9Btn) sidebarWeek9Btn.addEventListener('click', () => switchView('week9'));
     if (sidebarLangfuseBtn) sidebarLangfuseBtn.addEventListener('click', () => switchView('langfuse'));
 
     // Framed Questions Launchers in Week 5 view
@@ -1044,6 +1185,225 @@ document.addEventListener('DOMContentLoaded', () => {
                 btnRunWeek8Eval.disabled = false;
                 btnRunWeek8Eval.innerHTML = '<i class="fa-solid fa-play"></i> Re-Run Trajectory Eval';
                 alert('Trajectory eval failed: ' + err.message);
+            }
+        });
+    }
+
+    // ==============================================================================
+    // Week 9: MCP Protocol & Dynamic Tool Discovery Engine
+    // ==============================================================================
+    async function fetchWeek9Data() {
+        try {
+            const res = await fetch('/api/week9/status');
+            const data = await res.json();
+            if (data.status !== 'success') return;
+
+            // KPI Cards
+            const kpiToolCount = document.getElementById('w9KpiToolCount');
+            const kpiToolBefore = document.getElementById('w9KpiToolBefore');
+            if (kpiToolCount) kpiToolCount.innerHTML = `${data.tool_counts.before.count} &rarr; ${data.tool_counts.after.count}`;
+            if (kpiToolBefore) kpiToolBefore.textContent = `${data.tool_counts.before.count} Tools Init`;
+
+            // Diff Boxes
+            const agentDiffBox = document.getElementById('w9AgentDiffBox');
+            if (agentDiffBox) {
+                agentDiffBox.textContent = data.agent_diff || "/* 0 lines changed in src/mcp_agent.py */\n$ git diff --no-index src/mcp_agent.py src/mcp_agent.py\n[EXIT CODE 0 — ZERO BYTES CHANGED]";
+            }
+
+            const configDiffBox = document.getElementById('w9ConfigDiffBox');
+            if (configDiffBox) {
+                configDiffBox.textContent = data.config_diff || "diff --git a/mcp_config_single.json b/mcp_config.json\n+   \"ticket-history-server\": {\n+     \"command\": \"python\",\n+     \"args\": [\"src/mcp_ticket_history_server.py\"]\n+   }";
+            }
+
+            // Wire JSON Box
+            const wireJsonBox = document.getElementById('w9WireJsonBox');
+            if (wireJsonBox) {
+                wireJsonBox.textContent = JSON.stringify(data.wire_json, null, 2);
+            }
+
+            // Risk Note Box
+            const riskNoteBox = document.getElementById('w9RiskNoteBox');
+            if (riskNoteBox) {
+                riskNoteBox.textContent = data.risk_note || "";
+            }
+
+            // Audit Table Body
+            const auditTableBody = document.getElementById('w9AuditTableBody');
+            if (auditTableBody && data.audit_logs) {
+                if (data.audit_logs.length === 0) {
+                    auditTableBody.innerHTML = '<tr><td colspan="7" style="text-align:center; color:var(--text-muted); padding:16px;">No audit events recorded yet. Click "Test Gateway Deny" or "Test Gateway Allow" above.</td></tr>';
+                } else {
+                    auditTableBody.innerHTML = data.audit_logs.map(log => {
+                        const isDenied = log.status === 'DENIED';
+                        const badgeClass = isDenied ? 'w7-kpi-delta agent-win' : 'w7-kpi-delta workflow-win';
+                        const timeStr = (log.timestamp || '').replace('T', ' ').substring(0, 19) + ' UTC';
+                        return `
+                            <tr>
+                                <td style="font-family: monospace; font-size: 0.75rem;">${timeStr}</td>
+                                <td><span style="color:#C084FC;">${log.caller || 'N/A'}</span></td>
+                                <td><code>${log.tool || 'N/A'}</code></td>
+                                <td><strong style="color:#38BDF8;">${log.ticket_id || 'N/A'}</strong></td>
+                                <td><span class="${badgeClass}">${log.status}</span></td>
+                                <td><span style="font-size:0.75rem; color:var(--text-muted);">${log.token_scope || ''}</span></td>
+                                <td style="font-size:0.75rem; color:var(--text-muted);">${log.details || ''}</td>
+                            </tr>
+                        `;
+                    }).join('');
+                }
+            }
+        } catch (err) {
+            console.error("Error fetching Week 9 data:", err);
+        }
+    }
+
+    // Week 9 Action Button Handlers
+    const btnRefreshW9Status = document.getElementById('btnRefreshW9Status');
+    if (btnRefreshW9Status) {
+        btnRefreshW9Status.addEventListener('click', () => {
+            fetchWeek9Data();
+        });
+    }
+
+    const btnCloseW9Output = document.getElementById('btnCloseW9Output');
+    const w9RunOutputCard = document.getElementById('w9RunOutputCard');
+    const w9RunOutputContent = document.getElementById('w9RunOutputContent');
+
+    if (btnCloseW9Output && w9RunOutputCard) {
+        btnCloseW9Output.addEventListener('click', () => {
+            w9RunOutputCard.style.display = 'none';
+        });
+    }
+
+    // Run Live Agent on TCK-103
+    const btnRunW9Agent = document.getElementById('btnRunW9Agent');
+    if (btnRunW9Agent) {
+        btnRunW9Agent.addEventListener('click', async () => {
+            btnRunW9Agent.disabled = true;
+            btnRunW9Agent.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Running Agent...';
+            if (w9RunOutputCard) w9RunOutputCard.style.display = 'block';
+            if (w9RunOutputContent) {
+                w9RunOutputContent.innerHTML = '<div style="color:#A855F7; padding:12px;"><i class="fa-solid fa-spinner fa-spin"></i> Connecting to MCP servers (rag-support-server & ticket-history-server) over stdio and running Claude Haiku 4.5 agent loop...</div>';
+            }
+
+            try {
+                const res = await fetch('/api/week9/run', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ action: 'ticket', ticket_id: 'TCK-103' })
+                });
+                const json = await res.json();
+                btnRunW9Agent.disabled = false;
+                btnRunW9Agent.innerHTML = '<i class="fa-solid fa-play"></i> Run Agent (TCK-103)';
+
+                if (json.status === 'success' && w9RunOutputContent) {
+                    const stepsHtml = (json.steps || []).map(s => `
+                        <div style="background: rgba(31, 41, 55, 0.4); padding: 8px 12px; border-radius: 6px; margin-bottom: 6px; font-size: 0.8rem; border-left: 3px solid #A855F7;">
+                            <strong>Step ${s.step}: [${s.server}] &rarr; <code>${s.tool}</code></strong>
+                            <div style="color:var(--text-muted); font-size: 0.72rem; margin-top:2px;">Args: ${JSON.stringify(s.args)}</div>
+                            <pre style="margin-top: 4px; font-size: 0.7rem; color: #E2E8F0; background: rgba(0,0,0,0.3); padding: 4px 8px; border-radius: 4px; max-height: 80px; overflow-y:auto;">${s.output}</pre>
+                        </div>
+                    `).join('');
+
+                    w9RunOutputContent.innerHTML = `
+                        <div style="display:flex; gap:16px; margin-bottom:12px; font-size:0.85rem;">
+                            <span><strong>Total Tokens:</strong> ${json.tokens}</span>
+                            <span><strong>Cost:</strong> $${json.cost.toFixed(5)}</span>
+                            <span><strong>Latency:</strong> ${json.latency.toFixed(2)}s</span>
+                            <span><strong>Discovered:</strong> ${json.discovered_tools.length} Tools</span>
+                        </div>
+                        <h4 style="color:#A855F7; font-size:0.9rem; margin-bottom:6px;">MCP Wire Calls Trace (${json.steps.length} Laps):</h4>
+                        ${stepsHtml}
+                        <h4 style="color:#38BDF8; font-size:0.9rem; margin:10px 0 6px 0;">Final Resolution to Customer:</h4>
+                        <pre class="w7-pre-box" style="white-space: pre-wrap; color: #F9FAFB;">${json.reply}</pre>
+                    `;
+                } else if (w9RunOutputContent) {
+                    w9RunOutputContent.innerHTML = `<div style="color:#F87171;">Error running agent: ${json.error || 'Unknown error'}</div>`;
+                }
+                fetchWeek9Data();
+            } catch (err) {
+                btnRunW9Agent.disabled = false;
+                btnRunW9Agent.innerHTML = '<i class="fa-solid fa-play"></i> Run Agent (TCK-103)';
+                if (w9RunOutputContent) w9RunOutputContent.innerHTML = `<div style="color:#F87171;">Failed: ${err.message}</div>`;
+            }
+        });
+    }
+
+    // Test Gateway Deny
+    const btnTestW9Deny = document.getElementById('btnTestW9Deny');
+    if (btnTestW9Deny) {
+        btnTestW9Deny.addEventListener('click', async () => {
+            btnTestW9Deny.disabled = true;
+            btnTestW9Deny.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Testing Deny...';
+            try {
+                const res = await fetch('/api/week9/run', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ action: 'gateway_deny', ticket_id: 'TCK-103' })
+                });
+                const json = await res.json();
+                btnTestW9Deny.disabled = false;
+                btnTestW9Deny.innerHTML = '<i class="fa-solid fa-ban"></i> Test Gateway Deny';
+
+                if (w9RunOutputCard) w9RunOutputCard.style.display = 'block';
+                if (w9RunOutputContent) {
+                    w9RunOutputContent.innerHTML = `
+                        <div style="background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.4); padding: 12px; border-radius: 8px;">
+                            <h4 style="color:#F87171;"><i class="fa-solid fa-ban"></i> RBAC Token Permission Denied (Recoverable Error)</h4>
+                            <p style="font-size:0.8rem; color:var(--text-muted); margin-top:4px;">
+                                Caller Token: <code>${json.token_scope}</code> (Lacks <code>ticket:history:read</code> scope)
+                            </p>
+                            <pre class="w7-pre-box" style="margin-top:8px; color:#FCA5A5;">${JSON.stringify(json.result, null, 2)}</pre>
+                            <p style="font-size:0.75rem; color:#34D399; margin-top:8px;">
+                                <i class="fa-solid fa-circle-check"></i> Single audit line successfully written to <code>results/mcp_audit.log</code> with status: <strong>DENIED</strong>.
+                            </p>
+                        </div>
+                    `;
+                }
+                fetchWeek9Data();
+            } catch (err) {
+                btnTestW9Deny.disabled = false;
+                btnTestW9Deny.innerHTML = '<i class="fa-solid fa-ban"></i> Test Gateway Deny';
+                alert('Test failed: ' + err.message);
+            }
+        });
+    }
+
+    // Test Gateway Allow
+    const btnTestW9Allow = document.getElementById('btnTestW9Allow');
+    if (btnTestW9Allow) {
+        btnTestW9Allow.addEventListener('click', async () => {
+            btnTestW9Allow.disabled = true;
+            btnTestW9Allow.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Testing Allow...';
+            try {
+                const res = await fetch('/api/week9/run', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ action: 'gateway_allow', ticket_id: 'TCK-103' })
+                });
+                const json = await res.json();
+                btnTestW9Allow.disabled = false;
+                btnTestW9Allow.innerHTML = '<i class="fa-solid fa-shield-check"></i> Test Gateway Allow';
+
+                if (w9RunOutputCard) w9RunOutputCard.style.display = 'block';
+                if (w9RunOutputContent) {
+                    w9RunOutputContent.innerHTML = `
+                        <div style="background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.4); padding: 12px; border-radius: 8px;">
+                            <h4 style="color:#34D399;"><i class="fa-solid fa-circle-check"></i> RBAC Token Permission Allowed (Supervisor Role)</h4>
+                            <p style="font-size:0.8rem; color:var(--text-muted); margin-top:4px;">
+                                Caller Token: <code>${json.token_scope}</code> (Contains <code>ticket:history:read</code> scope)
+                            </p>
+                            <pre class="w7-pre-box" style="margin-top:8px; color:#6EE7B7;">${JSON.stringify(json.result, null, 2)}</pre>
+                            <p style="font-size:0.75rem; color:#34D399; margin-top:8px;">
+                                <i class="fa-solid fa-circle-check"></i> Single audit line successfully written to <code>results/mcp_audit.log</code> with status: <strong>ALLOWED</strong>.
+                            </p>
+                        </div>
+                    `;
+                }
+                fetchWeek9Data();
+            } catch (err) {
+                btnTestW9Allow.disabled = false;
+                btnTestW9Allow.innerHTML = '<i class="fa-solid fa-shield-check"></i> Test Gateway Allow';
+                alert('Test failed: ' + err.message);
             }
         });
     }

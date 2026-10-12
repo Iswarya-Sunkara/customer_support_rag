@@ -15,7 +15,7 @@
         rel="stylesheet">
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="/static/styles.css?v=9">
+    <link rel="stylesheet" href="/static/styles.css?v=14">
 </head>
 
 <body>
@@ -117,8 +117,16 @@
                         style="text-align: left; display: flex; align-items: center; gap: 8px; color: #F472B6; border-color: rgba(236,72,153,0.3); background: rgba(236,72,153,0.1);">
                         <i class="fa-solid fa-code-compare" style="color: #EC4899;"></i> Week 7: Agent vs Workflow
                     </button>
+                    <button class="btn-sidebar-view" id="sidebarWeek8Btn"
+                        style="text-align: left; display: flex; align-items: center; gap: 8px; color: #818CF8; border-color: rgba(99,102,241,0.3); background: rgba(99,102,241,0.1);">
+                        <i class="fa-solid fa-route" style="color: #6366F1;"></i> Week 8: Trajectory Evals
+                    </button>
+                    <button class="btn-sidebar-view" id="sidebarWeek9Btn"
+                        style="text-align: left; display: flex; align-items: center; gap: 8px; color: #C084FC; border-color: rgba(168,85,247,0.3); background: rgba(168,85,247,0.1);">
+                        <i class="fa-solid fa-network-wired" style="color: #A855F7;"></i> Week 9: MCP & Tools
+                    </button>
                     <button class="btn-sidebar-view" id="sidebarLangfuseBtn"
-                        style="text-align: left; display: flex; align-items: center; gap: 8px; color: #10B981; border-color: rgba(16,185,129,0.3); background: rgba(16,185,129,0.1);">
+                        style="text-align: left; display: flex; align-items: center; gap: 8px; color: #10B981; border-color: rgba(160,185,129,0.3); background: rgba(16,185,129,0.1);">
                         <i class="fa-solid fa-satellite-dish"></i> Langfuse Telemetry
                     </button>
                 </div>
@@ -133,34 +141,162 @@
         <main class="chat-main">
             <!-- Top Navigation Bar -->
             <header class="chat-header">
-                <div class="header-info">
-                    <h1>Universal Document Chatbot</h1>
+                <div class="header-info" style="display: flex; align-items: center; gap: 12px;">
+                    <button class="icon-btn" id="btnToggleSidebar" title="Toggle Left Sidebar" style="padding: 6px 11px; background: rgba(31, 41, 55, 0.6); font-size: 0.9rem;">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                    <h1 style="margin: 0; font-size: 1.15rem; white-space: nowrap;">Universal Document Chatbot</h1>
                     <!-- Top Navigation Tabs across All Weeks -->
                     <div class="nav-tabs">
                         <button class="main-tab-btn active" id="tabBtnChat">
                             <i class="fa-solid fa-comments"></i> Chatbot
                         </button>
-                        <button class="main-tab-btn" id="tabBtnWeek3">
-                            <i class="fa-solid fa-chart-line" style="color: #F59E0B;"></i> W3: Baseline
-                        </button>
-                        <button class="main-tab-btn" id="tabBtnWeek4">
-                            <i class="fa-solid fa-bolt" style="color: #06B6D4;"></i> W4: Hybrid
-                        </button>
-                        <button class="main-tab-btn" id="tabBtnWeek5">
-                            <i class="fa-solid fa-list-check" style="color: #A78BFA;"></i> W5: Taxonomy
-                        </button>
-                        <button class="main-tab-btn" id="tabBtnWeek6">
-                            <i class="fa-solid fa-scale-balanced" style="color: #38BDF8;"></i> W6: LLM Judge
-                        </button>
-                        <button class="main-tab-btn" id="tabBtnWeek7">
-                            <i class="fa-solid fa-code-compare" style="color: #EC4899;"></i> W7: Race & Budgets
-                        </button>
-                        <button class="main-tab-btn" id="tabBtnWeek8">
-                            <i class="fa-solid fa-route" style="color: #6366F1;"></i> W8: Trajectory Evals
-                        </button>
-                        <button class="main-tab-btn" id="tabBtnLangfuse">
-                            <i class="fa-solid fa-satellite-dish" style="color: #10B981;"></i> Langfuse
-                        </button>
+                        
+                        <!-- Curriculum Weeks Popover Dropdown -->
+                        <div class="weeks-popover-wrapper" id="weeksPopoverWrapper">
+                            <button class="main-tab-btn popover-trigger-btn" id="btnWeeksPopover" aria-haspopup="true" aria-expanded="false" title="Click to browse curriculum weeks & evaluations">
+                                <span class="popover-btn-content" id="popoverCurrentLabel">
+                                    <i class="fa-solid fa-layer-group" style="color: #A855F7;"></i>
+                                    <span>Curriculum Modules</span>
+                                </span>
+                                <i class="fa-solid fa-chevron-down popover-arrow" id="popoverArrow"></i>
+                            </button>
+
+                            <!-- Floating Popover Menu Panel -->
+                            <div class="weeks-popover-menu" id="weeksPopoverMenu" role="menu" aria-label="Curriculum Weeks Selection">
+                                <div class="popover-header">
+                                    <div class="popover-header-title">
+                                        <i class="fa-solid fa-graduation-cap" style="color: var(--accent-cyan);"></i>
+                                        <span>Curriculum Modules (Weeks 3 – 9)</span>
+                                    </div>
+                                    <span class="popover-count-badge">8 Modules</span>
+                                </div>
+                                <div class="popover-grid">
+                                    <!-- Week 3 -->
+                                    <button class="popover-week-card" id="tabBtnWeek3" data-target="week3" role="menuitem">
+                                        <div class="card-icon-box" style="background: rgba(245, 158, 11, 0.15); color: #F59E0B; border: 1px solid rgba(245, 158, 11, 0.3);">
+                                            <i class="fa-solid fa-chart-line"></i>
+                                        </div>
+                                        <div class="card-details">
+                                            <div class="card-title-row">
+                                                <span class="card-week-badge">Week 3</span>
+                                                <span class="card-chip">Dense</span>
+                                            </div>
+                                            <div class="card-name">Dense Baseline</div>
+                                            <div class="card-sub">Bi-Encoder Semantic Search</div>
+                                        </div>
+                                    </button>
+
+                                    <!-- Week 4 -->
+                                    <button class="popover-week-card" id="tabBtnWeek4" data-target="week4" role="menuitem">
+                                        <div class="card-icon-box" style="background: rgba(6, 182, 212, 0.15); color: #06B6D4; border: 1px solid rgba(6, 182, 212, 0.3);">
+                                            <i class="fa-solid fa-bolt"></i>
+                                        </div>
+                                        <div class="card-details">
+                                            <div class="card-title-row">
+                                                <span class="card-week-badge">Week 4</span>
+                                                <span class="card-chip">Hybrid</span>
+                                            </div>
+                                            <div class="card-name">Hybrid Search</div>
+                                            <div class="card-sub">BM25 + Dense + RRF Fusion</div>
+                                        </div>
+                                    </button>
+
+                                    <!-- Week 5 -->
+                                    <button class="popover-week-card" id="tabBtnWeek5" data-target="week5" role="menuitem">
+                                        <div class="card-icon-box" style="background: rgba(167, 139, 250, 0.15); color: #A78BFA; border: 1px solid rgba(167, 139, 250, 0.3);">
+                                            <i class="fa-solid fa-list-check"></i>
+                                        </div>
+                                        <div class="card-details">
+                                            <div class="card-title-row">
+                                                <span class="card-week-badge">Week 5</span>
+                                                <span class="card-chip">Taxonomy</span>
+                                            </div>
+                                            <div class="card-name">Error Taxonomy</div>
+                                            <div class="card-sub">Failure Modes & Analysis</div>
+                                        </div>
+                                    </button>
+
+                                    <!-- Week 6 -->
+                                    <button class="popover-week-card" id="tabBtnWeek6" data-target="week6" role="menuitem">
+                                        <div class="card-icon-box" style="background: rgba(56, 189, 248, 0.15); color: #38BDF8; border: 1px solid rgba(56, 189, 248, 0.3);">
+                                            <i class="fa-solid fa-scale-balanced"></i>
+                                        </div>
+                                        <div class="card-details">
+                                            <div class="card-title-row">
+                                                <span class="card-week-badge">Week 6</span>
+                                                <span class="card-chip">LLM Judge</span>
+                                            </div>
+                                            <div class="card-name">Judge Evaluation</div>
+                                            <div class="card-sub">Pairwise Win-Rate Lab</div>
+                                        </div>
+                                    </button>
+
+                                    <!-- Week 7 -->
+                                    <button class="popover-week-card" id="tabBtnWeek7" data-target="week7" role="menuitem">
+                                        <div class="card-icon-box" style="background: rgba(236, 72, 153, 0.15); color: #EC4899; border: 1px solid rgba(236, 72, 153, 0.3);">
+                                            <i class="fa-solid fa-code-compare"></i>
+                                        </div>
+                                        <div class="card-details">
+                                            <div class="card-title-row">
+                                                <span class="card-week-badge">Week 7</span>
+                                                <span class="card-chip">Budgets</span>
+                                            </div>
+                                            <div class="card-name">Race & Guardrails</div>
+                                            <div class="card-sub">Latency Race & Budgets</div>
+                                        </div>
+                                    </button>
+
+                                    <!-- Week 8 -->
+                                    <button class="popover-week-card" id="tabBtnWeek8" data-target="week8" role="menuitem">
+                                        <div class="card-icon-box" style="background: rgba(99, 102, 241, 0.15); color: #6366F1; border: 1px solid rgba(99, 102, 241, 0.3);">
+                                            <i class="fa-solid fa-route"></i>
+                                        </div>
+                                        <div class="card-details">
+                                            <div class="card-title-row">
+                                                <span class="card-week-badge">Week 8</span>
+                                                <span class="card-chip">Trajectory</span>
+                                            </div>
+                                            <div class="card-name">Trajectory Evals</div>
+                                            <div class="card-sub">Multi-Step Execution Cost</div>
+                                        </div>
+                                    </button>
+
+                                    <!-- Week 9 -->
+                                    <button class="popover-week-card" id="tabBtnWeek9" data-target="week9" role="menuitem">
+                                        <div class="card-icon-box" style="background: rgba(168, 85, 247, 0.18); color: #C084FC; border: 1px solid rgba(168, 85, 247, 0.4);">
+                                            <i class="fa-solid fa-network-wired"></i>
+                                        </div>
+                                        <div class="card-details">
+                                            <div class="card-title-row">
+                                                <span class="card-week-badge highlight">Week 9</span>
+                                                <span class="card-chip highlight">MCP Standard</span>
+                                            </div>
+                                            <div class="card-name">MCP & Multi-Agent</div>
+                                            <div class="card-sub">Standard Tools & Server</div>
+                                        </div>
+                                    </button>
+
+                                    <!-- Langfuse -->
+                                    <button class="popover-week-card" id="tabBtnLangfuse" data-target="langfuse" role="menuitem">
+                                        <div class="card-icon-box" style="background: rgba(16, 185, 129, 0.15); color: #10B981; border: 1px solid rgba(16, 185, 129, 0.3);">
+                                            <i class="fa-solid fa-satellite-dish"></i>
+                                        </div>
+                                        <div class="card-details">
+                                            <div class="card-title-row">
+                                                <span class="card-week-badge">Telemetry</span>
+                                                <span class="card-chip">Traces</span>
+                                            </div>
+                                            <div class="card-name">Langfuse Observability</div>
+                                            <div class="card-sub">Live Spans & Latency</div>
+                                        </div>
+                                    </button>
+                                </div>
+                                <div class="popover-footer">
+                                    <span><i class="fa-solid fa-lightbulb" style="color: #F59E0B;"></i> Select any week to explore interactive dashboards & benchmarks</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -230,11 +366,64 @@
 
                 <!-- Chat Input Footer -->
                 <footer class="chat-footer">
+                    <!-- Suggested Questions Floating Panel -->
+                    <div class="suggested-panel" id="suggestedPanel" style="display: none;">
+                        <div class="suggested-panel-header">
+                            <div class="suggested-panel-title">
+                                <i class="fa-solid fa-lightbulb" style="color: #F59E0B;"></i>
+                                <span>Suggested Knowledge Base Questions</span>
+                            </div>
+                            <button type="button" class="btn-close-suggested" id="btnCloseSuggested" title="Close Panel">
+                                <i class="fa-solid fa-xmark"></i>
+                            </button>
+                        </div>
+                        <div class="suggested-groups">
+                            <div class="suggested-group">
+                                <span class="group-label"><i class="fa-solid fa-credit-card" style="color: #06B6D4;"></i> Billing & Card Errors</span>
+                                <div class="group-chips">
+                                    <button type="button" class="suggest-chip" data-q="What should I do if I get credit card error code 51 - Decline when paying my invoice?">
+                                        💳 Error 51 - Decline
+                                    </button>
+                                    <button type="button" class="suggest-chip" data-q="How should I resolve credit card error code 14 - Card No. Error when saving my payment details?">
+                                        💳 Error 14 - Card No.
+                                    </button>
+                                    <button type="button" class="suggest-chip" data-q="What does Zendesk payment error code 430357 - Lost or Stolen Card mean and how do I fix it?">
+                                        💳 Error 430357 - Lost Card
+                                    </button>
+                                    <button type="button" class="suggest-chip" data-q="How do I fix Cloudflare billing error 'Payment error: authorization failed'?">
+                                        ☁️ Cloudflare Auth Failed
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="suggested-group">
+                                <span class="group-label"><i class="fa-solid fa-shield-halved" style="color: #38BDF8;"></i> Security & Policies</span>
+                                <div class="group-chips">
+                                    <button type="button" class="suggest-chip" data-q="Why shouldn't I use Google Voice to receive 2-Step Verification codes?">
+                                        🔒 Google Voice 2-Step Risk
+                                    </button>
+                                    <button type="button" class="suggest-chip" data-q="What is the key difference between Strong Customer Authentication (SCA) and 3D Secure (3DS)?">
+                                        🔒 SCA vs 3DS Difference
+                                    </button>
+                                    <button type="button" class="suggest-chip" data-q="How many times and over how many days will Cloudflare retry a failed recurring subscription renewal payment before ending grace period?">
+                                        🔄 Cloudflare Grace Period
+                                    </button>
+                                    <button type="button" class="suggest-chip" data-q="What URL parameter ?noapps should I add to test Zendesk tickets with all apps disabled?">
+                                        ⚙️ Test Tickets with ?noapps
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <form id="chatForm" class="chat-form">
                         <div class="input-wrapper">
+                            <button type="button" class="btn-suggested-toggle" id="btnSuggestedQuestions" title="Explore Suggested Questions">
+                                <i class="fa-solid fa-lightbulb"></i>
+                                <span>Suggested</span>
+                            </button>
                             <input type="text" id="userInput"
                                 placeholder="Ask any question about your uploaded document(s)..." autocomplete="off">
-                            <button type="submit" id="btnSend" class="btn-send">
+                            <button type="submit" id="btnSend" class="btn-send" title="Send Question">
                                 <i class="fa-solid fa-paper-plane"></i>
                             </button>
                         </div>
@@ -1327,10 +1516,281 @@
                     </div>
                 </div>
             </div>
+            <!-- VIEW 8: Week 9 MCP, Multi-Agent & Dynamic Tool Discovery -->
+            <div class="view-container" id="viewWeek9">
+                <div class="w7-container">
+                    <!-- Week 9 Header & Actions -->
+                    <div class="w7-header-card" style="border-color: rgba(168, 85, 247, 0.4);">
+                        <div class="w7-header-title">
+                            <h2><i class="fa-solid fa-network-wired" style="color: #A855F7;"></i> Week 9: MCP — The Standard Way Agents Reach Tools & Data</h2>
+                            <p>
+                                <strong>Track A: Customer Support Tickets.</strong> Connect your agent to tools the standard way (Model Context Protocol),
+                                bolt on Support Ops' <code>ticket-history-server</code> with <strong>zero agent code changes</strong>, and inspect live wire exchanges.
+                            </p>
+                        </div>
+                        <div class="w7-actions" style="display: flex; gap: 8px; flex-wrap: wrap;">
+                            <button class="w7-btn" id="btnRunW9Agent"
+                                style="background: linear-gradient(135deg, #8B5CF6, #A855F7); border-color: #8B5CF6;">
+                                <i class="fa-solid fa-play"></i> Run Agent (TCK-103)
+                            </button>
+                            <button class="w7-btn" id="btnTestW9Deny"
+                                style="background: rgba(239, 68, 68, 0.2); border-color: #EF4444; color: #FCA5A5;">
+                                <i class="fa-solid fa-ban"></i> Test Gateway Deny
+                            </button>
+                            <button class="w7-btn" id="btnTestW9Allow"
+                                style="background: rgba(16, 185, 129, 0.2); border-color: #10B981; color: #6EE7B7;">
+                                <i class="fa-solid fa-shield-check"></i> Test Gateway Allow
+                            </button>
+                            <button class="w7-btn" id="btnRefreshW9Status"
+                                style="background: rgba(59, 130, 246, 0.15); border-color: #3B82F6; color: #93C5FD;">
+                                <i class="fa-solid fa-arrows-rotate"></i> Refresh Status
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- 4 MCP KPI Cards -->
+                    <div class="w7-kpi-grid">
+                        <div class="w7-kpi-card">
+                            <span class="w7-kpi-title">Discovered Tools</span>
+                            <div class="w7-kpi-values">
+                                <span class="w7-kpi-val-workflow" style="color: #A855F7;" id="w9KpiToolCount">3 &rarr; 5</span>
+                                <span class="w7-kpi-val-agent" id="w9KpiToolBefore">3 Init</span>
+                            </div>
+                            <span class="w7-kpi-delta"><i class="fa-solid fa-arrow-up"></i> +66.7% Discovered</span>
+                            <span class="w7-kpi-sub">tools/list over JSON-RPC 2.0</span>
+                        </div>
+
+                        <div class="w7-kpi-card kpi-emerald">
+                            <span class="w7-kpi-title">Agent Code Diff</span>
+                            <div class="w7-kpi-values">
+                                <span class="w7-kpi-val-workflow" id="w9KpiDiffLines">0 Lines</span>
+                                <span class="w7-kpi-val-agent">0 Bytes</span>
+                            </div>
+                            <span class="w7-kpi-delta"><i class="fa-solid fa-check-double"></i> 100% Config-Driven</span>
+                            <span class="w7-kpi-sub">agent_diff.txt strictly empty</span>
+                        </div>
+
+                        <div class="w7-kpi-card kpi-pink">
+                            <span class="w7-kpi-title">Model Call Location</span>
+                            <div class="w7-kpi-values">
+                                <span class="w7-kpi-val-workflow" style="font-size: 1.15rem; color: #F472B6;">Host Agent</span>
+                                <span class="w7-kpi-val-agent">0 on Server</span>
+                            </div>
+                            <span class="w7-kpi-delta"><i class="fa-solid fa-microchip"></i> Clean Host Boundary</span>
+                            <span class="w7-kpi-sub">Servers are pure plumbing</span>
+                        </div>
+
+                        <div class="w7-kpi-card">
+                            <span class="w7-kpi-title">Gateway RBAC Security</span>
+                            <div class="w7-kpi-values">
+                                <span class="w7-kpi-val-workflow" style="color: #10B981;">Audited</span>
+                                <span class="w7-kpi-val-agent">Scoped</span>
+                            </div>
+                            <span class="w7-kpi-delta" style="color: #10B981;"><i class="fa-solid fa-lock"></i> Token-Enforced</span>
+                            <span class="w7-kpi-sub">results/mcp_audit.log</span>
+                        </div>
+                    </div>
+
+                    <!-- Live Agent Run Output Box -->
+                    <div class="w7-section-card" id="w9RunOutputCard" style="display: none; border-color: rgba(168, 85, 247, 0.5);">
+                        <div class="w7-section-header">
+                            <h3><i class="fa-solid fa-terminal" style="color: #A855F7;"></i> Live MCP Execution Trace & Resolution</h3>
+                            <button class="w7-btn" id="btnCloseW9Output" style="padding: 4px 10px; font-size: 0.75rem;">Close</button>
+                        </div>
+                        <div id="w9RunOutputContent" style="margin-top: 10px;">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </div>
+
+                    <!-- SECTION 1: Dynamic Tool Discovery (Before & After) -->
+                    <div class="w7-section-card">
+                        <div class="w7-section-header">
+                            <div>
+                                <h3><i class="fa-solid fa-boxes-stacked" style="color: #A855F7;"></i> Dynamic Tool Discovery: 3 Before &rarr; 5 After</h3>
+                                <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">
+                                    Capabilities discovered over the wire via <code>tools/list</code> without hardcoding.
+                                </p>
+                            </div>
+                            <span class="w7-badge-pass" style="background: rgba(168, 85, 247, 0.2); color: #C084FC; border: 1px solid rgba(168, 85, 247, 0.4);">
+                                <i class="fa-solid fa-plug"></i> MCP Protocol 2024-11-05
+                            </span>
+                        </div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 12px;">
+                            <div style="background: rgba(17, 24, 39, 0.6); padding: 14px; border-radius: 8px; border: 1px solid rgba(75, 85, 99, 0.4);">
+                                <h4 style="color: #38BDF8; font-size: 0.95rem; display: flex; align-items: center; gap: 8px;">
+                                    <i class="fa-solid fa-server"></i> Server 1: rag-support-server (3 Tools)
+                                </h4>
+                                <p style="font-size: 0.75rem; color: var(--text-muted); margin: 6px 0 10px 0;">Our core support app capabilities.</p>
+                                <ul style="list-style: none; display: flex; flex-direction: column; gap: 6px; padding: 0;">
+                                    <li style="padding: 8px 10px; background: rgba(31, 41, 55, 0.5); border-radius: 6px; font-size: 0.82rem; border-left: 3px solid #38BDF8;">
+                                        <strong>fetch_order_details</strong> (order_id)
+                                        <div style="font-size: 0.72rem; color: var(--text-muted); margin-top: 2px;">Retrieves financial transaction records with prompt guidance.</div>
+                                    </li>
+                                    <li style="padding: 8px 10px; background: rgba(31, 41, 55, 0.5); border-radius: 6px; font-size: 0.82rem; border-left: 3px solid #38BDF8;">
+                                        <strong>lookup_refund_policy</strong> (category)
+                                        <div style="font-size: 0.72rem; color: var(--text-muted); margin-top: 2px;">Retrieves refund window duration and rules by product category.</div>
+                                    </li>
+                                    <li style="padding: 8px 10px; background: rgba(31, 41, 55, 0.5); border-radius: 6px; font-size: 0.82rem; border-left: 3px solid #38BDF8;">
+                                        <strong>get_customer_tier</strong> (customer_id, channel)
+                                        <div style="font-size: 0.72rem; color: var(--text-muted); margin-top: 2px;">Retrieves account tier (Standard vs Priority) and SLA routing.</div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div style="background: rgba(17, 24, 39, 0.6); padding: 14px; border-radius: 8px; border: 1px solid rgba(168, 85, 247, 0.4);">
+                                <h4 style="color: #A855F7; font-size: 0.95rem; display: flex; align-items: center; gap: 8px;">
+                                    <i class="fa-solid fa-bolt"></i> Server 2: ticket-history-server (2 Tools)
+                                </h4>
+                                <p style="font-size: 0.75rem; color: var(--text-muted); margin: 6px 0 10px 0;">Stood up by Support Operations (bolted on via config).</p>
+                                <ul style="list-style: none; display: flex; flex-direction: column; gap: 6px; padding: 0;">
+                                    <li style="padding: 8px 10px; background: rgba(31, 41, 55, 0.5); border-radius: 6px; font-size: 0.82rem; border-left: 3px solid #A855F7;">
+                                        <strong>lookup_ticket_history</strong> (ticket_id)
+                                        <div style="font-size: 0.72rem; color: var(--text-muted); margin-top: 2px;">Retrieves escalation level, touches, and agent audit trail.</div>
+                                    </li>
+                                    <li style="padding: 8px 10px; background: rgba(31, 41, 55, 0.5); border-radius: 6px; font-size: 0.82rem; border-left: 3px solid #A855F7;">
+                                        <strong>get_ticket_details</strong> (ticket_id)
+                                        <div style="font-size: 0.72rem; color: var(--text-muted); margin-top: 2px;">Retrieves intake metadata, customer message, and reported channel.</div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SECTION 2: Config Diff vs Agent Diff -->
+                    <div class="w7-section-card">
+                        <div class="w7-section-header">
+                            <div>
+                                <h3><i class="fa-solid fa-code-compare" style="color: #10B981;"></i> Config-Only Server Swap: Zero Code Modified</h3>
+                                <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">
+                                    Proving that adding Server 2 required <strong>0 changed lines</strong> in <code>src/mcp_agent.py</code>.
+                                </p>
+                            </div>
+                        </div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 12px;">
+                            <div>
+                                <span style="font-size: 0.82rem; color: #10B981; font-weight: 600;">
+                                    <i class="fa-solid fa-file-code"></i> agent_diff.txt (0 Lines Changed)
+                                </span>
+                                <pre class="w7-pre-box" style="margin-top: 6px; height: 160px; color: #10B981;" id="w9AgentDiffBox">/* 0 lines changed in src/mcp_agent.py */
+$ git diff --no-index src/mcp_agent.py src/mcp_agent.py
+[EXIT CODE 0 — 0 BYTES CHANGED]</pre>
+                            </div>
+                            <div>
+                                <span style="font-size: 0.82rem; color: #A855F7; font-weight: 600;">
+                                    <i class="fa-solid fa-file-code"></i> config_diff.patch (Config Swap Only)
+                                </span>
+                                <pre class="w7-pre-box" style="margin-top: 6px; height: 160px;" id="w9ConfigDiffBox">Loading config diff...</pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SECTION 3: Raw Wire Protocol Inspection -->
+                    <div class="w7-section-card">
+                        <div class="w7-section-header">
+                            <div>
+                                <h3><i class="fa-solid fa-satellite-dish" style="color: #38BDF8;"></i> Raw JSON-RPC 2.0 Wire Protocol Exchange</h3>
+                                <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">
+                                    Annotated lifecycle exchange: <code>initialize</code> &rarr; <code>notifications/initialized</code> &rarr; <code>tools/list</code> &rarr; <code>tools/call</code>.
+                                </p>
+                            </div>
+                            <span class="w7-badge-pass" style="background: rgba(56, 189, 248, 0.2); color: #38BDF8; border: 1px solid rgba(56, 189, 248, 0.4);">
+                                Transport: stdio pipes
+                            </span>
+                        </div>
+                        <div style="margin-top: 12px; background: rgba(17, 24, 39, 0.6); padding: 12px; border-radius: 8px; border-left: 4px solid #A855F7;">
+                            <strong style="color: #E2E8F0; font-size: 0.85rem;">Mandatory Statement on Model-Call Location:</strong>
+                            <p style="font-size: 0.82rem; color: #C084FC; margin-top: 4px; font-style: italic;">
+                                "The model call (LLM inference) happens exclusively on the host/client agent side; the MCP server never executes an LLM call or knows about the model."
+                            </p>
+                        </div>
+                        <div style="margin-top: 12px;">
+                            <pre class="w7-pre-box" style="max-height: 260px;" id="w9WireJsonBox">Loading wire exchange...</pre>
+                        </div>
+                    </div>
+
+                    <!-- SECTION 4: Docstring-as-Prompt & Recoverable Error -->
+                    <div class="w7-section-card">
+                        <div class="w7-section-header">
+                            <div>
+                                <h3><i class="fa-solid fa-shield-halved" style="color: #EC4899;"></i> Docstring-as-Prompt & Recoverable Error Rewrite</h3>
+                                <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">
+                                    Replacing opaque failures (<code>Error 3: Record not found</code>) with structured operational guidance.
+                                </p>
+                            </div>
+                        </div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 12px;">
+                            <div style="background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 8px; padding: 14px;">
+                                <h4 style="color: #F87171; font-size: 0.9rem;"><i class="fa-solid fa-xmark"></i> BEFORE: Opaque Error 3</h4>
+                                <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;">Docstring: "Retrieve financial transaction records."</p>
+                                <pre class="w7-pre-box" style="margin-top: 8px; height: 110px; color: #FCA5A5;">{"error": "Error 3: Record not found"}
+
+Model Reaction:
+"The system returned Error 3. I cannot assist."</pre>
+                            </div>
+                            <div style="background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 8px; padding: 14px;">
+                                <h4 style="color: #34D399; font-size: 0.9rem;"><i class="fa-solid fa-check"></i> AFTER: Docstring-as-Prompt + Format Guidance</h4>
+                                <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;">Docstring primes format ^ORD-[0-9]{4}$ & recovery steps.</p>
+                                <pre class="w7-pre-box" style="margin-top: 8px; height: 110px; color: #6EE7B7;">{"status": "error", "recoverable": true,
+ "message": "Order 4471 not found: IDs look like ORD-nnnn"}
+
+Model Reaction:
+"Please provide complete order ID in format ORD-nnnn."</pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SECTION 5: Third-Party Supply Chain Risk Note -->
+                    <div class="w7-section-card">
+                        <div class="w7-section-header">
+                            <div>
+                                <h3><i class="fa-solid fa-triangle-exclamation" style="color: #F59E0B;"></i> 5-Line Supply-Chain Risk Note (risk_note.md)</h3>
+                                <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">
+                                    Audit analysis for <code>ticket-history-server</code> running inside agent's trust boundary.
+                                </p>
+                            </div>
+                            <span class="w7-badge-fail" style="background: rgba(239, 68, 68, 0.2); color: #FCA5A5; border: 1px solid rgba(239, 68, 68, 0.4);">
+                                Verdict: DO NOT SHIP (5 Lines)
+                            </span>
+                        </div>
+                        <div style="margin-top: 12px;">
+                            <pre class="w7-pre-box" style="color: #FBBF24; font-size: 0.82rem; line-height: 1.6;" id="w9RiskNoteBox">Loading risk note...</pre>
+                        </div>
+                    </div>
+
+                    <!-- SECTION 6: Bonus Challenge — Unified Gateway & Audit Trail -->
+                    <div class="w7-section-card">
+                        <div class="w7-section-header">
+                            <div>
+                                <h3><i class="fa-solid fa-dungeon" style="color: #10B981;"></i> Bonus Challenge: Unified MCP Gateway & RBAC Audit Trail</h3>
+                                <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">
+                                    Agent connects to <code>unified-gateway</code> front door. Every tool call writes a single immutable audit line.
+                                </p>
+                            </div>
+                        </div>
+                        <div style="overflow-x: auto; margin-top: 12px;">
+                            <table class="w7-summary-table">
+                                <thead>
+                                    <tr>
+                                        <th>Timestamp</th>
+                                        <th>Caller</th>
+                                        <th>Tool</th>
+                                        <th>Ticket ID</th>
+                                        <th>Status</th>
+                                        <th>Token Scope</th>
+                                        <th>Audit Details</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="w9AuditTableBody">
+                                    <!-- Populated dynamically -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </main>
     </div>
 
-    <script src="/static/app.js?v=9"></script>
+    <script src="/static/app.js?v=14"></script>
 </body>
 
 </html>

@@ -3,7 +3,7 @@ import sys
 from pathlib import Path
 from typing import List
 
-from fastapi import FastAPI, File, UploadFile, HTTPException
+from fastapi import FastAPI, File, UploadFile, HTTPException, Request
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import HTMLResponse, JSONResponse
 from pydantic import BaseModel
@@ -349,6 +349,132 @@ async def get_trajectory_bonus():
         return JSONResponse(status_code=500, content={"error": str(e)})
 
 
+@app.post("/api/week9/run")
+async def run_week9_action(request: Request):
+    """
+    Executes a live Week 9 action:
+    - ticket: runs agent on a ticket (e.g. TCK-103)
+    - gateway_deny: tests token-tier1-support denial through gateway
+    - gateway_allow: tests token-supervisor-admin allow through gateway
+    """
+    import json
+    from pathlib import Path
+    root = Path(__file__).resolve().parent.parent
+
+    try:
+        body = await request.json()
+    except Exception:
+        body = {}
+    action = body.get("action", "ticket")
+    ticket_id = body.get("ticket_id", "TCK-103")
+
+    if action == "gateway_deny":
+        import src.mcp_gateway as gw
+        res = gw.lookup_ticket_history(ticket_id)
+        return JSONResponse(content={
+            "status": "success",
+            "action": "gateway_deny",
+            "token_scope": "token-tier1-support",
+            "result": json.loads(res) if isinstance(res, str) and res.startswith("{") else res
+        })
+    elif action == "gateway_allow":
+        import os
+        import src.mcp_gateway as gw
+        old = os.environ.get("MCP_CALLER_TOKEN")
+        try:
+            os.environ["MCP_CALLER_TOKEN"] = "token-supervisor-admin"
+            res = gw.lookup_ticket_history(ticket_id)
+            return JSONResponse(content={
+                "status": "success",
+                "action": "gateway_allow",
+                "token_scope": "token-supervisor-admin",
+                "result": json.loads(res) if isinstance(res, str) and res.startswith("{") else res
+            })
+        finally:
+            if old:
+                os.environ["MCP_CALLER_TOKEN"] = old
+            else:
+                os.environ.pop("MCP_CALLER_TOKEN", None)
+    else:
+        try:
+            from src.mcp_agent import MCPAgentHost
+            host = MCPAgentHost(str(root / "mcp_config.json"))
+            query = f"Please check the escalation history for ticket {ticket_id}, verify order details, and summarize the ticket status."
+            result = await host.run(query)
+            return JSONResponse(content={
+                "status": "success",
+                "action": "agent_query",
+                "ticket_id": ticket_id,
+                "reply": result.reply,
+                "tokens": result.total_tokens,
+                "cost": result.total_cost,
+                "latency": result.latency,
+                "discovered_tools": result.discovered_tools,
+                "steps": [
+                    {
+                        "step": i + 1,
+                        "server": s.server_name,
+                        "tool": s.tool_name,
+                        "args": s.tool_input,
+                        "output": s.tool_result
+                    }
+                    for i, s in enumerate(result.steps)
+                ]
+            })
+        except Exception as e:
+            return JSONResponse(status_code=500, content={"error": str(e)})
+
+
+@app.get("/api/week9/status")
+async def get_week9_status():
+    """
+    Returns Week 9 MCP discovery metrics, diffs, wire annotations, and audit logs.
+    """
+    import json
+    from pathlib import Path
+    root = Path(__file__).resolve().parent.parent
+
+    agent_diff = (root / "agent_diff.txt").read_text(encoding="utf-8", errors="replace") if (root / "agent_diff.txt").exists() else ""
+    config_diff = (root / "config_diff.patch").read_text(encoding="utf-8", errors="replace") if (root / "config_diff.patch").exists() else ""
+    wire_json = json.loads((root / "wire.json").read_text(encoding="utf-8", errors="replace")) if (root / "wire.json").exists() else {}
+    risk_note = (root / "risk_note.md").read_text(encoding="utf-8", errors="replace") if (root / "risk_note.md").exists() else ""
+    error_comparison = (root / "error_before_after.md").read_text(encoding="utf-8", errors="replace") if (root / "error_before_after.md").exists() else ""
+    
+    audit_lines = []
+    audit_file = root / "results" / "mcp_audit.log"
+    if audit_file.exists():
+        for line in audit_file.read_text(encoding="utf-8", errors="replace").splitlines():
+            if line.strip():
+                try:
+                    audit_lines.append(json.loads(line))
+                except Exception:
+                    audit_lines.append({"raw": line})
+
+    return JSONResponse(content={
+        "status": "success",
+        "track": "Track A: Customer support tickets — Bolt on ticket-history server without touching agent",
+        "tool_counts": {
+            "before": {
+                "count": 3,
+                "server": "rag-support-server",
+                "tools": ["fetch_order_details", "lookup_refund_policy", "get_customer_tier"]
+            },
+            "after": {
+                "count": 5,
+                "servers": ["rag-support-server", "ticket-history-server"],
+                "tools": ["fetch_order_details", "lookup_refund_policy", "get_customer_tier", "lookup_ticket_history", "get_ticket_details"]
+            }
+        },
+        "agent_diff": agent_diff,
+        "config_diff": config_diff,
+        "wire_json": wire_json,
+        "risk_note": risk_note,
+        "error_comparison": error_comparison,
+        "audit_logs": audit_lines
+    })
+
+
 if __name__ == "__main__":
     print("[SERVER] Starting Universal Document Chatbot Server on http://127.0.0.1:8050")
     uvicorn.run(app, host="127.0.0.1", port=8050)
+

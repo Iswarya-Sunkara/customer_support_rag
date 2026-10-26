@@ -1,0 +1,44 @@
+{
+  "name": "support-ticket-orchestrator",
+  "description": "Enterprise customer support orchestrator decomposing tickets, delegating to triage and policy specialists, and synthesizing audited replies.",
+  "version": "1.0.0",
+  "protocol": "A2A/1.0",
+  "capabilities": {
+    "skills": [
+      {
+        "name": "ticket_triage",
+        "description": "Classify ticket category, detect Priority SLA tags, and formulate policy questions."
+      },
+      {
+        "name": "policy_lookup",
+        "description": "Retrieve ground-truth policy articles, error code definitions, and refund windows."
+      },
+      {
+        "name": "reply_synthesis",
+        "description": "Compose customer-facing compliant replies with business logic assertions."
+      }
+    ],
+    "input_modes": [
+      "application/json",
+      "text/plain"
+    ],
+    "output_modes": [
+      "application/json",
+      "text/markdown"
+    ],
+    "authentication": {
+      "type": "bearer",
+      "scopes": [
+        "support:tickets:read",
+        "support:tickets:write",
+        "support:triage"
+      ]
+    }
+  },
+  "a2a_task_lifecycle_mapping": {
+    "target_failed_case": "C08",
+    "lifecycle_state": "input-required",
+    "justification": "Under standard A2A task lifecycle (submitted -> working -> input-required / completed / failed), the failed policy worker call should NOT transition the task to terminal 'failed'. Instead, it transitions to 'input-required', pausing execution to await the ticket owner agent to provide alternate policy context or human supervisor input.",
+    "a2a_vs_rest_value_add": "A2A provides standardized stateful task lifecycles with asynchronous pause/resume across agents rather than ephemeral HTTP connection timeouts, and enables capability discovery via AgentCard rather than hardcoded endpoint contracts."
+  }
+}

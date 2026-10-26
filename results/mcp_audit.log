@@ -10,3 +10,12 @@
 {"timestamp": "2026-10-07T05:13:18.100647+00:00", "caller": "agent-session-401", "tool": "lookup_ticket_history", "ticket_id": "TCK-103", "status": "ALLOWED", "token_scope": "ticket:history:read", "details": ""}
 {"timestamp": "2026-10-07T05:13:20.881878+00:00", "caller": "agent-session-401", "tool": "lookup_ticket_history", "ticket_id": "TCK-103", "status": "DENIED", "token_scope": "token-tier1-support", "details": "Missing required scope 'ticket:history:read'"}
 {"timestamp": "2026-10-07T05:13:28.427394+00:00", "caller": "agent-session-401", "tool": "lookup_ticket_history", "ticket_id": "TCK-103", "status": "ALLOWED", "token_scope": "ticket:history:read", "details": ""}
+{"timestamp": "2026-10-12T12:19:57.017892+00:00", "caller": "agent-session-401", "tool": "fetch_order_details", "ticket_id": "ORD-5001", "status": "ALLOWED", "token_scope": "orders:read", "details": ""}
+{"timestamp": "2026-10-12T12:22:38.063526+00:00", "caller": "agent-session-401", "tool": "lookup_ticket_history", "ticket_id": "TCK-103", "status": "ALLOWED", "token_scope": "ticket:history:read", "details": ""}
+{"timestamp": "2026-10-12T12:25:43.937585+00:00", "caller": "agent-session-401", "tool": "lookup_ticket_history", "ticket_id": "TCK-103", "status": "ALLOWED", "token_scope": "ticket:history:read", "details": ""}
+{"timestamp": "2026-10-12T12:27:35.907035+00:00", "caller": "agent-session-401", "tool": "lookup_ticket_history", "ticket_id": "TCK-103", "status": "ALLOWED", "token_scope": "ticket:history:read", "details": ""}
+{"timestamp": "2026-10-12T12:27:35.911748+00:00", "caller": "agent-session-401", "tool": "fetch_order_details", "ticket_id": "ORD-5001", "status": "ALLOWED", "token_scope": "orders:read", "details": ""}
+{"timestamp": "2026-10-12T12:29:33.033940+00:00", "caller": "agent-session-401", "tool": "lookup_refund_policy", "ticket_id": "N/A", "status": "ALLOWED", "token_scope": "policies:read", "details": ""}
+{"timestamp": "2026-10-12T12:30:11.786713+00:00", "caller": "agent-session-401", "tool": "lookup_refund_policy", "ticket_id": "N/A", "status": "ALLOWED", "token_scope": "policies:read", "details": ""}
+{"timestamp": "2026-10-12T12:30:47.995929+00:00", "caller": "agent-session-401", "tool": "lookup_ticket_history", "ticket_id": "TCK-103", "status": "ALLOWED", "token_scope": "ticket:history:read", "details": ""}
+{"timestamp": "2026-10-12T12:31:11.291211+00:00", "caller": "agent-session-401", "tool": "lookup_ticket_history", "ticket_id": "TCK-103", "status": "ALLOWED", "token_scope": "ticket:history:read", "details": ""}

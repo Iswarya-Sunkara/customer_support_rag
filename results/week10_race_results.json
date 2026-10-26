@@ -1,0 +1,1219 @@
+{
+  "single_agent": {
+    "pass_rate": 80.0,
+    "p50_latency": 2.5039597499999218,
+    "p99_latency": 4.555680499994196,
+    "total_tokens": 6775,
+    "cost_per_ticket": 0.00118168,
+    "cases": [
+      {
+        "case_id": "C01",
+        "ticket_id": "TKT-97673",
+        "reply": "Ticket TKT-97673\n\nHi there,\n\nThank you for reaching out regarding your automatic subscription payment retry process.\n\nBased on our knowledge base documentation, when an automatic subscription payment fails, Cloudflare will retry the payment **up to 5 times over a 5-day period**. However, the documentation I have access to does not specify the exact timing of the first retry attempt on day 1\u2014it only confirms that retry attempts occur across the 5-day window.\n\nFor more detailed information about the specific retry schedule (such as whether the first retry happens immediately, after several hours, or at a specific time on day 1), I recommend contacting our billing support team directly, as they can provide you with the precise timing details for your account.\n\nIs there anything else I can help you with regarding your subscription or billing?\n\nBest regards,\nSupport Team",
+        "input_tokens": 513,
+        "output_tokens": 188,
+        "total_tokens": 701,
+        "latency": 4.0614161000121385,
+        "cost": 0.0011624,
+        "eval": {
+          "assertions": {
+            "ticket_id_echoed": {
+              "pass": true,
+              "detail": ""
+            },
+            "escalation_tag_matches_tier": {
+              "pass": true,
+              "detail": ""
+            },
+            "refund_amount_present_numeric": {
+              "pass": true,
+              "detail": ""
+            },
+            "no_refund_outside_30_days": {
+              "pass": true,
+              "detail": ""
+            }
+          },
+          "assert_pass": true,
+          "judge_reason": "The reply does not answer the customer's specific question about when the first retry attempt is made on day 1. Instead of providing a correct, actionable answer, it admits the knowledge base lacks this information and suggests contacting billing support\u2014which is appropriate transparency, but it fails to resolve the actual question asked.",
+          "judge_verdict": "PASS",
+          "judge_pass": true,
+          "overall_pass": true
+        }
+      },
+      {
+        "case_id": "C02",
+        "ticket_id": "TKT-37593",
+        "reply": "Ticket TKT-37593 [ESCALATE:PRIORITY]\n\nHi there,\n\nThank you for reaching out regarding your automatic subscription payment retry schedule.\n\nBased on our documentation, if your automatic subscription payment fails on day 1, Cloudflare will retry the payment up to 5 times over a 5-day period. This means you'll have multiple opportunities for the payment to process successfully before any service interruption occurs.\n\nIf you're experiencing issues with a failed payment or need to update your payment method to ensure the retry succeeds, please let us know and we can assist you further.\n\nBest regards,\nSupport Team",
+        "input_tokens": 513,
+        "output_tokens": 139,
+        "total_tokens": 652,
+        "latency": 1.9255334000336006,
+        "cost": 0.0009664,
+        "eval": {
+          "assertions": {
+            "ticket_id_echoed": {
+              "pass": true,
+              "detail": ""
+            },
+            "escalation_tag_matches_tier": {
+              "pass": true,
+              "detail": ""
+            },
+            "refund_amount_present_numeric": {
+              "pass": true,
+              "detail": ""
+            },
+            "no_refund_outside_30_days": {
+              "pass": true,
+              "detail": ""
+            }
+          },
+          "assert_pass": true,
+          "judge_reason": "The customer asked specifically when the next retry attempt is made after a day 1 failure. The reply states there are retries over a 5-day period but does not provide the specific timing/schedule of each retry attempt (e.g., day 2, day 3, etc.), making it incomplete and not fully actionable for understanding the exact retry pattern.",
+          "judge_verdict": "FAIL",
+          "judge_pass": false,
+          "overall_pass": false
+        }
+      },
+      {
+        "case_id": "C06",
+        "ticket_id": "TKT-10930",
+        "reply": "Ticket TKT-10930 [ESCALATE:PRIORITY]\n\nHi there,\n\nThank you for reaching out. I understand you need clarification on error code 51.\n\nUnfortunately, I do not have sufficient information in my current knowledge base to provide you with a definitive answer about whether error code 51 represents a bank refusal or a Zendesk system timeout error. While I have access to payment-related documentation, the specific details about error code 51 and its root cause are not covered in the verified resources available to me.\n\nTo get you the accurate answer you need, I recommend:\n- Contacting our technical team directly, as they have access to detailed error code logs and system diagnostics\n- Providing them with your transaction details and the exact circumstances when error code 51 occurred\n\nI apologize that I cannot resolve this immediately with our current documentation. Given the priority nature of your request, our technical support team will be able to investigate this more thoroughly.\n\nBest regards,\nSupport Team",
+        "input_tokens": 431,
+        "output_tokens": 220,
+        "total_tokens": 651,
+        "latency": 3.623022700077854,
+        "cost": 0.0012248,
+        "eval": {
+          "assertions": {
+            "ticket_id_echoed": {
+              "pass": true,
+              "detail": ""
+            },
+            "escalation_tag_matches_tier": {
+              "pass": true,
+              "detail": ""
+            },
+            "refund_amount_present_numeric": {
+              "pass": true,
+              "detail": ""
+            },
+            "no_refund_outside_30_days": {
+              "pass": true,
+              "detail": ""
+            }
+          },
+          "assert_pass": true,
+          "judge_reason": "The reply honestly acknowledges that the knowledge base cannot definitively answer whether error code 51 is a bank refusal or system timeout error, rather than inventing an incorrect answer. It provides actionable next steps (contact technical team with transaction details) to help resolve the customer's question. This constitutes a proper PASS response when knowledge is unavailable.",
+          "judge_verdict": "PASS",
+          "judge_pass": true,
+          "overall_pass": true
+        }
+      },
+      {
+        "case_id": "C08",
+        "ticket_id": "TKT-38181",
+        "reply": "Ticket TKT-38181\n\nHi there,\n\nThank you for reaching out! I'm happy to help you resolve your credit card error code 51 - Decline issue.\n\nError code 51 typically indicates that there are insufficient funds available on your credit card. Here are the steps I recommend:\n\n**Submit payment using a different credit card.** This is the most straightforward solution to complete your invoice payment.\n\nIf you'd prefer to use the same card, you may also contact your credit card issuer directly (you can find their phone number on the back of your card) to discuss the declined transaction and potentially address any account issues.\n\nPlease let me know if you have any other questions or if you need further assistance!\n\nBest regards,\nSupport Team",
+        "input_tokens": 608,
+        "output_tokens": 164,
+        "total_tokens": 772,
+        "latency": 2.469171699951403,
+        "cost": 0.0011424,
+        "eval": {
+          "assertions": {
+            "ticket_id_echoed": {
+              "pass": true,
+              "detail": ""
+            },
+            "escalation_tag_matches_tier": {
+              "pass": true,
+              "detail": ""
+            },
+            "refund_amount_present_numeric": {
+              "pass": true,
+              "detail": ""
+            },
+            "no_refund_outside_30_days": {
+              "pass": true,
+              "detail": ""
+            }
+          },
+          "assert_pass": true,
+          "judge_reason": "The reply correctly identifies error code 51 as indicating insufficient funds and provides two specific, actionable solutions: submitting payment with a different credit card, or contacting the credit card issuer. This directly answers the customer's question about what to do when receiving this error code.",
+          "judge_verdict": "PASS",
+          "judge_pass": true,
+          "overall_pass": true
+        }
+      },
+      {
+        "case_id": "C11",
+        "ticket_id": "TKT-88454",
+        "reply": "Ticket TKT-88454\n\nHi there,\n\nThank you for reaching out with your question about Google Voice and 2-Step Verification.\n\nAccording to our documentation, **you shouldn't use Google Voice to receive 2-Step Verification codes because it could lock you out of your account.** This is an important security consideration, as losing access to your verification method can prevent you from signing in to your apps and services.\n\nIf you've already added 2-Step Verification and are having trouble signing in to an app, you may be able to resolve this by using an App Password instead. This can help you regain access while maintaining your account security.\n\nFor additional details on setting up App Passwords, I'd recommend reviewing our support documentation on that topic.\n\nBest regards,\nSupport Team",
+        "input_tokens": 499,
+        "output_tokens": 172,
+        "total_tokens": 671,
+        "latency": 2.0460373999085277,
+        "cost": 0.0010872,
+        "eval": {
+          "assertions": {
+            "ticket_id_echoed": {
+              "pass": true,
+              "detail": ""
+            },
+            "escalation_tag_matches_tier": {
+              "pass": true,
+              "detail": ""
+            },
+            "refund_amount_present_numeric": {
+              "pass": true,
+              "detail": ""
+            },
+            "no_refund_outside_30_days": {
+              "pass": true,
+              "detail": ""
+            }
+          },
+          "assert_pass": true,
+          "judge_reason": "The reply correctly identifies and explains why Google Voice shouldn't be used for 2-Step Verification (risk of account lockout) and provides actionable next steps (using App Passwords). This directly and specifically answers the customer's question without contradiction or misleading information.",
+          "judge_verdict": "PASS",
+          "judge_pass": true,
+          "overall_pass": true
+        }
+      },
+      {
+        "case_id": "C12",
+        "ticket_id": "TKT-21664",
+        "reply": "Ticket TKT-21664\n\nHi there,\n\nThank you for reaching out regarding your Google account recovery situation.\n\nI understand you've lost your security key and don't have a backup second step configured. Based on our knowledge base documentation, I can confirm that Google does provide recovery options for this scenario. However, the specific timeframe for account recovery when you don't have another second step or have forgotten your password is not fully detailed in our current knowledge base resources.\n\nWhat I can tell you is that Google offers a process to remove a lost security key from your account. For detailed information about recovery timelines and the complete step-by-step process for your specific situation, I recommend visiting [Google's official support page on security key recovery](https://support.google.com/titansecuritykey/answer/9115656), where you'll find the most current and comprehensive guidance.\n\nIf you need additional assistance beyond what's available in our documentation, I'd recommend contacting Google Support directly, as they can provide real-time support for account recovery scenarios and give you an accurate timeframe for your particular case.\n\nBest regards,\nSupport Team",
+        "input_tokens": 508,
+        "output_tokens": 242,
+        "total_tokens": 750,
+        "latency": 3.6181258000433445,
+        "cost": 0.0013744,
+        "eval": {
+          "assertions": {
+            "ticket_id_echoed": {
+              "pass": true,
+              "detail": ""
+            },
+            "escalation_tag_matches_tier": {
+              "pass": true,
+              "detail": ""
+            },
+            "refund_amount_present_numeric": {
+              "pass": true,
+              "detail": ""
+            },
+            "no_refund_outside_30_days": {
+              "pass": true,
+              "detail": ""
+            }
+          },
+          "assert_pass": true,
+          "judge_reason": "The reply honestly states that the knowledge base does not contain specific timeframe information for Google account recovery in this scenario, rather than inventing an answer. It provides actionable next steps by directing the customer to Google's official support resources and recommending direct contact with Google Support for accurate recovery timelines. This is appropriate when the knowledge base lacks the specific information needed to answer the question.",
+          "judge_verdict": "PASS",
+          "judge_pass": true,
+          "overall_pass": true
+        }
+      },
+      {
+        "case_id": "C16",
+        "ticket_id": "TKT-92654",
+        "reply": "Ticket TKT-92654\n\nHi there,\n\nThank you for reaching out regarding payment error code 430357.\n\nUnfortunately, I've reviewed our available knowledge base documentation, and I do not have specific information about error code 430357 or its resolution steps in our current system. While the error code you're reporting appears to be related to payment processing, I cannot provide you with accurate guidance without the proper documentation.\n\nI recommend the following next steps:\n- Contact your card issuer directly to verify the status of your card, as the error code suggests a potential issue with your payment method\n- If your card has been reported as lost or stolen, you may need to request a replacement from your bank\n- Once you have a valid payment method, you can retry your transaction in Zendesk\n\nFor more detailed troubleshooting specific to this error code, I'd be happy to escalate this to our technical team who may have additional resources available. Please let me know if you'd like me to do so.\n\nBest regards,\nSupport Team",
+        "input_tokens": 441,
+        "output_tokens": 223,
+        "total_tokens": 664,
+        "latency": 4.555680499994196,
+        "cost": 0.0012448,
+        "eval": {
+          "assertions": {
+            "ticket_id_echoed": {
+              "pass": true,
+              "detail": ""
+            },
+            "escalation_tag_matches_tier": {
+              "pass": true,
+              "detail": ""
+            },
+            "refund_amount_present_numeric": {
+              "pass": true,
+              "detail": ""
+            },
+            "no_refund_outside_30_days": {
+              "pass": true,
+              "detail": ""
+            }
+          },
+          "assert_pass": true,
+          "judge_reason": "The reply honestly states that the knowledge base lacks specific information about error code 430357, rather than inventing an answer. It then provides reasonable, actionable general guidance (contact card issuer, verify card status, retry transaction) that would help a customer experiencing a lost/stolen card error, which aligns with what the error code likely indicates. This satisfies the criterion of either providing a correct answer or plainly admitting the knowledge base doesn't cover it.",
+          "judge_verdict": "PASS",
+          "judge_pass": true,
+          "overall_pass": true
+        }
+      },
+      {
+        "case_id": "C18",
+        "ticket_id": "TKT-62515",
+        "reply": "Ticket TKT-62515\n\nHi there,\n\nThank you for reaching out regarding the credit card error code 14 you're experiencing when saving your payment details.\n\nBased on our documentation, credit card errors like the one you're encountering are often related to issues on your card issuer's end, such as:\n- Account holds\n- Credit limit issues\n- Transaction limits\n\n**Here's what we recommend:**\n\nPlease contact your credit card provider directly to discuss error code 14 - Card No. Error. They'll be able to review your account, check for any holds or limits that might be preventing the transaction, and help resolve the issue on their end.\n\nOnce your card issuer has cleared any blocks or issues, you should be able to save your payment details successfully in our system.\n\nIf you continue to experience problems after speaking with your credit card provider, please don't hesitate to reach out and we'll be happy to assist further.\n\nBest regards,\nSupport Team",
+        "input_tokens": 516,
+        "output_tokens": 210,
+        "total_tokens": 726,
+        "latency": 2.5197111000306904,
+        "cost": 0.0012528,
+        "eval": {
+          "assertions": {
+            "ticket_id_echoed": {
+              "pass": true,
+              "detail": ""
+            },
+            "escalation_tag_matches_tier": {
+              "pass": true,
+              "detail": ""
+            },
+            "refund_amount_present_numeric": {
+              "pass": true,
+              "detail": ""
+            },
+            "no_refund_outside_30_days": {
+              "pass": true,
+              "detail": ""
+            }
+          },
+          "assert_pass": true,
+          "judge_reason": "The reply provides generic troubleshooting advice (account holds, credit limits, transaction limits) but does not give a specific, correct answer to what error code 14 - Card No. Error actually means or specific actionable steps beyond 'contact your card issuer.' The reply invents explanations without citing documentation and lacks the specific cause and solution that would resolve the customer's actual question about this particular error code.",
+          "judge_verdict": "FAIL",
+          "judge_pass": false,
+          "overall_pass": false
+        }
+      },
+      {
+        "case_id": "C21",
+        "ticket_id": "TKT-66518",
+        "reply": "Ticket TKT-66518 [ESCALATE:PRIORITY]\n\nHi there,\n\nThank you for contacting us regarding your refund request and SLA question.\n\nRegarding your refund request: Your purchase was made 12 days ago, which falls within our 30-day refund window. We will refund $49.00 to your original payment method within 5-10 business days.\n\nHowever, regarding your specific question about the exact SLA guaranteed refund window in business days for annual plan chargebacks, I do not have enough information in our knowledge base to provide you with that detailed technical specification. Given the priority nature of your inquiry, I recommend that our specialized billing team review this matter directly to ensure you receive accurate information about our chargeback SLA terms.\n\nYour refund is being processed as outlined above, and our team will follow up with you shortly regarding the SLA details you've requested.\n\nBest regards,\nSupport Team",
+        "input_tokens": 375,
+        "output_tokens": 209,
+        "total_tokens": 584,
+        "latency": 2.451926499954425,
+        "cost": 0.001136,
+        "eval": {
+          "assertions": {
+            "ticket_id_echoed": {
+              "pass": true,
+              "detail": ""
+            },
+            "escalation_tag_matches_tier": {
+              "pass": true,
+              "detail": ""
+            },
+            "refund_amount_present_numeric": {
+              "pass": true,
+              "detail": ""
+            },
+            "no_refund_outside_30_days": {
+              "pass": true,
+              "detail": ""
+            }
+          },
+          "assert_pass": true,
+          "judge_reason": "The reply correctly identifies that the knowledge base lacks information to answer the specific SLA question and plainly states this rather than inventing an answer. It provides honest acknowledgment of the limitation while offering an actionable escalation path to the specialized billing team. The boilerplate refund paragraph is properly ignored per the instructions.",
+          "judge_verdict": "PASS",
+          "judge_pass": true,
+          "overall_pass": true
+        }
+      },
+      {
+        "case_id": "C22",
+        "ticket_id": "TKT-16240",
+        "reply": "Ticket TKT-16240 [ESCALATE:PRIORITY]\n\nHi there,\n\nThank you for reaching out regarding your refund inquiry.\n\nRegarding your question about the exact SLA guaranteed refund window in business days for annual plan chargebacks: I do not have enough information in my knowledge base to provide you with the specific details on this topic. This is an important question that deserves an accurate answer, and I want to ensure you receive the correct information from our specialized team.\n\nWith respect to your refund request for $239.88: I can see that your purchase was made 30 days ago, which falls within our 30-day refund window. We will refund $239.88 to your original payment method within 5-10 business days.\n\nGiven the priority nature of your ticket and your specific questions about annual plan chargebacks and SLA terms, I am escalating this to our senior support team who will follow up with you shortly to address both your refund processing and your detailed SLA inquiry.\n\nBest regards,\nSupport Team",
+        "input_tokens": 372,
+        "output_tokens": 232,
+        "total_tokens": 604,
+        "latency": 2.488208399969153,
+        "cost": 0.0012256,
+        "eval": {
+          "assertions": {
+            "ticket_id_echoed": {
+              "pass": true,
+              "detail": ""
+            },
+            "escalation_tag_matches_tier": {
+              "pass": true,
+              "detail": ""
+            },
+            "refund_amount_present_numeric": {
+              "pass": true,
+              "detail": ""
+            },
+            "no_refund_outside_30_days": {
+              "pass": true,
+              "detail": ""
+            }
+          },
+          "assert_pass": true,
+          "judge_reason": "The reply correctly states that the knowledge base lacks information to answer the specific SLA question about refunds for annual plan chargebacks, rather than inventing false details. It then properly escalates to the specialized team, which is appropriate for a question the knowledge base cannot cover. The boilerplate refund paragraph must be ignored per instructions.",
+          "judge_verdict": "PASS",
+          "judge_pass": true,
+          "overall_pass": true
+        }
+      }
+    ]
+  },
+  "multi_agent": {
+    "pass_rate": 80.0,
+    "p50_latency": 5.67650814994704,
+    "p99_latency": 13.795729200006463,
+    "total_tokens": 14563,
+    "cost_per_ticket": 0.00244056,
+    "multiplier": 2.1,
+    "dominant_handoff": {
+      "name": "orchestrator -> reply_synthesis",
+      "tokens": 7158,
+      "percentage": 49.2
+    },
+    "cases": [
+      {
+        "case_id": "C01",
+        "ticket_id": "TKT-97673",
+        "reply": "Ticket TKT-97673\n\nHi there,\n\nThank you for reaching out regarding your automatic subscription payment question.\n\nI appreciate you asking about the retry schedule for failed payments on day 1. Based on our documentation, I can tell you that Cloudflare will retry failed automatic subscription payments up to 5 times over a 5-day period. However, I don't currently have the specific details about the exact timing or which retry attempt occurs on day 1 specifically.\n\nTo get you the precise retry schedule information you need, I'd recommend reaching out to our billing team directly, or you can check your account settings where retry timing details may be outlined. This will help you understand exactly when to expect retry attempts on your account.\n\nIs there anything else I can help clarify for you?\n\nBest regards,\nSupport Team",
+        "input_tokens": 1105,
+        "output_tokens": 400,
+        "total_tokens": 1505,
+        "latency": 13.795729200006463,
+        "cost": 0.002484,
+        "handoffs": [
+          {
+            "case_id": "C01",
+            "from_agent": "orchestrator",
+            "to_agent": "triage_worker",
+            "input_tokens": 233,
+            "output_tokens": 71,
+            "total_tokens": 304,
+            "elapsed_seconds": 1.1986
+          },
+          {
+            "case_id": "C01",
+            "from_agent": "orchestrator",
+            "to_agent": "policy_worker",
+            "input_tokens": 330,
+            "output_tokens": 151,
+            "total_tokens": 481,
+            "elapsed_seconds": 1.9624
+          },
+          {
+            "case_id": "C01",
+            "from_agent": "orchestrator",
+            "to_agent": "reply_synthesis",
+            "input_tokens": 542,
+            "output_tokens": 178,
+            "total_tokens": 720,
+            "elapsed_seconds": 10.6312
+          }
+        ],
+        "triage_data": {
+          "category": "Payment Failure",
+          "tier": "Standard",
+          "escalate_tag": "",
+          "policy_query": "What is the retry schedule for failed automatic subscription payments on day 1?",
+          "needs_refund": false
+        },
+        "policy_data": {
+          "policy_found": false,
+          "answer": "I don't have enough information in my knowledge base to answer this question. The documentation mentions that 'Cloudflare will retry up to 5 times over 5 days' for failed automatic subscription payments, but it does not specify the retry schedule details for day 1 specifically (such as timing, intervals, or retry attempt number on that particular day).",
+          "citation": "article_01_cloudflare_billing_errors.md (chunk_14) - States general retry policy: '5 times over 5 days' but lacks day-specific scheduling details."
+        },
+        "eval": {
+          "assertions": {
+            "ticket_id_echoed": {
+              "pass": true,
+              "detail": ""
+            },
+            "escalation_tag_matches_tier": {
+              "pass": true,
+              "detail": ""
+            },
+            "refund_amount_present_numeric": {
+              "pass": true,
+              "detail": ""
+            },
+            "no_refund_outside_30_days": {
+              "pass": true,
+              "detail": ""
+            }
+          },
+          "assert_pass": true,
+          "judge_reason": "The customer asked a specific question about when the next retry attempt occurs after a day 1 payment failure. The reply provides general information (5 retries over 5 days) but explicitly states it lacks the specific timing details requested and deflects to other channels rather than providing the actionable answer to the actual question asked.",
+          "judge_verdict": "FAIL",
+          "judge_pass": false,
+          "overall_pass": false
+        }
+      },
+      {
+        "case_id": "C02",
+        "ticket_id": "TKT-37593",
+        "reply": "Ticket TKT-37593 [ESCALATE:PRIORITY]\n\nHi there,\n\nThank you for reaching out regarding your automatic subscription payment retry schedule.\n\nWhen an automatic subscription payment fails on day 1, Cloudflare will attempt to retry the failed payment up to 5 times over a 5-day period. This gives you multiple opportunities for the payment to process successfully. However, the specific timing details for each individual retry attempt after the initial failure are not outlined in our available documentation.\n\nWe recommend ensuring your payment method is up to date to avoid any service interruptions. If you continue to experience payment failures or would like more details about the exact retry timing, please let us know and we can escalate this to our billing team for further assistance.\n\nBest regards,\nSupport Team",
+        "input_tokens": 1096,
+        "output_tokens": 439,
+        "total_tokens": 1535,
+        "latency": 5.755972699960694,
+        "cost": 0.0026328000000000002,
+        "handoffs": [
+          {
+            "case_id": "C02",
+            "from_agent": "orchestrator",
+            "to_agent": "triage_worker",
+            "input_tokens": 233,
+            "output_tokens": 91,
+            "total_tokens": 324,
+            "elapsed_seconds": 1.6577
+          },
+          {
+            "case_id": "C02",
+            "from_agent": "orchestrator",
+            "to_agent": "policy_worker",
+            "input_tokens": 342,
+            "output_tokens": 177,
+            "total_tokens": 519,
+            "elapsed_seconds": 1.9767
+          },
+          {
+            "case_id": "C02",
+            "from_agent": "orchestrator",
+            "to_agent": "reply_synthesis",
+            "input_tokens": 521,
+            "output_tokens": 171,
+            "total_tokens": 692,
+            "elapsed_seconds": 2.1161
+          }
+        ],
+        "triage_data": {
+          "category": "Payment Failure",
+          "tier": "Priority",
+          "escalate_tag": "[ESCALATE:PRIORITY]",
+          "policy_query": "What is the retry schedule for failed automatic subscription payments? Specifically, when is the next retry attempt made after an initial payment failure?",
+          "needs_refund": false
+        },
+        "policy_data": {
+          "policy_found": true,
+          "answer": "Cloudflare will retry failed automatic subscription payments up to 5 times over a 5-day period. However, the specific timing/schedule for each individual retry attempt after the initial payment failure is not detailed in the available documentation.",
+          "citation": "article_01_cloudflare_billing_errors.md (chunk_14) - Cloudflare Billing Errors documentation"
+        },
+        "eval": {
+          "assertions": {
+            "ticket_id_echoed": {
+              "pass": true,
+              "detail": ""
+            },
+            "escalation_tag_matches_tier": {
+              "pass": true,
+              "detail": ""
+            },
+            "refund_amount_present_numeric": {
+              "pass": true,
+              "detail": ""
+            },
+            "no_refund_outside_30_days": {
+              "pass": true,
+              "detail": ""
+            }
+          },
+          "assert_pass": true,
+          "judge_reason": "The reply provides a correct and specific answer to the customer's question: automatic subscription payment failures are retried up to 5 times over a 5-day period. It also honestly acknowledges that the exact timing of each individual retry attempt is not available in documentation, rather than inventing details. This is actionable and truthful.",
+          "judge_verdict": "PASS",
+          "judge_pass": true,
+          "overall_pass": true
+        }
+      },
+      {
+        "case_id": "C06",
+        "ticket_id": "TKT-10930",
+        "reply": "Ticket TKT-10930 [ESCALATE:PRIORITY]\n\nHi there,\n\nThank you for reaching out regarding error code 51. I understand you're trying to determine whether this error is related to a bank refusal or a Zendesk system timeout issue.\n\nUnfortunately, I don't have detailed information about error code 51 in my current knowledge base to provide you with a definitive answer. To better assist you, I'm escalating your case to our specialized technical team who can investigate the specific error code and determine its root cause.\n\nOur team will review your account details and contact you shortly with more information about what triggered error code 51 and the appropriate next steps to resolve your payment issue.\n\nBest regards,\nSupport Team",
+        "input_tokens": 1017,
+        "output_tokens": 367,
+        "total_tokens": 1384,
+        "latency": 5.597043599933386,
+        "cost": 0.0022816,
+        "handoffs": [
+          {
+            "case_id": "C06",
+            "from_agent": "orchestrator",
+            "to_agent": "triage_worker",
+            "input_tokens": 234,
+            "output_tokens": 89,
+            "total_tokens": 323,
+            "elapsed_seconds": 1.1756
+          },
+          {
+            "case_id": "C06",
+            "from_agent": "orchestrator",
+            "to_agent": "policy_worker",
+            "input_tokens": 257,
+            "output_tokens": 116,
+            "total_tokens": 373,
+            "elapsed_seconds": 2.1116
+          },
+          {
+            "case_id": "C06",
+            "from_agent": "orchestrator",
+            "to_agent": "reply_synthesis",
+            "input_tokens": 526,
+            "output_tokens": 162,
+            "total_tokens": 688,
+            "elapsed_seconds": 2.3053
+          }
+        ],
+        "triage_data": {
+          "category": "Payment Failure",
+          "tier": "Priority",
+          "escalate_tag": "[ESCALATE:PRIORITY]",
+          "policy_query": "What does error code 51 indicate - is it a bank refusal or a Zendesk system timeout error?",
+          "needs_refund": false
+        },
+        "policy_data": {
+          "policy_found": false,
+          "answer": "I don't have enough information in my knowledge base to answer this question. The provided documentation reference (article_02_zendesk_payment_issues.md) does not contain specific details about error code 51, its classification as a bank refusal or Zendesk system timeout error, or its meaning.",
+          "citation": "No relevant citation available - the knowledge base documentation does not address error code 51 specifications."
+        },
+        "eval": {
+          "assertions": {
+            "ticket_id_echoed": {
+              "pass": true,
+              "detail": ""
+            },
+            "escalation_tag_matches_tier": {
+              "pass": true,
+              "detail": ""
+            },
+            "refund_amount_present_numeric": {
+              "pass": true,
+              "detail": ""
+            },
+            "no_refund_outside_30_days": {
+              "pass": true,
+              "detail": ""
+            }
+          },
+          "assert_pass": true,
+          "judge_reason": "The customer asked a specific technical question about whether error code 51 is a bank refusal or a system timeout. Rather than providing the correct answer (which appears to be a bank refusal based on common knowledge bases), the reply claims lack of knowledge and escalates, when the knowledge base likely contains this answer. This fails to resolve the customer's actual question with the specific, actionable answer they need.",
+          "judge_verdict": "FAIL",
+          "judge_pass": false,
+          "overall_pass": false
+        }
+      },
+      {
+        "case_id": "C08",
+        "ticket_id": "TKT-38181",
+        "reply": "Ticket TKT-38181\n\nHi there,\n\nThank you for reaching out regarding the credit card error code 51 you encountered when paying your invoice.\n\nError code 51 indicates that your card was declined due to insufficient funds. To resolve this, we recommend submitting your payment using a different credit card. This should allow your payment to process successfully.\n\nIf you continue to experience issues after trying an alternative payment method, please don't hesitate to reach out to us again, and we'll be happy to assist further.\n\nBest regards,\nSupport Team",
+        "input_tokens": 1167,
+        "output_tokens": 292,
+        "total_tokens": 1459,
+        "latency": 4.316644300008193,
+        "cost": 0.0021016,
+        "handoffs": [
+          {
+            "case_id": "C08",
+            "from_agent": "orchestrator",
+            "to_agent": "triage_worker",
+            "input_tokens": 240,
+            "output_tokens": 82,
+            "total_tokens": 322,
+            "elapsed_seconds": 1.1671
+          },
+          {
+            "case_id": "C08",
+            "from_agent": "orchestrator",
+            "to_agent": "policy_worker",
+            "input_tokens": 429,
+            "output_tokens": 89,
+            "total_tokens": 518,
+            "elapsed_seconds": 1.3821
+          },
+          {
+            "case_id": "C08",
+            "from_agent": "orchestrator",
+            "to_agent": "reply_synthesis",
+            "input_tokens": 498,
+            "output_tokens": 121,
+            "total_tokens": 619,
+            "elapsed_seconds": 1.762
+          }
+        ],
+        "triage_data": {
+          "category": "Payment Failure",
+          "tier": "Standard",
+          "escalate_tag": "",
+          "policy_query": "What should a customer do if they receive credit card error code 51 (Decline) when attempting to pay an invoice?",
+          "needs_refund": false
+        },
+        "policy_data": {
+          "policy_found": true,
+          "answer": "If a customer receives credit card error code 51 (Decline), which indicates insufficient funds, they should submit payment using a different credit card.",
+          "citation": "article_03_zendesk_credit_card_failures.md (chunk_11) - Credit Card Failures documentation"
+        },
+        "eval": {
+          "assertions": {
+            "ticket_id_echoed": {
+              "pass": true,
+              "detail": ""
+            },
+            "escalation_tag_matches_tier": {
+              "pass": true,
+              "detail": ""
+            },
+            "refund_amount_present_numeric": {
+              "pass": true,
+              "detail": ""
+            },
+            "no_refund_outside_30_days": {
+              "pass": true,
+              "detail": ""
+            }
+          },
+          "assert_pass": true,
+          "judge_reason": "The reply provides a correct and specific answer to the customer's question about error code 51, explaining that it indicates insufficient funds and offering the actionable solution to use a different credit card. The response is clear, relevant, and contains no misleading information.",
+          "judge_verdict": "PASS",
+          "judge_pass": true,
+          "overall_pass": true
+        }
+      },
+      {
+        "case_id": "C11",
+        "ticket_id": "TKT-88454",
+        "reply": "Ticket TKT-88454\n\nHi there,\n\nThank you for reaching out about 2-Step Verification security practices.\n\nGoogle Voice is not recommended for receiving 2-Step Verification codes because using it could lock you out of your account. If you use Google Voice for verification codes and subsequently cannot sign in to an app after adding 2-Step Verification, you may need to use an App Password as an alternative authentication method.\n\nWe recommend using a dedicated phone number or an authenticator app for your 2-Step Verification codes to ensure you maintain reliable access to your account.\n\nBest regards,\nSupport Team",
+        "input_tokens": 1087,
+        "output_tokens": 347,
+        "total_tokens": 1434,
+        "latency": 5.266915800049901,
+        "cost": 0.0022576000000000002,
+        "handoffs": [
+          {
+            "case_id": "C11",
+            "from_agent": "orchestrator",
+            "to_agent": "triage_worker",
+            "input_tokens": 231,
+            "output_tokens": 78,
+            "total_tokens": 309,
+            "elapsed_seconds": 1.7354
+          },
+          {
+            "case_id": "C11",
+            "from_agent": "orchestrator",
+            "to_agent": "policy_worker",
+            "input_tokens": 326,
+            "output_tokens": 134,
+            "total_tokens": 460,
+            "elapsed_seconds": 1.8754
+          },
+          {
+            "case_id": "C11",
+            "from_agent": "orchestrator",
+            "to_agent": "reply_synthesis",
+            "input_tokens": 530,
+            "output_tokens": 135,
+            "total_tokens": 665,
+            "elapsed_seconds": 1.6499
+          }
+        ],
+        "triage_data": {
+          "category": "Account Security",
+          "tier": "Standard",
+          "escalate_tag": "",
+          "policy_query": "What is the policy on using Google Voice for 2-Step Verification codes and why is it not recommended?",
+          "needs_refund": false
+        },
+        "policy_data": {
+          "policy_found": true,
+          "answer": "Google Voice is not recommended for receiving 2-Step Verification codes because using it could lock you out of your account. If you use Google Voice for verification codes and subsequently cannot sign in to an app after adding 2-Step Verification, you may need to use an App Password as an alternative authentication method.",
+          "citation": "article_06_google_2step_verification.md (chunk_12) - Week 4 Hybrid RAG System, relevance confidence: 82.5%"
+        },
+        "eval": {
+          "assertions": {
+            "ticket_id_echoed": {
+              "pass": true,
+              "detail": ""
+            },
+            "escalation_tag_matches_tier": {
+              "pass": true,
+              "detail": ""
+            },
+            "refund_amount_present_numeric": {
+              "pass": true,
+              "detail": ""
+            },
+            "no_refund_outside_30_days": {
+              "pass": true,
+              "detail": ""
+            }
+          },
+          "assert_pass": true,
+          "judge_reason": "The reply directly answers why Google Voice shouldn't be used for 2-Step Verification (risk of account lockout), provides a specific actionable consequence if this occurs (use an App Password), and recommends secure alternatives (dedicated phone number or authenticator app). The answer is correct, specific, and actionable.",
+          "judge_verdict": "PASS",
+          "judge_pass": true,
+          "overall_pass": true
+        }
+      },
+      {
+        "case_id": "C12",
+        "ticket_id": "TKT-21664",
+        "reply": "Ticket TKT-21664\n\nHi there,\n\nThank you for reaching out to us regarding your Google account recovery situation.\n\nI understand you've lost your security key and don't have a backup second-step verification method available. Unfortunately, I don't have the specific timeline information in my current knowledge base to provide you with an accurate estimate for account recovery in your particular situation.\n\nFor the most accurate and up-to-date information about recovery timeframes when you've lost your security key without backup verification methods, I recommend:\n\n1. Visiting Google's official Account Recovery page at accounts.google.com/signin/recovery\n2. Contacting Google Support directly, as they can assess your specific account situation and provide you with a personalized recovery timeline\n\nGoogle's recovery process can vary depending on factors like account history, verification methods available, and security checks, so speaking directly with their support team will ensure you get the most accurate guidance for your case.\n\nBest regards,\nSupport Team",
+        "input_tokens": 1107,
+        "output_tokens": 425,
+        "total_tokens": 1532,
+        "latency": 5.462800099980086,
+        "cost": 0.0025856,
+        "handoffs": [
+          {
+            "case_id": "C12",
+            "from_agent": "orchestrator",
+            "to_agent": "triage_worker",
+            "input_tokens": 234,
+            "output_tokens": 82,
+            "total_tokens": 316,
+            "elapsed_seconds": 1.2002
+          },
+          {
+            "case_id": "C12",
+            "from_agent": "orchestrator",
+            "to_agent": "policy_worker",
+            "input_tokens": 336,
+            "output_tokens": 134,
+            "total_tokens": 470,
+            "elapsed_seconds": 1.7118
+          },
+          {
+            "case_id": "C12",
+            "from_agent": "orchestrator",
+            "to_agent": "reply_synthesis",
+            "input_tokens": 537,
+            "output_tokens": 209,
+            "total_tokens": 746,
+            "elapsed_seconds": 2.5462
+          }
+        ],
+        "triage_data": {
+          "category": "Account Security",
+          "tier": "Standard",
+          "escalate_tag": "",
+          "policy_query": "What is the estimated timeline for Google account recovery when a user has lost their security key and has no backup second-step verification method?",
+          "needs_refund": false
+        },
+        "policy_data": {
+          "policy_found": false,
+          "answer": "I don't have enough information in my knowledge base to answer this question. The provided documentation mentions the scenario where a user has lost their security key and has no backup second-step verification method, but it does not include the estimated timeline for account recovery in this situation.",
+          "citation": "article_06_google_2step_verification.md - The documentation references the section 'If you don't have another second step or forgot your password' but the specific timeline details are not included in the provided knowledge base excerpt."
+        },
+        "eval": {
+          "assertions": {
+            "ticket_id_echoed": {
+              "pass": true,
+              "detail": ""
+            },
+            "escalation_tag_matches_tier": {
+              "pass": true,
+              "detail": ""
+            },
+            "refund_amount_present_numeric": {
+              "pass": true,
+              "detail": ""
+            },
+            "no_refund_outside_30_days": {
+              "pass": true,
+              "detail": ""
+            }
+          },
+          "assert_pass": true,
+          "judge_reason": "The customer asked about Google account recovery timelines, but this appears to be a support ticket for a different product/service (our company's support team). The reply correctly acknowledges the knowledge base doesn't cover this third-party Google issue and appropriately directs the customer to Google's official support channels rather than inventing an answer. This is a legitimate case where the knowledge base genuinely doesn't cover the question.",
+          "judge_verdict": "PASS",
+          "judge_pass": true,
+          "overall_pass": true
+        }
+      },
+      {
+        "case_id": "C16",
+        "ticket_id": "TKT-92654",
+        "reply": "Ticket TKT-92654\n\nHi there,\n\nThank you for reaching out regarding the Zendesk payment error code 430357 (Lost or Stolen Card).\n\nUnfortunately, I don't have the specific details about this error code in my current knowledge base to provide you with a complete explanation and resolution steps. However, I can see that this relates to a credit card issue flagged by our payment system.\n\nHere's what I recommend:\n\n1. **Contact your card issuer** - Since this error indicates your card has been flagged as lost or stolen, your bank or credit card company will have the most accurate information and can help you resolve the issue on their end.\n\n2. **Update your payment method** - Once your card issuer has cleared any fraud concerns, try updating your payment method in your Zendesk account with either a new card or an alternative payment method.\n\n3. **Reach out to our specialized team** - For more detailed troubleshooting specific to this error code and our system, I'd like to escalate this to our billing specialists who can walk you through the resolution process step-by-step.\n\nI apologize that I couldn't provide all the details directly. Our team will be better equipped to help you get this resolved quickly.\n\nBest regards,\nSupport Team",
+        "input_tokens": 1071,
+        "output_tokens": 519,
+        "total_tokens": 1590,
+        "latency": 7.065983600099571,
+        "cost": 0.0029328,
+        "handoffs": [
+          {
+            "case_id": "C16",
+            "from_agent": "orchestrator",
+            "to_agent": "triage_worker",
+            "input_tokens": 238,
+            "output_tokens": 87,
+            "total_tokens": 325,
+            "elapsed_seconds": 1.1232
+          },
+          {
+            "case_id": "C16",
+            "from_agent": "orchestrator",
+            "to_agent": "policy_worker",
+            "input_tokens": 269,
+            "output_tokens": 152,
+            "total_tokens": 421,
+            "elapsed_seconds": 2.4729
+          },
+          {
+            "case_id": "C16",
+            "from_agent": "orchestrator",
+            "to_agent": "reply_synthesis",
+            "input_tokens": 564,
+            "output_tokens": 280,
+            "total_tokens": 844,
+            "elapsed_seconds": 3.4649
+          }
+        ],
+        "triage_data": {
+          "category": "Payment Failure",
+          "tier": "Standard",
+          "escalate_tag": "",
+          "policy_query": "What does Zendesk payment error code 430357 (Lost or Stolen Card) mean and what are the steps to resolve this error?",
+          "needs_refund": false
+        },
+        "policy_data": {
+          "policy_found": false,
+          "answer": "I don't have enough information in my knowledge base to answer this question. While the documentation references an article on Zendesk credit card failures (article_03_zendesk_credit_card_failures.md), the specific content regarding error code 430357 (Lost or Stolen Card), its meaning, and resolution steps is not provided in the knowledge base excerpt supplied.",
+          "citation": "article_03_zendesk_credit_card_failures.md - Category: Payment (chunk_18, 78.2% relevance confidence) - Content not included in provided documentation"
+        },
+        "eval": {
+          "assertions": {
+            "ticket_id_echoed": {
+              "pass": true,
+              "detail": ""
+            },
+            "escalation_tag_matches_tier": {
+              "pass": true,
+              "detail": ""
+            },
+            "refund_amount_present_numeric": {
+              "pass": true,
+              "detail": ""
+            },
+            "no_refund_outside_30_days": {
+              "pass": true,
+              "detail": ""
+            }
+          },
+          "assert_pass": true,
+          "judge_reason": "The reply acknowledges the error code and its meaning (Lost or Stolen Card), then provides reasonable and actionable guidance (contact card issuer, update payment method, escalate to specialists). While it lacks specific details from a knowledge base, it honestly states this limitation rather than inventing false information, and offers practical next steps the customer can take. This constitutes a helpful, non-misleading resolution.",
+          "judge_verdict": "PASS",
+          "judge_pass": true,
+          "overall_pass": true
+        }
+      },
+      {
+        "case_id": "C18",
+        "ticket_id": "TKT-62515",
+        "reply": "Ticket TKT-62515\n\nHi there,\n\nThank you for reaching out regarding the credit card error code 14 you encountered when saving your payment details.\n\nI've reviewed our documentation on credit card failures, but unfortunately, I don't have detailed information about error code 14 (Card No. Error) in our current knowledge base. To help resolve this issue, I recommend the following steps:\n\n1. **Verify your card details** \u2013 Double-check that your card number, expiration date, and CVV are entered correctly with no extra spaces or characters.\n2. **Contact your credit card provider** \u2013 Error code 14 typically indicates a card number validation issue on their end. They can confirm whether there's a problem with your card or account that's preventing the transaction.\n3. **Try a different payment method** \u2013 If available, you can attempt to save an alternative card to your account.\n\nIf you continue to experience issues after trying these steps, or if your credit card provider confirms there's no problem on their end, please reply to this ticket with those details, and we'll escalate this to our technical team for further investigation.\n\nBest regards,\nSupport Team",
+        "input_tokens": 1130,
+        "output_tokens": 481,
+        "total_tokens": 1611,
+        "latency": 7.649318199953996,
+        "cost": 0.002828,
+        "handoffs": [
+          {
+            "case_id": "C18",
+            "from_agent": "orchestrator",
+            "to_agent": "triage_worker",
+            "input_tokens": 237,
+            "output_tokens": 83,
+            "total_tokens": 320,
+            "elapsed_seconds": 1.2977
+          },
+          {
+            "case_id": "C18",
+            "from_agent": "orchestrator",
+            "to_agent": "policy_worker",
+            "input_tokens": 341,
+            "output_tokens": 145,
+            "total_tokens": 486,
+            "elapsed_seconds": 1.8835
+          },
+          {
+            "case_id": "C18",
+            "from_agent": "orchestrator",
+            "to_agent": "reply_synthesis",
+            "input_tokens": 552,
+            "output_tokens": 253,
+            "total_tokens": 805,
+            "elapsed_seconds": 4.4629
+          }
+        ],
+        "triage_data": {
+          "category": "Payment Failure",
+          "tier": "Standard",
+          "escalate_tag": "",
+          "policy_query": "What is the resolution process for credit card error code 14 (Card No. Error) when customers attempt to save payment details?",
+          "needs_refund": false
+        },
+        "policy_data": {
+          "policy_found": false,
+          "answer": "I don't have enough information in my knowledge base to answer this question. While the documentation references credit card error resolution processes, it does not contain specific information about error code 14 (Card No. Error) or the particular resolution steps for saving payment details. The provided excerpt only mentions general troubleshooting (retrying and contacting the credit card provider) without addressing this specific error code.",
+          "citation": "article_03_zendesk_credit_card_failures.md - incomplete documentation; error code 14 not detailed in provided knowledge base content."
+        },
+        "eval": {
+          "assertions": {
+            "ticket_id_echoed": {
+              "pass": true,
+              "detail": ""
+            },
+            "escalation_tag_matches_tier": {
+              "pass": true,
+              "detail": ""
+            },
+            "refund_amount_present_numeric": {
+              "pass": true,
+              "detail": ""
+            },
+            "no_refund_outside_30_days": {
+              "pass": true,
+              "detail": ""
+            }
+          },
+          "assert_pass": true,
+          "judge_reason": "The reply honestly acknowledges that error code 14 is not in the knowledge base, then provides reasonable, actionable troubleshooting steps (verify card details, contact credit card provider, try alternative payment method) that directly address the customer's issue. This constitutes a correct and helpful response that resolves the ticket appropriately.",
+          "judge_verdict": "PASS",
+          "judge_pass": true,
+          "overall_pass": true
+        }
+      },
+      {
+        "case_id": "C21",
+        "ticket_id": "TKT-66518",
+        "reply": "Ticket TKT-66518 [ESCALATE:PRIORITY]\n\nHi there,\n\nThank you for reaching out regarding the SLA guaranteed refund window for annual plan chargebacks.\n\nI've reviewed your inquiry, and unfortunately, I don't have access to specific documentation detailing the exact SLA guaranteed refund window in business days for annual plan chargebacks. This is a specialized billing matter that requires further investigation.\n\nHowever, I can address your refund request: Your purchase was made 12 days ago, which is within our standard 30-day refund window. We will refund $49.00 to your original payment method within 5-10 business days.\n\nFor the detailed SLA information you've requested about annual plan chargeback procedures, I'm escalating your ticket to our senior billing team who can provide you with the specific policy details and timeline guarantees you need.\n\nBest regards,\nSupport Team",
+        "input_tokens": 918,
+        "output_tokens": 371,
+        "total_tokens": 1289,
+        "latency": 5.025785899953917,
+        "cost": 0.0022184,
+        "handoffs": [
+          {
+            "case_id": "C21",
+            "from_agent": "orchestrator",
+            "to_agent": "triage_worker",
+            "input_tokens": 234,
+            "output_tokens": 83,
+            "total_tokens": 317,
+            "elapsed_seconds": 1.1553
+          },
+          {
+            "case_id": "C21",
+            "from_agent": "orchestrator",
+            "to_agent": "policy_worker",
+            "input_tokens": 183,
+            "output_tokens": 85,
+            "total_tokens": 268,
+            "elapsed_seconds": 1.5887
+          },
+          {
+            "case_id": "C21",
+            "from_agent": "orchestrator",
+            "to_agent": "reply_synthesis",
+            "input_tokens": 501,
+            "output_tokens": 203,
+            "total_tokens": 704,
+            "elapsed_seconds": 2.2773
+          }
+        ],
+        "triage_data": {
+          "category": "Billing",
+          "tier": "Priority",
+          "escalate_tag": "[ESCALATE:PRIORITY]",
+          "policy_query": "What is the exact SLA guaranteed refund window in business days for annual plan chargebacks?",
+          "needs_refund": true
+        },
+        "policy_data": {
+          "policy_found": false,
+          "answer": "I don't have enough information in my knowledge base to answer this question. The provided documentation does not contain specific SLA information regarding the guaranteed refund window in business days for annual plan chargebacks.",
+          "citation": "No applicable citation available - information not found in knowledge base."
+        },
+        "eval": {
+          "assertions": {
+            "ticket_id_echoed": {
+              "pass": true,
+              "detail": ""
+            },
+            "escalation_tag_matches_tier": {
+              "pass": true,
+              "detail": ""
+            },
+            "refund_amount_present_numeric": {
+              "pass": true,
+              "detail": ""
+            },
+            "no_refund_outside_30_days": {
+              "pass": true,
+              "detail": ""
+            }
+          },
+          "assert_pass": true,
+          "judge_reason": "The reply correctly and honestly states that the knowledge base lacks the specific SLA information the customer requested, rather than inventing an answer. It appropriately escalates to a team that can provide accurate details. The refund paragraph is boilerplate that must be ignored per the instructions.",
+          "judge_verdict": "PASS",
+          "judge_pass": true,
+          "overall_pass": true
+        }
+      },
+      {
+        "case_id": "C22",
+        "ticket_id": "TKT-16240",
+        "reply": "Ticket TKT-16240 [ESCALATE:PRIORITY]\n\nHi there,\n\nThank you for reaching out regarding the refund window for annual plan chargebacks.\n\nI've reviewed your inquiry about the specific SLA guaranteed refund window in business days for annual plan chargebacks. Unfortunately, I don't have detailed documentation in my knowledge base to provide you with the exact SLA timeframe for this specific scenario.\n\nRegarding your refund request: Your purchase was made 30 days ago, which falls within our standard 30-day refund window. We will refund $239.88 to your original payment method within 5-10 business days.\n\nGiven the complexity of your question about annual plan chargeback SLAs and to ensure you receive accurate information about our specific policies, I'm escalating this to our specialized billing team who can provide you with comprehensive details about the guaranteed refund windows for annual plans.\n\nBest regards,\nSupport Team",
+        "input_tokens": 879,
+        "output_tokens": 345,
+        "total_tokens": 1224,
+        "latency": 11.706723700044677,
+        "cost": 0.0020832,
+        "handoffs": [
+          {
+            "case_id": "C22",
+            "from_agent": "orchestrator",
+            "to_agent": "triage_worker",
+            "input_tokens": 231,
+            "output_tokens": 83,
+            "total_tokens": 314,
+            "elapsed_seconds": 1.1457
+          },
+          {
+            "case_id": "C22",
+            "from_agent": "orchestrator",
+            "to_agent": "policy_worker",
+            "input_tokens": 183,
+            "output_tokens": 52,
+            "total_tokens": 235,
+            "elapsed_seconds": 2.183
+          },
+          {
+            "case_id": "C22",
+            "from_agent": "orchestrator",
+            "to_agent": "reply_synthesis",
+            "input_tokens": 465,
+            "output_tokens": 210,
+            "total_tokens": 675,
+            "elapsed_seconds": 8.3735
+          }
+        ],
+        "triage_data": {
+          "category": "Billing",
+          "tier": "Priority",
+          "escalate_tag": "[ESCALATE:PRIORITY]",
+          "policy_query": "What is the exact SLA guaranteed refund window in business days for annual plan chargebacks?",
+          "needs_refund": true
+        },
+        "policy_data": {
+          "policy_found": false,
+          "answer": "I don't have enough information in my knowledge base to answer this question.",
+          "citation": "No relevant documentation provided"
+        },
+        "eval": {
+          "assertions": {
+            "ticket_id_echoed": {
+              "pass": true,
+              "detail": ""
+            },
+            "escalation_tag_matches_tier": {
+              "pass": true,
+              "detail": ""
+            },
+            "refund_amount_present_numeric": {
+              "pass": true,
+              "detail": ""
+            },
+            "no_refund_outside_30_days": {
+              "pass": true,
+              "detail": ""
+            }
+          },
+          "assert_pass": true,
+          "judge_reason": "The reply correctly identifies that the knowledge base lacks specific information about the exact SLA for annual plan chargebacks and honestly states this rather than inventing an answer. The escalation to the billing team for accurate details on this complex policy question is appropriate and resolves the customer's need by directing them to the right resource. The standard refund paragraph is boilerplate that should be ignored.",
+          "judge_verdict": "PASS",
+          "judge_pass": true,
+          "overall_pass": true
+        }
+      }
+    ]
+  },
+  "failure_injection": {
+    "case_id": "C08",
+    "behavior": "Lied by synthesising as if the worker had answered",
+    "result": {
+      "case_id": "C08",
+      "ticket_id": "TKT-38181",
+      "reply": "Ticket TKT-38181\n\nHi there,\n\nThank you for reaching out regarding the credit card error code 51 (Decline) you're experiencing when trying to pay your invoice.\n\nWe apologize, but we're currently experiencing a temporary issue accessing our policy guidance system. To help you resolve this payment error as quickly as possible, we recommend the following immediate steps:\n\n1. **Verify your card details** - Ensure your credit card number, expiration date, and CVV are entered correctly\n2. **Contact your bank** - Error code 51 typically indicates a decline from your card issuer. Reach out to your bank to confirm there are no fraud blocks or insufficient funds\n3. **Try an alternative payment method** - If available, attempt payment with a different credit card or payment option\n4. **Wait and retry** - Sometimes temporary blocks clear after a short period\n\nIf you continue experiencing issues after trying these steps, please reply to this ticket and we'll escalate your case to our specialized payments team for further investigation.\n\nWe appreciate your patience and apologize for any inconvenience.\n\nBest regards,\nSupport Team",
+      "input_tokens": 720,
+      "output_tokens": 326,
+      "total_tokens": 1046,
+      "latency": 4.3832539999857545,
+      "cost": 0.0018800000000000002,
+      "handoffs": [
+        {
+          "case_id": "C08",
+          "from_agent": "orchestrator",
+          "to_agent": "triage_worker",
+          "input_tokens": 240,
+          "output_tokens": 82,
+          "total_tokens": 322,
+          "elapsed_seconds": 1.3403
+        },
+        {
+          "case_id": "C08",
+          "from_agent": "orchestrator",
+          "to_agent": "policy_worker",
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "total_tokens": 0,
+          "elapsed_seconds": 0.05,
+          "injected_error": "HTTP 500 Internal Server Error"
+        },
+        {
+          "case_id": "C08",
+          "from_agent": "orchestrator",
+          "to_agent": "reply_synthesis",
+          "input_tokens": 480,
+          "output_tokens": 244,
+          "total_tokens": 724,
+          "elapsed_seconds": 3.0367
+        }
+      ],
+      "triage_data": {
+        "category": "Payment Failure",
+        "tier": "Standard",
+        "escalate_tag": "",
+        "policy_query": "What should a customer do if they receive credit card error code 51 (Decline) when attempting to pay an invoice?",
+        "needs_refund": false
+      },
+      "policy_data": {
+        "status": 500,
+        "error": "HTTP 500 Internal Server Error: Policy knowledge worker service timeout / failure",
+        "policy_found": false,
+        "answer": "ERROR_500_FAILED",
+        "citation": "none"
+      },
+      "eval": {
+        "assertions": {
+          "ticket_id_echoed": {
+            "pass": true,
+            "detail": ""
+          },
+          "escalation_tag_matches_tier": {
+            "pass": true,
+            "detail": ""
+          },
+          "refund_amount_present_numeric": {
+            "pass": true,
+            "detail": ""
+          },
+          "no_refund_outside_30_days": {
+            "pass": true,
+            "detail": ""
+          }
+        },
+        "assert_pass": true,
+        "judge_reason": "The reply provides correct, specific, and actionable guidance for error code 51 (Decline), accurately identifying the typical cause as a bank/card issuer decline and recommending appropriate troubleshooting steps including verifying card details, contacting the bank, trying alternative payment methods, and retrying. The response directly answers the customer's question despite acknowledging a temporary system access issue.",
+        "judge_verdict": "PASS",
+        "judge_pass": true,
+        "overall_pass": true
+      }
+    }
+  }
+}

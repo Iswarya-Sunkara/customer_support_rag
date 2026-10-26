@@ -1,0 +1,36 @@
+# Week 10 Multi-Agent Handoffs Log
+# Format: timestamp | case_id | from_agent -> to_agent | in_tok | out_tok | total_tok | elapsed_sec
+
+2026-10-13T05:45:02Z | C01 | orchestrator -> triage_worker | in:233 | out:71 | tot:304 | 1.1986s
+2026-10-13T05:45:04Z | C01 | orchestrator -> policy_worker | in:330 | out:151 | tot:481 | 1.9624s
+2026-10-13T05:45:14Z | C01 | orchestrator -> reply_synthesis | in:542 | out:178 | tot:720 | 10.6312s
+2026-10-13T05:45:18Z | C02 | orchestrator -> triage_worker | in:233 | out:91 | tot:324 | 1.6577s
+2026-10-13T05:45:20Z | C02 | orchestrator -> policy_worker | in:342 | out:177 | tot:519 | 1.9767s
+2026-10-13T05:45:22Z | C02 | orchestrator -> reply_synthesis | in:521 | out:171 | tot:692 | 2.1161s
+2026-10-13T05:45:25Z | C06 | orchestrator -> triage_worker | in:234 | out:89 | tot:323 | 1.1756s
+2026-10-13T05:45:27Z | C06 | orchestrator -> policy_worker | in:257 | out:116 | tot:373 | 2.1116s
+2026-10-13T05:45:29Z | C06 | orchestrator -> reply_synthesis | in:526 | out:162 | tot:688 | 2.3053s
+2026-10-13T05:45:32Z | C08 | orchestrator -> triage_worker | in:240 | out:82 | tot:322 | 1.1671s
+2026-10-13T05:45:34Z | C08 | orchestrator -> policy_worker | in:429 | out:89 | tot:518 | 1.3821s
+2026-10-13T05:45:35Z | C08 | orchestrator -> reply_synthesis | in:498 | out:121 | tot:619 | 1.762s
+2026-10-13T05:45:39Z | C11 | orchestrator -> triage_worker | in:231 | out:78 | tot:309 | 1.7354s
+2026-10-13T05:45:41Z | C11 | orchestrator -> policy_worker | in:326 | out:134 | tot:460 | 1.8754s
+2026-10-13T05:45:43Z | C11 | orchestrator -> reply_synthesis | in:530 | out:135 | tot:665 | 1.6499s
+2026-10-13T05:45:46Z | C12 | orchestrator -> triage_worker | in:234 | out:82 | tot:316 | 1.2002s
+2026-10-13T05:45:48Z | C12 | orchestrator -> policy_worker | in:336 | out:134 | tot:470 | 1.7118s
+2026-10-13T05:45:50Z | C12 | orchestrator -> reply_synthesis | in:537 | out:209 | tot:746 | 2.5462s
+2026-10-13T05:45:53Z | C16 | orchestrator -> triage_worker | in:238 | out:87 | tot:325 | 1.1232s
+2026-10-13T05:45:56Z | C16 | orchestrator -> policy_worker | in:269 | out:152 | tot:421 | 2.4729s
+2026-10-13T05:45:59Z | C16 | orchestrator -> reply_synthesis | in:564 | out:280 | tot:844 | 3.4649s
+2026-10-13T05:46:02Z | C18 | orchestrator -> triage_worker | in:237 | out:83 | tot:320 | 1.2977s
+2026-10-13T05:46:04Z | C18 | orchestrator -> policy_worker | in:341 | out:145 | tot:486 | 1.8835s
+2026-10-13T05:46:09Z | C18 | orchestrator -> reply_synthesis | in:552 | out:253 | tot:805 | 4.4629s
+2026-10-13T05:46:12Z | C21 | orchestrator -> triage_worker | in:234 | out:83 | tot:317 | 1.1553s
+2026-10-13T05:46:14Z | C21 | orchestrator -> policy_worker | in:183 | out:85 | tot:268 | 1.5887s
+2026-10-13T05:46:16Z | C21 | orchestrator -> reply_synthesis | in:501 | out:203 | tot:704 | 2.2773s
+2026-10-13T05:46:19Z | C22 | orchestrator -> triage_worker | in:231 | out:83 | tot:314 | 1.1457s
+2026-10-13T05:46:21Z | C22 | orchestrator -> policy_worker | in:183 | out:52 | tot:235 | 2.183s
+2026-10-13T05:46:29Z | C22 | orchestrator -> reply_synthesis | in:465 | out:210 | tot:675 | 8.3735s
+2026-10-13T05:46:32Z | C08 | orchestrator -> triage_worker | in:240 | out:82 | tot:322 | 1.3403s
+2026-10-13T05:46:32Z | C08 | orchestrator -> policy_worker | in:0 | out:0 | tot:0 | 0.05s
+2026-10-13T05:46:35Z | C08 | orchestrator -> reply_synthesis | in:480 | out:244 | tot:724 | 3.0367s

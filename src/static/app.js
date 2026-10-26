@@ -32,6 +32,122 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // --- Role-Based Access Control (User vs Admin) ---
+    let currentUserRole = localStorage.getItem('documind_user_role') || null;
+
+    const loginModalOverlay = document.getElementById('loginModalOverlay');
+    const btnSelectUser = document.getElementById('btnSelectUser');
+    const btnSelectAdmin = document.getElementById('btnSelectAdmin');
+    const adminPasswordInput = document.getElementById('adminPasswordInput');
+    const adminPasswordError = document.getElementById('adminPasswordError');
+    const btnCloseLoginModal = document.getElementById('btnCloseLoginModal');
+    const btnSwitchRole = document.getElementById('btnSwitchRole');
+    const headerTitle = document.getElementById('headerTitle');
+    const headerRoleBadge = document.getElementById('headerRoleBadge');
+    const welcomeMessageContent = document.getElementById('welcomeMessageContent');
+
+    function openLoginModal(allowClose = false) {
+        if (!loginModalOverlay) return;
+        loginModalOverlay.style.display = 'flex';
+        if (btnCloseLoginModal) {
+            btnCloseLoginModal.style.display = (allowClose && currentUserRole) ? 'inline-flex' : 'none';
+        }
+        if (adminPasswordInput) adminPasswordInput.value = '';
+        if (adminPasswordError) adminPasswordError.style.display = 'none';
+    }
+
+    function closeLoginModal() {
+        if (!loginModalOverlay) return;
+        loginModalOverlay.style.display = 'none';
+    }
+
+    function applyRole(role, save = true) {
+        currentUserRole = role;
+        if (save) {
+            localStorage.setItem('documind_user_role', role);
+        }
+
+        if (role === 'user') {
+            document.body.classList.remove('role-admin');
+            document.body.classList.add('role-user');
+            if (headerTitle) headerTitle.textContent = 'Customer Support Assistant';
+            if (headerRoleBadge) {
+                headerRoleBadge.innerHTML = '<i class="fa-solid fa-user"></i> User Mode';
+            }
+            if (welcomeMessageContent) {
+                welcomeMessageContent.innerHTML = `
+                    <p>👋 Hello! Welcome to <strong>DocuMind Customer Support</strong>.</p>
+                    <p>I am your AI Support Assistant with grounded knowledge across billing, card decline errors, refund policies, account security, and support tickets.</p>
+                    <p>You can <strong>upload your documents</strong> in the sidebar to ask questions about them, or ask about any customer support topic. How can I assist you today?</p>
+                `;
+            }
+            // User mode enforces clean chatbot view and week4 hybrid retrieval
+            currentMode = 'week4';
+            switchView('chat');
+        } else {
+            document.body.classList.remove('role-user');
+            document.body.classList.add('role-admin');
+            if (headerTitle) headerTitle.textContent = 'Universal Document Chatbot & Lab';
+            if (headerRoleBadge) {
+                headerRoleBadge.innerHTML = '<i class="fa-solid fa-crown"></i> Admin Mode';
+            }
+            if (welcomeMessageContent) {
+                welcomeMessageContent.innerHTML = `
+                    <p>👋 Hello Administrator! Welcome to the <strong>DocuMind AI Admin Control Center</strong>.</p>
+                    <p>You have full access to upload any documents without restriction, run benchmark tests across <strong>Weeks 3–10</strong>, evaluate trajectories, and test the <strong>MCP Gateway & RBAC audit logs</strong>.</p>
+                    <p style="margin-top: 8px; font-size: 0.85rem; color: #9CA3AF;">
+                        📌 <em>Use the <strong>Curriculum Modules</strong> popover above or the sidebar buttons to switch between Dense Baseline, Hybrid RAG, Error Taxonomy, LLM Judge, Race & Budgets, Trajectory Evals, MCP Tools, and <strong>Week 10: Multi-Agent Race</strong>.</em>
+                    </p>
+                `;
+            }
+        }
+        closeLoginModal();
+    }
+
+    if (btnSelectUser) {
+        btnSelectUser.addEventListener('click', () => applyRole('user', true));
+    }
+
+    if (btnSelectAdmin) {
+        btnSelectAdmin.addEventListener('click', () => {
+            const pwd = adminPasswordInput ? adminPasswordInput.value.trim().toLowerCase() : '';
+            // Accepts 'admin' or blank for easy demonstration
+            if (!pwd || pwd === 'admin') {
+                applyRole('admin', true);
+            } else {
+                if (adminPasswordError) adminPasswordError.style.display = 'flex';
+            }
+        });
+    }
+
+    if (adminPasswordInput) {
+        adminPasswordInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                if (btnSelectAdmin) btnSelectAdmin.click();
+            }
+        });
+    }
+
+    if (btnSwitchRole) {
+        btnSwitchRole.addEventListener('click', () => openLoginModal(true));
+    }
+
+    if (btnCloseLoginModal) {
+        btnCloseLoginModal.addEventListener('click', () => closeLoginModal());
+    }
+
+    // Connect User Topic buttons in sidebar
+    document.querySelectorAll('.user-topic-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const q = btn.getAttribute('data-q');
+            if (q && userInput) {
+                userInput.value = q;
+                userInput.focus();
+                if (chatForm) chatForm.dispatchEvent(new Event('submit'));
+            }
+        });
+    });
+
     // 1. Filter Switch Event Listeners (Week 3 vs Week 4)
     btnModeWeek3.addEventListener('click', () => {
         currentMode = 'week3';
@@ -384,6 +500,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const tabBtnWeek7 = document.getElementById('tabBtnWeek7');
     const tabBtnWeek8 = document.getElementById('tabBtnWeek8');
     const tabBtnWeek9 = document.getElementById('tabBtnWeek9');
+    const tabBtnWeek10 = document.getElementById('tabBtnWeek10');
     const tabBtnLangfuse = document.getElementById('tabBtnLangfuse');
 
     const btnWeeksPopover = document.getElementById('btnWeeksPopover');
@@ -398,6 +515,7 @@ document.addEventListener('DOMContentLoaded', () => {
         week7: { short: 'W7: Race & Budgets', icon: 'fa-code-compare', color: '#EC4899' },
         week8: { short: 'W8: Trajectory', icon: 'fa-route', color: '#6366F1' },
         week9: { short: 'W9: MCP & Tools', icon: 'fa-network-wired', color: '#A855F7' },
+        week10: { short: 'W10: Multi-Agent Race', icon: 'fa-users-gear', color: '#F97316' },
         langfuse: { short: 'Langfuse', icon: 'fa-satellite-dish', color: '#10B981' }
     };
 
@@ -431,6 +549,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const viewWeek7 = document.getElementById('viewWeek7');
     const viewWeek8 = document.getElementById('viewWeek8');
     const viewWeek9 = document.getElementById('viewWeek9');
+    const viewWeek10 = document.getElementById('viewWeek10');
     const viewLangfuse = document.getElementById('viewLangfuse');
 
     const sidebarWeek3Btn = document.getElementById('sidebarWeek3Btn');
@@ -440,17 +559,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const sidebarWeek7Btn = document.getElementById('sidebarWeek7Btn');
     const sidebarWeek8Btn = document.getElementById('sidebarWeek8Btn');
     const sidebarWeek9Btn = document.getElementById('sidebarWeek9Btn');
+    const sidebarWeek10Btn = document.getElementById('sidebarWeek10Btn');
     const sidebarLangfuseBtn = document.getElementById('sidebarLangfuseBtn');
     const btnReloadWeek6Frame = document.getElementById('btnReloadWeek6Frame');
     const week6Iframe = document.getElementById('week6Iframe');
 
     const filterSwitchContainer = document.getElementById('filterSwitchContainer');
 
-    const allTabBtns = [tabBtnChat, tabBtnWeek3, tabBtnWeek4, tabBtnWeek5, tabBtnWeek6, tabBtnWeek7, tabBtnWeek8, tabBtnWeek9, tabBtnLangfuse].filter(Boolean);
-    const allViews = [viewChat, viewWeek3, viewWeek4, viewWeek5, viewWeek6, viewWeek7, viewWeek8, viewWeek9, viewLangfuse].filter(Boolean);
+    const allTabBtns = [tabBtnChat, tabBtnWeek3, tabBtnWeek4, tabBtnWeek5, tabBtnWeek6, tabBtnWeek7, tabBtnWeek8, tabBtnWeek9, tabBtnWeek10, tabBtnLangfuse].filter(Boolean);
+    const allViews = [viewChat, viewWeek3, viewWeek4, viewWeek5, viewWeek6, viewWeek7, viewWeek8, viewWeek9, viewWeek10, viewLangfuse].filter(Boolean);
 
     function switchView(target) {
         closeWeeksPopover();
+
+        // Enforce pure chatbot mode for User role: week-wise modules cannot be opened
+        if (currentUserRole === 'user' && target !== 'chat') {
+            target = 'chat';
+        }
 
         allTabBtns.forEach(btn => btn.classList.remove('active'));
         allViews.forEach(v => {
@@ -532,6 +657,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     viewWeek9.style.display = 'flex';
                 }
                 fetchWeek9Data();
+            } else if (target === 'week10') {
+                if (tabBtnWeek10) tabBtnWeek10.classList.add('active');
+                if (viewWeek10) {
+                    viewWeek10.classList.add('active');
+                    viewWeek10.style.display = 'flex';
+                }
+                fetchWeek10Data();
             } else if (target === 'langfuse') {
                 if (tabBtnLangfuse) tabBtnLangfuse.classList.add('active');
                 if (viewLangfuse) {
@@ -584,6 +716,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (sidebarWeek7Btn) sidebarWeek7Btn.addEventListener('click', () => switchView('week7'));
     if (sidebarWeek8Btn) sidebarWeek8Btn.addEventListener('click', () => switchView('week8'));
     if (sidebarWeek9Btn) sidebarWeek9Btn.addEventListener('click', () => switchView('week9'));
+    if (sidebarWeek10Btn) sidebarWeek10Btn.addEventListener('click', () => switchView('week10'));
     if (sidebarLangfuseBtn) sidebarLangfuseBtn.addEventListener('click', () => switchView('langfuse'));
 
     // Framed Questions Launchers in Week 5 view
@@ -1408,8 +1541,121 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // ==============================================================================
+    // Week 10: Multi-Agent Triage Squad vs Single Agent Race Engine
+    // ==============================================================================
+    async function fetchWeek10Data() {
+        try {
+            const res = await fetch('/api/week10/results');
+            const data = await res.json();
+            if (data.status !== 'success') return;
+
+            const rd = data.race_data;
+            if (rd && rd.single_agent && rd.multi_agent) {
+                const kpiPass = document.getElementById('w10KpiPass');
+                const kpiLatency = document.getElementById('w10KpiLatency');
+                const kpiTokens = document.getElementById('w10KpiTokens');
+                const kpiCost = document.getElementById('w10KpiCost');
+
+                if (kpiPass) kpiPass.innerHTML = `${rd.single_agent.pass_rate.toFixed(1)}% vs ${rd.multi_agent.pass_rate.toFixed(1)}%`;
+                if (kpiLatency) kpiLatency.innerHTML = `${rd.single_agent.p50_latency.toFixed(2)}s vs ${rd.multi_agent.p50_latency.toFixed(2)}s`;
+                if (kpiTokens) kpiTokens.innerHTML = `${rd.single_agent.total_tokens.toLocaleString()} vs ${rd.multi_agent.total_tokens.toLocaleString()}`;
+                if (kpiCost) kpiCost.innerHTML = `$${rd.single_agent.cost_per_ticket.toFixed(5)} vs $${rd.multi_agent.cost_per_ticket.toFixed(5)}`;
+
+                // Populate Cases Table
+                const casesTableBody = document.getElementById('w10CasesTableBody');
+                if (casesTableBody && rd.single_agent.cases && rd.multi_agent.cases) {
+                    casesTableBody.innerHTML = '';
+                    rd.single_agent.cases.forEach((sc, i) => {
+                        const mc = rd.multi_agent.cases[i];
+                        const tr = document.createElement('tr');
+                        const isPriority = sc.case_id === 'C02' || sc.case_id === 'C06' || sc.case_id === 'C21' || sc.case_id === 'C22';
+                        let modeName = 'M1: Grace Period';
+                        if (sc.case_id === 'C06' || sc.case_id === 'C08') modeName = 'M2: Code 51 Decline';
+                        else if (sc.case_id === 'C11' || sc.case_id === 'C12') modeName = 'M3: 2FA Fallback';
+                        else if (sc.case_id === 'C16' || sc.case_id === 'C18') modeName = 'M4: Cardholder Format';
+                        else if (sc.case_id === 'C21' || sc.case_id === 'C22') modeName = 'M5: Refund SLA';
+
+                        tr.innerHTML = `
+                            <td><code>${sc.case_id}</code></td>
+                            <td><code>${sc.ticket_id}</code></td>
+                            <td>${modeName}</td>
+                            <td><span style="font-size:0.75rem; padding: 2px 8px; border-radius: 4px; background: ${isPriority ? 'rgba(236,72,153,0.2); color:#F472B6;' : 'rgba(148,163,184,0.2); color:#94A3B8;'}">${isPriority ? 'Priority' : 'Standard'}</span></td>
+                            <td>${sc.eval.overall_pass ? '<span style="color:#34D399; font-weight:600;"><i class="fa-solid fa-check"></i> PASS</span>' : '<span style="color:#F87171; font-weight:600;"><i class="fa-solid fa-xmark"></i> FAIL</span>'}</td>
+                            <td>${mc.eval.overall_pass ? '<span style="color:#34D399; font-weight:600;"><i class="fa-solid fa-check"></i> PASS</span>' : '<span style="color:#F87171; font-weight:600;"><i class="fa-solid fa-xmark"></i> FAIL</span>'}</td>
+                            <td>${sc.latency.toFixed(2)}s</td>
+                            <td>${mc.latency.toFixed(2)}s</td>
+                            <td>${sc.total_tokens.toLocaleString()}</td>
+                            <td>${mc.total_tokens.toLocaleString()}</td>
+                        `;
+                        casesTableBody.appendChild(tr);
+                    });
+                }
+            }
+
+            // Populate Injected Failure
+            const failReplyBox = document.getElementById('w10FailReplyBox');
+            if (failReplyBox && rd && rd.failure_injection && rd.failure_injection.result) {
+                failReplyBox.textContent = rd.failure_injection.result.reply;
+            }
+
+            // Populate Verdict
+            const verdictBox = document.getElementById('w10VerdictBox');
+            if (verdictBox && data.verdict_md) {
+                verdictBox.textContent = data.verdict_md;
+            }
+
+            // Populate AgentCard
+            const agentCardBox = document.getElementById('w10AgentCardBox');
+            if (agentCardBox && data.agent_card) {
+                agentCardBox.textContent = JSON.stringify(data.agent_card, null, 2);
+            }
+
+            // Populate Handoffs Table
+            const handoffsTableBody = document.getElementById('w10HandoffsTableBody');
+            if (handoffsTableBody && data.handoff_entries) {
+                handoffsTableBody.innerHTML = '';
+                data.handoff_entries.forEach(h => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td style="font-size:0.75rem; color:var(--text-muted);">${h.timestamp}</td>
+                        <td><code>${h.case_id}</code></td>
+                        <td><span style="color:#FB923C;">${h.direction}</span></td>
+                        <td>${h.in_tok}</td>
+                        <td>${h.out_tok}</td>
+                        <td><strong>${h.tot_tok}</strong></td>
+                        <td>${h.elapsed}</td>
+                    `;
+                    handoffsTableBody.appendChild(tr);
+                });
+            }
+        } catch (err) {
+            console.error("Error fetching Week 10 data:", err);
+        }
+    }
+
+    const btnRunWeek10Race = document.getElementById('btnRunWeek10Race');
+    if (btnRunWeek10Race) {
+        btnRunWeek10Race.addEventListener('click', async () => {
+            btnRunWeek10Race.disabled = true;
+            btnRunWeek10Race.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Refreshing Race...';
+            await fetchWeek10Data();
+            setTimeout(() => {
+                btnRunWeek10Race.disabled = false;
+                btnRunWeek10Race.innerHTML = '<i class="fa-solid fa-play"></i> Re-Run Week 10 Race';
+            }, 600);
+        });
+    }
+
     fetchDocumentsList();
     fetchGoldenSet();
     fetchLangfuseTelemetry();
+
+    // Role state check on startup
+    if (!currentUserRole) {
+        openLoginModal(false);
+    } else {
+        applyRole(currentUserRole, false);
+    }
 });
 

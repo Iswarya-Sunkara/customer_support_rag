@@ -474,6 +474,58 @@ async def get_week9_status():
     })
 
 
+@app.get("/api/week10/results")
+async def get_week10_results():
+    """
+    Returns Week 10 Multi-Agent Triage Squad vs Single Agent race results,
+    handoff audit logs, failure injection analysis, verdict, and AgentCard.
+    """
+    import json
+    from pathlib import Path
+    root = Path(__file__).resolve().parent.parent
+
+    results_file = root / "results" / "week10_race_results.json"
+    handoffs_file = root / "handoffs.log"
+    race_table_file = root / "race_table.md"
+    failure_file = root / "failure_case.md"
+    verdict_file = root / "verdict.md"
+    agent_card_file = root / "agent_card.json"
+
+    race_data = json.loads(results_file.read_text(encoding="utf-8")) if results_file.exists() else {}
+    handoffs_raw = handoffs_file.read_text(encoding="utf-8") if handoffs_file.exists() else ""
+    race_table_md = race_table_file.read_text(encoding="utf-8") if race_table_file.exists() else ""
+    failure_md = failure_file.read_text(encoding="utf-8") if failure_file.exists() else ""
+    verdict_md = verdict_file.read_text(encoding="utf-8") if verdict_file.exists() else ""
+    agent_card_data = json.loads(agent_card_file.read_text(encoding="utf-8")) if agent_card_file.exists() else {}
+
+    # Parse handoffs into structured objects
+    handoff_entries = []
+    for line in handoffs_raw.splitlines():
+        if line.startswith("#") or not line.strip():
+            continue
+        parts = [p.strip() for p in line.split("|")]
+        if len(parts) >= 7:
+            handoff_entries.append({
+                "timestamp": parts[0],
+                "case_id": parts[1],
+                "direction": parts[2],
+                "in_tok": parts[3].replace("in:", ""),
+                "out_tok": parts[4].replace("out:", ""),
+                "tot_tok": parts[5].replace("tot:", ""),
+                "elapsed": parts[6],
+            })
+
+    return JSONResponse(content={
+        "status": "success",
+        "race_data": race_data,
+        "handoff_entries": handoff_entries,
+        "race_table_md": race_table_md,
+        "failure_md": failure_md,
+        "verdict_md": verdict_md,
+        "agent_card": agent_card_data
+    })
+
+
 if __name__ == "__main__":
     print("[SERVER] Starting Universal Document Chatbot Server on http://127.0.0.1:8050")
     uvicorn.run(app, host="127.0.0.1", port=8050)

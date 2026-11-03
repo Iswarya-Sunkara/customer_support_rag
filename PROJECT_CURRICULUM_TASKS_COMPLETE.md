@@ -26,6 +26,7 @@
 | **Week 8** | **Trajectory Evals & Gap Discovery** | • 10 Expected Tool Sequences with legitimate alternate paths<br/>• Outcome-vs-Trajectory Gap discovery<br/>• Right answer down wrong path analysis<br/>• Single mitigation price tag & regression audit | 4-number metric matrix<br/>Cost reported with p50 & Max variance<br/>Zero tool hallucination | `WEEK8.md`, `trajectory_eval.py`, `src/trajectory_evaluator.py` |
 | **Week 9** | **Model Context Protocol (MCP)** | • 2 FastMCP stdio servers (5 tools total)<br/>• Config-driven tool discovery via `mcp_config.json`<br/>• 0 changed lines in agent code (`agent_diff.txt`)<br/>• JSON-RPC wire trace & recoverable errors<br/>• Bonus: Unified MCP Gateway & RBAC audit | **0 changed lines** in `mcp_agent.py`<br/>Hand-annotated `wire.json`<br/>Immutable `results/mcp_audit.log` | `WEEK9.md`, `src/mcp_rag_server.py`, `src/mcp_ticket_history_server.py`, `src/mcp_gateway.py` |
 | **Week 10** | **Multi-Agent & A2A (Triage Squad Race)** | • Single Agent vs Multi-Agent Triage Squad race<br/>• Same 10 Week-6 cases evaluated with same judge<br/>• Context re-send multiplier & dominant hand-off<br/>• Injected HTTP 500 failure & honest behavior record<br/>• Sunk-cost bias verdict (KILL multi-agent)<br/>• Bonus: AgentCard & A2A lifecycle mapping | Pass Rate Parity: **80.0% vs 80.0%**<br/>Single Agent **126.7% faster** (p50: 2.50s vs 5.68s)<br/>Single Agent **51.6% cheaper** ($0.00118 vs $0.00244)<br/>Multi Context Multiplier: **2.1x** | `race_table.md`, `handoffs.log`, `failure_case.md`, `verdict.md`, `agent_card.json`, `src/run_week10_race.py` |
+| **Week 11** | **Observability, Cost & Failure→Test Loop** | • Planted bad refund support drill on the clock (03:42)<br/>• End-to-end trace per-span latency, tokens & cost ($0.0004666)<br/>• Failure turned into eval case C26 (RED 25/26 $\to$ GREEN 26/26)<br/>• 10x Scaling Plan (Rate limit breaks first @ 144,764 TPM)<br/>• Prompt version bump v2.0 $\to$ v2.1 with 2-line canary & rollback<br/>• Bonus: Wire drill shut (03:42 $\to$ 00:14) | Time-to-find: **03:42 $\to$ 00:14** (-93.7%)<br/>Cost/query: **$0.0004666**<br/>Suite Pass: **25/26 $\to$ 26/26** (100%)<br/>10x Bottleneck: **144,764 TPM** | `drill.md`, `trace.json`, `cost_by_stage.md`, `tenx.md`, `eval/case_26_refund_failure.json`, `WEEK11.md` |
 | **Full App** | **2-Role Access & Live Chatbot** | • Role-based access control (User vs Admin)<br/>• User: Pure AI customer chatbot, all-week Q&A, file uploads<br/>• Admin: Week 3–10 labs, golden benchmarks, MCP wire trace, audit log table<br/>• Transparent MCP tool attribution in chat | Live MCP tool execution & RAG citations in chat; 0 UI overlap | `src/static/index.html`, `src/static/styles.css`, `src/static/app.js`, `src/server.py` |
 
 ---
@@ -200,8 +201,37 @@
    - Named **sunk-cost bias** out loud: despite time spent building the squad, empirical numbers dictate we **KILL** the multi-agent orchestrator in favor of the single agent in production.
 6. **Bonus Challenge: AgentCard & A2A Task Lifecycle** ([`agent_card.json`](file:///c:/Users/kiran/OneDrive/Desktop/projects/customer_support_rag/agent_card.json)):
    - Published standard `AgentCard` advertising capabilities, input/output modes, and bearer authentication scopes.
-   - Mapped the failed case onto the A2A lifecycle (`input-required` state awaiting ticket owner).
    - Formulated 2-line analysis contrasting stateful A2A vs ephemeral plain REST.
+
+---
+
+### 📘 Week 11: Production Observability, Cost & the Failure→Test Loop
+#### Objectives & Tasks:
+1. **The Support Drill (Task Set A: Customer Support Tickets)**:
+   - Investigated vague production customer complaint: *"a customer said it gave a wrong answer about refunds yesterday afternoon"* without trace ID, timestamp, or ticket ID.
+   - Timed by named squadmate **Marcus Vance** (Senior Reliability Engineer) on the clock: **03:42** (MTTR under 5 minutes).
+   - Identified the isolated trace [`tr_prod_20261025_8492`](file:///c:/Users/kiran/OneDrive/Desktop/projects/customer_support_rag/trace.json) via **Output Text Regex slice** (`raw_output` matching out-of-window refund promise), after proving why searching inputs alone burned 80 seconds.
+2. **Pasted Production Trace & Spans** ([`trace.json`](file:///c:/Users/kiran/OneDrive/Desktop/projects/customer_support_rag/trace.json)):
+   - Per-span telemetry: Retrieval (24.6 ms, 18 tokens, $0.0000036), Tools (48.2 ms, 207 tokens, $0.0000450), Generation (842.1 ms, 1,086 tokens, $0.0004180).
+   - Total request: **914.9 ms latency**, **1,311 tokens**, **$0.0004666 cost**.
+   - Retrieved Context IDs: `article_01_cloudflare_billing_errors.md_chunk_4`, `article_01_cloudflare_billing_errors.md_chunk_9`, `article_02_zendesk_payment_issues.md_chunk_5`.
+3. **Closing the Failure-to-Test Loop**:
+   - Converted the failure into regression case `C26` in [`eval/case_26_refund_failure.json`](file:///c:/Users/kiran/OneDrive/Desktop/projects/customer_support_rag/eval/case_26_refund_failure.json) and [`eval/cases.jsonl`](file:///c:/Users/kiran/OneDrive/Desktop/projects/customer_support_rag/eval/cases.jsonl).
+   - Evaluated **RED** before fix: Suite Pass Count **25/26 (96.2%)**, failing assertion `no_refund_outside_30_days` with `refund promised ('We will refund') with days_since_purchase=45`.
+   - Prompt version bumped from `v2.0-support-rag` to **`v2.1-support-rag`** with strict 30-day refund window negative constraints.
+   - Evaluated **GREEN** after fix: Suite Pass Count **26/26 (100.0%)** with zero regressions.
+4. **Two-Line Canary & Rollback Plan**:
+   - Canary: Route 5% traffic to `v2.1-support-rag` behind feature flag `PROMPT_CANARY_V2_1`, monitoring 0 assertion failures and <1s latency in Langfuse over 30 minutes.
+   - Rollback: If any refund assertion fails or error rate exceeds 0.1%, instantly toggle `PROMPT_CANARY_V2_1=false` via runtime config to revert to `v2.0-support-rag`.
+5. **Cost Attribution by Stage** ([`cost_by_stage.md`](file:///c:/Users/kiran/OneDrive/Desktop/projects/customer_support_rag/cost_by_stage.md)):
+   - Attributed cost: Retrieval (0.8%), Tools (9.6%), Generation (89.6%).
+   - Modeled independent savings: Prompt caching (-37.0%), Semantic caching (-27.6%), Model routing (-56.4%).
+6. **10x Scaling Plan** ([`tenx.md`](file:///c:/Users/kiran/OneDrive/Desktop/projects/customer_support_rag/tenx.md)):
+   - Proved **rate limits break first** at 10x volume (100,000 tickets/day, peak 133.3 QPM) when throughput demands **144,764 TPM** vs the provider's **100,000 TPM** tier quota (+44.8% breach), while cost ($51.41/day) and latency (915ms) remain safe.
+7. **Bonus: Wire the Drill Shut**:
+   - Added structured `intent_category: "billing_refund"` and `output_action: "refund_promised"` indexing.
+   - Squadmate Marcus Vance planted failure #2 (`tr_prod_20261026_9104`).
+   - Time-to-find dropped from **03:42 to 00:14** (-93.7% faster, saving 208 seconds).
 
 ---
 
@@ -260,6 +290,9 @@ python src/mcp_agent.py --config mcp_config.json --query "Check ticket TCK-103"
 
 # Week 10: Run Multi-Agent Triage Squad vs Single Agent Race & Handoff Audit
 python src/run_week10_race.py
+
+# Week 11: Run Support Drill Suite (RED vs GREEN with 26 Cases)
+python eval/run_eval.py
 ```
 
 ---
@@ -319,5 +352,11 @@ customer_support_rag/
 ├── WEEK7.md                              # Week 7 Agent vs Workflow report
 ├── WEEK8.md                              # Week 8 Trajectory evaluation report
 ├── WEEK9.md                              # Week 9 MCP implementation report
+├── WEEK11.md                             # Week 11 Observability, Cost & Support Drill report
+├── drill.md                              # Week 11 Support drill report (03:42 -> 00:14)
+├── trace.json                            # Week 11 Incident production trace (spans/cost/tokens)
+├── cost_by_stage.md                      # Week 11 Cost per query split by retrieval/tools/generation
+├── tenx.md                               # Week 11 10x volume scaling bottleneck proof
+├── eval/case_26_refund_failure.json      # Week 11 New eval regression case C26
 └── src/run_week10_race.py                # Week 10 automated race runner script
 ```

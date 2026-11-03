@@ -103,10 +103,14 @@ def main():
           f"{len(JUDGED_CRITERIA)} judged criterion {JUDGED_CRITERIA}")
 
     fails = [(c["case_id"], k, r["detail"]) for c in cases for k, r in c["assertions"].items() if not r["pass"]]
+    print(f"\nSuite Pass Count: {tot['a']}/{tot['n']} ({pct(tot['a'], tot['n']).strip()})")
     if fails:
+        print("Suite Status: RED (Assertion failures detected)")
         print("\nAssertion failures:")
         for f in fails:
             print("  ", *f)
+    else:
+        print("Suite Status: GREEN (All assertions passed)")
 
     summary = {"judge": args.judge, "n_cases": len(cases), "assertions": len(ASSERTIONS),
                "judged_criteria": len(JUDGED_CRITERIA)}

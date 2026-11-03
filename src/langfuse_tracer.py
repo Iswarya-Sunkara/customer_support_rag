@@ -128,7 +128,7 @@ class LangfuseTraceLogger:
             # Start RAG Observation Span
             span = self.client.start_observation(
                 name="customer_support_rag_query",
-                as_type="SPAN",
+                as_type="span",
                 input={"question": question},
                 output={"answer": answer, "status": status},
                 metadata={
@@ -138,6 +138,7 @@ class LangfuseTraceLogger:
                     "retrieved_chunks": retrieved_chunks
                 }
             )
+            span.end()
             # Flush telemetry queue
             self.client.flush()
             print(f"[Langfuse Live] Successfully streamed trace `{trace_id}` to dashboard ({self.host}).")

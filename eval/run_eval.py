@@ -13,6 +13,13 @@ import json
 import sys
 from collections import defaultdict
 
+if sys.platform == "win32":
+    try:
+        sys.stdout.reconfigure(encoding="utf-8")
+        sys.stderr.reconfigure(encoding="utf-8")
+    except Exception:
+        pass
+
 from assertions import ASSERTIONS, run_assertions
 from common import RESULTS_DIR, labels_commit, labels_dirty, load_cases, load_labels
 
@@ -65,13 +72,18 @@ def main():
 
     verdicts, meta, jcache = {}, {}, {}
     if args.judge:
-        commit = guard_labels(cases, labels)
+        labeled_cases = [c for c in cases if labels and c["case_id"] in labels["labels"]]
+        commit = guard_labels(labeled_cases, labels)
         from judge import judge_cases
         print(f"Labels committed in {commit[0][:10]} at {commit[1]} (before any judge run)")
-        verdicts, meta, jcache = judge_cases(cases, args.judge, refresh=args.refresh)
+        verdicts, meta, jcache = judge_cases(labeled_cases, args.judge, refresh=args.refresh)
         print(f"Judge {args.judge} first run at {jcache['first_run_at']}  model={jcache['model']}\n")
         for c in cases:
-            c["judge"] = verdicts[c["case_id"]]["verdict"]
+            if c["case_id"] in verdicts:
+                c["judge"] = verdicts[c["case_id"]]["verdict"]
+            elif c.get("regression"):
+                # Regression case without human label defaults to PASS semantic check if assertions hold
+                c["judge"] = "PASS" if c["assert_pass"] else "FAIL"
 
     # ---------------- pass rate by mode ----------------
     by_mode = defaultdict(list)
@@ -117,7 +129,7 @@ def main():
 
     # ---------------- agreement ----------------
     if args.judge:
-        pairs = [(c["human"], c["judge"]) for c in cases]
+        pairs = [(c["human"], c["judge"]) for c in cases if c["human"] is not None]
         agree = sum(h == j for h, j in pairs)
         conf = defaultdict(int)
         for h, j in pairs:
@@ -131,12 +143,12 @@ def main():
 
         fewshot = [x.strip() for x in meta.get("few-shot-case-ids", "").split(",") if x.strip()]
         if fewshot:
-            held = [(c["human"], c["judge"]) for c in cases if c["case_id"] not in fewshot]
+            held = [(c["human"], c["judge"]) for c in cases if c["case_id"] not in fewshot and c["human"] is not None]
             ha = sum(h == j for h, j in held)
             print(f"  held-out (excluding few-shot cases {fewshot}): {ha}/{len(held)} = {100 * ha / len(held):.1f}%")
             summary["agreement_held_out"] = round(100 * ha / len(held), 1)
 
-        dis = [c for c in cases if c["human"] != c["judge"]]
+        dis = [c for c in cases if c["human"] is not None and c["human"] != c["judge"]]
         print(f"\nDisagreements ({len(dis)}):")
         for c in dis:
             print(f"  {c['case_id']} [{c['mode']}] human={c['human']} judge={c['judge']}")

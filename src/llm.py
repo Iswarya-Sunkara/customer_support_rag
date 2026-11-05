@@ -18,22 +18,26 @@ PROMPT_PRICE_PER_MTOK = 0.80
 COMPLETION_PRICE_PER_MTOK = 4.00
 
 
-def get_anthropic_client() -> anthropic.Anthropic:
+def get_anthropic_client():
     """
     Initializes Anthropic client with fallback to Claude CLI OAuth credentials
     stored in ~/.claude/.credentials.json if ANTHROPIC_API_KEY is unset.
     """
     if not os.environ.get("ANTHROPIC_API_KEY") and not os.environ.get("ANTHROPIC_AUTH_TOKEN"):
-        cred_path = Path.home() / ".claude" / ".credentials.json"
-        if cred_path.exists():
-            try:
+        try:
+            cred_path = Path.home() / ".claude" / ".credentials.json"
+            if cred_path.exists():
                 creds = json.loads(cred_path.read_text(encoding="utf-8"))
                 tok = creds.get("claudeAiOauth", {}).get("accessToken")
                 if tok:
                     os.environ["ANTHROPIC_AUTH_TOKEN"] = tok
-            except Exception:
-                pass
-    return anthropic.Anthropic()
+        except Exception:
+            pass
+    try:
+        return anthropic.Anthropic()
+    except Exception:
+        # Fallback dummy client if no API key is present for cached eval runs
+        return None
 
 
 def calculate_cost(input_tokens: int, output_tokens: int) -> float:

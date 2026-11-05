@@ -516,6 +516,7 @@ document.addEventListener('DOMContentLoaded', () => {
         week8: { short: 'W8: Trajectory', icon: 'fa-route', color: '#6366F1' },
         week9: { short: 'W9: MCP & Tools', icon: 'fa-network-wired', color: '#A855F7' },
         week10: { short: 'W10: Multi-Agent Race', icon: 'fa-users-gear', color: '#F97316' },
+        week12: { short: 'W12: Capstone', icon: 'fa-trophy', color: '#F59E0B' },
         langfuse: { short: 'Langfuse', icon: 'fa-satellite-dish', color: '#10B981' }
     };
 
@@ -550,6 +551,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const viewWeek8 = document.getElementById('viewWeek8');
     const viewWeek9 = document.getElementById('viewWeek9');
     const viewWeek10 = document.getElementById('viewWeek10');
+    const viewWeek12 = document.getElementById('viewWeek12');
+    const tabBtnWeek12 = document.getElementById('tabBtnWeek12');
+    const tabBtnWeek12Header = document.getElementById('tabBtnWeek12Header');
+    const sidebarWeek12Btn = document.getElementById('sidebarWeek12Btn');
+    const btnRunWeek12Ticket1a = document.getElementById('btnRunWeek12Ticket1a');
+    const btnRunWeek12Ticket1b = document.getElementById('btnRunWeek12Ticket1b');
+    const w12Console = document.getElementById('w12LiveOutputConsole');
     const viewLangfuse = document.getElementById('viewLangfuse');
 
     const sidebarWeek3Btn = document.getElementById('sidebarWeek3Btn');
@@ -566,14 +574,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const filterSwitchContainer = document.getElementById('filterSwitchContainer');
 
-    const allTabBtns = [tabBtnChat, tabBtnWeek3, tabBtnWeek4, tabBtnWeek5, tabBtnWeek6, tabBtnWeek7, tabBtnWeek8, tabBtnWeek9, tabBtnWeek10, tabBtnLangfuse].filter(Boolean);
-    const allViews = [viewChat, viewWeek3, viewWeek4, viewWeek5, viewWeek6, viewWeek7, viewWeek8, viewWeek9, viewWeek10, viewLangfuse].filter(Boolean);
+    const allTabBtns = [tabBtnChat, tabBtnWeek3, tabBtnWeek4, tabBtnWeek5, tabBtnWeek6, tabBtnWeek7, tabBtnWeek8, tabBtnWeek9, tabBtnWeek10, tabBtnWeek12, tabBtnWeek12Header, sidebarWeek12Btn, tabBtnLangfuse].filter(Boolean);
+    const allViews = [viewChat, viewWeek3, viewWeek4, viewWeek5, viewWeek6, viewWeek7, viewWeek8, viewWeek9, viewWeek10, viewWeek12, viewLangfuse].filter(Boolean);
 
     function switchView(target) {
         closeWeeksPopover();
+        try {
+            if (target && target !== 'chat') {
+                history.replaceState(null, null, '#' + target);
+            } else {
+                history.replaceState(null, null, window.location.pathname);
+            }
+        } catch (_) {}
 
         // Enforce pure chatbot mode for User role: week-wise modules cannot be opened
-        if (currentUserRole === 'user' && target !== 'chat') {
+        if (currentUserRole === 'user' && target !== 'chat' && target !== 'week12') {
             target = 'chat';
         }
 
@@ -664,6 +679,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     viewWeek10.style.display = 'flex';
                 }
                 fetchWeek10Data();
+            } else if (target === 'week12') {
+                if (tabBtnWeek12) tabBtnWeek12.classList.add('active');
+                if (tabBtnWeek12Header) tabBtnWeek12Header.classList.add('active');
+                if (sidebarWeek12Btn) sidebarWeek12Btn.classList.add('active');
+                if (viewWeek12) {
+                    viewWeek12.classList.add('active');
+                    viewWeek12.style.display = 'flex';
+                }
+                fetchWeek12Summary();
             } else if (target === 'langfuse') {
                 if (tabBtnLangfuse) tabBtnLangfuse.classList.add('active');
                 if (viewLangfuse) {
@@ -717,6 +741,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (sidebarWeek8Btn) sidebarWeek8Btn.addEventListener('click', () => switchView('week8'));
     if (sidebarWeek9Btn) sidebarWeek9Btn.addEventListener('click', () => switchView('week9'));
     if (sidebarWeek10Btn) sidebarWeek10Btn.addEventListener('click', () => switchView('week10'));
+    if (sidebarWeek12Btn) sidebarWeek12Btn.addEventListener('click', () => switchView('week12'));
+    if (tabBtnWeek12Header) tabBtnWeek12Header.addEventListener('click', () => switchView('week12'));
     if (sidebarLangfuseBtn) sidebarLangfuseBtn.addEventListener('click', () => switchView('langfuse'));
 
     // Framed Questions Launchers in Week 5 view
@@ -1657,5 +1683,96 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
         applyRole(currentUserRole, false);
     }
+
+    // Direct hash navigation (e.g. #week12 or ?tab=week12)
+    const initialTarget = (window.location.hash || '').replace('#', '') || new URLSearchParams(window.location.search).get('tab');
+    if (initialTarget && ['week3', 'week4', 'week5', 'week6', 'week7', 'week8', 'week9', 'week10', 'week12', 'langfuse'].includes(initialTarget)) {
+        setTimeout(() => switchView(initialTarget), 80);
+    }
+
+    // =========================================================================
+    // Week 12: Production & Capstone Dashboard Interactivity
+    // =========================================================================
+    // Week 12 handlers declared above
+
+    async function fetchWeek12Summary() {
+        try {
+            const resp = await fetch('/api/week12/summary');
+            const data = await resp.json();
+            if (data.status === 'success' && w12Console && w12Console.textContent.includes('[Ready]')) {
+                w12Console.textContent = `[Connected to Gate M6 System]
+Module: ${data.module}
+Track: ${data.track}
+Status: ${data.gate_status}
+
+Client Volume: ${data.overview.client}
+Key Resolution: ${data.overview.solution}
+
+Click "Run Live Ticket 1a" or "Run Escalation Ticket 1b" to execute live.`;
+            }
+        } catch (e) {
+            console.error('Failed to load Week 12 summary:', e);
+        }
+    }
+
+    async function executeWeek12Ticket(payload) {
+        if (!w12Console) return;
+        w12Console.textContent = `[Executing Assistant Loop for Ticket ${payload.ticket_id}...]\nCustomer ID: ${payload.customer_id}\nQuery: "${payload.question}"\n\n• Calling check_customer_entitlement...\n• Calling fetch_order_details...\n• Searching help center articles...`;
+        try {
+            const resp = await fetch('/api/week12/run-ticket', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+            const data = await resp.json();
+            if (data.status === 'success') {
+                const res = data.ticket_result;
+                w12Console.textContent = `======================================================================
+[LIVE RESOLUTION COMPLETE] Ticket: ${res.ticket_id}
+======================================================================
+• Resolution Status:    ${res.status}
+• Entitlement Checked:  ${res.entitlement_checked} (Applicable Window: ${res.applicable_window_days} days)
+• Policy Cited (Slug):  [${res.policy_cited}]
+• Unified Trace ID:     ${res.trace_id}
+• Total Latency:        ${res.latency_ms.toFixed(2)} ms
+• Total Cost:           $${res.cost_usd.toFixed(6)} (${res.tokens} tokens across ${res.spans} spans)
+
+[ASSISTANT FINAL DRAFTED RESPONSE]:
+${res.reply}`;
+            } else {
+                w12Console.textContent = `[Error executing ticket]: ${data.error || 'Unknown error'}`;
+            }
+        } catch (err) {
+            w12Console.textContent = `[Network Error]: ${err.message}`;
+        }
+    }
+
+    if (btnRunWeek12Ticket1a) {
+        btnRunWeek12Ticket1a.addEventListener('click', () => {
+            executeWeek12Ticket({
+                ticket_id: 'TKT-84920',
+                customer_id: 'CUST-401',
+                order_id: 'ORD-5001',
+                question: 'Hi, I was charged $49 for Cloudflare Pro renewal 8 days ago under ORD-5001. Can I get a full refund to my card?'
+            });
+        });
+    }
+
+    if (btnRunWeek12Ticket1b) {
+        btnRunWeek12Ticket1b.addEventListener('click', () => {
+            executeWeek12Ticket({
+                ticket_id: 'TKT-99120',
+                customer_id: 'CUST-408',
+                order_id: null,
+                question: 'Urgent: I see an unauthorized fraudulent charge and have initiated a bank chargeback dispute. Refund this immediately or I will file an FTC complaint!'
+            });
+        });
+    }
+
+
+    if (tabBtnWeek12Header) {
+        tabBtnWeek12Header.addEventListener('click', () => switchView('week12'));
+    }
+
 });
 

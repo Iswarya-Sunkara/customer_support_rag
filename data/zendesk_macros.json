@@ -1,0 +1,79 @@
+{
+  "total_macros": 40,
+  "last_audit": "2026-10-15",
+  "warning": "Macro MACRO-12 contains superseded 14-day refund policy terms and must not be used for modern accounts.",
+  "macros": [
+    {
+      "macro_id": "MACRO-01",
+      "title": "Billing - Credit Card Decline Code 51",
+      "category": "billing",
+      "body": "Hello, error code 51 indicates insufficient funds or a credit limit hold. Please contact your card issuer or update your payment method in your billing portal.",
+      "tags": ["billing", "error_51", "decline"]
+    },
+    {
+      "macro_id": "MACRO-02",
+      "title": "Billing - Credit Card Error Code 14 (Invalid Number)",
+      "category": "billing",
+      "body": "Hello, error code 14 signifies an invalid card number. Please re-enter your 16-digit card number and confirm postal code formatting without special characters.",
+      "tags": ["billing", "error_14", "card_no"]
+    },
+    {
+      "macro_id": "MACRO-03",
+      "title": "Billing - Error Code 430357 Lost/Stolen Card",
+      "category": "billing",
+      "body": "Hello, error code 430357 indicates the card has been reported lost or stolen by the issuer. Please use an alternative payment card.",
+      "tags": ["billing", "error_430357", "lost_stolen"]
+    },
+    {
+      "macro_id": "MACRO-04",
+      "title": "Billing - Payment Retry Schedule (5 over 5 days)",
+      "category": "billing",
+      "body": "Failed subscription renewal payments are automatically retried up to 5 times over 5 consecutive days before grace period expiry.",
+      "tags": ["billing", "retry_schedule", "grace_period"]
+    },
+    {
+      "macro_id": "MACRO-05",
+      "title": "Security - Google Voice 2FA Insecurity",
+      "category": "security",
+      "body": "We strongly advise against using Google Voice for 2FA SMS verification codes due to VoIP hijacking and lockout vulnerabilities.",
+      "tags": ["security", "2fa", "google_voice"]
+    },
+    {
+      "macro_id": "MACRO-06",
+      "title": "Security - Titan Security Key Recovery",
+      "category": "security",
+      "body": "If you lost your primary security key, account recovery takes 3-5 business days. Please use your secondary backup authentication step.",
+      "tags": ["security", "titan_key", "recovery"]
+    },
+    {
+      "macro_id": "MACRO-07",
+      "title": "Shipping - Regional Delivery Times",
+      "category": "shipping",
+      "body": "Hardware shipments to North America deliver in 3-5 business days (Express: 1-2 days). EMEA delivers in 4-6 business days.",
+      "tags": ["shipping", "sla", "hardware"]
+    },
+    {
+      "macro_id": "MACRO-12",
+      "title": "Refund - Retired 14-Day Window [SUPERSEDED]",
+      "category": "refund",
+      "body": "Thank you for contacting customer care. Under our 14-day refund policy, refund requests must be received within 14 calendar days of transaction date. Transactions beyond 14 days cannot be refunded.",
+      "tags": ["refund", "superseded_14day", "danger_old_macro"],
+      "status": "SUPERSEDED_CAUSE_OF_CEO_ESCALATION"
+    },
+    {
+      "macro_id": "MACRO-13",
+      "title": "Refund - Current 30-Day Satisfaction Policy [ACTIVE]",
+      "category": "refund",
+      "body": "Thank you for contacting customer support. Under our 30-day satisfaction guarantee (refund-and-returns-policy-30day-v2), subscription and digital license purchases within 30 days are fully refundable.",
+      "tags": ["refund", "current_30day", "v2_standard"],
+      "status": "ACTIVE_STANDARD"
+    },
+    {
+      "macro_id": "MACRO-14",
+      "title": "Escalation - Non-Tier-1 Complex Dispute Transfer",
+      "category": "escalation",
+      "body": "Your request has been escalated to Tier-2 Operations for manual account ledger reconciliation. A senior specialist will review your ticket within 4 business hours.",
+      "tags": ["escalation", "tier2", "transfer"]
+    }
+  ]
+}

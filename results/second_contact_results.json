@@ -1,0 +1,98 @@
+{
+  "n": 10,
+  "initial_deflection_rate_pct": 100.0,
+  "simulated_reopen_rate_pct": 50.0,
+  "net_deflection_rate_pct": 50.0,
+  "cases": [
+    {
+      "ticket_id": "TCK-101",
+      "initial_status": "DEFLECTED_RESOLVED",
+      "policy_cited": "refund-and-returns-policy-30day-v2",
+      "simulated_followup": "Thanks for approving the $49 refund. Will my Pro features shut off immediately today, or do they stay active until the end of the current billing cycle?",
+      "reopened": false,
+      "preempted": true,
+      "notes": "First reply gave exact dollar amount and 5-7 business day window. Customer asks standard access question."
+    },
+    {
+      "ticket_id": "TCK-102",
+      "initial_status": "DEFLECTED_RESOLVED",
+      "policy_cited": "refund-and-returns-policy-30day-v2",
+      "simulated_followup": "Since you cannot refund my card because it's past 30 days, can you apply the $199 as account credit towards my Cloudflare Business team plan instead?",
+      "reopened": true,
+      "preempted": false,
+      "notes": "Re-opens because out-of-window policy denial correctly directs customer to discuss credit options with an agent."
+    },
+    {
+      "ticket_id": "TCK-103",
+      "initial_status": "DEFLECTED_RESOLVED",
+      "policy_cited": "refund-and-returns-policy-30day-v2",
+      "simulated_followup": "Thank you. Could you also email a formal credit memo PDF to our accounts payable department for our quarterly audit?",
+      "reopened": true,
+      "preempted": false,
+      "notes": "Corporate accounts payable requires tax credit memo, provoking second contact."
+    },
+    {
+      "ticket_id": "TCK-104",
+      "initial_status": "DEFLECTED_RESOLVED",
+      "policy_cited": "refund-and-returns-policy-30day-v2",
+      "simulated_followup": "Our legal department needs the exact contract clause reference stating why the 30-day window cannot be extended for Enterprise SLA partners.",
+      "reopened": true,
+      "preempted": false,
+      "notes": "Policy citation provides slug link, but partner dispute re-opens."
+    },
+    {
+      "ticket_id": "TCK-105",
+      "initial_status": "DEFLECTED_RESOLVED",
+      "policy_cited": "refund-and-returns-policy-30day-v2",
+      "simulated_followup": "Understood that ORD-5005 was already refunded on 2026-09-24. Which last-4 card digits was it sent to?",
+      "reopened": false,
+      "preempted": true,
+      "notes": "Assistant accurately states payment was already credited to original payment method."
+    },
+    {
+      "ticket_id": "TCK-106",
+      "initial_status": "DEFLECTED_RESOLVED",
+      "policy_cited": "article_06_google_2step_verification",
+      "simulated_followup": "Got it, thanks. Where do I download the prepaid return shipping label, and what is the return warehouse address?",
+      "reopened": true,
+      "preempted": false,
+      "notes": "Hardware return approved within 14-day window, but physical return logistics require shipping label dispatch."
+    },
+    {
+      "ticket_id": "TCK-107",
+      "initial_status": "DEFLECTED_RESOLVED",
+      "policy_cited": "refund-and-returns-policy-14day-legacy",
+      "simulated_followup": "Is there an exception for unopened hardware in original sealed packaging if we pay a restocking fee?",
+      "reopened": true,
+      "preempted": false,
+      "notes": "Strict 14-day hardware policy enforced, customer asks for restocking fee waiver."
+    },
+    {
+      "ticket_id": "TCK-108",
+      "initial_status": "DEFLECTED_RESOLVED",
+      "policy_cited": "article_01_cloudflare_billing_errors",
+      "simulated_followup": "Perfect, up to 5 times over 5 days answers my question completely. No further help needed!",
+      "reopened": false,
+      "preempted": true,
+      "notes": "Clear, definitive factual answer completely satisfies user without ambiguity."
+    },
+    {
+      "ticket_id": "TCK-109",
+      "initial_status": "DEFLECTED_RESOLVED",
+      "policy_cited": "article_03_zendesk_credit_card_failures",
+      "simulated_followup": "Thanks, updating to our backup corporate credit card worked immediately. Ticket resolved.",
+      "reopened": false,
+      "preempted": true,
+      "notes": "Actionable instructions (insufficient funds, use backup card) resolve issue on first touch."
+    },
+    {
+      "ticket_id": "TCK-110",
+      "initial_status": "DEFLECTED_RESOLVED",
+      "policy_cited": "article_06_google_2step_verification",
+      "simulated_followup": "Understood that VoIP hijacking is dangerous. I switched to a physical Titan key. Thanks!",
+      "reopened": false,
+      "preempted": true,
+      "notes": "Security advice is complete and actionable; zero re-open required."
+    }
+  ]
+}

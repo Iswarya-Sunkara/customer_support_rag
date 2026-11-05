@@ -22,16 +22,17 @@
     }
   },
   "customers": {
-    "CUST-401": {"customer_id": "CUST-401", "name": "Alice Chen", "tier": "Standard", "channel": "web", "loyalty_years": 1},
-    "CUST-402": {"customer_id": "CUST-402", "name": "Bob Martin", "tier": "Standard", "channel": "email", "loyalty_years": 2},
-    "CUST-403": {"customer_id": "CUST-403", "name": "Nexus Corp", "tier": "Priority", "channel": "web", "loyalty_years": 4},
-    "CUST-404": {"customer_id": "CUST-404", "name": "Apex Holdings", "tier": "Priority", "channel": "email", "loyalty_years": 5},
-    "CUST-405": {"customer_id": "CUST-405", "name": "Carol Danvers", "tier": "Standard", "channel": "web", "loyalty_years": 1},
-    "CUST-406": {"customer_id": "CUST-406", "name": "David Miller", "tier": "Standard", "channel": "email", "loyalty_years": 3},
-    "CUST-407": {"customer_id": "CUST-407", "name": "Elena Rostova", "tier": "Standard", "channel": "web", "loyalty_years": 1},
-    "CUST-408": {"customer_id": "CUST-408", "name": "Frank Castle", "tier": "Standard", "channel": "email", "loyalty_years": 2},
-    "CUST-409": {"customer_id": "CUST-409", "name": "Vanguard Global", "tier": "Priority", "channel": "web", "loyalty_years": 6},
-    "CUST-410": {"customer_id": "CUST-410", "name": "Grace Hopper", "tier": "Standard", "channel": "email", "loyalty_years": 3}
+    "CUST-401": {"customer_id": "CUST-401", "name": "Alice Chen", "tier": "Standard", "channel": "web", "loyalty_years": 1, "terms_version": "30-day-current", "entitlement_slug": "refund-and-returns-policy-30day-v2", "contract_date": "2025-03-10"},
+    "CUST-402": {"customer_id": "CUST-402", "name": "Bob Martin", "tier": "Standard", "channel": "email", "loyalty_years": 2, "terms_version": "30-day-current", "entitlement_slug": "refund-and-returns-policy-30day-v2", "contract_date": "2025-01-14"},
+    "CUST-403": {"customer_id": "CUST-403", "name": "Nexus Corp", "tier": "Priority", "channel": "web", "loyalty_years": 4, "terms_version": "30-day-current", "entitlement_slug": "refund-and-returns-policy-30day-v2", "contract_date": "2024-09-01"},
+    "CUST-404": {"customer_id": "CUST-404", "name": "Apex Holdings", "tier": "Priority", "channel": "email", "loyalty_years": 5, "terms_version": "30-day-current", "entitlement_slug": "refund-and-returns-policy-30day-v2", "contract_date": "2024-11-20"},
+    "CUST-405": {"customer_id": "CUST-405", "name": "Carol Danvers", "tier": "Standard", "channel": "web", "loyalty_years": 1, "terms_version": "30-day-current", "entitlement_slug": "refund-and-returns-policy-30day-v2", "contract_date": "2025-06-18"},
+    "CUST-406": {"customer_id": "CUST-406", "name": "David Miller", "tier": "Standard", "channel": "email", "loyalty_years": 3, "terms_version": "30-day-current", "entitlement_slug": "refund-and-returns-policy-30day-v2", "contract_date": "2024-10-05"},
+    "CUST-407": {"customer_id": "CUST-407", "name": "Elena Rostova", "tier": "Standard", "channel": "web", "loyalty_years": 1, "terms_version": "30-day-current", "entitlement_slug": "refund-and-returns-policy-30day-v2", "contract_date": "2025-05-12"},
+    "CUST-408": {"customer_id": "CUST-408", "name": "Frank Castle", "tier": "Standard", "channel": "email", "loyalty_years": 4, "terms_version": "14-day-legacy", "entitlement_slug": "refund-and-returns-policy-14day-legacy", "contract_date": "2023-10-15"},
+    "CUST-409": {"customer_id": "CUST-409", "name": "Vanguard Global", "tier": "Priority", "channel": "web", "loyalty_years": 6, "terms_version": "30-day-current", "entitlement_slug": "refund-and-returns-policy-30day-v2", "contract_date": "2024-08-15"},
+    "CUST-410": {"customer_id": "CUST-410", "name": "Grace Hopper", "tier": "Standard", "channel": "email", "loyalty_years": 3, "terms_version": "30-day-current", "entitlement_slug": "refund-and-returns-policy-30day-v2", "contract_date": "2025-02-01"},
+    "CUST-411": {"customer_id": "CUST-411", "name": "Legacy Enterprise Co", "tier": "Priority", "channel": "web", "loyalty_years": 5, "terms_version": "14-day-legacy", "entitlement_slug": "refund-and-returns-policy-14day-legacy", "contract_date": "2023-04-10"}
   },
   "orders": {
     "ORD-5001": {
@@ -96,6 +97,15 @@
       "category": "hardware",
       "amount": 120.00,
       "days_since_purchase": 22,
+      "status": "COMPLETED"
+    },
+    "ORD-5011": {
+      "order_id": "ORD-5011",
+      "customer_id": "CUST-408",
+      "item": "Legacy Cloud Server Add-on",
+      "category": "subscription",
+      "amount": 350.00,
+      "days_since_purchase": 20,
       "status": "COMPLETED"
     }
   },

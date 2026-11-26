@@ -591,11 +591,10 @@ class DynamicRAGEngine:
         # 1. Parse Key-Value / Table alignment patterns
         kv_pairs = self._extract_key_value_pairs(context)
         
-        # Question stop words
         stopwords = {
-            "what", "is", "the", "in", "that", "pdf", "file", "given", "of", "a", "an",
-            "for", "to", "how", "much", "many", "which", "where", "who", "give", "tell",
-            "me", "about", "show", "please", "can", "you", "name"
+            "the", "in", "that", "pdf", "file", "given", "of", "a", "an", "for", "to",
+            "many", "which", "where", "who", "give", "tell", "me", "about", "show", "please",
+            "can", "you", "name", "do", "does", "are"
         }
         q_words = [w.strip("?,.:!\"'") for w in q_lower.split() if w.strip("?,.:!\"'") not in stopwords and len(w) > 1]
 
@@ -603,9 +602,9 @@ class DynamicRAGEngine:
         if any(phrase in q_lower for phrase in ["what the pdf is about", "what is the pdf about", "summarize", "summary", "overview", "info", "information"]):
             if kv_pairs:
                 formatted_all = [f"• **{k}:** {v}" for k, v in kv_pairs.items()]
-                return "This PDF document is a **BustleSpot Activity & Work Report**. Here are the extracted details:\n\n" + "\n".join(formatted_all)
+                return "Here are the extracted details from the document:\n\n" + "\n".join(formatted_all)
 
-        # Handle specific field questions
+        # Handle specific field questions matching key-value pairs
         if kv_pairs:
             matched_pairs = []
             for k, v in kv_pairs.items():
@@ -622,17 +621,60 @@ class DynamicRAGEngine:
                         seen.add(k)
                 return "\n".join(unique_matches)
 
-        # 2. Text Sentence Extraction based on Keyword Scoring
-        sentences = re.split(r'(?<=[.!?\n])\s+', context)
+        lines = [l.strip() for l in context.splitlines() if l.strip() and not l.startswith("---")]
+
+        # 2. Direct Heading-to-Answer Matching (e.g. "## 1. What is React?" -> Extract the next explanation line)
+        best_heading_idx = -1
+        best_heading_score = 0
+        for i, line in enumerate(lines):
+            line_clean = re.sub(r'^[#\s\d\.\-_]+', '', line).strip()
+            line_lower = line_clean.lower()
+            if line.startswith('#') or line.endswith('?'):
+                score = sum(1 for qw in q_words if qw in line_lower)
+                if line.endswith('?') or any(hw in line_lower for hw in ['what is', 'how to', 'definition', 'overview', 'about']):
+                    score += 2
+                # Document main title (# File Title) should not outscore a specific sub-question heading
+                if line.startswith('# ') and not line.endswith('?'):
+                    score -= 1
+                if score > best_heading_score:
+                    best_heading_score = score
+                    best_heading_idx = i
+
+        if best_heading_idx != -1 and best_heading_score >= 2:
+            answer_lines = []
+            for next_idx in range(best_heading_idx + 1, min(best_heading_idx + 6, len(lines))):
+                next_line = lines[next_idx]
+                if next_line.startswith('#'):
+                    break
+                clean_next = re.sub(r'^[#\s\d\.\*_\-]+', '', next_line).strip()
+                if clean_next and not clean_next.endswith('?'):
+                    answer_lines.append(clean_next)
+                if len(answer_lines) >= 3:
+                    break
+            if answer_lines:
+                return "\n\n".join(answer_lines)
+
+        # 3. Text Sentence Extraction based on Keyword Scoring & Definition Priority
+        raw_sentences = re.split(r'(?<=[.!?\n])\s+', context)
         scored_sentences = []
         
-        for s in sentences:
-            s_clean = s.strip()
-            if not s_clean or len(s_clean) < 5 or s_clean.startswith("---"):
+        for s in raw_sentences:
+            s_clean = re.sub(r'^[#\s\d\.\*_\-]+', '', s).strip()
+            if not s_clean or len(s_clean) < 10 or s_clean.startswith("---"):
                 continue
+            # Avoid echoing question headers back as answers
+            if s_clean.endswith('?') and any(qw in s_clean.lower() for qw in ["what", "how", "why", "when", "where", "who", "can"]):
+                continue
+
             s_lower = s_clean.lower()
             score = sum(1 for qw in q_words if qw in s_lower)
             if score > 0:
+                # Bonus if sentence is a direct definition
+                if any(f"{qw} is " in s_lower or f"{qw} refers to" in s_lower or f"{qw} are " in s_lower or f"{qw} provides" in s_lower for qw in q_words):
+                    score += 5
+                # Bonus for actionable support keywords
+                if any(kw in s_lower for kw in ["error", "decline", "contact", "support", "steps", "resolve", "solution", "click", "navigate"]):
+                    score += 2
                 scored_sentences.append((score, s_clean))
                 
         if scored_sentences:
@@ -640,16 +682,17 @@ class DynamicRAGEngine:
             seen = set()
             top_sentences = []
             for score, s_text in scored_sentences:
-                if s_text not in seen:
+                key = s_text[:30].lower()
+                if key not in seen:
                     top_sentences.append(f"• {s_text}")
-                    seen.add(s_text)
+                    seen.add(key)
                 if len(top_sentences) >= 3:
                     break
             return "\n".join(top_sentences)
 
-        # 3. Fallback
-        lines = [line.strip() for line in context.splitlines() if line.strip() and not line.startswith("---")]
-        clean_excerpt = " ".join(lines[:4])
+        # 4. Fallback Clean Excerpt
+        clean_lines = [re.sub(r'^[#\s\d\.\*_\-]+', '', l).strip() for l in lines if l.strip() and not l.startswith("---") and not l.endswith('?')]
+        clean_excerpt = " ".join(clean_lines[:3])
         return clean_excerpt[:350] + ("..." if len(clean_excerpt) > 350 else "")
 
     def _extract_key_value_pairs(self, text: str) -> Dict[str, str]:

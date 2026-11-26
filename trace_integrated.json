@@ -1,8 +1,8 @@
 {
-  "trace_id": "tr_capstone_20261125_TKT84920",
+  "trace_id": "tr_capstone_20261126_TKT84920",
   "ticket_id": "TKT-84920",
   "customer_id": "CUST-401",
-  "timestamp": "2026-11-25T10:07:04.387985+00:00",
+  "timestamp": "2026-11-26T09:56:41.982129+00:00",
   "intent_category": "billing_refund",
   "prompt_version": "v2.1-support-rag",
   "model": "claude-haiku-4-5",
@@ -12,17 +12,17 @@
   "entitlement_verified": true,
   "policy_slug_cited": "refund-and-returns-policy-30day-v2",
   "totals": {
-    "latency_ms": 8.88,
+    "latency_ms": 15.99,
     "tokens": 1115,
     "cost_usd": 0.002028
   },
   "spans": [
     {
-      "span_id": "tr_capstone_20261125_TKT84920_mcp_entitlement",
-      "parent_span_id": "tr_capstone_20261125_TKT84920_agent_loop",
+      "span_id": "tr_capstone_20261126_TKT84920_mcp_entitlement",
+      "parent_span_id": "tr_capstone_20261126_TKT84920_agent_loop",
       "name": "mcp_tool_check_customer_entitlement",
       "type": "mcp_tool",
-      "latency_ms": 0.43,
+      "latency_ms": 0.94,
       "tokens": 160,
       "cost_usd": 0.00032,
       "metadata": {
@@ -31,11 +31,11 @@
       }
     },
     {
-      "span_id": "tr_capstone_20261125_TKT84920_mcp_order_lookup",
-      "parent_span_id": "tr_capstone_20261125_TKT84920_agent_loop",
+      "span_id": "tr_capstone_20261126_TKT84920_mcp_order_lookup",
+      "parent_span_id": "tr_capstone_20261126_TKT84920_agent_loop",
       "name": "mcp_tool_fetch_order_details",
       "type": "mcp_tool",
-      "latency_ms": 0.46,
+      "latency_ms": 0.73,
       "tokens": 185,
       "cost_usd": 0.000388,
       "metadata": {
@@ -44,11 +44,11 @@
       }
     },
     {
-      "span_id": "tr_capstone_20261125_TKT84920_mcp_rag_search",
-      "parent_span_id": "tr_capstone_20261125_TKT84920_agent_loop",
+      "span_id": "tr_capstone_20261126_TKT84920_mcp_rag_search",
+      "parent_span_id": "tr_capstone_20261126_TKT84920_agent_loop",
       "name": "mcp_tool_search_help_center",
       "type": "retrieval",
-      "latency_ms": 7.88,
+      "latency_ms": 14.12,
       "tokens": 320,
       "cost_usd": 0.00064,
       "metadata": {
@@ -57,11 +57,11 @@
       }
     },
     {
-      "span_id": "tr_capstone_20261125_TKT84920_llm_synthesis",
-      "parent_span_id": "tr_capstone_20261125_TKT84920_agent_loop",
+      "span_id": "tr_capstone_20261126_TKT84920_llm_synthesis",
+      "parent_span_id": "tr_capstone_20261126_TKT84920_agent_loop",
       "name": "claude_35_haiku_synthesis",
       "type": "llm",
-      "latency_ms": 0.01,
+      "latency_ms": 0.02,
       "tokens": 450,
       "cost_usd": 0.00068,
       "metadata": {
@@ -70,11 +70,11 @@
       }
     },
     {
-      "span_id": "tr_capstone_20261125_TKT84920_agent_loop",
+      "span_id": "tr_capstone_20261126_TKT84920_agent_loop",
       "parent_span_id": null,
       "name": "agent_react_loop",
       "type": "agent",
-      "latency_ms": 8.88,
+      "latency_ms": 15.99,
       "tokens": 0,
       "cost_usd": 0.0,
       "metadata": {
